@@ -1,0 +1,40 @@
+======
+group
+======
+
+{}
+
+---
+
+(document (group))
+
+
+======
+group group
+======
+
+{{}}
+
+---
+
+(document (group (group)))
+
+======
+group with text
+======
+
+{foo}
+
+---
+
+(document (group (text)))
+
+======
+group with command and text
+======
+
+{\it foo}
+
+---
+
+(document (group (command (name)) (text)))

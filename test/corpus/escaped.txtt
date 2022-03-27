@@ -1,0 +1,24 @@
+======
+Escaped Character
+======
+
+\#
+
+---
+(document (escaped (escapechar)))
+
+======
+Escaped Character, Not a Comment
+======
+
+This is \% not a comment
+
+---
+(document 
+    (text)
+    (escaped (escapechar))
+    (text)
+)
+
+
+

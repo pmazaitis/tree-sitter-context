@@ -1,0 +1,210 @@
+======
+Simple Command
+======
+
+\blank
+
+---
+
+(document (command (name)))
+
+======
+Command with Option Block and Keyword
+======
+
+\blank[big]
+
+---
+
+(document (command (name) (optionblock (opkey))))
+
+======
+Command with Option Block and Two Keywords
+======
+
+\blank[big, hat]
+
+---
+
+(document (command (name) (optionblock (opkey) (opkey))))
+
+======
+Command with Option Block and Keyval
+======
+
+\blank[big=hat]
+
+---
+
+(document (command (name) (optionblock (opkey) (opval (optext)))))
+
+======
+Command with Option Block and Keyval with command
+======
+
+\blank[big=\hat]
+
+---
+
+(document (command (name) (optionblock (opkey) (opval (command (name))))))
+
+======
+Command with Option Block and two keyvals
+======
+
+\blank[big=hat, small=hat]
+
+---
+
+(document (command (name) 
+    (optionblock 
+        (opkey) (opval (optext))
+        (opkey) (opval (optext))
+    )
+))
+
+======
+Command with Option Block and two keyvals, one groupd
+======
+
+\blank[big=hat, small={hat}]
+
+---
+
+(document (command (name) 
+    (optionblock 
+        (opkey) (opval (optext))
+        (opkey) (opval (group (text)))
+    )
+))
+
+======
+Command with Option Block and group
+======
+
+\blank[big=hat]{foo}
+
+---
+
+(document 
+    (command 
+        (name) 
+        (optionblock 
+            (opkey) (opval (optext))
+        )
+    )
+    (group (text))
+)
+
+======
+Command with Option Block and two keyvals with newlines
+======
+
+\blank[big=hat, 
+       small=hat]
+
+---
+
+(document (command (name) 
+    (optionblock 
+        (opkey) (opval (optext))
+        (opkey) (opval (optext))
+    )
+))
+
+======
+Complicated Command and Option Block
+======
+
+\setvariables[local]
+        [short_title={Lab01},
+        title={Setting Up},
+        subtitle={},
+        type={Individual}, 
+        submit={to GitHub},  
+        id=s18hw1,
+        version=001,]
+        
+---
+
+(document 
+    (command (name) 
+        (optionblock (opkey)) 
+        (optionblock 
+            (opkey) (opval (group (text))) 
+            (opkey) (opval (group (text))) 
+            (opkey) (opval (group)) 
+            (opkey) (opval (group (text))) 
+            (opkey) (opval (group (text))) 
+            (opkey) (opval (optext)) 
+            (opkey) (opval (optext))
+        )
+    )
+)
+
+======
+Section start and stop
+======
+
+\startsection[title={Happy Little Goals}]
+
+Nice little fluffy clouds laying around in the sky being lazy. Use what you see, don't plan it. Maybe there's a happy little bush that lives right there.
+
+A thin paint will stick to a thick paint. That's a crooked tree. We'll send him to Washington. Look at them little rascals. I thought today we would make a happy little stream that's just running through the woods here.
+
+\stopsection
+
+---
+
+(document (command (name) (optionblock (opkey) (opval (group (text))))) (text) (command (name)))
+
+======
+Section start and stop with escaped char
+======
+
+\startsection[title={Happy Little Goals}]
+
+Nice little fluffy clouds laying around in the sky being lazy. \$ Use what you see, don't plan it. Maybe there's a happy little bush that lives right there.
+
+A thin paint will stick to a thick paint. That's a crooked tree. We'll send him to Washington. Look at them little rascals. I thought today we would make a happy little stream that's just running through the woods here.
+
+\stopsection
+
+---
+
+(document (command (name) (optionblock (opkey) (opval (group (text))))) (text) (escaped (escapechar)) (text) (command (name)))
+
+======
+Command with spaces between option blocks
+======
+
+\blank [big] [hat]
+
+---
+
+(document 
+    (command (name) 
+        (optionblock (opkey))
+        (optionblock (opkey))
+    )
+)
+
+======
+Setuptable with wacky opblocks
+======
+
+\setupTABLE[column][1][width=8mm,offset=\dimexpr1mm+2pt,align=flushleft,style=\bfx]
+
+---
+
+(document 
+    (command (name) 
+        (optionblock (opkey)) 
+        (optionblock (opkey)) 
+        (optionblock (opkey) (opval (optext)) 
+                     (opkey) (opval (command (name)) (optext)) 
+                     (opkey) (opval (optext)) 
+                     (opkey) (opval (command (name)))
+        )
+    )
+)

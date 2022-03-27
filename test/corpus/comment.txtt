@@ -1,0 +1,34 @@
+======
+Comment
+======
+
+%test comments
+
+---
+
+(document (comment))
+
+======
+Text and Comment
+======
+
+foo foo foo %test comments
+
+---
+
+(document 
+    (text)
+    (comment)
+)
+
+======
+Command and Comment
+======
+
+\blank %test comments
+
+---
+
+(document 
+    (command (name)) (comment)
+)

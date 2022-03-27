@@ -1,0 +1,21 @@
+======
+Text
+======
+
+hello
+
+---
+
+(document (text))
+
+======
+Multi-paragraph Text
+======
+
+hello
+
+hello
+
+---
+
+(document (text))
