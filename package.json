@@ -23,7 +23,7 @@
         "mkiv",
         "mkxl"
       ],
-      "": "(\\starttext|\\startcomponent)",
+      "content-regex": "(\\starttext|\\startcomponent)",
       "injection-regex": "context"
     }
   ]
