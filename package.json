@@ -4,9 +4,9 @@
   "description": "Parser for the ConTeXt trypsetting language",
   "main": "bindings/node",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tree-sitter test"
   },
-  "author": "",
+  "author": "Paul Mazaitis <paul@mazaitis.org",
   "license": "ISC",
   "dependencies": {
     "nan": "^2.15.0"
@@ -14,4 +14,17 @@
   "devDependencies": {
     "tree-sitter-cli": "^0.20.6"
   }
+  "tree-sitter": [
+    {
+      "scope": "text.tex.context",
+      "file-types": [
+        "tex",
+        "ctx",
+        "mkiv",
+        "mkxl"
+      ],
+      "": "(\\starttext|\\startcomponent)",
+      "injection-regex": "context"
+    }
+  ]
 }
