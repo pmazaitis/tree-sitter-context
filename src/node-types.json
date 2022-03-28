@@ -48,6 +48,14 @@
           "named": true
         },
         {
+          "type": "main_start",
+          "named": true
+        },
+        {
+          "type": "main_stop",
+          "named": true
+        },
+        {
           "type": "text",
           "named": true
         }
@@ -99,11 +107,29 @@
           "named": true
         },
         {
+          "type": "main_start",
+          "named": true
+        },
+        {
+          "type": "main_stop",
+          "named": true
+        },
+        {
           "type": "text",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "main_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "main_stop",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "optionblock",
@@ -189,6 +215,22 @@
   },
   {
     "type": "\\",
+    "named": false
+  },
+  {
+    "type": "\\startcomponent",
+    "named": false
+  },
+  {
+    "type": "\\starttext",
+    "named": false
+  },
+  {
+    "type": "\\stopcomponent",
+    "named": false
+  },
+  {
+    "type": "\\stoptext",
     "named": false
   },
   {

@@ -2,10 +2,44 @@
   "name": "ConTeXt",
   "rules": {
     "document": {
-      "type": "REPEAT",
+      "type": "REPEAT1",
       "content": {
         "type": "SYMBOL",
         "name": "_content"
+      }
+    },
+    "main_start": {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\starttext"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startcomponent"
+          }
+        ]
+      }
+    },
+    "main_stop": {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\stoptext"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopcomponent"
+          }
+        ]
       }
     },
     "_content": {
@@ -34,6 +68,14 @@
         {
           "type": "SYMBOL",
           "name": "_newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "main_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "main_stop"
         }
       ]
     },
@@ -362,7 +404,7 @@
     },
     "text": {
       "type": "PATTERN",
-      "value": "[^\\[\\]$%&^_{}|~\\\\]+"
+      "value": "[^\\]\\[$%&^_{}|~\\\\]+"
     },
     "optext": {
       "type": "PATTERN",
