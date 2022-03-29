@@ -25,7 +25,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "math"
+          "name": "inline_math"
         },
         {
           "type": "SYMBOL",
@@ -260,7 +260,7 @@
     },
     "math_group": {
       "type": "PREC",
-      "value": 8,
+      "value": 14,
       "content": {
         "type": "SEQ",
         "members": [
@@ -300,24 +300,20 @@
         {
           "type": "SYMBOL",
           "name": "math_text"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_newline"
         }
       ]
     },
     "math_text": {
       "type": "PREC",
-      "value": 6,
+      "value": 14,
       "content": {
         "type": "PATTERN",
-        "value": "[^$]*"
+        "value": "[^$]+"
       }
     },
-    "math": {
+    "inline_math": {
       "type": "PREC",
-      "value": 10,
+      "value": 12,
       "content": {
         "type": "SEQ",
         "members": [
@@ -326,7 +322,7 @@
             "value": "$"
           },
           {
-            "type": "REPEAT",
+            "type": "REPEAT1",
             "content": {
               "type": "SYMBOL",
               "name": "_math_content"

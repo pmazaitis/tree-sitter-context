@@ -11,7 +11,7 @@ module.exports = grammar({
     
     document: $ => repeat1($._content),
     
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.math, $.text, $.command, $._newline, $.main_start, $.main_stop),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $._newline, $.main_start, $.main_stop),
 
 
     // AREA MARKERS
@@ -55,13 +55,13 @@ module.exports = grammar({
     // ConTeXt can handle inline math mode like TeX, marking the start and stop of math mode with a dollar sign ('$').
     // Brace groups ({}) are needed in inline math mode.
     
-    math_group: $ => prec(6, seq("{", repeat($._math_content), "}")),
+    math_group: $ => seq("{", repeat($._math_content), "}"),
     
-    _math_content: $=> choice($.comment, $.escaped, $.math_group, $.math_text, $._newline),
+    _math_content: $=> choice($.comment, $.escaped, $.math_group, $.math_text),
     
-    math_text: $ => prec(8, /[^$]*/),
+    math_text: $ => /[^$]+/,
   
-    math: $ => prec(10,seq('$', repeat($._math_content), '$')),
+    inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
     
     // This one works!
     // math: $ => prec(10, seq('$', /[^$]*/, '$')),
