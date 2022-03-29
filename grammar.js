@@ -9,11 +9,11 @@ module.exports = grammar({
 
     // GENERAL DOCUMENT CONTENT
     
+    document: $ => repeat1($._content),
+    
     _content: $ => choice($.comment, $.escaped, $.brace_group, $.math_group, $.text, $.command, $._newline, $.main_start, $.main_stop),
 
-    document: $ => repeat1($._content),
-  
-    
+
     // AREA MARKERS
     //
     // This ConTeXt commands divide the context file into:
@@ -42,7 +42,12 @@ module.exports = grammar({
     //  
     // This grouping class can accept either a '{' or a '\bgroup' to start the group, and a '}' or a '\egroup' to end the group. They do not need to match.
       
-    brace_group: $ => prec(1, choice( seq("{", repeat($._content), "}"), seq("{", repeat($._content), "\\egroup"), seq("\\bgroup", repeat($._content), "}"), seq("\\bgroup", repeat($._content), "\\egroup"))),
+    brace_group: $ => prec(1, choice( 
+      seq("{", repeat($._content), "}"), 
+      seq("{", repeat($._content), "\\egroup"), 
+      seq("\\bgroup", repeat($._content), "}"), 
+      seq("\\bgroup", repeat($._content), "\\egroup")
+    )),
   
   
     // MATH GROUP
