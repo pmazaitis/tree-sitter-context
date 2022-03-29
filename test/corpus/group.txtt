@@ -78,3 +78,33 @@ command with grouped text
 ---
 
 (document (command (command_name)) (brace_group (text)))
+
+======
+command_group with text
+======
+\start
+
+Woo!
+
+\stop
+
+---
+
+(document (command_group (text)))
+
+======
+command_group in a full document
+======
+\starttext
+
+\start
+
+Woo!
+
+\stop
+
+\stoptext
+
+---
+
+(document (main_start) (command_group (text)) (main_stop))
