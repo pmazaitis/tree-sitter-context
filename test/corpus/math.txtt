@@ -26,4 +26,4 @@ $ f(x) = x^{2x} $
 
 ---
 
-(document (inline_math (math_text (math_brace_group(math_text))))
+(document (inline_math (math_text) (math_group (math_text)) (math_text)))

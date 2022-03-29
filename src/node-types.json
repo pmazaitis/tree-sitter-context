@@ -194,11 +194,6 @@
     }
   },
   {
-    "type": "math_text",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "optionblock",
     "named": true,
     "fields": {},
@@ -330,6 +325,10 @@
   },
   {
     "type": "command_name",
+    "named": true
+  },
+  {
+    "type": "math_text",
     "named": true
   },
   {

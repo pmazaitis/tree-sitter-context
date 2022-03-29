@@ -259,28 +259,24 @@
       }
     },
     "math_group": {
-      "type": "PREC",
-      "value": 14,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "{"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_math_content"
-            }
-          },
-          {
-            "type": "STRING",
-            "value": "}"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_math_content"
           }
-        ]
-      }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
     },
     "_math_content": {
       "type": "CHOICE",
@@ -304,16 +300,12 @@
       ]
     },
     "math_text": {
-      "type": "PREC",
-      "value": 14,
-      "content": {
-        "type": "PATTERN",
-        "value": "[^$]+"
-      }
+      "type": "PATTERN",
+      "value": "[^${}]+"
     },
     "inline_math": {
       "type": "PREC",
-      "value": 12,
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [

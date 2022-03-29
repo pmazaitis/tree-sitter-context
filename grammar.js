@@ -59,7 +59,7 @@ module.exports = grammar({
     
     _math_content: $=> choice($.comment, $.escaped, $.math_group, $.math_text),
     
-    math_text: $ => /[^$]+/,
+    math_text: $ => /[^${}]+/,
   
     inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
     
