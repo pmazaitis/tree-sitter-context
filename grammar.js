@@ -7,23 +7,23 @@ module.exports = grammar({
   rules: {
     // The production rules of the context-free grammar for the ConTeXt markup language
 
+    // GENERAL DOCUMENT CONTENT
+    
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.math_group, $.text, $.command, $._newline, $.main_start, $.main_stop),
+
     document: $ => repeat1($._content),
     
     // AREA MARKERS
+    //
+    // This ConTeXt commands divide the context file into:
+    //   - Preamble (interpreted commands, but content is not displayed)
+    //   - Main (Content is displayed)
+    //   - Postamble (Everything is ignored by the processor)
        
     main_start: $ => prec(2, choice("\\starttext","\\startcomponent")), 
     
     main_stop: $ => prec(2, choice("\\stoptext","\\stopcomponent")),   
        
-    // CONTENT COLLECTIONS
-    
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.math_group, $.text, $.command, $._newline, $.main_start, $.main_stop),
-    
-    _opcontent: $ => choice($.comment, $.escaped, $.brace_group, $.optext, $.command, $._newline),
-
-    // _math_content: $=> choice($.comment, $.escaped, $.math_brace_group, $.math_text, $._newline),
-    _math_content: $=> choice($.math_text),
-
     // COMMENTS
     
     comment: $ => prec(1, token(seq('%', /.*/))),
@@ -34,20 +34,34 @@ module.exports = grammar({
 
     escaped: $ => prec(1, seq('\\', $.escapechar)),
 
-    // GROUPS
-        
-    math_brace_group: $ => prec(1, seq("{", repeat($._math_content), "}")),
-    
+    // BRACE GROUP
+    //  
+    // This grouping class can accept either a '{' or a '\bgroup' to start the group, and a '}' or a '\egroup' to end the group. They do not need to match.
+      
     brace_group: $ => prec(1, choice( seq("{", repeat($._content), "}"), seq("{", repeat($._content), "\\egroup"), seq("\\bgroup", repeat($._content), "}"), seq("\\bgroup", repeat($._content), "\\egroup"))),
+  
+    // MATH GROUP
+    //
+    // ConTeXt can handle inline math mode like TeX, marking the start and stop of math mode with a dollar sign ('$').
+    // Brace groups ({}) are important to handle in inline mat hmode.
+    
+    math_brace_group: $ => prec(1, seq("{", repeat($._math_content), "}")),
     
     // math_brace_group: $ => prec(1, choice( seq("{", repeat($._math_content), "}"), seq("{", repeat($._math_content), "\\egroup"), seq("\\bgroup", repeat($._math_content), "}"), seq("\\bgroup", repeat($._math_content), "\\egroup"))),
     
+    // _math_content: $=> choice($.comment, $.escaped, $.math_brace_group, $.math_text, $._newline),
+    
+    _math_content: $=> choice($.math_text),
+    
     math_group: $ => prec(1, seq('$', repeat($._math_content), '$')),
     
+    math_text: $ => /[^$]*/,
     
     // COMMANDS
     
-    command: $ => prec(1, seq('\\', $.name, repeat(seq(optional(/\s+/), $.optionblock)), optional(/\s+/))),
+    command: $ => prec(1, seq('\\', $.command_name, repeat(seq(optional(/\s+/), $.optionblock)), optional(/\s+/))),
+    
+    command_name: $ => /[a-zA-Z]+/,
     
     optionblock: $ =>  prec(1, seq('[', optional(seq($._options, optional(repeat(seq(',', optional(/\s+/), $._options))))), optional(','), ']')),
      
@@ -57,15 +71,15 @@ module.exports = grammar({
             
     opval: $ => repeat1($._opcontent),
     
-    // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
-    
+    _opcontent: $ => choice($.comment, $.escaped, $.brace_group, $.optext, $.command, $._newline),
+
     optext: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
-    math_text: $ => /[^$]*/,
+    // ELSE
     
-    name: $ => /[a-zA-Z0-9]+/,
- 
+    // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
+    text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+  
     _newline: $ => prec(1, '\n'),
     
     _extras: $ => choice(" ", "\t", "\n"),

@@ -83,44 +83,6 @@
         }
       ]
     },
-    "_opcontent": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "comment"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "escaped"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "brace_group"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "optext"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "command"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_newline"
-        }
-      ]
-    },
-    "_math_content": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "math_text"
-        }
-      ]
-    },
     "comment": {
       "type": "PREC",
       "value": 1,
@@ -203,30 +165,6 @@
           {
             "type": "SYMBOL",
             "name": "escapechar"
-          }
-        ]
-      }
-    },
-    "math_brace_group": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "{"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_math_content"
-            }
-          },
-          {
-            "type": "STRING",
-            "value": "}"
           }
         ]
       }
@@ -320,6 +258,39 @@
         ]
       }
     },
+    "math_brace_group": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "{"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_math_content"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    "_math_content": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "math_text"
+        }
+      ]
+    },
     "math_group": {
       "type": "PREC",
       "value": 1,
@@ -344,6 +315,10 @@
         ]
       }
     },
+    "math_text": {
+      "type": "PATTERN",
+      "value": "[^$]*"
+    },
     "command": {
       "type": "PREC",
       "value": 1,
@@ -356,7 +331,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "name"
+            "name": "command_name"
           },
           {
             "type": "REPEAT",
@@ -396,6 +371,10 @@
           }
         ]
       }
+    },
+    "command_name": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z]+"
     },
     "optionblock": {
       "type": "PREC",
@@ -528,21 +507,42 @@
         "name": "_opcontent"
       }
     },
-    "text": {
-      "type": "PATTERN",
-      "value": "[^\\]\\[$%&^_{}|~\\\\]+"
+    "_opcontent": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "escaped"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "brace_group"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "optext"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
     },
     "optext": {
       "type": "PATTERN",
       "value": "[^\\\\{}\\[\\]\\s,][^\\\\{}\\[\\],]*"
     },
-    "math_text": {
+    "text": {
       "type": "PATTERN",
-      "value": "[^$]*"
-    },
-    "name": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z0-9]+"
+      "value": "[^\\]\\[$%&^_{}|~\\\\]+"
     },
     "_newline": {
       "type": "PREC",

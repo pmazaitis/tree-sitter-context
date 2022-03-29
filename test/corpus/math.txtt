@@ -1,0 +1,10 @@
+======
+simple math group
+======
+
+$ $
+
+---
+
+(document (math_group (text)))
+
