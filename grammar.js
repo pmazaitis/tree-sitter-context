@@ -11,7 +11,7 @@ module.exports = grammar({
     
     document: $ => repeat1($._content),
     
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $._newline, $.main_start, $.main_stop),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._newline, $.main_start, $.main_stop),
 
 
     // AREA MARKERS
@@ -49,7 +49,13 @@ module.exports = grammar({
       seq("\\bgroup", repeat($._content), "\\egroup")
     )),
   
-  
+    // COMMAND GROUP
+    //
+    // ConTeXt can also group document content between the commands "\start" and "\stop"
+    
+    command_group: $ => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._content), /\\stop[^a-zA-Z]/)),
+    
+
     // INLINE MATH
     //
     // ConTeXt can handle inline math mode like TeX, marking the start and stop of math mode with a dollar sign ('$').

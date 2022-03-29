@@ -37,6 +37,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "command_group"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_newline"
         },
         {
@@ -254,6 +258,30 @@
                 "value": "\\egroup"
               }
             ]
+          }
+        ]
+      }
+    },
+    "command_group": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\\\\start[^a-zA-Z]"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_content"
+            }
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\\\stop[^a-zA-Z]"
           }
         ]
       }
