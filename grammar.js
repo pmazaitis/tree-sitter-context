@@ -35,9 +35,7 @@ module.exports = grammar({
     escaped: $ => prec(1, seq('\\', $.escapechar)),
 
     // GROUPS
-    
-    // brace_group: $ => prec(1, seq("{", repeat($._content), "}")),
-    
+        
     math_brace_group: $ => prec(1, seq("{", repeat($._math_content), "}")),
     
     brace_group: $ => prec(1, choice( seq("{", repeat($._content), "}"), seq("{", repeat($._content), "\\egroup"), seq("\\bgroup", repeat($._content), "}"), seq("\\bgroup", repeat($._content), "\\egroup"))),
