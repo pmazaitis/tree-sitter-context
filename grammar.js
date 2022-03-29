@@ -62,10 +62,7 @@ module.exports = grammar({
     math_text: $ => /[^${}]+/,
   
     inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
-    
-    // This one works!
-    // math: $ => prec(10, seq('$', /[^$]*/, '$')),
-    
+
     
     // COMMANDS
     
