@@ -1,8 +1,38 @@
 ======
-group
+group brace brace
 ======
 
-{}
+{ }
+
+---
+
+(document (brace_group))
+
+======
+group bgroup brace
+======
+
+\bgroup }
+
+---
+
+(document (brace_group))
+
+======
+group brace egroup
+======
+
+{ \egroup
+
+---
+
+(document (brace_group))
+
+======
+group bgroup egroup
+======
+
+\bgroup \egroup
 
 ---
 

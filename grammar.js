@@ -21,7 +21,7 @@ module.exports = grammar({
     
     _opcontent: $ => choice($.comment, $.escaped, $.brace_group, $.optext, $.command, $._newline),
 
-    _math_content: $=> choice($.comment, $.escaped, $.brace_group, $.math_text, $._newline),
+    _math_content: $=> choice($.comment, $.escaped, $.math_brace_group, $.math_text, $._newline),
 
     // COMMENTS
     
@@ -34,8 +34,14 @@ module.exports = grammar({
     escaped: $ => prec(1, seq('\\', $.escapechar)),
 
     // GROUPS
-
-    brace_group: $ => prec(1, seq('{', repeat($._content), '}')),
+    
+    // brace_group: $ => prec(1, seq("{", repeat($._content), "}")),
+    // 
+    math_brace_group: $ => prec(1, seq("{", repeat($._math_content), "}")),
+    
+    brace_group: $ => prec(1, choice( seq("{", repeat($._content), "}"), seq("{", repeat($._content), "\\egroup"), seq("\\bgroup", repeat($._content), "}"), seq("\\bgroup", repeat($._content), "\\egroup"))),
+    
+    // math_brace_group: $ => prec(1, choice( seq("{", repeat($._math_content), "}"), seq("{", repeat($._math_content), "\\egroup"), seq("\\bgroup", repeat($._math_content), "}"), seq("\\bgroup", repeat($._math_content), "\\egroup"))),
     
     math_group: $ => prec(1, seq('$', repeat($._math_content), '$')),
     
@@ -57,13 +63,13 @@ module.exports = grammar({
     
     optext: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
-    mathtext: $ => /[^$]*/,
+    math_text: $ => /[^$]*/,
     
     name: $ => /[a-zA-Z0-9]+/,
  
     _newline: $ => prec(1, '\n'),
     
-    _extras: $ => [" ", "\t", "\n"];
+    // _extras: $ => [" ", "\t", "\n"],
     
   },
   

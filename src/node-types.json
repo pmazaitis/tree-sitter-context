@@ -140,17 +140,13 @@
     "fields": {}
   },
   {
-    "type": "math_group",
+    "type": "math_brace_group",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "brace_group",
-          "named": true
-        },
         {
           "type": "comment",
           "named": true
@@ -160,7 +156,38 @@
           "named": true
         },
         {
-          "type": "text",
+          "type": "math_brace_group",
+          "named": true
+        },
+        {
+          "type": "math_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "math_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "math_brace_group",
+          "named": true
+        },
+        {
+          "type": "math_text",
           "named": true
         }
       ]
@@ -253,6 +280,14 @@
     "named": false
   },
   {
+    "type": "\\bgroup",
+    "named": false
+  },
+  {
+    "type": "\\egroup",
+    "named": false
+  },
+  {
     "type": "\\startcomponent",
     "named": false
   },
@@ -279,6 +314,10 @@
   {
     "type": "_",
     "named": false
+  },
+  {
+    "type": "math_text",
+    "named": true
   },
   {
     "type": "name",

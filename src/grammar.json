@@ -125,11 +125,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "brace_group"
+          "name": "math_brace_group"
         },
         {
           "type": "SYMBOL",
-          "name": "text"
+          "name": "math_text"
         },
         {
           "type": "SYMBOL",
@@ -223,7 +223,7 @@
         ]
       }
     },
-    "brace_group": {
+    "math_brace_group": {
       "type": "PREC",
       "value": 1,
       "content": {
@@ -237,12 +237,101 @@
             "type": "REPEAT",
             "content": {
               "type": "SYMBOL",
-              "name": "_content"
+              "name": "_math_content"
             }
           },
           {
             "type": "STRING",
             "value": "}"
+          }
+        ]
+      }
+    },
+    "brace_group": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "{"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_content"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "}"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "{"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_content"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "\\egroup"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\\bgroup"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_content"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "}"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\\bgroup"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_content"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "\\egroup"
+              }
+            ]
           }
         ]
       }
@@ -463,9 +552,9 @@
       "type": "PATTERN",
       "value": "[^\\\\{}\\[\\]\\s,][^\\\\{}\\[\\],]*"
     },
-    "mathtext": {
+    "math_text": {
       "type": "PATTERN",
-      "value": "[^$\\\\{}\\[\\]\\s,][^\\\\{}\\[\\],]*"
+      "value": "[^$]*"
     },
     "name": {
       "type": "PATTERN",
