@@ -6,7 +6,7 @@ group brace brace
 
 ---
 
-(document (brace_group))
+(document (brace_group (text)))
 
 ======
 group bgroup brace
@@ -16,7 +16,7 @@ group bgroup brace
 
 ---
 
-(document (brace_group))
+(document (brace_group (text)))
 
 ======
 group brace egroup
@@ -26,7 +26,7 @@ group brace egroup
 
 ---
 
-(document (brace_group))
+(document (brace_group (text)))
 
 ======
 group bgroup egroup
@@ -36,7 +36,7 @@ group bgroup egroup
 
 ---
 
-(document (brace_group))
+(document (brace_group (text)))
 
 
 ======

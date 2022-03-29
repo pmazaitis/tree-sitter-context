@@ -140,33 +140,6 @@
     "fields": {}
   },
   {
-    "type": "math_brace_group",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "escaped",
-          "named": true
-        },
-        {
-          "type": "math_brace_group",
-          "named": true
-        },
-        {
-          "type": "math_text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "math_group",
     "named": true,
     "fields": {},
@@ -174,18 +147,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "escaped",
-          "named": true
-        },
-        {
-          "type": "math_brace_group",
-          "named": true
-        },
         {
           "type": "math_text",
           "named": true
@@ -244,7 +205,15 @@
     }
   },
   {
+    "type": "\t",
+    "named": false
+  },
+  {
     "type": "\n",
+    "named": false
+  },
+  {
+    "type": " ",
     "named": false
   },
   {
