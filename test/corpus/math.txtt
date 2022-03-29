@@ -1,0 +1,29 @@
+======
+simple math group
+======
+
+$ $
+
+---
+
+(document (math_group (text)))
+
+======
+simple formula
+======
+
+$ f(x) = x^2 $
+
+---
+
+(document (math_group (text)))
+
+======
+simple formula with grouping
+======
+
+$ f(x) = x^{2x} $
+
+---
+
+(document (math_group (text (brace_group(text))))

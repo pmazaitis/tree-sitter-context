@@ -74,7 +74,7 @@ Command with Option Block and two keyvals, one groupd
 (document (command (name) 
     (optionblock 
         (opkey) (opval (optext))
-        (opkey) (opval (group (text)))
+        (opkey) (opval (brace_group (text)))
     )
 ))
 
@@ -93,7 +93,7 @@ Command with Option Block and group
             (opkey) (opval (optext))
         )
     )
-    (group (text))
+    (brace_group (text))
 )
 
 ======
@@ -131,11 +131,11 @@ Complicated Command and Option Block
     (command (name) 
         (optionblock (opkey)) 
         (optionblock 
-            (opkey) (opval (group (text))) 
-            (opkey) (opval (group (text))) 
-            (opkey) (opval (group)) 
-            (opkey) (opval (group (text))) 
-            (opkey) (opval (group (text))) 
+            (opkey) (opval (brace_group (text))) 
+            (opkey) (opval (brace_group (text))) 
+            (opkey) (opval (brace_group)) 
+            (opkey) (opval (brace_group (text))) 
+            (opkey) (opval (brace_group (text))) 
             (opkey) (opval (optext)) 
             (opkey) (opval (optext))
         )
@@ -156,7 +156,7 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-(document (command (name) (optionblock (opkey) (opval (group (text))))) (text) (command (name)))
+(document (command (name) (optionblock (opkey) (opval (brace_group (text))))) (text) (command (name)))
 
 ======
 Section start and stop with escaped char
@@ -172,7 +172,7 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-(document (command (name) (optionblock (opkey) (opval (group (text))))) (text) (escaped (escapechar)) (text) (command (name)))
+(document (command (name) (optionblock (opkey) (opval (brace_group (text))))) (text) (escaped (escapechar)) (text) (command (name)))
 
 ======
 Command with spaces between option blocks

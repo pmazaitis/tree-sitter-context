@@ -1,5 +1,48 @@
 [
   {
+    "type": "brace_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "main_start",
+          "named": true
+        },
+        {
+          "type": "main_stop",
+          "named": true
+        },
+        {
+          "type": "math_group",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "command",
     "named": true,
     "fields": {},
@@ -32,6 +75,10 @@
       "required": false,
       "types": [
         {
+          "type": "brace_group",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
@@ -44,15 +91,15 @@
           "named": true
         },
         {
-          "type": "group",
-          "named": true
-        },
-        {
           "type": "main_start",
           "named": true
         },
         {
           "type": "main_stop",
+          "named": true
+        },
+        {
+          "type": "math_group",
           "named": true
         },
         {
@@ -83,7 +130,17 @@
     }
   },
   {
-    "type": "group",
+    "type": "main_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "main_stop",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "math_group",
     "named": true,
     "fields": {},
     "children": {
@@ -91,7 +148,7 @@
       "required": false,
       "types": [
         {
-          "type": "command",
+          "type": "brace_group",
           "named": true
         },
         {
@@ -103,33 +160,11 @@
           "named": true
         },
         {
-          "type": "group",
-          "named": true
-        },
-        {
-          "type": "main_start",
-          "named": true
-        },
-        {
-          "type": "main_stop",
-          "named": true
-        },
-        {
           "type": "text",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "main_start",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "main_stop",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "optionblock",
@@ -159,6 +194,10 @@
       "required": false,
       "types": [
         {
+          "type": "brace_group",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
@@ -168,10 +207,6 @@
         },
         {
           "type": "escaped",
-          "named": true
-        },
-        {
-          "type": "group",
           "named": true
         },
         {

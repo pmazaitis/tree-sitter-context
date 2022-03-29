@@ -6,7 +6,7 @@ group
 
 ---
 
-(document (group))
+(document (brace_group))
 
 
 ======
@@ -17,7 +17,7 @@ group group
 
 ---
 
-(document (group (group)))
+(document (brace_group (brace_group)))
 
 ======
 group with text
@@ -27,7 +27,7 @@ group with text
 
 ---
 
-(document (group (text)))
+(document (brace_group (text)))
 
 ======
 group with command and text
@@ -37,4 +37,14 @@ group with command and text
 
 ---
 
-(document (group (command (name)) (text)))
+(document (brace_group (command (name)) (text)))
+
+======
+command with grouped text
+======
+
+\emph {foo}
+
+---
+
+(document (command (name)) (brace_group (text)))

@@ -1,17 +1,6 @@
 // Note: the escaped backslash _must_ be the last character in this array (ug)
 var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 
-var group_start = ["{", "\\start"]; // TODO: Use keyword extraction for this?
-
-var group_stop = ["{", "\\stop"];
-
-// _extras: $ => [" ", "\t", "\n"];
-
-// notes - Handling folds
-//
-// we want to have a notion of foldable nodes - 
-
-
 module.exports = grammar({
   name: 'ConTeXt',
 
@@ -28,9 +17,11 @@ module.exports = grammar({
        
     // CONTENT COLLECTIONS
     
-    _content: $ => choice($.comment, $.escaped, $.group, $.text, $.command, $._newline, $.main_start, $.main_stop),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.math_group, $.text, $.command, $._newline, $.main_start, $.main_stop),
     
-    _opcontent: $ => choice($.comment, $.escaped, $.group, $.optext, $.command, $._newline),
+    _opcontent: $ => choice($.comment, $.escaped, $.brace_group, $.optext, $.command, $._newline),
+
+    _math_content: $=> choice($.comment, $.escaped, $.brace_group, $.math_text, $._newline),
 
     // COMMENTS
     
@@ -44,7 +35,10 @@ module.exports = grammar({
 
     // GROUPS
 
-    group: $ => prec(1, seq('{', repeat($._content), '}')),
+    brace_group: $ => prec(1, seq('{', repeat($._content), '}')),
+    
+    math_group: $ => prec(1, seq('$', repeat($._math_content), '$')),
+    
     
     // COMMANDS
     
@@ -63,9 +57,13 @@ module.exports = grammar({
     
     optext: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
+    mathtext: $ => /[^$]*/,
+    
     name: $ => /[a-zA-Z0-9]+/,
  
     _newline: $ => prec(1, '\n'),
+    
+    _extras: $ => [" ", "\t", "\n"];
     
   },
   
