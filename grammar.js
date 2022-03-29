@@ -52,8 +52,6 @@ module.exports = grammar({
     
     math_brace_group: $ => prec(1, seq("{", repeat($._math_content), "}")),
     
-    // math_brace_group: $ => prec(1, choice( seq("{", repeat($._math_content), "}"), seq("{", repeat($._math_content), "\\egroup"), seq("\\bgroup", repeat($._math_content), "}"), seq("\\bgroup", repeat($._math_content), "\\egroup"))),
-    
     // _math_content: $=> choice($.comment, $.escaped, $.math_brace_group, $.math_text, $._newline),
     
     _math_content: $=> choice($.math_text),
