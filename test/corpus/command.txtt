@@ -6,7 +6,7 @@ Simple Command
 
 ---
 
-(document (command (name)))
+(document (command (command_name)))
 
 ======
 Command with Option Block and Keyword
@@ -16,7 +16,7 @@ Command with Option Block and Keyword
 
 ---
 
-(document (command (name) (optionblock (opkey))))
+(document (command (command_name) (optionblock (opkey))))
 
 ======
 Command with Option Block and Two Keywords
@@ -26,7 +26,7 @@ Command with Option Block and Two Keywords
 
 ---
 
-(document (command (name) (optionblock (opkey) (opkey))))
+(document (command (command_name) (optionblock (opkey) (opkey))))
 
 ======
 Command with Option Block and Keyval
@@ -36,7 +36,7 @@ Command with Option Block and Keyval
 
 ---
 
-(document (command (name) (optionblock (opkey) (opval (optext)))))
+(document (command (command_name) (optionblock (opkey) (opval (optext)))))
 
 ======
 Command with Option Block and Keyval with command
@@ -46,7 +46,7 @@ Command with Option Block and Keyval with command
 
 ---
 
-(document (command (name) (optionblock (opkey) (opval (command (name))))))
+(document (command (command_name) (optionblock (opkey) (opval (command (command_name))))))
 
 ======
 Command with Option Block and two keyvals
@@ -56,7 +56,7 @@ Command with Option Block and two keyvals
 
 ---
 
-(document (command (name) 
+(document (command (command_name) 
     (optionblock 
         (opkey) (opval (optext))
         (opkey) (opval (optext))
@@ -71,7 +71,7 @@ Command with Option Block and two keyvals, one groupd
 
 ---
 
-(document (command (name) 
+(document (command (command_name) 
     (optionblock 
         (opkey) (opval (optext))
         (opkey) (opval (brace_group (text)))
@@ -88,7 +88,7 @@ Command with Option Block and group
 
 (document 
     (command 
-        (name) 
+        (command_name) 
         (optionblock 
             (opkey) (opval (optext))
         )
@@ -105,7 +105,7 @@ Command with Option Block and two keyvals with newlines
 
 ---
 
-(document (command (name) 
+(document (command (command_name) 
     (optionblock 
         (opkey) (opval (optext))
         (opkey) (opval (optext))
@@ -128,7 +128,7 @@ Complicated Command and Option Block
 ---
 
 (document 
-    (command (name) 
+    (command (command_name) 
         (optionblock (opkey)) 
         (optionblock 
             (opkey) (opval (brace_group (text))) 
@@ -156,7 +156,7 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-(document (command (name) (optionblock (opkey) (opval (brace_group (text))))) (text) (command (name)))
+(document (command (command_name) (optionblock (opkey) (opval (brace_group (text))))) (text) (command (command_name)))
 
 ======
 Section start and stop with escaped char
@@ -172,7 +172,7 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-(document (command (name) (optionblock (opkey) (opval (brace_group (text))))) (text) (escaped (escapechar)) (text) (command (name)))
+(document (command (command_name) (optionblock (opkey) (opval (brace_group (text))))) (text) (escaped (escapechar)) (text) (command (command_name)))
 
 ======
 Command with spaces between option blocks
@@ -183,7 +183,7 @@ Command with spaces between option blocks
 ---
 
 (document 
-    (command (name) 
+    (command (command_name) 
         (optionblock (opkey))
         (optionblock (opkey))
     )
@@ -198,13 +198,13 @@ Setuptable with wacky opblocks
 ---
 
 (document 
-    (command (name) 
+    (command (command_name) 
         (optionblock (opkey)) 
         (optionblock (opkey)) 
         (optionblock (opkey) (opval (optext)) 
-                     (opkey) (opval (command (name)) (optext)) 
+                     (opkey) (opval (command (command_name)) (optext)) 
                      (opkey) (opval (optext)) 
-                     (opkey) (opval (command (name)))
+                     (opkey) (opval (command (command_name)))
         )
     )
 )

@@ -63,7 +63,7 @@ module.exports = grammar({
     
     math_group: $ => prec(1, seq('$', repeat($._math_content), '$')),
     
-    math_text: $ => /[^$]*/,
+    math_text: $ => /[^$]*/g,
     
     
     // COMMANDS

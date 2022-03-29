@@ -67,7 +67,7 @@ group with command and text
 
 ---
 
-(document (brace_group (command (name)) (text)))
+(document (brace_group (command (command_name)) (text)))
 
 ======
 command with grouped text
@@ -77,4 +77,4 @@ command with grouped text
 
 ---
 
-(document (command (name)) (brace_group (text)))
+(document (command (command_name)) (brace_group (text)))

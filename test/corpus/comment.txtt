@@ -30,5 +30,15 @@ Command and Comment
 ---
 
 (document 
-    (command (name)) (comment)
+    (command (command_name)) (comment)
 )
+
+======
+Comment and Command
+======
+
+%test comments \blank
+
+---
+
+(document (comment))
