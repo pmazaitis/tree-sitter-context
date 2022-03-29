@@ -32,7 +32,7 @@
           "named": true
         },
         {
-          "type": "math_group",
+          "type": "math",
           "named": true
         },
         {
@@ -99,7 +99,7 @@
           "named": true
         },
         {
-          "type": "math_group",
+          "type": "math",
           "named": true
         },
         {
@@ -140,6 +140,33 @@
     "fields": {}
   },
   {
+    "type": "math",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "math_group",
+          "named": true
+        },
+        {
+          "type": "math_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "math_group",
     "named": true,
     "fields": {},
@@ -148,11 +175,28 @@
       "required": false,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "math_group",
+          "named": true
+        },
+        {
           "type": "math_text",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "math_text",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "optionblock",
@@ -286,10 +330,6 @@
   },
   {
     "type": "command_name",
-    "named": true
-  },
-  {
-    "type": "math_text",
     "named": true
   },
   {

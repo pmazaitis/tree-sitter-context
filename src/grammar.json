@@ -25,7 +25,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "math_group"
+          "name": "math"
         },
         {
           "type": "SYMBOL",
@@ -51,7 +51,7 @@
     },
     "main_start": {
       "type": "PREC",
-      "value": 2,
+      "value": 20,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -68,7 +68,7 @@
     },
     "main_stop": {
       "type": "PREC",
-      "value": 2,
+      "value": 20,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -85,7 +85,7 @@
     },
     "comment": {
       "type": "PREC",
-      "value": 1,
+      "value": 10,
       "content": {
         "type": "TOKEN",
         "content": {
@@ -154,7 +154,7 @@
     },
     "escaped": {
       "type": "PREC",
-      "value": 1,
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
@@ -171,7 +171,7 @@
     },
     "brace_group": {
       "type": "PREC",
-      "value": 1,
+      "value": 10,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -258,9 +258,9 @@
         ]
       }
     },
-    "math_brace_group": {
+    "math_group": {
       "type": "PREC",
-      "value": 1,
+      "value": 8,
       "content": {
         "type": "SEQ",
         "members": [
@@ -287,13 +287,37 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "escaped"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "math_group"
+        },
+        {
+          "type": "SYMBOL",
           "name": "math_text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
         }
       ]
     },
-    "math_group": {
+    "math_text": {
       "type": "PREC",
-      "value": 1,
+      "value": 6,
+      "content": {
+        "type": "PATTERN",
+        "value": "[^$]*"
+      }
+    },
+    "math": {
+      "type": "PREC",
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
@@ -315,13 +339,9 @@
         ]
       }
     },
-    "math_text": {
-      "type": "PATTERN",
-      "value": "[^$]*"
-    },
     "command": {
       "type": "PREC",
-      "value": 1,
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
@@ -378,7 +398,7 @@
     },
     "optionblock": {
       "type": "PREC",
-      "value": 1,
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
@@ -546,7 +566,7 @@
     },
     "_newline": {
       "type": "PREC",
-      "value": 1,
+      "value": 10,
       "content": {
         "type": "STRING",
         "value": "\n"
