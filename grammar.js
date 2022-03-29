@@ -12,6 +12,7 @@ module.exports = grammar({
     _content: $ => choice($.comment, $.escaped, $.brace_group, $.math_group, $.text, $.command, $._newline, $.main_start, $.main_stop),
 
     document: $ => repeat1($._content),
+  
     
     // AREA MARKERS
     //
@@ -23,10 +24,12 @@ module.exports = grammar({
     main_start: $ => prec(2, choice("\\starttext","\\startcomponent")), 
     
     main_stop: $ => prec(2, choice("\\stoptext","\\stopcomponent")),   
-       
+    
+        
     // COMMENTS
     
     comment: $ => prec(1, token(seq('%', /.*/))),
+
 
     // ESCAPED CHARACTERS
 
@@ -34,11 +37,13 @@ module.exports = grammar({
 
     escaped: $ => prec(1, seq('\\', $.escapechar)),
 
+
     // BRACE GROUP
     //  
     // This grouping class can accept either a '{' or a '\bgroup' to start the group, and a '}' or a '\egroup' to end the group. They do not need to match.
       
     brace_group: $ => prec(1, choice( seq("{", repeat($._content), "}"), seq("{", repeat($._content), "\\egroup"), seq("\\bgroup", repeat($._content), "}"), seq("\\bgroup", repeat($._content), "\\egroup"))),
+  
   
     // MATH GROUP
     //
@@ -56,6 +61,7 @@ module.exports = grammar({
     math_group: $ => prec(1, seq('$', repeat($._math_content), '$')),
     
     math_text: $ => /[^$]*/,
+    
     
     // COMMANDS
     
@@ -75,7 +81,8 @@ module.exports = grammar({
 
     optext: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
-    // ELSE
+    
+    // TEXT CONTENT
     
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
     text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
