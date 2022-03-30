@@ -61,6 +61,10 @@
         {
           "type": "optionblock",
           "named": true
+        },
+        {
+          "type": "settingsblock",
+          "named": true
         }
       ]
     }
@@ -212,6 +216,16 @@
     }
   },
   {
+    "type": "key",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "keyword",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "main_start",
     "named": true,
     "fields": {}
@@ -257,18 +271,48 @@
       "required": false,
       "types": [
         {
-          "type": "opkey",
-          "named": true
-        },
-        {
-          "type": "opval",
+          "type": "keyword",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "opval",
+    "type": "setting",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "key",
+          "named": true
+        },
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "settingsblock",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "setting",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value",
     "named": true,
     "fields": {},
     "children": {
@@ -292,22 +336,14 @@
           "named": true
         },
         {
-          "type": "optext",
+          "type": "value_text",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "\t",
-    "named": false
-  },
-  {
     "type": "\n",
-    "named": false
-  },
-  {
-    "type": " ",
     "named": false
   },
   {
@@ -387,15 +423,11 @@
     "named": true
   },
   {
-    "type": "opkey",
-    "named": true
-  },
-  {
-    "type": "optext",
-    "named": true
-  },
-  {
     "type": "text",
+    "named": true
+  },
+  {
+    "type": "value_text",
     "named": true
   },
   {

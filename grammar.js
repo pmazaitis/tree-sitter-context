@@ -16,7 +16,7 @@ module.exports = grammar({
 
     // AREA MARKERS
     //
-    // This ConTeXt commands divide the context file into:
+    // These ConTeXt commands divide the context file into areas:
     //   - Preamble (interpreted commands, but content is not displayed)
     //   - Main (Content is displayed)
     //   - Postamble (Everything is ignored by the processor)
@@ -72,24 +72,64 @@ module.exports = grammar({
     
     // COMMANDS
     
-    // TODO: differentiate the parse between options and settings
+    // For this parser, we'll use the following labels: option blocks of keywords, and settings blocks of key/value pairs.
+    //
+    // An _option block_ is a square bracket delimited set of none or more keywords, separated by commas. 
+    // A _keyword_ is a switch to modify command behavior. Keywords may contain spaces.
+    //
+    // A _settings block_ is a square bracket delimited set of none or more key/value pairs, separated by commas (",").
+    // A key/value pair is separated by an equals sign ("="). Keys may not have spaces in them. Values should be grouped.
     
-    command: $ => prec(10, seq('\\', $.command_name, repeat(seq(optional(/\s+/), $.optionblock)), optional(/\s+/))),
-    
+    // Command names cannot contain numbers
     command_name: $ => /[a-zA-Z]+/,
     
-    optionblock: $ =>  prec(10, seq('[', optional(seq($._options, optional(repeat(seq(',', optional(/\s+/), $._options))))), optional(','), ']')),
+    // Option block
+    optionblock: $ =>  prec(10, seq('[', 
+                                    optional(seq($.keyword, 
+                                    optional(repeat(seq(',', optional(/\s+/), $.keyword, optional(/\s+/),))))), 
+                                    optional(','), 
+                                    ']'
+                                   )
+                           ),
      
-    _options: $ => seq($.opkey, optional(seq('=', optional($.opval)))),
+    keyword: $ =>  /[^=,\[\]]+/,
+     
+//      
+//     _options: $ => seq($.opkey, optional(seq('=', optional($.opval)))),
+//     
+//     opkey: $ =>  /[^=,\[\]]+/,
+//             
+//     opval: $ => repeat1($._opcontent),
+//     
+//     _opcontent: $ => choice($.comment, $.escaped, $.brace_group, $.optext, $.command, $._newline),
+// 
+//     optext: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
-    opkey: $ =>  /[^=,\[\]]+/,
-            
-    opval: $ => repeat1($._opcontent),
+    // Settings block
+    settingsblock: $ =>  prec(12, seq('[', 
+                                      optional(seq($.setting, 
+                                      optional(repeat(seq(',', optional(/\s+/), $.setting, optional(/\s+/),))))), 
+                                      optional(','), 
+                                      ']'
+                                     )
+                             ),
     
-    _opcontent: $ => choice($.comment, $.escaped, $.brace_group, $.optext, $.command, $._newline),
-
-    optext: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
+    setting: $ => seq($.key, '=', optional($.value)),
     
+    key: $ => /[^=,\[\]]+/,
+    
+    value: $ => repeat1($._value_content),
+    
+    _value_content: $ => choice($.comment, $.escaped, $.brace_group, $.value_text, $.command, $._newline),
+    
+    value_text: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
+    
+    
+    // The complete command rule
+    command: $ => prec.right(10, seq('\\', 
+                               $.command_name, 
+                               repeat(choice($.optionblock, $.settingsblock)), 
+                               optional(/\s+/))),
     
     // TEXT CONTENT
     
@@ -98,7 +138,7 @@ module.exports = grammar({
   
     _newline: $ => prec(10, '\n'),
     
-    _extras: $ => choice(" ", "\t", "\n"),
+    // extras: $ => [" ", "\t", "\n", "\r"],
     
   },
   
