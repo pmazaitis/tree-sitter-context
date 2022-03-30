@@ -4,7 +4,7 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 module.exports = grammar({
   name: 'ConTeXt',
 
-  extras: $ => [/[\s\n]/],
+  // extras: $ => [/[ \t\n\s]/],
 
   rules: {
     // The production rules of the context-free grammar for the ConTeXt markup language
@@ -82,31 +82,67 @@ module.exports = grammar({
     // A _keyword_ is a switch to modify command behavior. Keywords may contain spaces.
     //
     // A _settings block_ is a square bracket delimited set of none or more key/value pairs, separated by commas (",").
-    // A key/value pair is separated by an equals sign ("="). Keys may not have spaces in them. Values should be grouped.
+    // A key/value pair is separated by an equals sign ("="). Keys may not have spaces in them. Values can be grouped.
+    //
+    // Arbitrary whitespace can occur between a command name and any options or settings blocks _except_ for a sequence of
+    // two or more EOLs. Two EOLs in seqnece terminate the command. Anything other than whitespace will also terminate 
+    // the command at that point.
+    
     
     // Command names cannot contain numbers
     command_name: $ => /[a-zA-Z]+/,
     
     // Option block
-    optionblock: $ =>  prec(10, seq(
-                                    '[', 
-                                    optional(seq($.keyword, 
-                                                 optional(repeat(seq(',', optional(/\s+/), $.keyword, optional(/\s+/),))))), 
-                                    optional(','), 
-                                    ']'
-                                   )
-                           ),
+    optionblock: $ => prec(
+                        12, 
+                         seq(
+                            optional(/[^(\n\n)\\][ \t]+/),
+                            '[', 
+                            optional(
+                              seq(
+                                $.keyword, 
+                                optional(
+                                  repeat(
+                                    seq(
+                                      ',', 
+                                      optional(/\s+/), 
+                                      $.keyword, 
+                                      optional(/\s+/),
+                                    )
+                                  )
+                                )
+                              )
+                            ), 
+                            optional(','), 
+                            ']'
+                          )
+                        ),
      
     keyword: $ =>  /[^=,\[\]]+/,
      
     // Settings block
-    settingsblock: $ =>  prec(12, seq('[', 
-                                      optional(seq($.setting, 
-                                      optional(repeat(seq(',', optional(/\s+/), $.setting, optional(/\s+/),))))), 
-                                      optional(','), 
-                                      ']'
-                                     )
-                             ),
+    settingsblock: $ => prec(
+                          14, 
+                          seq(
+                            '[', 
+                            optional(
+                              seq($.setting, 
+                                optional(
+                                  repeat(
+                                    seq(
+                                      ',', 
+                                      optional(/\s+/), 
+                                      $.setting, 
+                                      optional(/\s+/),
+                                    )
+                                  )
+                                )
+                              )
+                            ), 
+                            optional(','), 
+                            ']'
+                            )
+                          ),
     
     setting: $ => seq($.key, '=', optional($.value)),
     
@@ -114,17 +150,31 @@ module.exports = grammar({
     
     value: $ => repeat1($._value_content),
     
-    _value_content: $ => choice($.comment, $.escaped, $.brace_group, $.value_text, $.command, $._newline),
+    _value_content: $ => choice($.comment, $.escaped, $.value_brace_group, $.value_text, $.command, $._newline),
     
     value_text: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
+    value_brace_group: $ => seq("{", repeat($._value_content), "}"),
+        
+    command_space: $ => prec(10, /[^(\n\n)\\]\s+/),
     
+    command_stop: $ => choice("\n\n", /[azA-Z0-9\\]/),
+
     // The complete command rule
-    command: $ => prec.right(10, seq('\\', 
-                               $.command_name,
-                               optional(/\s+/), 
-                               repeat(choice($.optionblock, $.settingsblock)), 
-                               optional(/\s+/))),
+    command: $ => prec.right(
+                    10, 
+                      seq(
+                        '\\', 
+                        $.command_name,
+                        repeat(
+                          choice(
+                            $.optionblock, 
+                            $.settingsblock, 
+                            $.command_space,
+                          )
+                        ), 
+                      )
+                    ),
     
     // TEXT CONTENT
     
