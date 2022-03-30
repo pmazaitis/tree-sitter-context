@@ -28,6 +28,8 @@ module.exports = grammar({
         
     // COMMENTS
     
+    // TODO: tokenize multi-line comments?
+    
     comment: $ => prec(10, token(seq('%', /.*/))),
 
 
