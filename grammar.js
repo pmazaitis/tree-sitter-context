@@ -4,6 +4,8 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 module.exports = grammar({
   name: 'ConTeXt',
 
+  extras: $ => [/[\s\n]/],
+
   rules: {
     // The production rules of the context-free grammar for the ConTeXt markup language
 
@@ -86,9 +88,10 @@ module.exports = grammar({
     command_name: $ => /[a-zA-Z]+/,
     
     // Option block
-    optionblock: $ =>  prec(10, seq('[', 
+    optionblock: $ =>  prec(10, seq(
+                                    '[', 
                                     optional(seq($.keyword, 
-                                    optional(repeat(seq(',', optional(/\s+/), $.keyword, optional(/\s+/),))))), 
+                                                 optional(repeat(seq(',', optional(/\s+/), $.keyword, optional(/\s+/),))))), 
                                     optional(','), 
                                     ']'
                                    )
@@ -118,7 +121,8 @@ module.exports = grammar({
     
     // The complete command rule
     command: $ => prec.right(10, seq('\\', 
-                               $.command_name, 
+                               $.command_name,
+                               optional(/\s+/), 
                                repeat(choice($.optionblock, $.settingsblock)), 
                                optional(/\s+/))),
     
@@ -128,9 +132,7 @@ module.exports = grammar({
     text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
   
     _newline: $ => prec(10, '\n'),
-    
-    // extras: $ => [" ", "\t", "\n", "\r"],
-    
+        
   },
   
   // conflicts: $ => [

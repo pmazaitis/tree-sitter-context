@@ -635,6 +635,18 @@
             "name": "command_name"
           },
           {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\s+"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
             "type": "REPEAT",
             "content": {
               "type": "CHOICE",

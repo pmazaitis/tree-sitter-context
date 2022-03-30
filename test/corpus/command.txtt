@@ -16,7 +16,7 @@ Command with Option Block and Keyword
 
 ---
 
-(document (command (command_name) (optionblock (opkey))))
+(document (command (command_name) (optionblock (keyword))))
 
 ======
 Command with Option Block and Two Keywords
@@ -26,30 +26,30 @@ Command with Option Block and Two Keywords
 
 ---
 
-(document (command (command_name) (optionblock (opkey) (opkey))))
+(document (command (command_name) (optionblock (keyword) (keyword))))
 
 ======
-Command with Option Block and Keyval
+Command with Settings Block and Keyval Pair
 ======
 
 \blank[big=hat]
 
 ---
 
-(document (command (command_name) (optionblock (opkey) (opval (optext)))))
+(document (command (command_name) (settingsblock (setting (key) (value (value_text))))))
 
 ======
-Command with Option Block and Keyval with command
+Command with Settings Block with Command as Value
 ======
 
 \blank[big=\hat]
 
 ---
 
-(document (command (command_name) (optionblock (opkey) (opval (command (command_name))))))
+(document (command (command_name) (settingsblock (setting (key) (value (command (command_name)))))))
 
 ======
-Command with Option Block and two keyvals
+Command with Settings Block with Two Settings
 ======
 
 \blank[big=hat, small=hat]
@@ -57,29 +57,36 @@ Command with Option Block and two keyvals
 ---
 
 (document (command (command_name) 
-    (optionblock 
-        (opkey) (opval (optext))
-        (opkey) (opval (optext))
+    (settingsblock 
+        (setting (key) (value (value_text)))
+        (setting (key) (value (value_text)))
     )
 ))
 
 ======
-Command with Option Block and two keyvals, one groupd
+Command with Settings Block and Two Settings, one with Grouped Value
 ======
 
 \blank[big=hat, small={hat}]
 
 ---
 
-(document (command (command_name) 
-    (optionblock 
-        (opkey) (opval (optext))
-        (opkey) (opval (brace_group (text)))
-    )
-))
+(document
+  (command
+    (command_name)
+    (settingsblock
+      (setting
+        (key)
+        (value
+          (value_text)))
+      (setting
+        (key)
+        (value
+          (brace_group
+            (text)))))))
 
 ======
-Command with Option Block and group
+Command with Option Block and Group
 ======
 
 \blank[big=hat]{foo}
@@ -89,15 +96,15 @@ Command with Option Block and group
 (document 
     (command 
         (command_name) 
-        (optionblock 
-            (opkey) (opval (optext))
+        (settingsblock 
+            (setting (key) (value (value_text)))
         )
     )
     (brace_group (text))
 )
 
 ======
-Command with Option Block and two keyvals with newlines
+Command with Settings Block and Two Settings with newlines
 ======
 
 \blank[big=hat, 
@@ -106,9 +113,9 @@ Command with Option Block and two keyvals with newlines
 ---
 
 (document (command (command_name) 
-    (optionblock 
-        (opkey) (opval (optext))
-        (opkey) (opval (optext))
+    (settingsblock 
+        (setting (key) (value (value_text)))
+        (setting (key) (value (value_text)))
     )
 ))
 
@@ -129,15 +136,15 @@ Complicated Command and Option Block
 
 (document 
     (command (command_name) 
-        (optionblock (opkey)) 
-        (optionblock 
-            (opkey) (opval (brace_group (text))) 
-            (opkey) (opval (brace_group (text))) 
-            (opkey) (opval (brace_group)) 
-            (opkey) (opval (brace_group (text))) 
-            (opkey) (opval (brace_group (text))) 
-            (opkey) (opval (optext)) 
-            (opkey) (opval (optext))
+        (optionblock (keyword)) 
+        (settingsblock 
+            (setting (key) (value (brace_group (text))))
+            (setting (key) (value (brace_group (text))))
+            (setting (key) (value (brace_group)))
+            (setting (key) (value (brace_group (text))))
+            (setting (key) (value (brace_group (text)))) 
+            (setting (key) (value (value_text))) 
+            (setting (key) (value (value_text)))
         )
     )
 )
@@ -156,8 +163,18 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-(document (command (command_name) (optionblock (opkey) (opval (brace_group (text))))) (text) (command (command_name)))
-
+    (document
+  (command
+    (command_name)
+    (settingsblock
+      (setting
+        (key)
+        (value
+          (brace_group
+            (text))))))
+  (text)
+  (command
+    (command_name)))
 ======
 Section start and stop with escaped char
 ======
@@ -172,7 +189,21 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-(document (command (command_name) (optionblock (opkey) (opval (brace_group (text))))) (text) (escaped (escapechar)) (text) (command (command_name)))
+    (document
+  (command
+    (command_name)
+    (settingsblock
+      (setting
+        (key)
+        (value
+          (brace_group
+            (text))))))
+  (text)
+  (escaped
+    (escapechar))
+  (text)
+  (command
+    (command_name)))
 
 ======
 Command with spaces between option blocks
@@ -184,8 +215,8 @@ Command with spaces between option blocks
 
 (document 
     (command (command_name) 
-        (optionblock (opkey))
-        (optionblock (opkey))
+        (optionblock (keyword))
+        (optionblock (keyword))
     )
 )
 
@@ -199,12 +230,27 @@ Setuptable with wacky opblocks
 
 (document 
     (command (command_name) 
-        (optionblock (opkey)) 
-        (optionblock (opkey)) 
-        (optionblock (opkey) (opval (optext)) 
-                     (opkey) (opval (command (command_name)) (optext)) 
-                     (opkey) (opval (optext)) 
-                     (opkey) (opval (command (command_name)))
-        )
+        (optionblock (keyword)) 
+        (optionblock (keyword)) 
+        (settingsblock
+                  (setting
+                    (key)
+                    (value
+                      (value_text)))
+                  (setting
+                    (key)
+                    (value
+                      (command
+                        (command_name))
+                      (value_text)))
+                  (setting
+                    (key)
+                    (value
+                      (value_text)))
+                  (setting
+                    (key)
+                    (value
+                      (command
+                        (command_name)))))
     )
 )
