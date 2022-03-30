@@ -534,7 +534,7 @@
     },
     "opkey": {
       "type": "PATTERN",
-      "value": "[^=,\\[\\] ]+"
+      "value": "[^=,\\[\\]]+"
     },
     "opval": {
       "type": "REPEAT1",
