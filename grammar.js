@@ -94,17 +94,6 @@ module.exports = grammar({
      
     keyword: $ =>  /[^=,\[\]]+/,
      
-//      
-//     _options: $ => seq($.opkey, optional(seq('=', optional($.opval)))),
-//     
-//     opkey: $ =>  /[^=,\[\]]+/,
-//             
-//     opval: $ => repeat1($._opcontent),
-//     
-//     _opcontent: $ => choice($.comment, $.escaped, $.brace_group, $.optext, $.command, $._newline),
-// 
-//     optext: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
-    
     // Settings block
     settingsblock: $ =>  prec(12, seq('[', 
                                       optional(seq($.setting, 
