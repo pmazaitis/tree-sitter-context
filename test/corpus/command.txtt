@@ -82,8 +82,8 @@ Command with Settings Block and Two Settings, one with Grouped Value
       (setting
         (key)
         (value
-          (brace_group
-            (text)))))))
+          (value_brace_group
+            (value_text)))))))
 
 ======
 Command with Option Block and Group
@@ -138,11 +138,11 @@ Complicated Command and Option Block
     (command (command_name) 
         (optionblock (keyword)) 
         (settingsblock 
-            (setting (key) (value (brace_group (text))))
-            (setting (key) (value (brace_group (text))))
-            (setting (key) (value (brace_group)))
-            (setting (key) (value (brace_group (text))))
-            (setting (key) (value (brace_group (text)))) 
+            (setting (key) (value (value_brace_group (text))))
+            (setting (key) (value (value_brace_group (text))))
+            (setting (key) (value (value_brace_group)))
+            (setting (key) (value (value_brace_group (text))))
+            (setting (key) (value (value_brace_group (text)))) 
             (setting (key) (value (value_text))) 
             (setting (key) (value (value_text)))
         )
@@ -170,8 +170,8 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
       (setting
         (key)
         (value
-          (brace_group
-            (text))))))
+          (value_brace_group
+            (value_text))))))
   (text)
   (command
     (command_name)))
@@ -196,8 +196,8 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
       (setting
         (key)
         (value
-          (brace_group
-            (text))))))
+          (value_brace_group
+            (value_text))))))
   (text)
   (escaped
     (escapechar))
