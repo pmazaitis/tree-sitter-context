@@ -72,6 +72,8 @@ module.exports = grammar({
     
     // COMMANDS
     
+    // TODO: differentiate the parse between options and settings
+    
     command: $ => prec(10, seq('\\', $.command_name, repeat(seq(optional(/\s+/), $.optionblock)), optional(/\s+/))),
     
     command_name: $ => /[a-zA-Z]+/,
@@ -80,7 +82,7 @@ module.exports = grammar({
      
     _options: $ => seq($.opkey, optional(seq('=', optional($.opval)))),
     
-    opkey: $ =>  /[^=,\[\] ]+/,
+    opkey: $ =>  /[^=,\[\]]+/,
             
     opval: $ => repeat1($._opcontent),
     
