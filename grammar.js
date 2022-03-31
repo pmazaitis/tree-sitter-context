@@ -6,6 +6,10 @@ module.exports = grammar({
 
   // extras: $ => [/[ \t\n\s]/],
 
+  // externals: $ => [
+  //   $.commandstop
+  // ],
+
   rules: {
     // The production rules of the context-free grammar for the ConTeXt markup language
 
@@ -156,10 +160,6 @@ module.exports = grammar({
     
     value_brace_group: $ => seq("{", repeat($._value_content), "}"),
         
-    command_space: $ => prec(10, /[^(\n\n)\\]\s+/),
-    
-    command_stop: $ => choice("\n\n", /[azA-Z0-9\\]/),
-
     // The complete command rule
     command: $ => prec.right(
                     10, 
@@ -170,9 +170,8 @@ module.exports = grammar({
                           choice(
                             $.optionblock, 
                             $.settingsblock, 
-                            $.command_space,
                           )
-                        ), 
+                        ),
                       )
                     ),
     

@@ -361,10 +361,22 @@
     },
     "optionblock": {
       "type": "PREC",
-      "value": 10,
+      "value": 12,
       "content": {
         "type": "SEQ",
         "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[^(\\n\\n)\\\\][ \\t]+"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
           {
             "type": "STRING",
             "value": "["
@@ -459,7 +471,7 @@
     },
     "settingsblock": {
       "type": "PREC",
-      "value": 12,
+      "value": 14,
       "content": {
         "type": "SEQ",
         "members": [
@@ -600,7 +612,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "brace_group"
+          "name": "value_brace_group"
         },
         {
           "type": "SYMBOL",
@@ -620,6 +632,26 @@
       "type": "PATTERN",
       "value": "[^\\\\{}\\[\\]\\s,][^\\\\{}\\[\\],]*"
     },
+    "value_brace_group": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_value_content"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
     "command": {
       "type": "PREC_RIGHT",
       "value": 10,
@@ -633,18 +665,6 @@
           {
             "type": "SYMBOL",
             "name": "command_name"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "\\s+"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
           },
           {
             "type": "REPEAT",
@@ -661,18 +681,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "\\s+"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
           }
         ]
       }
