@@ -2,13 +2,13 @@
 var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 
 module.exports = grammar({
-  name: 'ConTeXt',
+  name: 'context',
 
-  // extras: $ => [/[ \t\n\s]/],
+  extras: $ => [/[ \t\n\s]/],
 
-  // externals: $ => [
-  //   $.commandstop
-  // ],
+  externals: $ => [
+    $.command_stop
+  ],
 
   rules: {
     // The production rules of the context-free grammar for the ConTeXt markup language
@@ -86,10 +86,11 @@ module.exports = grammar({
     // A _keyword_ is a switch to modify command behavior. Keywords may contain spaces.
     //
     // A _settings block_ is a square bracket delimited set of none or more key/value pairs, separated by commas (",").
-    // A key/value pair is separated by an equals sign ("="). Keys may not have spaces in them. Values can be grouped.
+    // A key/value pair is separated by an equals sign ("="). Keys may not have spaces in them. Values can be grouped
+    // with curly braces.
     //
     // Arbitrary whitespace can occur between a command name and any options or settings blocks _except_ for a sequence of
-    // two or more EOLs. Two EOLs in seqnece terminate the command. Anything other than whitespace will also terminate 
+    // two or more EOLs. Two EOLs in sequence terminate the command. Anything other than whitespace will also terminate 
     // the command at that point.
     
     
@@ -100,7 +101,6 @@ module.exports = grammar({
     optionblock: $ => prec(
                         12, 
                          seq(
-                            optional(/[^(\n\n)\\][ \t]+/),
                             '[', 
                             optional(
                               seq(
@@ -109,9 +109,9 @@ module.exports = grammar({
                                   repeat(
                                     seq(
                                       ',', 
-                                      optional(/\s+/), 
+                                      // optional(/\s+/), 
                                       $.keyword, 
-                                      optional(/\s+/),
+                                      // optional(/\s+/),
                                     )
                                   )
                                 )
@@ -166,12 +166,15 @@ module.exports = grammar({
                       seq(
                         '\\', 
                         $.command_name,
-                        repeat(
-                          choice(
-                            $.optionblock, 
-                            $.settingsblock, 
-                          )
+                        optional(
+                          repeat(
+                            choice(
+                              $.optionblock, 
+                              $.settingsblock, 
+                            )
+                          )  
                         ),
+                        $.command_stop,
                       )
                     ),
     
@@ -181,6 +184,8 @@ module.exports = grammar({
     text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
   
     _newline: $ => prec(10, '\n'),
+        
+    _end_of_line: $ =>  prec(10, choice('\n', '\r', '\r\n')),   
         
   },
   

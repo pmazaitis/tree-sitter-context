@@ -1,5 +1,5 @@
 {
-  "name": "ConTeXt",
+  "name": "context",
   "rules": {
     "document": {
       "type": "REPEAT1",
@@ -366,18 +366,6 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[^(\\n\\n)\\\\][ \\t]+"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
             "type": "STRING",
             "value": "["
           },
@@ -404,32 +392,8 @@
                               "value": ","
                             },
                             {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "PATTERN",
-                                  "value": "\\s+"
-                                },
-                                {
-                                  "type": "BLANK"
-                                }
-                              ]
-                            },
-                            {
                               "type": "SYMBOL",
                               "name": "keyword"
-                            },
-                            {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "PATTERN",
-                                  "value": "\\s+"
-                                },
-                                {
-                                  "type": "BLANK"
-                                }
-                              ]
                             }
                           ]
                         }
@@ -667,20 +631,32 @@
             "name": "command_name"
           },
           {
-            "type": "REPEAT",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "optionblock"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "settingsblock"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "optionblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "settingsblock"
+                    }
+                  ]
                 }
-              ]
-            }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "command_stop"
           }
         ]
       }
@@ -696,17 +672,43 @@
         "type": "STRING",
         "value": "\n"
       }
+    },
+    "_end_of_line": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\n"
+          },
+          {
+            "type": "STRING",
+            "value": "\r"
+          },
+          {
+            "type": "STRING",
+            "value": "\r\n"
+          }
+        ]
+      }
     }
   },
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[ \\t\\n\\s]"
     }
   ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "command_stop"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }

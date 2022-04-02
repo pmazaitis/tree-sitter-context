@@ -44,12 +44,12 @@ Comment and Command
 (document (comment))
 
 ======
-Multi-line Comment
+Multiline Comment
 ======
 
-% One
-% Two
-% Three
+%foo
+%bar
+%baz
 
 ---
 

@@ -59,6 +59,10 @@
           "named": true
         },
         {
+          "type": "command_stop",
+          "named": true
+        },
+        {
           "type": "optionblock",
           "named": true
         },
@@ -378,6 +382,14 @@
     "named": false
   },
   {
+    "type": "\r",
+    "named": false
+  },
+  {
+    "type": "\r\n",
+    "named": false
+  },
+  {
     "type": "#",
     "named": false
   },
@@ -447,6 +459,10 @@
   },
   {
     "type": "command_name",
+    "named": true
+  },
+  {
+    "type": "command_stop",
     "named": true
   },
   {
