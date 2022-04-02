@@ -30,11 +30,14 @@ static bool scan_command_stop(TSLexer *lexer) {
   
   while (iswspace(lexer->lookahead)) {
   
+    
+  
     if (lexer->lookahead == '\n') {
-      lexer->advance(lexer, true);
+      advance(lexer);
+      if (lexer->lookahead == '[') return false;
       if (lexer->lookahead == '\n') return true;
     }
-    lexer->advance(lexer, true);
+    skip(lexer);
   }
   
   if (lexer->lookahead == '[') return false;

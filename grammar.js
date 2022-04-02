@@ -5,7 +5,8 @@ module.exports = grammar({
   name: 'context',
 
   extras: $ => [/[ \t\n\s]/],
-
+  // extras: $ => [],
+  
   externals: $ => [
     $.command_stop
   ],
@@ -17,7 +18,7 @@ module.exports = grammar({
     
     document: $ => repeat1($._content),
     
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._newline, $.main_start, $.main_stop),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop),
 
 
     // AREA MARKERS
@@ -109,9 +110,7 @@ module.exports = grammar({
                                   repeat(
                                     seq(
                                       ',', 
-                                      // optional(/\s+/), 
                                       $.keyword, 
-                                      // optional(/\s+/),
                                     )
                                   )
                                 )
@@ -122,6 +121,7 @@ module.exports = grammar({
                           )
                         ),
      
+    // keyword: $ =>  seq(/(\s|\r?\n)*/, /[^=,\[\]]+/, /(\s|\r?\n)*/),
     keyword: $ =>  /[^=,\[\]]+/,
      
     // Settings block
@@ -154,7 +154,7 @@ module.exports = grammar({
     
     value: $ => repeat1($._value_content),
     
-    _value_content: $ => choice($.comment, $.escaped, $.value_brace_group, $.value_text, $.command, $._newline),
+    _value_content: $ => choice($.comment, $.escaped, $.value_brace_group, $.value_text, $.command, $._end_of_line),
     
     value_text: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
@@ -166,13 +166,11 @@ module.exports = grammar({
                       seq(
                         '\\', 
                         $.command_name,
-                        optional(
-                          repeat(
-                            choice(
-                              $.optionblock, 
-                              $.settingsblock, 
-                            )
-                          )  
+                        repeat(
+                          choice(
+                            $.optionblock, 
+                            $.settingsblock,
+                          )
                         ),
                         $.command_stop,
                       )
@@ -182,9 +180,7 @@ module.exports = grammar({
     
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
     text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
-  
-    _newline: $ => prec(10, '\n'),
-        
+      
     _end_of_line: $ =>  prec(10, choice('\n', '\r', '\r\n')),   
         
   },
