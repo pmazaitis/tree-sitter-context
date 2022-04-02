@@ -128,6 +128,35 @@ Command with Settings Block with Two Settings
   )
 )
 
+======
+Command with Settings Block with Two Settings and line break
+======
+
+\blank
+[big=hat, small=hat]
+
+---
+
+(document 
+  (command 
+    (command_name) 
+      (settingsblock 
+          (setting 
+            (key) 
+            (value 
+              (value_text)
+            )
+          )
+          (setting 
+            (key) 
+            (value 
+              (value_text)
+            )
+          )
+        )
+    (command_stop)
+  )
+)
 
 ======
 Command with Settings Block and Two Settings, one with Grouped Value
@@ -328,6 +357,30 @@ Command with spaces between option blocks
     (command_stop)
   )
 )
+
+======
+Command with linebreak between option blocks
+======
+
+\blank 
+  [big] 
+  [hat]
+
+---
+
+(document 
+  (command 
+    (command_name) 
+    (optionblock 
+      (keyword)
+    )
+    (optionblock 
+      (keyword)
+    )
+    (command_stop)
+  )
+)
+
 
 ======
 Setuptable with tricky option blocks
