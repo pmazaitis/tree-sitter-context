@@ -6,7 +6,9 @@ hello
 
 ---
 
-(document (text))
+(document 
+    (text)
+)
 
 ======
 Multi-paragraph Text
@@ -18,4 +20,6 @@ hello
 
 ---
 
-(document (text))
+(document 
+    (text)
+)

@@ -30,7 +30,12 @@ Command and Comment
 ---
 
 (document 
-    (command (command_name)) (text) (comment)
+    (command 
+        (command_name) 
+        (command_stop)
+    ) 
+    (text) 
+    (comment)
 )
 
 ======
