@@ -380,28 +380,20 @@
                     "name": "keyword"
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SEQ",
-                          "members": [
-                            {
-                              "type": "STRING",
-                              "value": ","
-                            },
-                            {
-                              "type": "SYMBOL",
-                              "name": "keyword"
-                            }
-                          ]
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "keyword"
                         }
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               },
@@ -431,7 +423,7 @@
     },
     "keyword": {
       "type": "PATTERN",
-      "value": "[^=,\\[\\]]+"
+      "value": "[^\\s=,\\[\\]]+"
     },
     "settingsblock": {
       "type": "PREC",
@@ -454,52 +446,20 @@
                     "name": "setting"
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SEQ",
-                          "members": [
-                            {
-                              "type": "STRING",
-                              "value": ","
-                            },
-                            {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "PATTERN",
-                                  "value": "\\s+"
-                                },
-                                {
-                                  "type": "BLANK"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "SYMBOL",
-                              "name": "setting"
-                            },
-                            {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "PATTERN",
-                                  "value": "\\s+"
-                                },
-                                {
-                                  "type": "BLANK"
-                                }
-                              ]
-                            }
-                          ]
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "setting"
                         }
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               },
@@ -554,7 +514,7 @@
     },
     "key": {
       "type": "PATTERN",
-      "value": "[^=,\\[\\]]+"
+      "value": "[^\\s=,\\[\\]]+"
     },
     "value": {
       "type": "REPEAT1",
@@ -682,7 +642,7 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "[ \\t\\n\\s]"
+      "value": "\\s"
     }
   ],
   "conflicts": [],

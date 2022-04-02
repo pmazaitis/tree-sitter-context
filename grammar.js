@@ -127,15 +127,12 @@ module.exports = grammar({
                           seq(
                             '[', 
                             optional(
-                              seq($.setting, 
-                                optional(
-                                  repeat(
-                                    seq(
-                                      ',', 
-                                      // optional(/\s+/), 
-                                      $.setting, 
-                                      // optional(/\s+/),
-                                    )
+                              seq(
+                                $.setting, 
+                                repeat(
+                                  seq(
+                                    ',', 
+                                    $.setting, 
                                   )
                                 )
                               )
@@ -147,7 +144,7 @@ module.exports = grammar({
     
     setting: $ => seq($.key, '=', optional($.value)),
     
-    key: $ => /[^ =,\[\]]+/,
+    key: $ => /[^\s=,\[\]]+/,
     
     value: $ => repeat1($._value_content),
     
