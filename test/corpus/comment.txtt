@@ -48,14 +48,4 @@ Comment and Command
 
 (document (comment))
 
-======
-Multiline Comment
-======
 
-%foo
-%bar
-%baz
-
----
-
-(document (comment))
