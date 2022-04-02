@@ -4,7 +4,7 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 module.exports = grammar({
   name: 'context',
 
-  extras: $ => [/[ \t\n\s]/],
+  // extras: $ => [/[ \t\n\s]/],
   // extras: $ => [],
   
   externals: $ => [
@@ -106,12 +106,10 @@ module.exports = grammar({
                             optional(
                               seq(
                                 $.keyword, 
-                                optional(
-                                  repeat(
-                                    seq(
-                                      ',', 
-                                      $.keyword, 
-                                    )
+                                repeat(
+                                  seq(
+                                    ',', 
+                                    $.keyword, 
                                   )
                                 )
                               )
@@ -121,8 +119,7 @@ module.exports = grammar({
                           )
                         ),
      
-    // keyword: $ =>  seq(/(\s|\r?\n)*/, /[^=,\[\]]+/, /(\s|\r?\n)*/),
-    keyword: $ =>  /[^=,\[\]]+/,
+    keyword: $ =>  /[^\s=,\[\]]+/,
      
     // Settings block
     settingsblock: $ => prec(
@@ -135,9 +132,9 @@ module.exports = grammar({
                                   repeat(
                                     seq(
                                       ',', 
-                                      optional(/\s+/), 
+                                      // optional(/\s+/), 
                                       $.setting, 
-                                      optional(/\s+/),
+                                      // optional(/\s+/),
                                     )
                                   )
                                 )
@@ -150,7 +147,7 @@ module.exports = grammar({
     
     setting: $ => seq($.key, '=', optional($.value)),
     
-    key: $ => /[^=,\[\]]+/,
+    key: $ => /[^ =,\[\]]+/,
     
     value: $ => repeat1($._value_content),
     
