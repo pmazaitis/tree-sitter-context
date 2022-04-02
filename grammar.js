@@ -188,8 +188,4 @@ module.exports = grammar({
     _end_of_line: $ =>  prec(10, choice('\n', '\r', '\r\n')),   
         
   },
-  
-  // conflicts: $ => [
-  //   [$.preamble, $.main_none]
-  // ]
 });
