@@ -3,9 +3,6 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 
 module.exports = grammar({
   name: 'context',
-
-  // extras: $ => [/[ \t\n\s]/],
-  // extras: $ => [],
   
   externals: $ => [
     $.command_stop
@@ -49,7 +46,8 @@ module.exports = grammar({
 
     // BRACE GROUP
     //  
-    // This grouping class can accept either a '{' or a '\bgroup' to start the group, and a '}' or a '\egroup' to end the group. They do not need to match.
+    // This grouping class can accept either a '{' or a '\bgroup' to start the group, 
+    // and a '}' or a '\egroup' to end the group. They do not need to match.
       
     brace_group: $ => prec(10, choice( 
       seq("{", repeat($._content), "}"), 
