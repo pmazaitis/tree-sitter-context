@@ -248,7 +248,7 @@ Complicated Command and Option Block
         (optionblock (keyword)) 
         (settingsblock 
             (setting (key) (value (value_brace_group (value_text))))
-            (setting (key) (value (value_brace_group (value_text))))
+            (title_setting (title_value (value_brace_group (value_text))))
             (setting (key) (value (value_brace_group)))
             (setting (key) (value (value_brace_group (value_text))))
             (setting (key) (value (value_brace_group (value_text)))) 
@@ -279,9 +279,8 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
   (command
     (command_name)
     (settingsblock
-      (setting
-        (key)
-        (value
+      (title_setting
+        (title_value
           (value_brace_group
             (value_text)
           )
@@ -316,9 +315,8 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
   (command
     (command_name)
     (settingsblock
-      (setting
-        (key)
-        (value
+      (title_setting
+        (title_value
           (value_brace_group
             (value_text)
           )

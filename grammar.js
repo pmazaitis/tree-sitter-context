@@ -126,11 +126,17 @@ module.exports = grammar({
                             '[', 
                             optional(
                               seq(
-                                $.setting, 
+                                choice(
+                                  $.setting,
+                                  $.title_setting,  
+                                ), 
                                 repeat(
                                   seq(
                                     ',', 
-                                    $.setting, 
+                                    choice(
+                                      $.setting,
+                                      $.title_setting,
+                                    )  
                                   )
                                 )
                               )
@@ -141,6 +147,12 @@ module.exports = grammar({
                           ),
     
     setting: $ => seq($.key, '=', optional($.value)),
+    
+    // We want special treatment for settings that have values of reader-presented text, like the
+    // titles of sections or figures.
+    title_setting: $ => prec(12,seq("title", '=', optional($.title_value))),
+    
+    title_value: $ => repeat1($._value_content),
     
     key: $ => /[^\s=,\[\]]+/,
     
