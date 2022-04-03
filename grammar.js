@@ -154,6 +154,9 @@ module.exports = grammar({
     
     title_value: $ => repeat1($._value_content),
     
+    // End special cases
+    
+    
     key: $ => /[^\s=,\[\]]+/,
     
     value: $ => repeat1($._value_content),
