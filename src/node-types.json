@@ -5,10 +5,18 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "brace_group_start",
+          "named": true
+        },
+        {
+          "type": "brace_group_stop",
           "named": true
         },
         {
@@ -45,6 +53,16 @@
         }
       ]
     }
+  },
+  {
+    "type": "brace_group_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "brace_group_stop",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "command",

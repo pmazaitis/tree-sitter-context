@@ -6,7 +6,13 @@ group brace brace
 
 ---
 
-(document (brace_group (text)))
+(document 
+  (brace_group 
+    (brace_group_start)
+    (text)
+    (brace_group_stop)
+  )
+)
 
 ======
 group bgroup brace
@@ -16,7 +22,13 @@ group bgroup brace
 
 ---
 
-(document (brace_group (text)))
+(document 
+  (brace_group 
+    (brace_group_start)
+    (text)
+    (brace_group_stop)
+  )
+)
 
 ======
 group brace egroup
@@ -26,7 +38,13 @@ group brace egroup
 
 ---
 
-(document (brace_group (text)))
+(document 
+  (brace_group 
+    (brace_group_start)
+    (text)
+    (brace_group_stop)
+  )
+)
 
 ======
 group bgroup egroup
@@ -36,7 +54,13 @@ group bgroup egroup
 
 ---
 
-(document (brace_group (text)))
+(document 
+  (brace_group 
+    (brace_group_start)
+    (text)
+    (brace_group_stop)
+  )
+)
 
 
 ======
@@ -47,7 +71,16 @@ group group
 
 ---
 
-(document (brace_group (brace_group)))
+(document 
+  (brace_group 
+    (brace_group_start)
+    (brace_group
+      (brace_group_start)
+      (brace_group_stop)
+    )
+    (brace_group_stop)
+  )
+)
 
 ======
 group with text
@@ -57,7 +90,13 @@ group with text
 
 ---
 
-(document (brace_group (text)))
+(document 
+  (brace_group 
+    (brace_group_start)
+    (text)
+    (brace_group_stop)
+  )
+)
 
 ======
 group with command and text
@@ -68,13 +107,15 @@ group with command and text
 ---
 
 (document 
-    (brace_group 
-        (command 
-            (command_name)
-            (command_stop)
-        ) 
-        (text)
-    )
+  (brace_group
+    (brace_group_start)
+    (command 
+        (command_name)
+        (command_stop)
+    ) 
+    (text)
+    (brace_group_stop)
+  )
 )
 
 ======
@@ -86,13 +127,15 @@ command with grouped text
 ---
 
 (document 
-    (command 
-        (command_name)
-        (command_stop)
-    ) 
-    (brace_group 
-        (text)
-    )
+  (command 
+    (command_name)
+    (command_stop)
+  ) 
+  (brace_group 
+    (brace_group_start)
+    (text)
+    (brace_group_stop)
+  )
 )
 
 ======
@@ -107,9 +150,9 @@ Woo!
 ---
 
 (document 
-    (command_group 
-        (text)
-    )
+  (command_group 
+    (text)
+  )
 )
 
 ======

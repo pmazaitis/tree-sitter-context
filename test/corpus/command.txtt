@@ -205,7 +205,11 @@ Command with Option Block and Group
         )
         (command_stop)
     )
-    (brace_group (text))
+    (brace_group 
+      (brace_group_start)
+      (text)
+      (brace_group_stop)
+    )
 )
 
 ======

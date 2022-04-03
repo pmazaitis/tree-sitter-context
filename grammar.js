@@ -49,12 +49,20 @@ module.exports = grammar({
     // This grouping class can accept either a '{' or a '\bgroup' to start the group, 
     // and a '}' or a '\egroup' to end the group. They do not need to match.
       
-    brace_group: $ => prec(10, choice( 
-      seq("{", repeat($._content), "}"), 
-      seq("{", repeat($._content), "\\egroup"), 
-      seq("\\bgroup", repeat($._content), "}"), 
-      seq("\\bgroup", repeat($._content), "\\egroup")
-    )),
+    brace_group_start: $ => prec(20, choice("{","\\bgroup")),  
+    
+    brace_group_stop: $ => prec(20, choice("}","\\egroup")), 
+      
+    // brace_group: $ => prec(10, choice( 
+    //   seq("{", repeat($._content), "}"), 
+    //   seq("{", repeat($._content), "\\egroup"), 
+    //   seq("\\bgroup", repeat($._content), "}"), 
+    //   seq("\\bgroup", repeat($._content), "\\egroup")
+    // )),
+  
+    brace_group: $ => prec(10, 
+      seq($.brace_group_start, repeat($._content), $.brace_group_stop)
+    ),
   
     // COMMAND GROUP
     //
