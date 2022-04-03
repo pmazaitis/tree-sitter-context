@@ -162,7 +162,13 @@ module.exports = grammar({
     // titles of sections or figures.
     title_setting: $ => prec(12,seq("title", '=', optional($.title_value))),
     
-    title_value: $ => repeat1($._value_content),
+    title_value: $ => repeat1($._title_content),
+    
+    _title_content: $ => choice($.comment, $.escaped, $.title_brace_group, $.title_text, $.command, $._end_of_line),
+    
+    title_brace_group: $ => seq("{", repeat($._title_content), "}"),
+    
+    title_text: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
     
     // End special cases
     

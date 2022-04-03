@@ -1,6 +1,7 @@
-\blank  
-[  big  ]     
-[  cat,
-   dog]
+\startsection[title={Foo}, bar=baz]
 
+% Comments
 
+This is a {highlight} test.
+
+\stopsection
