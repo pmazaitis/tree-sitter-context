@@ -49,3 +49,18 @@ Comment and Command
 (document (comment))
 
 
+======
+Multiline Comments
+======
+
+% One
+% Two 
+% Three
+
+---
+
+(document
+  (comment)
+  (comment)
+  (comment)
+)
