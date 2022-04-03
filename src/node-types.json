@@ -97,7 +97,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "brace_group",
@@ -109,6 +109,14 @@
         },
         {
           "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "command_group_start",
+          "named": true
+        },
+        {
+          "type": "command_group_stop",
           "named": true
         },
         {
@@ -524,6 +532,14 @@
   {
     "type": "_",
     "named": false
+  },
+  {
+    "type": "command_group_start",
+    "named": true
+  },
+  {
+    "type": "command_group_stop",
+    "named": true
   },
   {
     "type": "command_name",

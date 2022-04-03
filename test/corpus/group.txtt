@@ -151,7 +151,9 @@ Woo!
 
 (document 
   (command_group 
+    (command_group_start)
     (text)
+    (command_group_stop)
   )
 )
 
@@ -171,9 +173,11 @@ Woo!
 ---
 
 (document 
-    (main_start) 
-    (command_group 
-        (text)
-    ) 
-    (main_stop)
+  (main_start) 
+  (command_group 
+      (command_group_start)
+      (text)
+      (command_group_stop)
+    )
+  (main_stop)
 )

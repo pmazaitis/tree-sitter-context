@@ -231,6 +231,14 @@
         ]
       }
     },
+    "command_group_start": {
+      "type": "PATTERN",
+      "value": "\\\\start[^a-zA-Z]"
+    },
+    "command_group_stop": {
+      "type": "PATTERN",
+      "value": "\\\\stop[^a-zA-Z]"
+    },
     "command_group": {
       "type": "PREC",
       "value": 10,
@@ -238,8 +246,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "\\\\start[^a-zA-Z]"
+            "type": "SYMBOL",
+            "name": "command_group_start"
           },
           {
             "type": "REPEAT",
@@ -249,8 +257,8 @@
             }
           },
           {
-            "type": "PATTERN",
-            "value": "\\\\stop[^a-zA-Z]"
+            "type": "SYMBOL",
+            "name": "command_group_stop"
           }
         ]
       }

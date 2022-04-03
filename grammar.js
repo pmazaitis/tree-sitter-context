@@ -52,14 +52,7 @@ module.exports = grammar({
     brace_group_start: $ => prec(20, choice("{","\\bgroup")),  
     
     brace_group_stop: $ => prec(20, choice("}","\\egroup")), 
-      
-    // brace_group: $ => prec(10, choice( 
-    //   seq("{", repeat($._content), "}"), 
-    //   seq("{", repeat($._content), "\\egroup"), 
-    //   seq("\\bgroup", repeat($._content), "}"), 
-    //   seq("\\bgroup", repeat($._content), "\\egroup")
-    // )),
-  
+       
     brace_group: $ => prec(10, 
       seq($.brace_group_start, repeat($._content), $.brace_group_stop)
     ),
@@ -68,7 +61,11 @@ module.exports = grammar({
     //
     // ConTeXt can also group document content between the commands "\start" and "\stop"
     
-    command_group: $ => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._content), /\\stop[^a-zA-Z]/)),
+    command_group_start: $ => /\\start[^a-zA-Z]/,
+    
+    command_group_stop: $ => /\\stop[^a-zA-Z]/,
+    
+    command_group: $ => prec(10, seq($.command_group_start, repeat($._content), $.command_group_stop)),
     
 
     // INLINE MATH
