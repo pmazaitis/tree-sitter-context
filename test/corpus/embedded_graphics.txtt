@@ -1,0 +1,47 @@
+======
+Metapost Inclusions
+======
+\startMPinclusions
+  draw (0,0) -- (1,1);
+\stopMPinclusions
+---
+
+(document 
+  (metapost_inclusion
+      (metapost_start)
+      (metapost_body)
+      (metapost_stop)
+  )
+)
+
+======
+Metapost Graphic
+======
+\startuseMPgraphic
+  draw (0,0) -- (1,1);
+\stopuseMPgraphic
+---
+
+(document 
+  (metapost_inclusion
+      (metapost_start)
+      (metapost_body)
+      (metapost_stop)
+  )
+)
+
+======
+TiKz Graphic
+======
+\starttikzpicture
+  draw (0,0) -- (1,1);
+\stoptikzpicture
+---
+
+(document 
+  (tikz_inclusion
+      (tikz_start)
+      (tikz_body)
+      (tikz_stop)
+  )
+)

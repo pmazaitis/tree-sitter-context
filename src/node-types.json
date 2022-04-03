@@ -48,7 +48,19 @@
           "named": true
         },
         {
+          "type": "metapost_inclusion",
+          "named": true
+        },
+        {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "tikz_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_inclusion",
           "named": true
         }
       ]
@@ -140,7 +152,19 @@
           "named": true
         },
         {
+          "type": "metapost_inclusion",
+          "named": true
+        },
+        {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "tikz_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_inclusion",
           "named": true
         }
       ]
@@ -192,7 +216,19 @@
           "named": true
         },
         {
+          "type": "metapost_inclusion",
+          "named": true
+        },
+        {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "tikz_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_inclusion",
           "named": true
         }
       ]
@@ -293,6 +329,44 @@
     }
   },
   {
+    "type": "metapost_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "metapost_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "metapost_body",
+          "named": true
+        },
+        {
+          "type": "metapost_start",
+          "named": true
+        },
+        {
+          "type": "metapost_stop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "metapost_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "metapost_stop",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "option_block",
     "named": true,
     "fields": {},
@@ -360,6 +434,44 @@
         }
       ]
     }
+  },
+  {
+    "type": "tikz_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tikz_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "tikz_body",
+          "named": true
+        },
+        {
+          "type": "tikz_start",
+          "named": true
+        },
+        {
+          "type": "tikz_stop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tikz_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tikz_stop",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "title_brace_group",
@@ -442,6 +554,44 @@
         }
       ]
     }
+  },
+  {
+    "type": "typing_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "typing_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_body",
+          "named": true
+        },
+        {
+          "type": "typing_start",
+          "named": true
+        },
+        {
+          "type": "typing_stop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "typing_stop",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "value",
@@ -559,7 +709,55 @@
     "named": false
   },
   {
+    "type": "\\startCSS",
+    "named": false
+  },
+  {
+    "type": "\\startHTML",
+    "named": false
+  },
+  {
+    "type": "\\startLUA",
+    "named": false
+  },
+  {
+    "type": "\\startMP",
+    "named": false
+  },
+  {
+    "type": "\\startMPcode",
+    "named": false
+  },
+  {
+    "type": "\\startMPinclusions",
+    "named": false
+  },
+  {
+    "type": "\\startMPpage",
+    "named": false
+  },
+  {
+    "type": "\\startPARSEDXML",
+    "named": false
+  },
+  {
+    "type": "\\startTEX",
+    "named": false
+  },
+  {
+    "type": "\\startXML",
+    "named": false
+  },
+  {
     "type": "\\startcomponent",
+    "named": false
+  },
+  {
+    "type": "\\startreusableMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\startstaticMPfigure",
     "named": false
   },
   {
@@ -567,11 +765,83 @@
     "named": false
   },
   {
+    "type": "\\starttikzpicture",
+    "named": false
+  },
+  {
+    "type": "\\starttyping",
+    "named": false
+  },
+  {
+    "type": "\\startuseMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\stopCSS",
+    "named": false
+  },
+  {
+    "type": "\\stopHTML",
+    "named": false
+  },
+  {
+    "type": "\\stopLUA",
+    "named": false
+  },
+  {
+    "type": "\\stopMP",
+    "named": false
+  },
+  {
+    "type": "\\stopMPcode",
+    "named": false
+  },
+  {
+    "type": "\\stopMPinclusions",
+    "named": false
+  },
+  {
+    "type": "\\stopMPpage",
+    "named": false
+  },
+  {
+    "type": "\\stopPARSEDXML",
+    "named": false
+  },
+  {
+    "type": "\\stopTEX",
+    "named": false
+  },
+  {
+    "type": "\\stopXML",
+    "named": false
+  },
+  {
     "type": "\\stopcomponent",
     "named": false
   },
   {
+    "type": "\\stopreusableMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\stopstaticMPfigure",
+    "named": false
+  },
+  {
     "type": "\\stoptext",
+    "named": false
+  },
+  {
+    "type": "\\stoptikzpicture",
+    "named": false
+  },
+  {
+    "type": "\\stoptyping",
+    "named": false
+  },
+  {
+    "type": "\\stopuseMPgraphic",
     "named": false
   },
   {

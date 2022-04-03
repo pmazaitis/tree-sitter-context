@@ -15,7 +15,7 @@ module.exports = grammar({
     
     document: $ => repeat1($._content),
     
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop, $.metapost_inclusion, $.tikz_inclusion, $.typing_inclusion),
 
 
     // AREA MARKERS
@@ -81,6 +81,48 @@ module.exports = grammar({
   
     inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
 
+    
+    // ENVIRONMENTS
+    //
+    // ConTeXt can embed other languages: Metafun, TiKz, and anything supported with typing
+    // environments or the filter module.
+    // 
+    // (A non-goal for this grammar is discovery of any user-generated start/stop commands
+    // in a document. We can support typing, and common environments like HTML and CSS, but
+    // nothing bespoke...)
+    
+    // Metafun/Post
+    
+    metapost_start: $ => prec(10, choice("\\startMPinclusions","\\startuseMPgraphic","\\startreusableMPgraphic","\\startMPcode","\\startMPpage","\\startstaticMPfigure")),
+    
+    metapost_stop: $ => prec(10, choice("\\stopMPinclusions","\\stopuseMPgraphic","\\stopreusableMPgraphic","\\stopMPcode","\\stopMPpage","\\stopstaticMPfigure")),
+    
+    metapost_body: $ => /[^\\]*/,
+    
+    metapost_inclusion: $ => prec(10, seq($.metapost_start,$.metapost_body,$.metapost_stop)),
+    
+    // TiKz
+    
+    tikz_start: $ => prec(10, "\\starttikzpicture"),
+    
+    tikz_stop: $ => prec(10, "\\stoptikzpicture"),
+    
+    tikz_body: $ => /[^\\]*/,
+    
+    tikz_inclusion: $ => prec(10, seq($.tikz_start,$.tikz_body,$.tikz_stop)),
+    
+    // Typing
+     
+    typing_start: $ => prec(10, choice("\\starttyping","\\startLUA","\\startMP","\\startPARSEDXML","\\startTEX","\\startXML","\\startHTML","\\startCSS")),
+    
+    typing_stop: $ => prec(10, choice("\\stoptyping","\\stopLUA","\\stopMP","\\stopPARSEDXML","\\stopTEX","\\stopXML","\\stopHTML","\\stopCSS")),
+    
+    typing_body: $ => /[^\\]*/,
+    
+    typing_inclusion: $ => prec(10, seq($.typing_start,$.typing_body,$.typing_stop)),
+    
+    
+    
     
     // COMMANDS
     

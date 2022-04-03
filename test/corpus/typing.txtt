@@ -1,0 +1,16 @@
+
+======
+Ordinary Typing
+======
+\starttyping
+  draw (0,0) -- (1,1);
+\stoptyping
+---
+
+(document 
+  (typing_inclusion
+      (typing_start)
+      (typing_body)
+      (typing_stop)
+  )
+)

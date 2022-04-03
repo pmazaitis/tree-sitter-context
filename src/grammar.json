@@ -50,6 +50,18 @@
         {
           "type": "SYMBOL",
           "name": "main_stop"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "metapost_inclusion"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tikz_inclusion"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typing_inclusion"
         }
       ]
     },
@@ -328,6 +340,245 @@
           {
             "type": "STRING",
             "value": "$"
+          }
+        ]
+      }
+    },
+    "metapost_start": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\startMPinclusions"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startuseMPgraphic"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startreusableMPgraphic"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startMPcode"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startMPpage"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startstaticMPfigure"
+          }
+        ]
+      }
+    },
+    "metapost_stop": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\stopMPinclusions"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopuseMPgraphic"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopreusableMPgraphic"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopMPcode"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopMPpage"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopstaticMPfigure"
+          }
+        ]
+      }
+    },
+    "metapost_body": {
+      "type": "PATTERN",
+      "value": "[^\\\\]*"
+    },
+    "metapost_inclusion": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "metapost_start"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "metapost_body"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "metapost_stop"
+          }
+        ]
+      }
+    },
+    "tikz_start": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "STRING",
+        "value": "\\starttikzpicture"
+      }
+    },
+    "tikz_stop": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "STRING",
+        "value": "\\stoptikzpicture"
+      }
+    },
+    "tikz_body": {
+      "type": "PATTERN",
+      "value": "[^\\\\]*"
+    },
+    "tikz_inclusion": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "tikz_start"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "tikz_body"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "tikz_stop"
+          }
+        ]
+      }
+    },
+    "typing_start": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\starttyping"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startLUA"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startMP"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startPARSEDXML"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startTEX"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startXML"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startHTML"
+          },
+          {
+            "type": "STRING",
+            "value": "\\startCSS"
+          }
+        ]
+      }
+    },
+    "typing_stop": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\stoptyping"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopLUA"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopMP"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopPARSEDXML"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopTEX"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopXML"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopHTML"
+          },
+          {
+            "type": "STRING",
+            "value": "\\stopCSS"
+          }
+        ]
+      }
+    },
+    "typing_body": {
+      "type": "PATTERN",
+      "value": "[^\\\\]*"
+    },
+    "typing_inclusion": {
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "typing_start"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "typing_body"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "typing_stop"
           }
         ]
       }
