@@ -5,17 +5,18 @@
 
 (command_name) @command
 
-"{" @group
-"}" @group
-(main_start) @group
-(main_stop) @group
-;"\\bgroup" @group
-;"\\egroup" @group
 
-
-"[" @option_group
-"]" @option_group
+(brace_group_start) @groupmarker
+(brace_group_stop) @groupmarker
+(command_group_start) @groupmarker
+(command_group_stop) @groupmarker
+(main_start) @groupmarker
+(main_stop) @groupmarker
+(command_block_start) @groupmarker
+(command_block_stop) @groupmarker
 
 (comment) @comment
 
 (escaped) @escaped
+
+(inline_math) @math

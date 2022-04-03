@@ -101,11 +101,16 @@ module.exports = grammar({
     // Command names cannot contain numbers
     command_name: $ => /[a-zA-Z]+/,
     
-    // Option block
-    optionblock: $ => prec(
+    // Labels for tokenizing the boundaries of option blocks and settings blocks
+    command_block_start: $ => "[",
+    
+    command_block_stop: $ => "]",
+    
+    // Option block    
+    option_block: $ => prec(
                         12, 
                          seq(
-                            '[', 
+                            $.command_block_start, 
                             optional(
                               seq(
                                 $.keyword, 
@@ -118,17 +123,17 @@ module.exports = grammar({
                               )
                             ), 
                             optional(','), 
-                            ']'
+                            $.command_block_stop
                           )
                         ),
      
     keyword: $ =>  /[^\s=,\[\]]+/,
      
-    // Settings block
-    settingsblock: $ => prec(
+    // Settings block    
+    settings_block: $ => prec(
                           14, 
                           seq(
-                            '[', 
+                            $.command_block_start, 
                             optional(
                               seq(
                                 choice(
@@ -147,7 +152,7 @@ module.exports = grammar({
                               )
                             ), 
                             optional(','), 
-                            ']'
+                            $.command_block_stop
                             )
                           ),
     
@@ -180,8 +185,8 @@ module.exports = grammar({
                         $.command_name,
                         repeat(
                           choice(
-                            $.optionblock, 
-                            $.settingsblock,
+                            $.option_block, 
+                            $.settings_block,
                           )
                         ),
                         $.command_stop,

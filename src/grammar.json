@@ -336,15 +336,23 @@
       "type": "PATTERN",
       "value": "[a-zA-Z]+"
     },
-    "optionblock": {
+    "command_block_start": {
+      "type": "STRING",
+      "value": "["
+    },
+    "command_block_stop": {
+      "type": "STRING",
+      "value": "]"
+    },
+    "option_block": {
       "type": "PREC",
       "value": 12,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "["
+            "type": "SYMBOL",
+            "name": "command_block_start"
           },
           {
             "type": "CHOICE",
@@ -392,8 +400,8 @@
             ]
           },
           {
-            "type": "STRING",
-            "value": "]"
+            "type": "SYMBOL",
+            "name": "command_block_stop"
           }
         ]
       }
@@ -402,15 +410,15 @@
       "type": "PATTERN",
       "value": "[^\\s=,\\[\\]]+"
     },
-    "settingsblock": {
+    "settings_block": {
       "type": "PREC",
       "value": 14,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "["
+            "type": "SYMBOL",
+            "name": "command_block_start"
           },
           {
             "type": "CHOICE",
@@ -476,8 +484,8 @@
             ]
           },
           {
-            "type": "STRING",
-            "value": "]"
+            "type": "SYMBOL",
+            "name": "command_block_stop"
           }
         ]
       }
@@ -628,11 +636,11 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "optionblock"
+                  "name": "option_block"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "settingsblock"
+                  "name": "settings_block"
                 }
               ]
             }

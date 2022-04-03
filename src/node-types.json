@@ -81,11 +81,11 @@
           "named": true
         },
         {
-          "type": "optionblock",
+          "type": "option_block",
           "named": true
         },
         {
-          "type": "settingsblock",
+          "type": "settings_block",
           "named": true
         }
       ]
@@ -293,13 +293,21 @@
     }
   },
   {
-    "type": "optionblock",
+    "type": "option_block",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "command_block_start",
+          "named": true
+        },
+        {
+          "type": "command_block_stop",
+          "named": true
+        },
         {
           "type": "keyword",
           "named": true
@@ -327,13 +335,21 @@
     }
   },
   {
-    "type": "settingsblock",
+    "type": "settings_block",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "command_block_start",
+          "named": true
+        },
+        {
+          "type": "command_block_stop",
+          "named": true
+        },
         {
           "type": "setting",
           "named": true
@@ -490,10 +506,6 @@
     "named": false
   },
   {
-    "type": "[",
-    "named": false
-  },
-  {
     "type": "\\",
     "named": false
   },
@@ -522,16 +534,20 @@
     "named": false
   },
   {
-    "type": "]",
-    "named": false
-  },
-  {
     "type": "^",
     "named": false
   },
   {
     "type": "_",
     "named": false
+  },
+  {
+    "type": "command_block_start",
+    "named": true
+  },
+  {
+    "type": "command_block_stop",
+    "named": true
   },
   {
     "type": "command_group_start",

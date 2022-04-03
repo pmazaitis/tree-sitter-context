@@ -24,8 +24,10 @@ Command with Option Block and Keyword
 (document 
   (command 
     (command_name) 
-    (optionblock 
+    (option_block
+      (command_block_start) 
       (keyword)
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -42,9 +44,11 @@ Command with Option Block and Two Keywords
 (document 
   (command 
     (command_name) 
-    (optionblock 
+    (option_block 
+      (command_block_start)
       (keyword) 
       (keyword)
+      (command_block_stop)
     )
     (command_stop)  
   )
@@ -61,13 +65,15 @@ Command with Settings Block and Keyval Pair
 (document 
   (command 
     (command_name) 
-    (settingsblock 
+    (settings_block
+      (command_block_start) 
       (setting 
         (key) 
         (value 
           (value_text)
         )
       )
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -84,7 +90,8 @@ Command with Settings Block with Command as Value
 (document 
   (command 
     (command_name) 
-    (settingsblock 
+    (settings_block
+      (command_block_start) 
       (setting 
         (key) 
         (value 
@@ -94,6 +101,7 @@ Command with Settings Block with Command as Value
           )
         )
       )
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -110,20 +118,22 @@ Command with Settings Block with Two Settings
 (document 
   (command 
     (command_name) 
-      (settingsblock 
-          (setting 
-            (key) 
-            (value 
-              (value_text)
-            )
-          )
-          (setting 
-            (key) 
-            (value 
-              (value_text)
-            )
+      (settings_block
+        (command_block_start) 
+        (setting 
+          (key) 
+          (value 
+            (value_text)
           )
         )
+        (setting 
+          (key) 
+          (value 
+            (value_text)
+          )
+        )
+        (command_block_stop)
+      )
     (command_stop)
   )
 )
@@ -140,20 +150,22 @@ Command with Settings Block with Two Settings and line break
 (document 
   (command 
     (command_name) 
-      (settingsblock 
-          (setting 
-            (key) 
-            (value 
-              (value_text)
-            )
-          )
-          (setting 
-            (key) 
-            (value 
-              (value_text)
-            )
+      (settings_block
+        (command_block_start) 
+        (setting 
+          (key) 
+          (value 
+            (value_text)
           )
         )
+        (setting 
+          (key) 
+          (value 
+            (value_text)
+          )
+        )
+        (command_block_stop)
+      )
     (command_stop)
   )
 )
@@ -169,7 +181,8 @@ Command with Settings Block and Two Settings, one with Grouped Value
 (document
   (command
     (command_name)
-    (settingsblock
+    (settings_block
+      (command_block_start)
       (setting
         (key)
         (value
@@ -184,6 +197,7 @@ Command with Settings Block and Two Settings, one with Grouped Value
           )
         )
       )
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -198,18 +212,20 @@ Command with Option Block and Group
 ---
 
 (document 
-    (command 
-        (command_name) 
-        (settingsblock 
-            (setting (key) (value (value_text)))
-        )
-        (command_stop)
+  (command 
+    (command_name) 
+    (settings_block 
+      (command_block_start)
+      (setting (key) (value (value_text)))
+      (command_block_stop)
     )
-    (brace_group 
-      (brace_group_start)
-      (text)
-      (brace_group_stop)
-    )
+    (command_stop)
+  )
+  (brace_group 
+    (brace_group_start)
+    (text)
+    (brace_group_stop)
+  )
 )
 
 ======
@@ -224,9 +240,11 @@ Command with Settings Block and Two Settings with newlines
 (document 
   (command 
     (command_name) 
-    (settingsblock 
-        (setting (key) (value (value_text)))
-        (setting (key) (value (value_text)))
+    (settings_block 
+      (command_block_start)
+      (setting (key) (value (value_text)))
+      (setting (key) (value (value_text)))
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -249,17 +267,23 @@ Complicated Command and Option Block
 
 (document 
     (command (command_name) 
-        (optionblock (keyword)) 
-        (settingsblock 
-            (setting (key) (value (value_brace_group (value_text))))
-            (title_setting (title_value (value_brace_group (value_text))))
-            (setting (key) (value (value_brace_group)))
-            (setting (key) (value (value_brace_group (value_text))))
-            (setting (key) (value (value_brace_group (value_text)))) 
-            (setting (key) (value (value_text))) 
-            (setting (key) (value (value_text)))
-        )
-        (command_stop)
+      (option_block 
+        (command_block_start)
+        (keyword)
+        (command_block_stop)
+      ) 
+      (settings_block
+        (command_block_start)
+        (setting (key) (value (value_brace_group (value_text))))
+        (title_setting (title_value (value_brace_group (value_text))))
+        (setting (key) (value (value_brace_group)))
+        (setting (key) (value (value_brace_group (value_text))))
+        (setting (key) (value (value_brace_group (value_text)))) 
+        (setting (key) (value (value_text))) 
+        (setting (key) (value (value_text)))
+        (command_block_stop)
+      )
+      (command_stop)
     )
     (text)
 )
@@ -282,7 +306,8 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 (document
   (command
     (command_name)
-    (settingsblock
+    (settings_block
+      (command_block_start)
       (title_setting
         (title_value
           (value_brace_group
@@ -290,6 +315,7 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
           )
         )
       )
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -318,7 +344,8 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 (document
   (command
     (command_name)
-    (settingsblock
+    (settings_block
+      (command_block_start)
       (title_setting
         (title_value
           (value_brace_group
@@ -326,6 +353,7 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
           )
         )
       )
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -350,11 +378,15 @@ Command with spaces between option blocks
 (document 
   (command 
     (command_name) 
-    (optionblock 
+    (option_block
+      (command_block_start) 
       (keyword)
+      (command_block_stop)
     )
-    (optionblock 
+    (option_block
+      (command_block_start) 
       (keyword)
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -373,11 +405,15 @@ Command with linebreak between option blocks
 (document 
   (command 
     (command_name) 
-    (optionblock 
+    (option_block
+      (command_block_start) 
       (keyword)
+      (command_block_stop)
     )
-    (optionblock 
+    (option_block
+      (command_block_start) 
       (keyword)
+      (command_block_stop)
     )
     (command_stop)
   )
@@ -395,13 +431,18 @@ Setuptable with tricky option blocks
 (document 
   (command 
     (command_name) 
-    (optionblock 
+    (option_block
+      (command_block_start) 
       (keyword)
+      (command_block_stop)
     ) 
-    (optionblock 
+    (option_block
+      (command_block_start) 
       (keyword)
+      (command_block_stop)
     ) 
-    (settingsblock
+    (settings_block
+      (command_block_start)
       (setting
         (key)
         (value
@@ -425,8 +466,9 @@ Setuptable with tricky option blocks
             (command_name)
             (command_stop)
           )
-       )
+        )
       )
+      (command_block_stop)
     )
     (command_stop)
   )
