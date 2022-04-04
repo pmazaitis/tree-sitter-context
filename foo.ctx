@@ -4,4 +4,10 @@
 
 This is a {highlight} test.
 
+\startHTML
+    
+<p>This is a paragraph.</p>
+    
+\stopHTML
+
 \stopsection

@@ -14,3 +14,19 @@ Ordinary Typing
       (typing_stop)
   )
 )
+
+======
+HTML Typing
+======
+\startHTML
+  <p>Foo.</p>
+\stopHTML
+---
+
+(document 
+  (typing_html_inclusion
+      (typing_html_start)
+      (typing_html_body)
+      (typing_html_stop)
+  )
+)

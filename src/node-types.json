@@ -60,6 +60,10 @@
           "named": true
         },
         {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
           "type": "typing_inclusion",
           "named": true
         }
@@ -164,6 +168,10 @@
           "named": true
         },
         {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
           "type": "typing_inclusion",
           "named": true
         }
@@ -225,6 +233,10 @@
         },
         {
           "type": "tikz_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
           "named": true
         },
         {
@@ -557,6 +569,44 @@
   },
   {
     "type": "typing_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "typing_html_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "typing_html_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_html_body",
+          "named": true
+        },
+        {
+          "type": "typing_html_start",
+          "named": true
+        },
+        {
+          "type": "typing_html_stop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_html_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "typing_html_stop",
     "named": true,
     "fields": {}
   },

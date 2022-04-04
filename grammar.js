@@ -15,7 +15,7 @@ module.exports = grammar({
     
     document: $ => repeat1($._content),
     
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop, $.metapost_inclusion, $.tikz_inclusion, $.typing_inclusion),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop, $.metapost_inclusion, $.tikz_inclusion, $.typing_inclusion, $.typing_html_inclusion),
 
 
     // AREA MARKERS
@@ -92,7 +92,6 @@ module.exports = grammar({
     // nothing bespoke...)
     
     // Metafun/Post
-    
     metapost_start: $ => prec(10, choice("\\startMPinclusions","\\startuseMPgraphic","\\startreusableMPgraphic","\\startMPcode","\\startMPpage","\\startstaticMPfigure")),
     
     metapost_stop: $ => prec(10, choice("\\stopMPinclusions","\\stopuseMPgraphic","\\stopreusableMPgraphic","\\stopMPcode","\\stopMPpage","\\stopstaticMPfigure")),
@@ -102,7 +101,6 @@ module.exports = grammar({
     metapost_inclusion: $ => prec(10, seq($.metapost_start,$.metapost_body,$.metapost_stop)),
     
     // TiKz
-    
     tikz_start: $ => prec(10, "\\starttikzpicture"),
     
     tikz_stop: $ => prec(10, "\\stoptikzpicture"),
@@ -111,17 +109,23 @@ module.exports = grammar({
     
     tikz_inclusion: $ => prec(10, seq($.tikz_start,$.tikz_body,$.tikz_stop)),
     
-    // Typing
-     
-    typing_start: $ => prec(10, choice("\\starttyping","\\startLUA","\\startMP","\\startPARSEDXML","\\startTEX","\\startXML","\\startHTML","\\startCSS")),
+    // Typing 
+    typing_start: $ => prec(10, choice("\\starttyping","\\startLUA","\\startMP","\\startPARSEDXML","\\startTEX","\\startXML","\\startCSS")),
     
-    typing_stop: $ => prec(10, choice("\\stoptyping","\\stopLUA","\\stopMP","\\stopPARSEDXML","\\stopTEX","\\stopXML","\\stopHTML","\\stopCSS")),
+    typing_stop: $ => prec(10, choice("\\stoptyping","\\stopLUA","\\stopMP","\\stopPARSEDXML","\\stopTEX","\\stopXML","\\stopCSS")),
     
     typing_body: $ => /[^\\]*/,
     
     typing_inclusion: $ => prec(10, seq($.typing_start,$.typing_body,$.typing_stop)),
     
-    
+    //HTML
+    typing_html_start: $ => prec(10, "\\startHTML"),
+     
+    typing_html_stop: $ => prec(10, "\\stopHTML"),
+     
+    typing_html_body: $ => /[^\\]*/,
+     
+    typing_html_inclusion: $ => prec(10, seq($.typing_html_start,$.typing_html_body,$.typing_html_stop)),   
     
     
     // COMMANDS
