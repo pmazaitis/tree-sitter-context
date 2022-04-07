@@ -982,6 +982,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "settings_block"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "command_stop"
                 }
               ]
             }

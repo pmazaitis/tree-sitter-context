@@ -239,6 +239,7 @@ module.exports = grammar({
                           choice(
                             $.option_block, 
                             $.settings_block,
+                            $.command_stop,
                           )
                         ),
                         $.command_stop,

@@ -1,4 +1,4 @@
 \placefigure
     [force]                                       % figure placement
-    [fig:counting_d]                           % figure reference
-    {Comparing Color Notations}
+    [thing]
+
