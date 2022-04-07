@@ -53,6 +53,8 @@ static bool scan_command_stop(TSLexer *lexer) {
 
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
+  UNUSED(payload);
+
   if (valid_symbols[COMMAND_STOP]) {
     return scan_command_stop(lexer);
   }
