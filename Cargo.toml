@@ -1,6 +1,6 @@
 [package]
-name = "tree-sitter-YOUR-LANGUAGE-NAME"
-description = "YOUR-LANGUAGE-NAME grammar for the tree-sitter parsing library"
+name = "tree-sitter-context"
+description = "ConTeXt grammar for the tree-sitter parsing library"
 version = "0.0.1"
 keywords = ["incremental", "parsing", "YOUR-LANGUAGE-NAME"]
 categories = ["parsing", "text-editors"]
