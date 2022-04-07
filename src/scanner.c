@@ -1,15 +1,17 @@
 #include <tree_sitter/parser.h>
 #include <wctype.h>
 
+#define UNUSED(x) (void)(x)
+
 enum TokenType {
   COMMAND_STOP
 };
 
 void *tree_sitter_context_external_scanner_create() { return NULL; }
-void tree_sitter_context_external_scanner_destroy(void *p) {}
-void tree_sitter_jcontext_external_scanner_reset(void *p) {}
+void tree_sitter_context_external_scanner_destroy(void *p) {UNUSED(p);}
+void tree_sitter_jcontext_external_scanner_reset(void *p) {UNUSED(p);}
 unsigned tree_sitter_context_external_scanner_serialize(void *p, char *buffer) { return 0; }
-void tree_sitter_context_external_scanner_deserialize(void *p, const char *b, unsigned n) {}
+void tree_sitter_context_external_scanner_deserialize(void *p, const char *b, unsigned n) {UNUSED(p); UNUSED(b); UNUSED(n);}
 
 static void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
