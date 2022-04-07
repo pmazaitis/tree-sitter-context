@@ -32,24 +32,26 @@ static bool scan_command_stop(TSLexer *lexer) {
   
   while (iswspace(lexer->lookahead)) {
   
-    
+    if (lexer->lookahead == '[') return false;
+    if (lexer->lookahead == '{') return true;
+    if (lexer->lookahead == '%') return false;
   
     if (lexer->lookahead == '\n') {
       advance(lexer);
       if (lexer->lookahead == '[') return false;
+      if (lexer->lookahead == '%') return false;
+      if (lexer->lookahead == '{') return true;
       if (lexer->lookahead == '\n') return true;
     }
     skip(lexer);
   }
   
-  if (lexer->lookahead == '[') return false;
+  
   
   return true;
 }
 
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
-
-  UNUSED(payload);  
 
   if (valid_symbols[COMMAND_STOP]) {
     return scan_command_stop(lexer);

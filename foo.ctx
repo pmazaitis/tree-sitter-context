@@ -1,13 +1,4 @@
-\startsection[title={Foo}, bar=baz]
-
-% Comments
-
-This is a {highlight} test.
-
-\startHTML
-    
-<p>This is a paragraph.</p>
-    
-\stopHTML
-
-\stopsection
+\placefigure
+    [force]                                       % figure placement
+    [fig:counting_d]                           % figure reference
+    {Comparing Color Notations}
