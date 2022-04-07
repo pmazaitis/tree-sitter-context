@@ -295,9 +295,7 @@ Section start and stop
 
 \startsection[title={Happy Little Goals}]
 
-Nice little fluffy clouds laying around in the sky being lazy. Use what you see, don't plan it. Maybe there's a happy little bush that lives right there.
-
-A thin paint will stick to a thick paint. That's a crooked tree. We'll send him to Washington. Look at them little rascals. I thought today we would make a happy little stream that's just running through the woods here.
+Nice.
 
 \stopsection
 
@@ -333,9 +331,7 @@ Section start and stop with escaped char
 
 \startsection[title={Happy Little Goals}]
 
-Nice little fluffy clouds laying around in the sky being lazy. \$ Use what you see, don't plan it. Maybe there's a happy little bush that lives right there.
-
-A thin paint will stick to a thick paint. That's a crooked tree. We'll send him to Washington. Look at them little rascals. I thought today we would make a happy little stream that's just running through the woods here.
+Nice. \%
 
 \stopsection
 
