@@ -243,6 +243,7 @@ module.exports = grammar({
                             $.settings_block,
                             // $.command_stop,
                             $.comment,
+                            $._end_of_line,
                           )
                         ),
                         $.command_stop,

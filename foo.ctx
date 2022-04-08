@@ -1,4 +1,6 @@
 \pf
  [a] % cmt
- [b]
-
+ [b] % cmt
+ [a=b,
+  c=d]
+ {Foo.}

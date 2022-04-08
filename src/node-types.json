@@ -298,16 +298,6 @@
     }
   },
   {
-    "type": "key",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "keyword",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "main_start",
     "named": true,
     "fields": {}
@@ -928,6 +918,14 @@
   },
   {
     "type": "command_stop",
+    "named": true
+  },
+  {
+    "type": "key",
+    "named": true
+  },
+  {
+    "type": "keyword",
     "named": true
   },
   {

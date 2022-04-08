@@ -304,27 +304,20 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 ---
 
 (document
-  (command
-    (command_name)
-    (settings_block
-      (command_block_start)
-      (title_setting
-        (title_value
-          (title_brace_group
-            (title_text)
-          )
-        )
-      )
-      (command_block_stop)
-    )
-    (command_stop)
-  )
-  (text)
-  (command
-    (command_name)
-    (command_stop)
-  )
-)
+(command
+  (command_name)
+  (settings_block
+    (command_block_start)
+    (title_setting
+      (title_value
+        (title_brace_group
+          (title_text))))
+    (command_block_stop))
+  (command_stop))
+(text)
+(command
+  (command_name)
+  (command_stop)))
     
     
 ======
@@ -341,31 +334,35 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-(document
-  (command
-    (command_name)
-    (settings_block
-      (command_block_start)
-      (title_setting
-        (title_value
-          (title_brace_group
-            (title_text)
-          )
-        )
-      )
-      (command_block_stop)
-    )
-    (command_stop)
-  )
-  (text)
-  (escaped
-    (escapechar))
-  (text)
-  (command
-    (command_name)
-    (command_stop)
-  )
-)
+    (document
+(command
+  (command_name)
+  (settings_block
+    (command_block_start)
+    (title_setting
+      (title_value
+        (title_brace_group
+          (title_text))))
+    (command_block_stop))
+    (document
+    (command
+      (command_name)
+      (settings_block
+        (command_block_start)
+        (title_setting
+          (title_value
+            (title_brace_group
+              (title_text))))
+        (command_block_stop))
+      (command_stop))
+    (text)
+    (escaped
+      (escapechar))
+    (text)
+    (command
+      (command_name)
+      (command_stop)))
+  (command_stop)))
 
 ======
 Command with spaces between option blocks

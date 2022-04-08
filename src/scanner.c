@@ -23,20 +23,14 @@ static bool scan_command_stop(TSLexer *lexer) {
   Conditions for a valid COMMAND_STOP token:
   
   - We encounter two EOLs
-  - We encounter something other than a open square bracket ("[")
+  - ...
 
   */
   
   lexer->result_symbol = COMMAND_STOP;
   lexer->mark_end(lexer);
-  
-  // while (!lexer->is_eof()) {
+
   while (lexer->lookahead != 0) {
-  
-    if (iswspace(lexer->lookahead)) {
-        skip(lexer);
-        continue;
-    }
   
     // We have the start of an option block; still in command
     if (lexer->lookahead == '[') return false;
@@ -56,9 +50,17 @@ static bool scan_command_stop(TSLexer *lexer) {
       if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
       if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
       if (lexer->lookahead == '\n') return true;
-    }
-    skip(lexer);
+      advance(lexer);
+      continue;
+    } 
+  
     
+    if (iswspace(lexer->lookahead)) {
+        skip(lexer);
+        continue;
+    }
+  
+    advance(lexer);
     
   }
   

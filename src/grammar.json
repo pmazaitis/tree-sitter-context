@@ -117,7 +117,7 @@
             },
             {
               "type": "PATTERN",
-              "value": ".*"
+              "value": "[^\\n]*"
             }
           ]
         }
@@ -696,7 +696,7 @@
     },
     "keyword": {
       "type": "PATTERN",
-      "value": "[^\\s=,\\[\\]]+"
+      "value": "[^=,\\[\\]]+"
     },
     "settings_block": {
       "type": "PREC",
@@ -986,6 +986,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "comment"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_end_of_line"
                 }
               ]
             }
@@ -1003,7 +1007,7 @@
     },
     "_end_of_line": {
       "type": "PREC",
-      "value": 10,
+      "value": 5,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -1025,8 +1029,12 @@
   },
   "extras": [
     {
-      "type": "PATTERN",
-      "value": "\\s"
+      "type": "STRING",
+      "value": " "
+    },
+    {
+      "type": "STRING",
+      "value": "\t"
     }
   ],
   "conflicts": [],
