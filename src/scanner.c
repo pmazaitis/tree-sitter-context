@@ -38,18 +38,23 @@ static bool scan_command_stop(TSLexer *lexer) {
         continue;
     }
   
-    // We have the start of a new option block; still in command
+    // We have the start of an option block; still in command
     if (lexer->lookahead == '[') return false;
+    // If we find the stop of an option block, the closing option block ends the command
+    if (lexer->lookahead == ']') {lexer->mark_end(lexer); return true;}
     // We have a comment; this is not necessarily a stop
     if (lexer->lookahead == '%') return false;
-    // We have  a scope; the command is over
+    // We enter or leave a scope; the command is over
     if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
+    if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
       
     if (lexer->lookahead == '\n') {
       advance(lexer);
       if (lexer->lookahead == '[') return false;
+      if (lexer->lookahead == ']') {lexer->mark_end(lexer); return true;}
       if (lexer->lookahead == '%') return false;
       if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
+      if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
       if (lexer->lookahead == '\n') return true;
     }
     skip(lexer);

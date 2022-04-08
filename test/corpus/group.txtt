@@ -113,7 +113,6 @@ group with command and text
         (command_name)
         (command_stop)
     ) 
-    (text)
     (brace_group_stop)
   )
 )
