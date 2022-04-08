@@ -4,6 +4,8 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 module.exports = grammar({
   name: 'context',
   
+  extras: $ => [" ", "\t"],
+  
   externals: $ => [
     $.command_stop
   ],
@@ -34,7 +36,7 @@ module.exports = grammar({
     
     // TODO: tokenize multi-line comments?
     
-    comment: $ => prec(10, token(seq('%', /.*/))),
+    comment: $ => prec(10, token(seq('%', /[^\n]*/))),
 
 
     // ESCAPED CHARACTERS
@@ -173,7 +175,7 @@ module.exports = grammar({
                           )
                         ),
      
-    keyword: $ =>  /[^\s=,\[\]]+/,
+    keyword: $ =>  /[^=,\[\]]+/,
      
     // Settings block    
     settings_block: $ => prec(
@@ -198,7 +200,7 @@ module.exports = grammar({
                               )
                             ), 
                             optional(','), 
-                            $.command_block_stop
+                            $.command_block_stop,
                             )
                           ),
     
@@ -252,7 +254,7 @@ module.exports = grammar({
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
     text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
       
-    _end_of_line: $ =>  prec(10, choice('\n', '\r', '\r\n')),   
+    _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),   
         
   },
 });
