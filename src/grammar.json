@@ -985,7 +985,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "command_stop"
+                  "name": "comment"
                 }
               ]
             }

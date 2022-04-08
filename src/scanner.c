@@ -30,25 +30,34 @@ static bool scan_command_stop(TSLexer *lexer) {
   lexer->result_symbol = COMMAND_STOP;
   lexer->mark_end(lexer);
   
-  while (iswspace(lexer->lookahead)) {
+  // while (!lexer->is_eof()) {
+  while (lexer->lookahead != 0) {
+  
+    if (iswspace(lexer->lookahead)) {
+        skip(lexer);
+        continue;
+    }
   
     // We have the start of a new option block; still in command
     if (lexer->lookahead == '[') return false;
     // We have a comment; this is not necessarily a stop
     if (lexer->lookahead == '%') return false;
     // We have  a scope; the command is over
-    if (lexer->lookahead == '{') return true;
+    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
       
     if (lexer->lookahead == '\n') {
       advance(lexer);
       if (lexer->lookahead == '[') return false;
       if (lexer->lookahead == '%') return false;
-      if (lexer->lookahead == '{') return true;
+      if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
       if (lexer->lookahead == '\n') return true;
     }
     skip(lexer);
+    
+    
   }
   
+  lexer->mark_end(lexer);
   return true;
 }
 

@@ -1,4 +1,4 @@
-\placefigure
-    [force]                                       % figure placement
-    [thing]
+\pf
+ [a] % cmt
+ [b]
 
