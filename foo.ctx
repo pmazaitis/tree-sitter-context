@@ -1,1 +1,12 @@
-\setupTABLE[column][1][width=8mm,offset=\dimexpr1mm+2pt,align=flushleft,style=\bfx]
+\starttext
+
+\blank
+
+One.
+
+Two, \% two.
+
+Three.
+
+
+\stoptext

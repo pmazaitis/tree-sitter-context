@@ -4,7 +4,8 @@
 #define UNUSED(x) (void)(x)
 
 enum TokenType {
-  COMMAND_STOP
+  COMMAND_STOP,
+  PARAGRAPH_STOP
 };
 
 void *tree_sitter_context_external_scanner_create() { return NULL; }
@@ -71,12 +72,72 @@ static bool scan_command_stop(TSLexer *lexer) {
   return true;
 }
 
+static bool scan_paragraph_stop(TSLexer *lexer) {
+  lexer->result_symbol = PARAGRAPH_STOP;
+  lexer->mark_end(lexer);
+  
+  while (lexer->lookahead != 0) {
+    if (lexer->lookahead == '\n') {
+      advance(lexer);
+      if (lexer->lookahead == '\n') {
+        advance(lexer);
+        // lexer->mark_end(lexer);
+        return true;
+      } else {
+        skip(lexer);
+        return false;
+      }
+    }
+    
+    if (lexer->lookahead == '\\') {
+      advance(lexer);
+      switch (lexer->lookahead) {
+        case '#': return false;
+        case '$': return false;
+        case '%': return false;
+        case '&': return false;
+        case '^': return false;
+        case '_': return false;
+        case '{': return false;
+        case '}': return false;
+        case '|': return false;
+        case '~': return false;
+        case '\\': return false;
+      } 
+      advance(lexer);
+      return true;
+    }
+    
+    switch (lexer->lookahead) {
+      case '#': return false;
+      case '$': return false;
+      case '%': return false;
+      case '&': return false;
+      case '^': return false;
+      case '_': return false;
+      case '{': return false;
+      case '}': return false;
+      case '|': return false;
+      case '~': return false;
+    }
+    
+    
+    
+    advance(lexer);
+  }
+  return true;
+}
+
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
   UNUSED(payload);
 
   if (valid_symbols[COMMAND_STOP]) {
     return scan_command_stop(lexer);
+  }
+  
+  if (valid_symbols[PARAGRAPH_STOP]) {
+    return scan_paragraph_stop(lexer);
   }
   
   return false;
