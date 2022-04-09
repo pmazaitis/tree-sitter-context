@@ -41,6 +41,9 @@ static bool scan_command_stop(TSLexer *lexer) {
     // We enter or leave a scope; the command is over
     if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
     if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
+    // We find a numeric, the command is over
+    if (iswdigit(lexer->lookahead)) {lexer->mark_end(lexer); return true;}
+    
       
     if (lexer->lookahead == '\n') {
       advance(lexer);

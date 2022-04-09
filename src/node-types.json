@@ -399,10 +399,6 @@
           "named": true
         },
         {
-          "type": "comment",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         }
