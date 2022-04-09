@@ -164,7 +164,8 @@ module.exports = grammar({
                                 $.keyword, 
                                 repeat(
                                   seq(
-                                    ',', 
+                                    ',',
+                                    optional($._end_of_line), 
                                     $.keyword, 
                                   )
                                 )
