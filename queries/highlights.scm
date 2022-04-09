@@ -1,6 +1,6 @@
 ; highlights.scm for tree-sitter-context
 
-(text) @user.text
+(paragraph) @user.text
 (title_value)  @user.text
 (title_text) @user.text
 
