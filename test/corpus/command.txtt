@@ -223,7 +223,7 @@ Command with Option Block and Group
   )
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -261,8 +261,8 @@ Complicated Command and Option Block
         type={Individual}, 
         submit={to GitHub},  
         id=s18hw1,
-        version=001,]
-        
+        version=001,] 
+    
 ---
 
 (document 
@@ -285,7 +285,6 @@ Complicated Command and Option Block
       )
       (command_stop)
     )
-    (text)
 )
 
 
@@ -306,21 +305,21 @@ Nice.
     (command_name)
     (settings_block
       (command_block_start)
-      (title_setting
-        (title_value
-          (title_brace_group
-            (title_text)
+        (title_setting
+          (title_value
+            (title_brace_group
+              (title_text)
+            )
           )
         )
-      )
       (command_block_stop)
     )
-    (command_stop)
-  )
-  (text)
+  (command_stop))
+  (paragraph)
+  (paragraph)
   (command
     (command_name)
-    (command_stop)
+    (command_stop) 
   )
 )
     
@@ -337,29 +336,30 @@ Nice. \%
 
 ---
 
+
 (document
   (command
     (command_name)
     (settings_block
       (command_block_start)
-      (title_setting
-        (title_value
-          (title_brace_group
-            (title_text)
+        (title_setting
+          (title_value
+            (title_brace_group
+              (title_text)
+            )
           )
         )
-      )
       (command_block_stop)
     )
-    (command_stop)
-  )
-  (text)
+  (command_stop))
+  (paragraph)
   (escaped
     (escapechar))
-  (text)
+  (paragraph)
+  (paragraph)
   (command
     (command_name)
-    (command_stop)
+    (command_stop) 
   )
 )
 
@@ -442,7 +442,9 @@ Setuptable with tricky option blocks
       (setting
         (key)
         (value
-          (value_text)))
+          (value_text)
+        )
+      )
       (setting
         (key)
         (value
@@ -450,11 +452,15 @@ Setuptable with tricky option blocks
             (command_name)
             (command_stop)
           )
-          (value_text)))
+          (value_text)
+        )
+      )
       (setting
         (key)
         (value
-          (value_text)))
+          (value_text)
+        )
+      )
       (setting
         (key)
         (value
@@ -462,6 +468,140 @@ Setuptable with tricky option blocks
             (command_name)
             (command_stop)
           )
+        )
+      )
+      (command_block_stop)
+    )
+    (command_stop)
+  )
+)
+
+======
+Option block with line breaks
+======
+
+\cmd[foo,
+     bar]
+
+---
+
+(document
+  (command
+    (command_name)
+    (option_block
+      (command_block_start)
+      (keyword)
+      (keyword)
+      (command_block_stop))
+    (command_stop)
+  )
+)
+
+======
+Settings block with line breaks
+======
+
+\cmd[foo=bar,
+     bar=baz]
+
+---
+
+(document
+  (command
+    (command_name)
+    (settings_block
+      (command_block_start)
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (command_block_stop))
+    (command_stop)
+  )
+)
+
+======
+Option and Settings block with line breaks
+======
+
+\cmd[foo,
+     bar]
+    [foo=bar,
+     bar=baz]
+
+---
+
+(document
+  (command
+    (command_name)
+    (option_block
+      (command_block_start)
+      (keyword)
+      (keyword)
+      (command_block_stop)
+    )
+    (settings_block
+      (command_block_start)
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (command_block_stop)
+    )
+    (command_stop)
+  )
+)
+
+======
+Option and Settings block with extra line breaks
+======
+
+\cmd[foo,
+     bar
+     ]
+    [foo=bar,
+     bar=baz
+     ]
+
+---
+
+(document
+  (command
+    (command_name)
+    (option_block
+      (command_block_start)
+      (keyword)
+      (keyword)
+      (command_block_stop)
+    )
+    (settings_block
+      (command_block_start)
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (setting
+        (key)
+        (value
+          (value_text)
         )
       )
       (command_block_stop)

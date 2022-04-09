@@ -7,7 +7,7 @@ hello
 ---
 
 (document 
-    (text)
+    (paragraph)
 )
 
 ======
@@ -21,5 +21,6 @@ hello
 ---
 
 (document 
-    (text)
+    (paragraph)
+    (paragraph)
 )

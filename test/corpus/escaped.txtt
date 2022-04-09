@@ -19,11 +19,11 @@ This is \% not a comment
 
 ---
 (document 
-    (text)
+    (paragraph)
     (escaped 
         (escapechar)
     )
-    (text)
+    (paragraph)
 )
 
 

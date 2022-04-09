@@ -9,7 +9,7 @@ group brace brace
 (document 
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -25,7 +25,7 @@ group bgroup brace
 (document 
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -41,7 +41,7 @@ group brace egroup
 (document 
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -57,7 +57,7 @@ group bgroup egroup
 (document 
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -93,7 +93,7 @@ group with text
 (document 
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -113,7 +113,6 @@ group with command and text
         (command_name)
         (command_stop)
     ) 
-    (text)
     (brace_group_stop)
   )
 )
@@ -133,7 +132,7 @@ command with grouped text
   ) 
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -152,7 +151,7 @@ Woo!
 (document 
   (command_group 
     (command_group_start)
-    (text)
+    (paragraph)
     (command_group_stop)
   )
 )
@@ -160,6 +159,7 @@ Woo!
 ======
 command_group in a full document
 ======
+
 \starttext
 
 \start
@@ -176,7 +176,7 @@ Woo!
   (main_start) 
   (command_group 
       (command_group_start)
-      (text)
+      (paragraph)
       (command_group_stop)
     )
   (main_stop)

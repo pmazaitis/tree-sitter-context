@@ -17,7 +17,7 @@ foo foo foo %test comments
 ---
 
 (document 
-    (text)
+    (paragraph)
     (comment)
 )
 
@@ -30,12 +30,11 @@ Command and Comment
 ---
 
 (document 
-    (command 
-        (command_name) 
-        (command_stop)
-    ) 
-    (text) 
-    (comment)
+  (command 
+    (command_name)
+    (comment) 
+    (command_stop)
+  )
 )
 
 ======

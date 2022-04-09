@@ -4,6 +4,8 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 module.exports = grammar({
   name: 'context',
   
+  extras: $ => [" ", "\t"],
+  
   externals: $ => [
     $.command_stop
   ],
@@ -15,7 +17,7 @@ module.exports = grammar({
     
     document: $ => repeat1($._content),
     
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop, $.metapost_inclusion, $.tikz_inclusion, $.typing_inclusion, $.typing_html_inclusion),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.paragraph, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop, $.metapost_inclusion, $.tikz_inclusion, $.typing_inclusion, $.typing_html_inclusion),
 
 
     // AREA MARKERS
@@ -34,7 +36,7 @@ module.exports = grammar({
     
     // TODO: tokenize multi-line comments?
     
-    comment: $ => prec(10, token(seq('%', /.*/))),
+    comment: $ => prec(10, token(seq('%', /[^\n]*/))),
 
 
     // ESCAPED CHARACTERS
@@ -163,13 +165,14 @@ module.exports = grammar({
                                 repeat(
                                   seq(
                                     ',',
-                                    optional($.comment), 
+                                    optional($._end_of_line), 
                                     $.keyword, 
                                   )
                                 )
                               )
                             ), 
-                            optional(','), 
+                            optional(','),
+                            optional($._end_of_line), 
                             $.command_block_stop
                           )
                         ),
@@ -189,7 +192,8 @@ module.exports = grammar({
                                 ), 
                                 repeat(
                                   seq(
-                                    ',', 
+                                    ',',
+                                    optional($._end_of_line), 
                                     choice(
                                       $.setting,
                                       $.title_setting,
@@ -198,18 +202,19 @@ module.exports = grammar({
                                 )
                               )
                             ), 
-                            optional(','), 
-                            $.command_block_stop
+                            optional(','),
+                            optional($._end_of_line), 
+                            $.command_block_stop,
                             )
                           ),
     
-    setting: $ => seq($.key, '=', optional($.value)),
+    setting: $ => seq($.key, '=', $.value),
     
     // We want special treatment for settings that have values of reader-presented text, like the
     // titles of sections or figures.
-    title_setting: $ => prec(12,seq("title", '=', optional($.title_value))),
+    title_setting: $ => prec.right(seq("title", '=', optional($.title_value))),
     
-    title_value: $ => repeat1($._title_content),
+    title_value: $ => prec.right(repeat1($._title_content)),
     
     _title_content: $ => choice($.comment, $.escaped, $.title_brace_group, $.title_text, $.command, $._end_of_line),
     
@@ -222,7 +227,7 @@ module.exports = grammar({
     
     key: $ => /[^\s=,\[\]]+/,
     
-    value: $ => repeat1($._value_content),
+    value: $ => prec.right(repeat1($._value_content)),
     
     _value_content: $ => choice($.comment, $.escaped, $.value_brace_group, $.value_text, $.command, $._end_of_line),
     
@@ -240,6 +245,8 @@ module.exports = grammar({
                           choice(
                             $.option_block, 
                             $.settings_block,
+                            $.comment,
+                            $._end_of_line,
                           )
                         ),
                         $.command_stop,
@@ -249,9 +256,16 @@ module.exports = grammar({
     // TEXT CONTENT
     
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+    paragraph: $ => prec.right(1, 
+                      repeat1(
+                        seq(
+                          new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'), 
+                          optional($._end_of_line)
+                        )
+                      )
+                    ),
       
-    _end_of_line: $ =>  prec(10, choice('\n', '\r', '\r\n')),   
+    _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),   
         
   },
 });
