@@ -150,19 +150,15 @@ module.exports = grammar({
     command_name: $ => /[a-zA-Z]+/,
     
     // Labels for tokenizing the boundaries of option blocks and settings blocks
-    option_block_start: $ => "[",
+    command_block_start: $ => "[",
     
-    option_block_stop: $ => "]",
-    
-    settings_block_start: $ => prec(14,"["),
-    
-    settings_block_stop: $ => prec(14,"]"),
+    command_block_stop: $ => "]",
     
     // Option block    
     option_block: $ => prec(
                         12, 
                          seq(
-                            $.option_block_start, 
+                            $.command_block_start, 
                             optional(
                               seq(
                                 $.keyword, 
@@ -175,17 +171,17 @@ module.exports = grammar({
                               )
                             ), 
                             optional(','), 
-                            $.option_block_stop
+                            $.command_block_stop
                           )
                         ),
      
-    keyword: $ =>  prec(12,/[^=,\[\]]+/),
+    keyword: $ =>  /[^\s=,\[\]]+/,
      
     // Settings block    
     settings_block: $ => prec(
                           14, 
                           seq(
-                            $.settings_block_start, 
+                            $.command_block_start, 
                             optional(
                               seq(
                                 choice(
@@ -195,7 +191,7 @@ module.exports = grammar({
                                 repeat(
                                   seq(
                                     ',',
-                                    // optional($._end_of_line), // Do we need this?
+                                    optional($._end_of_line), 
                                     choice(
                                       $.setting,
                                       $.title_setting,
@@ -205,11 +201,11 @@ module.exports = grammar({
                               )
                             ), 
                             optional(','), 
-                            $.settings_block_stop,
+                            $.command_block_stop,
                             )
                           ),
     
-    setting: $ => prec(14, seq($.key, '=', $.value)),
+    setting: $ => seq($.key, '=', $.value),
     
     // We want special treatment for settings that have values of reader-presented text, like the
     // titles of sections or figures.
