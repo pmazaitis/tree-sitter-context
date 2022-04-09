@@ -622,7 +622,7 @@
     },
     "command_name": {
       "type": "PATTERN",
-      "value": "[a-zA-Z]+"
+      "value": "\\\\[a-zA-Z]+"
     },
     "command_block_start": {
       "type": "STRING",
@@ -1010,10 +1010,6 @@
       "content": {
         "type": "SEQ",
         "members": [
-          {
-            "type": "STRING",
-            "value": "\\"
-          },
           {
             "type": "SYMBOL",
             "name": "command_name"

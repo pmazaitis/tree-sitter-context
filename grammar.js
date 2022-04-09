@@ -147,7 +147,7 @@ module.exports = grammar({
     
     
     // Command names cannot contain numbers
-    command_name: $ => /[a-zA-Z]+/,
+    command_name: $ => /\\[a-zA-Z]+/,
     
     // Labels for tokenizing the boundaries of option blocks and settings blocks
     command_block_start: $ => "[",
@@ -239,7 +239,6 @@ module.exports = grammar({
     command: $ => prec.right(
                     10, 
                       seq(
-                        '\\', 
                         $.command_name,
                         repeat(
                           choice(
