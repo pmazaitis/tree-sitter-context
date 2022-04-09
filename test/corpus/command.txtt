@@ -479,3 +479,95 @@ Setuptable with tricky option blocks
     (command_stop)
   )
 )
+
+======
+Option block with line breaks
+======
+
+\cmd[foo,
+     bar]
+
+---
+
+(document
+  (command
+    (command_name)
+    (option_block
+      (command_block_start)
+      (keyword)
+      (keyword)
+      (command_block_stop))
+    (command_stop)
+  )
+)
+
+======
+Settings block with line breaks
+======
+
+\cmd[foo=bar,
+     bar=baz]
+
+---
+
+(document
+  (command
+    (command_name)
+    (settings_block
+      (command_block_start)
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (command_block_stop))
+    (command_stop)
+  )
+)
+
+======
+Option and Settings block with line breaks
+======
+
+\cmd[foo,
+     bar]
+    [foo=bar,
+     bar=baz]
+
+---
+
+(document
+  (command
+    (command_name)
+    (option_block
+      (command_block_start)
+      (keyword)
+      (keyword)
+      (command_block_stop)
+    )
+    (settings_block
+      (command_block_start)
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (setting
+        (key)
+        (value
+          (value_text)
+        )
+      )
+      (command_block_stop)
+    )
+    (command_stop)
+  )
+)
