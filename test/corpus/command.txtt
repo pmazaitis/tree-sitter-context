@@ -316,7 +316,6 @@ Nice.
     )
   (command_stop))
   (paragraph)
-  (paragraph)
   (command
     (command_name)
     (command_stop) 
@@ -355,8 +354,6 @@ Nice. \%
   (paragraph)
   (escaped
     (escapechar))
-  (paragraph)
-  (paragraph)
   (command
     (command_name)
     (command_stop) 
