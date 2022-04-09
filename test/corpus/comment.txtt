@@ -17,7 +17,7 @@ foo foo foo %test comments
 ---
 
 (document 
-    (text)
+    (paragraph)
     (comment)
 )
 

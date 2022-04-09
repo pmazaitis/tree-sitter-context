@@ -223,7 +223,7 @@ Command with Option Block and Group
   )
   (brace_group 
     (brace_group_start)
-    (text)
+    (paragraph)
     (brace_group_stop)
   )
 )
@@ -285,7 +285,7 @@ Complicated Command and Option Block
       )
       (command_stop)
     )
-    (text)
+    (paragraph)
 )
 
 
@@ -314,7 +314,7 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
           (title_text))))
     (command_block_stop))
   (command_stop))
-(text)
+(paragraph)
 (command
   (command_name)
   (command_stop)))
@@ -355,10 +355,10 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
               (title_text))))
         (command_block_stop))
       (command_stop))
-    (text)
+    (paragraph)
     (escaped
       (escapechar))
-    (text)
+    (paragraph)
     (command
       (command_name)
       (command_stop)))
