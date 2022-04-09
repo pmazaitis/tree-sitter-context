@@ -261,8 +261,8 @@ Complicated Command and Option Block
         type={Individual}, 
         submit={to GitHub},  
         id=s18hw1,
-        version=001,]
-        
+        version=001,] 
+    
 ---
 
 (document 
@@ -285,7 +285,6 @@ Complicated Command and Option Block
       )
       (command_stop)
     )
-    (paragraph)
 )
 
 
@@ -304,20 +303,27 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 ---
 
 (document
-(command
-  (command_name)
-  (settings_block
-    (command_block_start)
-    (title_setting
-      (title_value
-        (title_brace_group
-          (title_text))))
-    (command_block_stop))
+  (command
+    (command_name)
+    (settings_block
+      (command_block_start)
+        (title_setting
+          (title_value
+            (title_brace_group
+              (title_text)
+            )
+          )
+        )
+      (command_block_stop)
+    )
   (command_stop))
-(paragraph)
-(command
-  (command_name)
-  (command_stop)))
+  (paragraph)
+  (paragraph)
+  (command
+    (command_name)
+    (command_stop) 
+  )
+)
     
     
 ======
@@ -334,35 +340,32 @@ A thin paint will stick to a thick paint. That's a crooked tree. We'll send him 
 
 ---
 
-    (document
-(command
-  (command_name)
-  (settings_block
-    (command_block_start)
-    (title_setting
-      (title_value
-        (title_brace_group
-          (title_text))))
-    (command_block_stop))
-    (document
-    (command
-      (command_name)
-      (settings_block
-        (command_block_start)
+
+(document
+  (command
+    (command_name)
+    (settings_block
+      (command_block_start)
         (title_setting
           (title_value
             (title_brace_group
-              (title_text))))
-        (command_block_stop))
-      (command_stop))
-    (paragraph)
-    (escaped
-      (escapechar))
-    (paragraph)
-    (command
-      (command_name)
-      (command_stop)))
-  (command_stop)))
+              (title_text)
+            )
+          )
+        )
+      (command_block_stop)
+    )
+  (command_stop))
+  (paragraph)
+  (escaped
+    (escapechar))
+  (paragraph)
+  (paragraph)
+  (command
+    (command_name)
+    (command_stop) 
+  )
+)
 
 ======
 Command with spaces between option blocks
@@ -443,7 +446,9 @@ Setuptable with tricky option blocks
       (setting
         (key)
         (value
-          (value_text)))
+          (value_text)
+        )
+      )
       (setting
         (key)
         (value
@@ -451,11 +456,15 @@ Setuptable with tricky option blocks
             (command_name)
             (command_stop)
           )
-          (value_text)))
+          (value_text)
+        )
+      )
       (setting
         (key)
         (value
-          (value_text)))
+          (value_text)
+        )
+      )
       (setting
         (key)
         (value
