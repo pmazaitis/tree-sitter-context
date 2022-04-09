@@ -1,6 +1,1 @@
-\pf
- [a] % cmt
- [b] % cmt
- [a=b,
-  c=d]
- {Foo}
+\setupTABLE[column][1][width=8mm,offset=\dimexpr1mm+2pt,align=flushleft,style=\bfx]

@@ -1,7 +1,1 @@
-\starts[title={h}]
-
-N.
-
-A.
-
-\stops
+\cmd[o=\dim1mm+2mm,foo]
