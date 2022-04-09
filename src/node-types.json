@@ -97,10 +97,6 @@
           "named": true
         },
         {
-          "type": "comment",
-          "named": true
-        },
-        {
           "type": "option_block",
           "named": true
         },
@@ -298,6 +294,11 @@
     }
   },
   {
+    "type": "keyword",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "main_start",
     "named": true,
     "fields": {}
@@ -381,19 +382,29 @@
       "required": true,
       "types": [
         {
-          "type": "command_block_start",
-          "named": true
-        },
-        {
-          "type": "command_block_stop",
-          "named": true
-        },
-        {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "option_block_start",
+          "named": true
+        },
+        {
+          "type": "option_block_stop",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "option_block_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "option_block_stop",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "setting",
@@ -423,15 +434,15 @@
       "required": true,
       "types": [
         {
-          "type": "command_block_start",
-          "named": true
-        },
-        {
-          "type": "command_block_stop",
-          "named": true
-        },
-        {
           "type": "setting",
+          "named": true
+        },
+        {
+          "type": "settings_block_start",
+          "named": true
+        },
+        {
+          "type": "settings_block_stop",
           "named": true
         },
         {
@@ -440,6 +451,16 @@
         }
       ]
     }
+  },
+  {
+    "type": "settings_block_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "settings_block_stop",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "tikz_body",
@@ -741,6 +762,10 @@
     "named": false
   },
   {
+    "type": "[",
+    "named": false
+  },
+  {
     "type": "\\",
     "named": false
   },
@@ -889,20 +914,16 @@
     "named": false
   },
   {
+    "type": "]",
+    "named": false
+  },
+  {
     "type": "^",
     "named": false
   },
   {
     "type": "_",
     "named": false
-  },
-  {
-    "type": "command_block_start",
-    "named": true
-  },
-  {
-    "type": "command_block_stop",
-    "named": true
   },
   {
     "type": "command_group_start",
@@ -922,10 +943,6 @@
   },
   {
     "type": "key",
-    "named": true
-  },
-  {
-    "type": "keyword",
     "named": true
   },
   {
