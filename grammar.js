@@ -254,7 +254,14 @@ module.exports = grammar({
     // TEXT CONTENT
     
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    paragraph: $ => prec.right(1, repeat1(seq(new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'), optional($._end_of_line)))),
+    paragraph: $ => prec.right(1, 
+                      repeat1(
+                        seq(
+                          new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'), 
+                          optional($._end_of_line)
+                        )
+                      )
+                    ),
       
     _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),   
         
