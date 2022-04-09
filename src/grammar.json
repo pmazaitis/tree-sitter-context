@@ -662,6 +662,18 @@
                           "value": ","
                         },
                         {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "_end_of_line"
+                            },
+                            {
+                              "type": "BLANK"
+                            }
+                          ]
+                        },
+                        {
                           "type": "SYMBOL",
                           "name": "keyword"
                         }
@@ -1003,7 +1015,7 @@
     },
     "text": {
       "type": "PATTERN",
-      "value": "[^\\]\\[$%&^_{}|~\\\\]+"
+      "value": "[^\\n\\]\\[$%&^_{}|~\\\\]+"
     },
     "_end_of_line": {
       "type": "PREC",
