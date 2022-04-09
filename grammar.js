@@ -171,7 +171,8 @@ module.exports = grammar({
                                 )
                               )
                             ), 
-                            optional(','), 
+                            optional(','),
+                            optional($._end_of_line), 
                             $.command_block_stop
                           )
                         ),
@@ -201,7 +202,8 @@ module.exports = grammar({
                                 )
                               )
                             ), 
-                            optional(','), 
+                            optional(','),
+                            optional($._end_of_line), 
                             $.command_block_stop,
                             )
                           ),
@@ -210,9 +212,9 @@ module.exports = grammar({
     
     // We want special treatment for settings that have values of reader-presented text, like the
     // titles of sections or figures.
-    title_setting: $ => seq("title", '=', optional($.title_value)),
+    title_setting: $ => prec.right(seq("title", '=', optional($.title_value))),
     
-    title_value: $ => repeat1($._title_content),
+    title_value: $ => prec.right(repeat1($._title_content)),
     
     _title_content: $ => choice($.comment, $.escaped, $.title_brace_group, $.title_text, $.command, $._end_of_line),
     
@@ -225,7 +227,7 @@ module.exports = grammar({
     
     key: $ => /[^\s=,\[\]]+/,
     
-    value: $ => repeat1($._value_content),
+    value: $ => prec.right(repeat1($._value_content)),
     
     _value_content: $ => choice($.comment, $.escaped, $.value_brace_group, $.value_text, $.command, $._end_of_line),
     
