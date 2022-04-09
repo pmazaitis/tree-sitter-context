@@ -52,7 +52,7 @@
           "named": true
         },
         {
-          "type": "text",
+          "type": "paragraph",
           "named": true
         },
         {
@@ -164,7 +164,7 @@
           "named": true
         },
         {
-          "type": "text",
+          "type": "paragraph",
           "named": true
         },
         {
@@ -232,7 +232,7 @@
           "named": true
         },
         {
-          "type": "text",
+          "type": "paragraph",
           "named": true
         },
         {
@@ -404,6 +404,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "paragraph",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "setting",
@@ -932,10 +937,6 @@
   },
   {
     "type": "math_text",
-    "named": true
-  },
-  {
-    "type": "text",
     "named": true
   },
   {

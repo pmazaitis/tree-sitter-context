@@ -17,7 +17,7 @@ module.exports = grammar({
     
     document: $ => repeat1($._content),
     
-    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.text, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop, $.metapost_inclusion, $.tikz_inclusion, $.typing_inclusion, $.typing_html_inclusion),
+    _content: $ => choice($.comment, $.escaped, $.brace_group, $.inline_math, $.paragraph, $.command, $.command_group, $._end_of_line, $.main_start, $.main_stop, $.metapost_inclusion, $.tikz_inclusion, $.typing_inclusion, $.typing_html_inclusion),
 
 
     // AREA MARKERS
@@ -254,7 +254,7 @@ module.exports = grammar({
     // TEXT CONTENT
     
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    text: $ => new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+    paragraph: $ => prec.right(1, repeat1(seq(new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'), optional($._end_of_line)))),
       
     _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),   
         

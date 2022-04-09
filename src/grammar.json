@@ -29,7 +29,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "text"
+          "name": "paragraph"
         },
         {
           "type": "SYMBOL",
@@ -1013,9 +1013,33 @@
         ]
       }
     },
-    "text": {
-      "type": "PATTERN",
-      "value": "[^\\n\\]\\[$%&^_{}|~\\\\]+"
+    "paragraph": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\n\\]\\[$%&^_{}|~\\\\]+"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_end_of_line"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        }
+      }
     },
     "_end_of_line": {
       "type": "PREC",
