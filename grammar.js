@@ -39,11 +39,10 @@ module.exports = grammar({
     
     main_stop: $ => prec(20, choice("\\stoptext","\\stopcomponent")),   
     
+    
     // PARAGRAPH CONTENT
     //
     // Paragraphs are the primary content unit
-    
-    
     
     paragraph: $ => prec.right(18,
                       seq( 
@@ -68,11 +67,7 @@ module.exports = grammar({
                               seq($.typing_html_inclusion, optional($._end_of_line)),
                             ), 
       
-    
-    
-    
-    
-    
+
         
     // COMMENTS
     
@@ -296,9 +291,6 @@ module.exports = grammar({
                         $.command_stop,
                       )
                     ),
-    
-    
-    
     
     
     // MISC TEXT CONTENT
