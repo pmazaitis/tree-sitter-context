@@ -19,9 +19,9 @@ module.exports = grammar({
 
     // GENERAL DOCUMENT CONTENT
     
-    document: $ => repeat1($._content),
+    document: $ => repeat1($._document_content),
     
-    _content: $ => choice(
+    _document_content: $ => choice(
       $.paragraph, 
       $.main_start, 
       $.main_stop, 
