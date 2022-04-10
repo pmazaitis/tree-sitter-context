@@ -1,3 +1,6 @@
+// We are now grouping content by paragraph.
+
+
 // Note: the escaped backslash _must_ be the last character in this array (ug)
 var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 
@@ -26,7 +29,7 @@ module.exports = grammar({
       $.paragraph, 
       // $.command, 
       $.command_group, 
-      $._end_of_line, 
+      // $._end_of_line, 
       $.main_start, 
       $.main_stop, 
       $.metapost_inclusion, 

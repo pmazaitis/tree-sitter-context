@@ -21,10 +21,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_end_of_line"
-        },
-        {
-          "type": "SYMBOL",
           "name": "main_start"
         },
         {
