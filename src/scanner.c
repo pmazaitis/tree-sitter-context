@@ -91,39 +91,6 @@ static bool scan_paragraph_stop(TSLexer *lexer) {
       advance(lexer);
       return false;
     }
-    
-    if (lexer->lookahead == '\\') {
-      advance(lexer);
-      switch (lexer->lookahead) {
-        case '#': return false;
-        case '$': return false;
-        case '%': return false;
-        case '&': return false;
-        case '^': return false;
-        case '_': return false;
-        case '{': return false;
-        case '}': return false;
-        case '|': return false;
-        case '~': return false;
-        case '\\': return false;
-      } 
-      advance(lexer);
-      return true;
-    }
-    
-    switch (lexer->lookahead) {
-      case '#': return false;
-      case '$': return false;
-      case '%': return false;
-      case '&': return false;
-      case '^': return false;
-      case '_': return false;
-      case '{': return false;
-      case '}': return false;
-      case '|': return false;
-      case '~': return false;
-    }
-  
   }
   lexer->mark_end(lexer);
   return true;

@@ -19,10 +19,10 @@ module.exports = grammar({
     document: $ => repeat1($._content),
     
     _content: $ => choice(
-      $.comment, 
-      $.escaped, 
-      $.brace_group, 
-      $.inline_math, 
+      // $.comment, 
+      // $.escaped, 
+      // $.brace_group, 
+      // $.inline_math, 
       $.paragraph, 
       // $.command, 
       $.command_group, 
@@ -58,7 +58,7 @@ module.exports = grammar({
 
     escapechar: $ => choice(...escaped_chars),
 
-    escaped: $ => prec(8, seq('\\', $.escapechar)),
+    escaped: $ => prec(10, seq('\\', $.escapechar)),
 
 
     // BRACE GROUP
@@ -71,7 +71,11 @@ module.exports = grammar({
     brace_group_stop: $ => prec(20, choice("}","\\egroup")), 
        
     brace_group: $ => prec(10, 
-      seq($.brace_group_start, repeat($._content), $.brace_group_stop)
+      seq(
+        $.brace_group_start, 
+        repeat($._content), 
+        $.brace_group_stop
+      )
     ),
   
     // COMMAND GROUP
@@ -279,33 +283,22 @@ module.exports = grammar({
                     ),
       
     _paragraph_content: $ => choice(
-                              seq($.paragraph_text, optional($._end_of_line)),
-                              seq($.paragraph_escaped, optional($._end_of_line)),
-                              seq($.paragraph_comment, optional($._end_of_line)),
-                              seq($.paragraph_brace_group, optional($._end_of_line)),
+                              seq($.text, optional($._end_of_line)),
+                              seq($.escaped, optional($._end_of_line)),
+                              seq($.comment, optional($._end_of_line)),
+                              seq($.brace_group, optional($._end_of_line)),
                               seq($.command, optional($._end_of_line)),
+                              seq($.inline_math, optional($._end_of_line)),
                             ), 
       
-    // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    paragraph_text: $ => new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'), 
-     
-    paragraph_escapechar: $ => prec(8, choice(...escaped_chars)),
     
-    paragraph_escaped: $ => prec(8, seq('\\', $.paragraph_escapechar)),
- 
-    paragraph_comment: $ => prec(8, token(seq('%', /[^\n]*/))),
-      
-    paragraph_brace_group_start: $ => prec(16, choice("{","\\bgroup")),  
-    
-    paragraph_brace_group_stop: $ => prec(16, choice("}","\\egroup")), 
-       
-    paragraph_brace_group: $ => prec(10, 
-      seq($.paragraph_brace_group_start, repeat($._paragraph_content), $.paragraph_brace_group_stop)
-    ),
     
     
     
     // MISC TEXT CONTENT
+      
+    // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
+    text: $ => new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
       
     _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),   
         
