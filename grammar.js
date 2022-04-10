@@ -279,12 +279,11 @@ module.exports = grammar({
                     ),
       
     _paragraph_content: $ => choice(
-                              seq($.paragraph_text,optional($._end_of_line)),
-                              $.paragraph_escaped,
-                              $.paragraph_comment,
-                              $.paragraph_brace_group,
-                              $.command,
-                              // $._end_of_line, 
+                              seq($.paragraph_text, optional($._end_of_line)),
+                              seq($.paragraph_escaped, optional($._end_of_line)),
+                              seq($.paragraph_comment, optional($._end_of_line)),
+                              seq($.paragraph_brace_group, optional($._end_of_line)),
+                              seq($.command, optional($._end_of_line)),
                             ), 
       
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
