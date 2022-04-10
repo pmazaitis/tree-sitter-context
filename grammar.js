@@ -21,10 +21,10 @@ module.exports = grammar({
     
     document: $ => repeat1($._document_content),
     
-    _document_content: $ => choice(
-      $.paragraph, 
-      $.main_start, 
-      $.main_stop, 
+    _document_content: $ => choice( 
+      $.main_start, // Prec 20
+      $.main_stop,  // Prec 20
+      $.paragraph,  // Prec 18
     ),
 
 
@@ -42,7 +42,7 @@ module.exports = grammar({
     
     // PARAGRAPH CONTENT
     //
-    // Paragraphs are the primary content unit
+    // Paragraphs are the primary content unit.
     
     paragraph: $ => prec.right(18,
                       seq( 
@@ -55,19 +55,26 @@ module.exports = grammar({
       
     _paragraph_content: $ => choice(
                               seq($.text, optional($._end_of_line)),
-                              seq($.escaped, optional($._end_of_line)),
-                              seq($.comment, optional($._end_of_line)),
+                              // seq($.escaped, optional($._end_of_line)),
+                              // seq($.comment, $._end_of_line),
                               seq($.brace_group, optional($._end_of_line)),
-                              seq($.command, optional($._end_of_line)),
-                              seq($.command_group, optional($._end_of_line)),
-                              seq($.inline_math, optional($._end_of_line)),
-                              seq($.metapost_inclusion, optional($._end_of_line)), 
-                              seq($.tikz_inclusion, optional($._end_of_line)), 
-                              seq($.typing_inclusion, optional($._end_of_line)),
-                              seq($.typing_html_inclusion, optional($._end_of_line)),
+                              // seq($.command, optional($._end_of_line)),
+                              // seq($.command_group, optional($._end_of_line)),
+                              // seq($.inline_math, optional($._end_of_line)),
+                              // seq($.metapost_inclusion, optional($._end_of_line)), 
+                              // seq($.tikz_inclusion, optional($._end_of_line)), 
+                              // seq($.typing_inclusion, optional($._end_of_line)),
+                              // seq($.typing_html_inclusion, optional($._end_of_line)),
                             ), 
       
-
+      
+    // MISC TEXT CONTENT
+                              
+                            // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
+                            // text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+                            text: $ => /[^\n\{]+/,  
+                              
+                            _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),  
         
     // COMMENTS
     
@@ -88,9 +95,9 @@ module.exports = grammar({
     // This grouping class can accept either a '{' or a '\bgroup' to start the group, 
     // and a '}' or a '\egroup' to end the group. They do not need to match.
       
-    brace_group_start: $ => prec(20, choice("{","\\bgroup")),  
+    brace_group_start: $ => prec(10, choice("{","\\bgroup")),  
     
-    brace_group_stop: $ => prec(20, choice("}","\\egroup")), 
+    brace_group_stop: $ => prec(10, choice("}","\\egroup")), 
        
     brace_group: $ => prec(10, 
       seq(
@@ -293,12 +300,7 @@ module.exports = grammar({
                     ),
     
     
-    // MISC TEXT CONTENT
-      
-    // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    text: $ => new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
-      
-    _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),   
+ 
         
   },
 });
