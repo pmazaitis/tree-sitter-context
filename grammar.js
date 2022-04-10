@@ -1,4 +1,4 @@
-// We are now grouping content by paragraph.
+
 
 
 // Note: the escaped backslash _must_ be the last character in this array (ug)
@@ -164,9 +164,8 @@ module.exports = grammar({
     // A key/value pair is separated by an equals sign ("="). Keys may not have spaces in them. Values can be grouped
     // with curly braces.
     //
-    // Arbitrary whitespace can occur between a command name and any options or settings blocks _except_ for a sequence of
-    // two or more EOLs. Two EOLs in sequence terminate the command. Anything other than whitespace will also terminate 
-    // the command at that point.
+    // Arbitrary white space can occur between a command name and any options or settings blocks _except_ for a sequence of
+    // two or more EOLs. Two EOLs in sequence terminate the command. 
     
     
     // Command names cannot contain numbers
@@ -277,7 +276,7 @@ module.exports = grammar({
     
     // PARAGRAPH CONTENT
     
-    paragraph: $ => prec.right(12,
+    paragraph: $ => prec.right(18,
                       seq( 
                         repeat1(
                           $._paragraph_content
