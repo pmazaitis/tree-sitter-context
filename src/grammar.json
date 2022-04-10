@@ -33,10 +33,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "command"
-        },
-        {
-          "type": "SYMBOL",
           "name": "command_group"
         },
         {
@@ -1047,7 +1043,7 @@
     },
     "paragraph": {
       "type": "PREC_RIGHT",
-      "value": 8,
+      "value": 12,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1069,8 +1065,25 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "paragraph_text"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "paragraph_text"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_end_of_line"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -1083,12 +1096,16 @@
         {
           "type": "SYMBOL",
           "name": "paragraph_brace_group"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command"
         }
       ]
     },
     "paragraph_text": {
       "type": "PATTERN",
-      "value": "[^\\]\\[$%&^_{}|~\\\\]+"
+      "value": "[^\\n\\]\\[$%&^_{}|~\\\\]+"
     },
     "paragraph_escapechar": {
       "type": "PREC",
@@ -1182,7 +1199,7 @@
     },
     "paragraph_brace_group_start": {
       "type": "PREC",
-      "value": 18,
+      "value": 16,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -1199,7 +1216,7 @@
     },
     "paragraph_brace_group_stop": {
       "type": "PREC",
-      "value": 18,
+      "value": 16,
       "content": {
         "type": "CHOICE",
         "members": [

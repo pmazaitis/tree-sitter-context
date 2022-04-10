@@ -24,7 +24,7 @@ module.exports = grammar({
       $.brace_group, 
       $.inline_math, 
       $.paragraph, 
-      $.command, 
+      // $.command, 
       $.command_group, 
       $._end_of_line, 
       $.main_start, 
@@ -269,7 +269,7 @@ module.exports = grammar({
     
     // PARAGRAPH CONTENT
     
-    paragraph: $ => prec.right(8,
+    paragraph: $ => prec.right(12,
                       seq( 
                         repeat1(
                           $._paragraph_content
@@ -279,16 +279,16 @@ module.exports = grammar({
                     ),
       
     _paragraph_content: $ => choice(
-                              $.paragraph_text,
+                              seq($.paragraph_text,optional($._end_of_line)),
                               $.paragraph_escaped,
                               $.paragraph_comment,
                               $.paragraph_brace_group,
-                              // $.paragraph_command,
+                              $.command,
                               // $._end_of_line, 
                             ), 
       
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    paragraph_text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'), 
+    paragraph_text: $ => new RegExp('[^\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'), 
      
     paragraph_escapechar: $ => prec(8, choice(...escaped_chars)),
     
@@ -296,13 +296,14 @@ module.exports = grammar({
  
     paragraph_comment: $ => prec(8, token(seq('%', /[^\n]*/))),
       
-    paragraph_brace_group_start: $ => prec(18, choice("{","\\bgroup")),  
+    paragraph_brace_group_start: $ => prec(16, choice("{","\\bgroup")),  
     
-    paragraph_brace_group_stop: $ => prec(18, choice("}","\\egroup")), 
+    paragraph_brace_group_stop: $ => prec(16, choice("}","\\egroup")), 
        
     paragraph_brace_group: $ => prec(10, 
       seq($.paragraph_brace_group_start, repeat($._paragraph_content), $.paragraph_brace_group_stop)
     ),
+    
     
     
     // MISC TEXT CONTENT

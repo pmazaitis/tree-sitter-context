@@ -20,10 +20,6 @@
           "named": true
         },
         {
-          "type": "command",
-          "named": true
-        },
-        {
           "type": "command_group",
           "named": true
         },
@@ -124,10 +120,6 @@
           "named": true
         },
         {
-          "type": "command",
-          "named": true
-        },
-        {
           "type": "command_group",
           "named": true
         },
@@ -197,10 +189,6 @@
       "types": [
         {
           "type": "brace_group",
-          "named": true
-        },
-        {
-          "type": "command",
           "named": true
         },
         {
@@ -414,6 +402,10 @@
       "required": true,
       "types": [
         {
+          "type": "command",
+          "named": true
+        },
+        {
           "type": "paragraph_brace_group",
           "named": true
         },
@@ -444,6 +436,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "command",
+          "named": true
+        },
         {
           "type": "paragraph_brace_group",
           "named": true

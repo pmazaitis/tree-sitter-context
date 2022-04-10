@@ -68,7 +68,7 @@ static bool scan_command_stop(TSLexer *lexer) {
     
   }
   
-  lexer->mark_end(lexer);
+  // lexer->mark_end(lexer);
   return true;
 }
 
@@ -78,53 +78,54 @@ static bool scan_paragraph_stop(TSLexer *lexer) {
   
   while (lexer->lookahead != 0) {
     if (lexer->lookahead == '\n') {
-      advance(lexer);
+      skip(lexer);
       if (lexer->lookahead == '\n') {
-        advance(lexer);
-        // lexer->mark_end(lexer);
+        lexer->mark_end(lexer);
+        skip(lexer);
         return true;
       } else {
         skip(lexer);
         return false;
       }
-    }
-    
-    if (lexer->lookahead == '\\') {
+    } else {
       advance(lexer);
-      switch (lexer->lookahead) {
-        case '#': return false;
-        case '$': return false;
-        case '%': return false;
-        case '&': return false;
-        case '^': return false;
-        case '_': return false;
-        case '{': return false;
-        case '}': return false;
-        case '|': return false;
-        case '~': return false;
-        case '\\': return false;
-      } 
-      advance(lexer);
-      return true;
+      return false;
     }
     
-    switch (lexer->lookahead) {
-      case '#': return false;
-      case '$': return false;
-      case '%': return false;
-      case '&': return false;
-      case '^': return false;
-      case '_': return false;
-      case '{': return false;
-      case '}': return false;
-      case '|': return false;
-      case '~': return false;
-    }
+    // if (lexer->lookahead == '\\') {
+    //   advance(lexer);
+    //   switch (lexer->lookahead) {
+    //     case '#': return false;
+    //     case '$': return false;
+    //     case '%': return false;
+    //     case '&': return false;
+    //     case '^': return false;
+    //     case '_': return false;
+    //     case '{': return false;
+    //     case '}': return false;
+    //     case '|': return false;
+    //     case '~': return false;
+    //     case '\\': return false;
+    //   } 
+    //   advance(lexer);
+      // return true;
+    // }
     
-    
-    
-    advance(lexer);
+    // switch (lexer->lookahead) {
+    //   case '#': return false;
+    //   case '$': return false;
+    //   case '%': return false;
+    //   case '&': return false;
+    //   case '^': return false;
+    //   case '_': return false;
+    //   case '{': return false;
+    //   case '}': return false;
+    //   case '|': return false;
+    //   case '~': return false;
+    // }
+  
   }
+  lexer->mark_end(lexer);
   return true;
 }
 
