@@ -22,20 +22,9 @@ module.exports = grammar({
     document: $ => repeat1($._content),
     
     _content: $ => choice(
-      // $.comment, 
-      // $.escaped, 
-      // $.brace_group, 
-      // $.inline_math, 
       $.paragraph, 
-      // $.command, 
-      // $.command_group, 
-      // $._end_of_line, 
       $.main_start, 
       $.main_stop, 
-      // $.metapost_inclusion, 
-      // $.tikz_inclusion, 
-      // $.typing_inclusion, 
-      // $.typing_html_inclusion
     ),
 
 
@@ -49,6 +38,40 @@ module.exports = grammar({
     main_start: $ => prec(20, choice("\\starttext","\\startcomponent")), 
     
     main_stop: $ => prec(20, choice("\\stoptext","\\stopcomponent")),   
+    
+    // PARAGRAPH CONTENT
+    //
+    // Paragraphs are the primary content unit
+    
+    
+    
+    paragraph: $ => prec.right(18,
+                      seq( 
+                        repeat1(
+                          $._paragraph_content
+                        ),
+                        $.paragraph_stop,
+                      )
+                    ),
+      
+    _paragraph_content: $ => choice(
+                              seq($.text, optional($._end_of_line)),
+                              seq($.escaped, optional($._end_of_line)),
+                              seq($.comment, optional($._end_of_line)),
+                              seq($.brace_group, optional($._end_of_line)),
+                              seq($.command, optional($._end_of_line)),
+                              seq($.command_group, optional($._end_of_line)),
+                              seq($.inline_math, optional($._end_of_line)),
+                              seq($.metapost_inclusion, optional($._end_of_line)), 
+                              seq($.tikz_inclusion, optional($._end_of_line)), 
+                              seq($.typing_inclusion, optional($._end_of_line)),
+                              seq($.typing_html_inclusion, optional($._end_of_line)),
+                            ), 
+      
+    
+    
+    
+    
     
         
     // COMMENTS
@@ -274,31 +297,6 @@ module.exports = grammar({
                       )
                     ),
     
-    // PARAGRAPH CONTENT
-    
-    paragraph: $ => prec.right(18,
-                      seq( 
-                        repeat1(
-                          $._paragraph_content
-                        ),
-                        $.paragraph_stop,
-                      )
-                    ),
-      
-    _paragraph_content: $ => choice(
-                              seq($.text, optional($._end_of_line)),
-                              seq($.escaped, optional($._end_of_line)),
-                              seq($.comment, optional($._end_of_line)),
-                              seq($.brace_group, optional($._end_of_line)),
-                              seq($.command, optional($._end_of_line)),
-                              seq($.command_group, optional($._end_of_line)),
-                              seq($.inline_math, optional($._end_of_line)),
-                              seq($.metapost_inclusion, optional($._end_of_line)), 
-                              seq($.tikz_inclusion, optional($._end_of_line)), 
-                              seq($.typing_inclusion, optional($._end_of_line)),
-                              seq($.typing_html_inclusion, optional($._end_of_line)),
-                            ), 
-      
     
     
     
