@@ -28,14 +28,15 @@ module.exports = grammar({
       // $.inline_math, 
       $.paragraph, 
       // $.command, 
-      $.command_group, 
+      // $.command_group, 
       // $._end_of_line, 
       $.main_start, 
       $.main_stop, 
-      $.metapost_inclusion, 
-      $.tikz_inclusion, 
-      $.typing_inclusion, 
-      $.typing_html_inclusion),
+      // $.metapost_inclusion, 
+      // $.tikz_inclusion, 
+      // $.typing_inclusion, 
+      // $.typing_html_inclusion
+    ),
 
 
     // AREA MARKERS
@@ -76,7 +77,7 @@ module.exports = grammar({
     brace_group: $ => prec(10, 
       seq(
         $.brace_group_start, 
-        repeat($._content), 
+        repeat($.paragraph), 
         $.brace_group_stop
       )
     ),
@@ -89,7 +90,7 @@ module.exports = grammar({
     
     command_group_stop: $ => /\\stop[^a-zA-Z]/,
     
-    command_group: $ => prec(10, seq($.command_group_start, repeat($._content), $.command_group_stop)),
+    command_group: $ => prec(10, seq($.command_group_start, repeat($.paragraph), $.command_group_stop)),
     
 
     // INLINE MATH
@@ -291,7 +292,12 @@ module.exports = grammar({
                               seq($.comment, optional($._end_of_line)),
                               seq($.brace_group, optional($._end_of_line)),
                               seq($.command, optional($._end_of_line)),
+                              seq($.command_group, optional($._end_of_line)),
                               seq($.inline_math, optional($._end_of_line)),
+                              seq($.metapost_inclusion, optional($._end_of_line)), 
+                              seq($.tikz_inclusion, optional($._end_of_line)), 
+                              seq($.typing_inclusion, optional($._end_of_line)),
+                              seq($.typing_html_inclusion, optional($._end_of_line)),
                             ), 
       
     
