@@ -24,10 +24,6 @@
           "named": true
         },
         {
-          "type": "command_group",
-          "named": true
-        },
-        {
           "type": "comment",
           "named": true
         },
@@ -117,10 +113,6 @@
         },
         {
           "type": "command",
-          "named": true
-        },
-        {
-          "type": "command_group",
           "named": true
         },
         {

@@ -59,7 +59,8 @@ module.exports = grammar({
                               seq($.escaped, optional($._end_of_line)),
                               seq($.comment, $._end_of_line),
                               seq($.command, optional($._end_of_line)),
-                              seq($.command_group, optional($._end_of_line)),
+                              // seq($.command_group, optional($._end_of_line)),
+                              $.command_group,
                               seq($.inline_math, optional($._end_of_line)),
                               seq($.metapost_inclusion, optional($._end_of_line)), 
                               seq($.tikz_inclusion, optional($._end_of_line)), 
@@ -104,7 +105,7 @@ module.exports = grammar({
       seq($.escaped, optional($._end_of_line)),
       seq($.comment, $._end_of_line),
       seq($.command, optional($._end_of_line)),
-      seq($.command_group, optional($._end_of_line)),
+      // seq($.command_group, optional($._end_of_line)),
       seq($.inline_math, optional($._end_of_line)),
       seq($.metapost_inclusion, optional($._end_of_line)), 
       seq($.tikz_inclusion, optional($._end_of_line)), 
@@ -123,6 +124,8 @@ module.exports = grammar({
     // COMMAND GROUP
     //
     // ConTeXt can also group document content between the commands "\start" and "\stop"
+    //
+    // FIXME: these tokens eat the trailing newline, which can suppress paragraph_stop detection
     
     command_group_start: $ => /\\start[^a-zA-Z]/,
     
