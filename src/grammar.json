@@ -128,7 +128,7 @@
     },
     "text": {
       "type": "PATTERN",
-      "value": "[^\\n\\{]+"
+      "value": "[^\\n\\{\\}]+"
     },
     "_end_of_line": {
       "type": "PREC",
