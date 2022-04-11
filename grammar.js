@@ -56,25 +56,25 @@ module.exports = grammar({
     _paragraph_content: $ => choice(
                               seq($.text, optional($._end_of_line)),
                               seq($.brace_group, optional($._end_of_line)),
-                              // seq($.escaped, optional($._end_of_line)),
-                              // seq($.comment, $._end_of_line),
-                              // seq($.command, optional($._end_of_line)),
-                              // seq($.command_group, optional($._end_of_line)),
-                              // seq($.inline_math, optional($._end_of_line)),
-                              // seq($.metapost_inclusion, optional($._end_of_line)), 
-                              // seq($.tikz_inclusion, optional($._end_of_line)), 
-                              // seq($.typing_inclusion, optional($._end_of_line)),
-                              // seq($.typing_html_inclusion, optional($._end_of_line)),
+                              seq($.escaped, optional($._end_of_line)),
+                              seq($.comment, $._end_of_line),
+                              seq($.command, optional($._end_of_line)),
+                              seq($.command_group, optional($._end_of_line)),
+                              seq($.inline_math, optional($._end_of_line)),
+                              seq($.metapost_inclusion, optional($._end_of_line)), 
+                              seq($.tikz_inclusion, optional($._end_of_line)), 
+                              seq($.typing_inclusion, optional($._end_of_line)),
+                              seq($.typing_html_inclusion, optional($._end_of_line)),
                             ), 
       
       
     // MISC TEXT CONTENT
                               
-                            // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-                            // text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
-                            text: $ => /[^\n\{\}]+/,  
-                              
-                            _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),  
+    // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
+    // text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+    text: $ => /[^\n\{\}\]\[$]+/,  
+      
+    _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),  
         
     // COMMENTS
     
@@ -99,24 +99,24 @@ module.exports = grammar({
     
     brace_group_stop: $ => prec(10, choice("}","\\egroup")), 
      
-    _brace_group_content: $ => choice(
+    _group_content: $ => choice(
       seq($.text, optional($._end_of_line)),
       seq($.brace_group, optional($._end_of_line)),
-      // seq($.escaped, optional($._end_of_line)),
-      // seq($.comment, $._end_of_line),
-      // seq($.command, optional($._end_of_line)),
-      // seq($.command_group, optional($._end_of_line)),
-      // seq($.inline_math, optional($._end_of_line)),
-      // seq($.metapost_inclusion, optional($._end_of_line)), 
-      // seq($.tikz_inclusion, optional($._end_of_line)), 
-      // seq($.typing_inclusion, optional($._end_of_line)),
-      // seq($.typing_html_inclusion, optional($._end_of_line)),
+      seq($.escaped, optional($._end_of_line)),
+      seq($.comment, $._end_of_line),
+      seq($.command, optional($._end_of_line)),
+      seq($.command_group, optional($._end_of_line)),
+      seq($.inline_math, optional($._end_of_line)),
+      seq($.metapost_inclusion, optional($._end_of_line)), 
+      seq($.tikz_inclusion, optional($._end_of_line)), 
+      seq($.typing_inclusion, optional($._end_of_line)),
+      seq($.typing_html_inclusion, optional($._end_of_line)),
     ),  
        
     brace_group: $ => prec(10, 
       seq(
         $.brace_group_start, 
-        repeat($._brace_group_content), 
+        repeat($._group_content), 
         $.brace_group_stop
       )
     ),
@@ -129,7 +129,7 @@ module.exports = grammar({
     
     command_group_stop: $ => /\\stop[^a-zA-Z]/,
     
-    command_group: $ => prec(10, seq($.command_group_start, repeat($.paragraph), $.command_group_stop)),
+    command_group: $ => prec(10, seq($.command_group_start, repeat($._group_content), $.command_group_stop)),
     
 
     // INLINE MATH
