@@ -71,9 +71,8 @@ module.exports = grammar({
     // MISC TEXT CONTENT
                               
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
-    // text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
-    text: $ => /[^\n\{\}\]\[$]+/,  
-      
+    text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+       
     _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),  
         
     // COMMENTS
