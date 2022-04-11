@@ -174,10 +174,14 @@ Woo!
 
 (document 
   (main_start) 
-  (command_group 
+  (paragraph
+    (command_group 
       (command_group_start)
-      (paragraph)
+      (text)
       (command_group_stop)
     )
+    
+  )
+
   (main_stop)
 )

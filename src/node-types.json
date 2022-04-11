@@ -442,10 +442,39 @@
   {
     "type": "postamble",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "paragraph",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "preamble",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "preamble_content",
+          "named": true
+        },
+        {
+          "type": "preamble_stop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "preamble_content",
     "named": true,
     "fields": {},
     "children": {
@@ -453,7 +482,11 @@
       "required": true,
       "types": [
         {
-          "type": "preamble_stop",
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         }
       ]

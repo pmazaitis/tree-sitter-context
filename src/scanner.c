@@ -136,8 +136,8 @@ static bool scan_preamble_stop(TSLexer *lexer) {
   while (char_count < char_limit) {
     test_string[char_count] = lexer->lookahead;
     
-    printf("Char under test: %c\n", lexer->lookahead);
-    printf("String under test: %s\n", test_string);
+    // printf("Char under test: %c\n", lexer->lookahead);
+    // printf("String under test: %s\n", test_string);
     
     if (strcmp(test_string, "\\starttext") == 0) return true;
     if (strcmp(test_string, "\\startcomponent") == 0) return true;

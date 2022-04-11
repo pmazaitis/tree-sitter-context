@@ -1,4 +1,8 @@
 
+// CAVEATS
+//
+// This parser requires document start and stop commands
+// This parser considers zero characters after the stop command to be an error
 
 
 // Note: the escaped backslash _must_ be the last character in this array (ug)
@@ -23,26 +27,40 @@ module.exports = grammar({
     
     // document: $ => repeat($._document_content),
     
-    document: $ => seq(optional($.preamble), $.main, optional($.postamble)),
+    document: $ => seq($.preamble, $.main, $.postamble),
     
-    
-    preamble: $ => seq(/[^\\]*/, $.preamble_stop),
-     
-    main: $ => seq(optional($.main_start), repeat1($.paragraph), optional($.main_stop)),
-    
-    postamble: $ => repeat1(/./),
-    
-    // AREA MARKERS
+
+    // AREAS AND AREA MARKERS
     //
     // These ConTeXt commands divide the context file into areas:
     //   - Preamble (interpreted commands, but content is not displayed)
     //   - Main (Content is displayed)
     //   - Postamble (Everything is ignored by the processor)
-       
+    
+    main_stop: $ => prec(20, choice("\\stoptext","\\stopcomponent")),  
+    
     main_start: $ => prec(20, choice("\\starttext","\\startcomponent")), 
     
-    main_stop: $ => prec(20, choice("\\stoptext","\\stopcomponent")),   
+    preamble: $ => prec.left(seq(repeat($.preamble_content), $.preamble_stop)),
+
+    main: $ => prec.right(18, seq($.main_start, repeat1($.paragraph), $.main_stop)),
     
+    postamble: $ => prec(16, repeat1($.paragraph)),
+    
+    // PREAMBLE CONTENT
+    //
+    // Todo: handle buffers?
+    
+    preamble_content: $ => prec.left(16,
+      choice(
+        seq($.text, optional($._end_of_line)),
+        // seq($.brace_group, optional($._end_of_line)),
+        // seq($.escaped, optional($._end_of_line)),
+        seq($.comment, $._end_of_line),
+        // seq($.command, optional($._end_of_line)),
+        // seq($.command_group, optional($._end_of_line_or_paragraph)),
+      )
+    ), 
     
     // PARAGRAPH CONTENT
     //
@@ -50,7 +68,7 @@ module.exports = grammar({
     
     _end_of_line_or_paragraph: $ => choice($._eol, $.paragraph_stop),
     
-    paragraph: $ => prec.right(18,
+    paragraph: $ => prec.right(14,
                       seq( 
                         repeat1(
                           $._paragraph_content
@@ -59,7 +77,7 @@ module.exports = grammar({
                       )
                     ),
       
-    _paragraph_content: $ => prec.left(18,
+    _paragraph_content: $ => prec.left(14,
                               choice(
                                 seq($.text, optional($._end_of_line)),
                                 seq($.brace_group, optional($._end_of_line)),
@@ -75,13 +93,13 @@ module.exports = grammar({
                               )
                             ), 
       
-      
     // MISC TEXT CONTENT
                               
     // We have to double the slashes at the end of the regexp to account for the under-interpolation of escape in this context
     text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
        
     _end_of_line: $ =>  prec(5, choice('\n', '\r', '\r\n')),  
+      
         
     // COMMENTS
     
@@ -226,7 +244,7 @@ module.exports = grammar({
     
     // Option block    
     option_block: $ => prec(
-                        12, 
+                        11, 
                          seq(
                             $.command_block_start, 
                             optional(
@@ -251,7 +269,7 @@ module.exports = grammar({
      
     // Settings block    
     settings_block: $ => prec(
-                          14, 
+                          13, 
                           seq(
                             $.command_block_start, 
                             optional(
