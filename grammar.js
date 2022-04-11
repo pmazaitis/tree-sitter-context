@@ -19,7 +19,7 @@ module.exports = grammar({
 
     // GENERAL DOCUMENT CONTENT
     
-    document: $ => repeat1($._document_content),
+    document: $ => repeat($._document_content),
     
     _document_content: $ => choice( 
       $.main_start, // Prec 20
@@ -55,9 +55,9 @@ module.exports = grammar({
       
     _paragraph_content: $ => choice(
                               seq($.text, optional($._end_of_line)),
+                              seq($.brace_group, optional($._end_of_line)),
                               // seq($.escaped, optional($._end_of_line)),
                               // seq($.comment, $._end_of_line),
-                              seq($.brace_group, optional($._end_of_line)),
                               // seq($.command, optional($._end_of_line)),
                               // seq($.command_group, optional($._end_of_line)),
                               // seq($.inline_math, optional($._end_of_line)),
@@ -98,11 +98,25 @@ module.exports = grammar({
     brace_group_start: $ => prec(10, choice("{","\\bgroup")),  
     
     brace_group_stop: $ => prec(10, choice("}","\\egroup")), 
+     
+    _brace_group_content: $ => choice(
+      seq($.text, optional($._end_of_line)),
+      seq($.brace_group, optional($._end_of_line)),
+      // seq($.escaped, optional($._end_of_line)),
+      // seq($.comment, $._end_of_line),
+      // seq($.command, optional($._end_of_line)),
+      // seq($.command_group, optional($._end_of_line)),
+      // seq($.inline_math, optional($._end_of_line)),
+      // seq($.metapost_inclusion, optional($._end_of_line)), 
+      // seq($.tikz_inclusion, optional($._end_of_line)), 
+      // seq($.typing_inclusion, optional($._end_of_line)),
+      // seq($.typing_html_inclusion, optional($._end_of_line)),
+    ),  
        
     brace_group: $ => prec(10, 
       seq(
         $.brace_group_start, 
-        repeat($.paragraph), 
+        repeat($._brace_group_content), 
         $.brace_group_stop
       )
     ),
