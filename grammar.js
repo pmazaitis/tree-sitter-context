@@ -23,15 +23,15 @@ module.exports = grammar({
     
     // document: $ => repeat($._document_content),
     
-    document: $ => seq($.preamble_stop, repeat($._document_content)),
+    document: $ => seq(optional($.preamble), $.main, optional($.postamble)),
     
-    _document_content: $ => choice( 
-      $.main_start, // Prec 20
-      $.main_stop,  // Prec 20
-      $.paragraph,  // Prec 18
-    ),
-
-
+    
+    preamble: $ => seq(/[^\\]*/, $.preamble_stop),
+     
+    main: $ => seq(optional($.main_start), repeat1($.paragraph), optional($.main_stop)),
+    
+    postamble: $ => repeat1(/./),
+    
     // AREA MARKERS
     //
     // These ConTeXt commands divide the context file into areas:

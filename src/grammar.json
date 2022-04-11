@@ -5,34 +5,90 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "preamble_stop"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "preamble"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_document_content"
-          }
+          "type": "SYMBOL",
+          "name": "main"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "postamble"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
-    "_document_content": {
-      "type": "CHOICE",
+    "preamble": {
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "main_start"
+          "type": "PATTERN",
+          "value": "[^\\\\]*"
         },
         {
           "type": "SYMBOL",
-          "name": "main_stop"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "paragraph"
+          "name": "preamble_stop"
         }
       ]
+    },
+    "main": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "main_start"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "main_stop"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "postamble": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "PATTERN",
+        "value": "."
+      }
     },
     "main_start": {
       "type": "PREC",
