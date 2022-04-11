@@ -5,8 +5,10 @@
 
 enum TokenType {
   COMMAND_STOP,
-  PARAGRAPH_STOP
+  PARAGRAPH_STOP,
+  EOL,
 };
+
 
 void *tree_sitter_context_external_scanner_create() { return NULL; }
 void tree_sitter_context_external_scanner_destroy(void *p) {UNUSED(p);}
@@ -96,9 +98,36 @@ static bool scan_paragraph_stop(TSLexer *lexer) {
   return true;
 }
 
+static bool scan_eol(TSLexer *lexer) {
+  lexer->result_symbol = EOL;
+  lexer->mark_end(lexer);
+  
+  while (lexer->lookahead != 0) {
+    if (lexer->lookahead == '\n') {
+      skip(lexer);
+      if (lexer->lookahead == '\n') {
+        skip(lexer);
+        return false;
+      } else {
+        skip(lexer);
+        return true;
+      }
+    } else {
+      advance(lexer);
+      return false;
+    }
+  }
+  lexer->mark_end(lexer);
+  return true;
+}
+
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
   UNUSED(payload);
+
+  if (valid_symbols[EOL]) {
+    return scan_eol(lexer);
+  }
 
   if (valid_symbols[COMMAND_STOP]) {
     return scan_command_stop(lexer);

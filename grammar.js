@@ -12,6 +12,7 @@ module.exports = grammar({
   externals: $ => [
     $.command_stop,
     $.paragraph_stop,
+    $._eol
   ],
 
   rules: {
@@ -44,6 +45,8 @@ module.exports = grammar({
     //
     // Paragraphs are the primary content unit.
     
+    _end_of_line_or_paragraph: $ => choice($._eol, $.paragraph_stop),
+    
     paragraph: $ => prec.right(18,
                       seq( 
                         repeat1(
@@ -53,19 +56,20 @@ module.exports = grammar({
                       )
                     ),
       
-    _paragraph_content: $ => choice(
-                              seq($.text, optional($._end_of_line)),
-                              seq($.brace_group, optional($._end_of_line)),
-                              seq($.escaped, optional($._end_of_line)),
-                              seq($.comment, $._end_of_line),
-                              seq($.command, optional($._end_of_line)),
-                              // seq($.command_group, optional($._end_of_line)),
-                              $.command_group,
-                              seq($.inline_math, optional($._end_of_line)),
-                              seq($.metapost_inclusion, optional($._end_of_line)), 
-                              seq($.tikz_inclusion, optional($._end_of_line)), 
-                              seq($.typing_inclusion, optional($._end_of_line)),
-                              seq($.typing_html_inclusion, optional($._end_of_line)),
+    _paragraph_content: $ => prec.left(18,
+                              choice(
+                                seq($.text, optional($._end_of_line)),
+                                seq($.brace_group, optional($._end_of_line)),
+                                seq($.escaped, optional($._end_of_line)),
+                                seq($.comment, $._end_of_line),
+                                seq($.command, optional($._end_of_line)),
+                                seq($.command_group, optional($._end_of_line_or_paragraph)),
+                                seq($.inline_math, optional($._end_of_line)),
+                                seq($.metapost_inclusion, optional($._end_of_line)), 
+                                seq($.tikz_inclusion, optional($._end_of_line)), 
+                                seq($.typing_inclusion, optional($._end_of_line)),
+                                seq($.typing_html_inclusion, optional($._end_of_line)),
+                              )
                             ), 
       
       
@@ -105,7 +109,7 @@ module.exports = grammar({
       seq($.escaped, optional($._end_of_line)),
       seq($.comment, $._end_of_line),
       seq($.command, optional($._end_of_line)),
-      seq($.command_group, optional($._end_of_line)),
+      seq($.command_group, optional($._end_of_line_or_paragraph)),
       seq($.inline_math, optional($._end_of_line)),
       seq($.metapost_inclusion, optional($._end_of_line)), 
       seq($.tikz_inclusion, optional($._end_of_line)), 

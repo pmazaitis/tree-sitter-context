@@ -24,6 +24,10 @@
           "named": true
         },
         {
+          "type": "command_group",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -37,6 +41,10 @@
         },
         {
           "type": "metapost_inclusion",
+          "named": true
+        },
+        {
+          "type": "paragraph_stop",
           "named": true
         },
         {
@@ -116,6 +124,10 @@
           "named": true
         },
         {
+          "type": "command_group",
+          "named": true
+        },
+        {
           "type": "command_group_start",
           "named": true
         },
@@ -137,6 +149,10 @@
         },
         {
           "type": "metapost_inclusion",
+          "named": true
+        },
+        {
+          "type": "paragraph_stop",
           "named": true
         },
         {
