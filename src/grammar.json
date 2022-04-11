@@ -2,11 +2,20 @@
   "name": "context",
   "rules": {
     "document": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_document_content"
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "preamble_stop"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_document_content"
+          }
+        }
+      ]
     },
     "_document_content": {
       "type": "CHOICE",
@@ -1540,6 +1549,10 @@
     {
       "type": "SYMBOL",
       "name": "_eol"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "preamble_stop"
     }
   ],
   "inline": [],

@@ -12,7 +12,8 @@ module.exports = grammar({
   externals: $ => [
     $.command_stop,
     $.paragraph_stop,
-    $._eol
+    $._eol,
+    $.preamble_stop,
   ],
 
   rules: {
@@ -20,7 +21,9 @@ module.exports = grammar({
 
     // GENERAL DOCUMENT CONTENT
     
-    document: $ => repeat($._document_content),
+    // document: $ => repeat($._document_content),
+    
+    document: $ => seq($.preamble_stop, repeat($._document_content)),
     
     _document_content: $ => choice( 
       $.main_start, // Prec 20

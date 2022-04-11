@@ -185,7 +185,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "main_start",
@@ -197,6 +197,10 @@
         },
         {
           "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "preamble_stop",
           "named": true
         }
       ]
@@ -947,6 +951,10 @@
   },
   {
     "type": "paragraph_stop",
+    "named": true
+  },
+  {
+    "type": "preamble_stop",
     "named": true
   },
   {

@@ -1,5 +1,7 @@
 #include <tree_sitter/parser.h>
+#include <string.h>
 #include <wctype.h>
+#include <stdio.h>
 
 #define UNUSED(x) (void)(x)
 
@@ -7,6 +9,7 @@ enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_STOP,
   EOL,
+  PREAMBLE_STOP,
 };
 
 
@@ -121,6 +124,30 @@ static bool scan_eol(TSLexer *lexer) {
   return true;
 }
 
+static bool scan_preamble_stop(TSLexer *lexer) {
+  lexer->result_symbol = PREAMBLE_STOP;
+  lexer->mark_end(lexer);
+  
+  int char_count = 0;
+  int char_limit = 15;
+  
+  char test_string[16] = "";
+  
+  while (char_count < char_limit) {
+    test_string[char_count] = lexer->lookahead;
+    
+    printf("Char under test: %c\n", lexer->lookahead);
+    printf("String under test: %s\n", test_string);
+    
+    if (strcmp(test_string, "\\starttext") == 0) return true;
+    if (strcmp(test_string, "\\startcomponent") == 0) return true;
+    
+    advance(lexer);
+    char_count++;
+  }
+  return false;
+}
+
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
   UNUSED(payload);
@@ -135,6 +162,10 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
   
   if (valid_symbols[PARAGRAPH_STOP]) {
     return scan_paragraph_stop(lexer);
+  }
+  
+  if (valid_symbols[PREAMBLE_STOP]) {
+    return scan_preamble_stop(lexer);
   }
   
   return false;
