@@ -105,7 +105,7 @@ module.exports = grammar({
       seq($.escaped, optional($._end_of_line)),
       seq($.comment, $._end_of_line),
       seq($.command, optional($._end_of_line)),
-      // seq($.command_group, optional($._end_of_line)),
+      seq($.command_group, optional($._end_of_line)),
       seq($.inline_math, optional($._end_of_line)),
       seq($.metapost_inclusion, optional($._end_of_line)), 
       seq($.tikz_inclusion, optional($._end_of_line)), 
