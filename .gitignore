@@ -2,4 +2,7 @@ node_modules
 bindings
 .nova
 foo*.tex
-
+src/grammar.json
+src/node-types.json
+src/src/*
+src/tree-sitter/*
