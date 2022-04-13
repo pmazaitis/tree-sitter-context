@@ -81,7 +81,24 @@ static bool scan_paragraph_stop(TSLexer *lexer) {
   lexer->result_symbol = PARAGRAPH_STOP;
   lexer->mark_end(lexer);
   
+  int char_count = 0;
+  int char_limit = 14;
+  
+  char test_string[15] = "";
+  
   while (lexer->lookahead != 0) {
+    
+    if (char_count < char_limit) {
+      test_string[char_count] = lexer->lookahead;
+      
+      printf("Char under test: %c\n", lexer->lookahead);
+      printf("String under test: %s\n", test_string);
+      
+      if (strcmp(test_string, "\\stoptext") == 0) return true;
+      if (strcmp(test_string, "\\stopcomponent") == 0) return true;
+      char_count++;
+    }
+    
     if (lexer->lookahead == '\n') {
       skip(lexer);
       if (lexer->lookahead == '\n') {
@@ -90,12 +107,11 @@ static bool scan_paragraph_stop(TSLexer *lexer) {
         return true;
       } else {
         skip(lexer);
-        return false;
       }
     } else {
       advance(lexer);
-      return false;
     }
+    if (char_count == char_limit) return false;
   }
   lexer->mark_end(lexer);
   return true;
