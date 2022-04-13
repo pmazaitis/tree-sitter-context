@@ -14,8 +14,8 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 // UTILITIES
 //
 // Cribbed from tree-sitter-latex
-const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
-const sepBy = (rule, sep) => optional(sepBy1(rule, sep)); 
+// const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
+// const sepBy = (rule, sep) => optional(sepBy1(rule, sep)); 
 
 
 module.exports = grammar({
