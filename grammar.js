@@ -98,7 +98,7 @@ module.exports = grammar({
       )
     ),
     
-    command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+\*?)?/,
+    command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     
     command_scope: $ => seq("{", /[^}]*/, "}" ),
     

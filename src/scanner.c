@@ -35,7 +35,7 @@ static bool scan_command_stop(TSLexer *lexer) {
     // We have a comment; this is not necessarily a stop
     if (lexer->lookahead == '%') return false;
     // We enter or leave a scope; the command is over
-    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
+    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
     if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
     // Found another command
     if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}

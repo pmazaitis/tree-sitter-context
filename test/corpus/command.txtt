@@ -1,0 +1,49 @@
+======
+command-simple_command
+======
+
+\blank
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+    )
+  ) 
+)
+
+======
+command-simple_with_scope
+======
+
+\blank{cow}
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (command_scope)
+    )
+  ) 
+)
+
+======
+command-simple_with_space_with_scope
+======
+
+\blank {cow}
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (command_scope)
+    )
+  ) 
+)
