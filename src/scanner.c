@@ -40,7 +40,7 @@ static bool scan_command_stop(TSLexer *lexer) {
     // We enter or leave a scope; the command is over
     if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
     if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
-    // Another command
+    // Found another command
     if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
     // We find a numeric, the command is over
     if (iswdigit(lexer->lookahead)) {lexer->mark_end(lexer); return true;}
@@ -53,6 +53,7 @@ static bool scan_command_stop(TSLexer *lexer) {
       if (lexer->lookahead == '%') return false;
       if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
       if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
+      if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
       if (lexer->lookahead == '\n') return true;
       advance(lexer);
       continue;
@@ -80,8 +81,8 @@ static bool scan_paragraph_stop(TSLexer *lexer) {
     if (char_count < char_limit) {
       test_string[char_count] = lexer->lookahead;
       
-      printf("Char under test: %c\n", lexer->lookahead);
-      printf("String under test: %s\n", test_string);
+      // printf("Char under test: %c\n", lexer->lookahead);
+      // printf("String under test: %s\n", test_string);
       
       if (strcmp(test_string, "\\stoptext") == 0) return true;
       if (strcmp(test_string, "\\stopcomponent") == 0) return true;
@@ -141,8 +142,8 @@ static bool scan_preamble_stop(TSLexer *lexer) {
   while (char_count < char_limit) {
     test_string[char_count] = lexer->lookahead;
     
-    // printf("Char under test: %c\n", lexer->lookahead);
-    // printf("String under test: %s\n", test_string);
+    printf("Char under test: %c\n", lexer->lookahead);
+    printf("String under test: %s\n", test_string);
     
     if (strcmp(test_string, "\\starttext") == 0) return true;
     if (strcmp(test_string, "\\startcomponent") == 0) return true;
@@ -165,6 +166,69 @@ static bool scan_postamble_stop(TSLexer *lexer) {
   
 }
 
+// Cribbed from tree-sitter-latex
+static bool find_verbatim(TSLexer *lexer, const char *keyword,
+                          bool is_command_name) {
+  bool has_marked = false;
+  while (true) {
+    if (lexer->eof(lexer)) {
+      break;
+    }
+
+    bool advanced = false;
+    bool failed = false;
+    for (size_t i = 0; keyword[i]; i++) {
+      if (lexer->eof(lexer)) {
+        return has_marked;
+      }
+
+      if (lexer->lookahead != keyword[i]) {
+        failed = true;
+        break;
+      }
+
+      lexer->advance(lexer, false);
+      advanced = true;
+    }
+
+    if (failed && !advanced) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+      has_marked = true;
+      continue;
+    }
+
+    if (!failed) {
+      if (is_command_name) {
+        if (lexer->eof(lexer)) {
+          return has_marked;
+        }
+
+        char c = lexer->lookahead;
+        switch (c) {
+        case ':':
+        case '_':
+        case '@':
+          failed = true;
+          break;
+        default:
+          failed = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+          break;
+        }
+
+        if (failed) {
+          lexer->mark_end(lexer);
+          has_marked = true;
+          continue;
+        }
+      }
+
+      return has_marked;
+    }
+  }
+
+  return has_marked;
+}
 
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 

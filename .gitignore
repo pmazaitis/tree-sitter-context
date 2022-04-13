@@ -7,3 +7,4 @@ src/node-types.json
 src/parser.c
 src/src/*
 src/tree-sitter/*
+log.html

@@ -41,14 +41,17 @@ module.exports = grammar({
 
     // DOCUMENT - An entire ConTeXt document.
       
-    document: $ => seq($.preamble, $.main, $.postamble),
+    document: $ => choice(
+      prec(20, seq($.preamble, $.main, $.postamble)),
+      $.main,
+    ),
     
   
     // PREAMBLE
     
     preamble: $ =>  seq(
       repeat($._preamble_content), 
-      $._preamble_stop
+      choice("\\starttext", "\\startcomponent"),
     ),
     
     _preamble_content: $ => choice(
@@ -58,25 +61,20 @@ module.exports = grammar({
     
     // MAIN
     
-    main: $ =>  choice(
-      $.main_text,
-      $.main_component,
-    ),
+    main: $ => repeat1($._main_content),
     
-    main_text: $ => seq("\\starttext", $.command, "\\stoptext"),
-    
-    main_component: $ => seq("\\startcomponent", $.command, "\\stopcomponent"),
+    _main_content: $ => $.command, 
     
     // POSTAMBLE
     
     postamble: $ => seq(
-                      repeat($._postamble_content), 
-                      $._postamble_stop
-                    ),
+      choice("\\stoptext", "\\stopcomponent"),
+      repeat($._postamble_content), 
+    ),
     
     _postamble_content: $ =>  choice(
-                                $.command, 
-                              ),
+      $.command, 
+    ),
     
     
     
