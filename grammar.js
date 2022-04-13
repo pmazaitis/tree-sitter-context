@@ -51,7 +51,7 @@ module.exports = grammar({
       choice("\\starttext", "\\startcomponent"),
     ),
     
-    _preamble_content: $ => prec(20,
+    _preamble_content: $ => prec(18,
       choice(
         $.command,
       ),
@@ -62,7 +62,10 @@ module.exports = grammar({
     
     main: $ => repeat1($._main_content),
     
-    _main_content: $ => $.command, 
+    _main_content: $ => choice(
+      $.line_comment,
+      $.command, 
+    ),
     
     // POSTAMBLE
     
@@ -72,7 +75,7 @@ module.exports = grammar({
     ),
     
     _postamble_content: $ =>  choice(
-      $.command, 
+      $.command,
     ),
     
     

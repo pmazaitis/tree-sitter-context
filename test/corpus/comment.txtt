@@ -1,0 +1,13 @@
+======
+comment-comment_only
+======
+
+%comment
+
+---
+
+(document
+    (main
+        (line_comment)
+    )
+)
