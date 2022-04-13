@@ -11,13 +11,15 @@ areas-all_areas
 ---
 
 (document
-    (preamble)
-    (main
-        (command
-            (command_name)
-        )
+  (preamble)
+  (main
+    (paragraph
+      (command
+        (command_name)
+      )
     )
-    (postamble)
+  )
+  (postamble)
 )
 
 ======
@@ -29,15 +31,17 @@ areas-main_only
 ---
 
 (document
-    (main
-        (command
-            (command_name)
-        )
+  (main
+    (paragraph
+      (command
+          (command_name)
+      )
     )
+  )
 )
 
 ======
-areas-preamble_main
+areas-preamble_main-ERROR
 ======
 
 \starttext
@@ -49,8 +53,10 @@ areas-preamble_main
 (document
   (preamble)
   (main
-    (command
-      (command_name)
+    (paragraph
+      (command
+        (command_name)
+      )
     )
   )
   (postamble
@@ -59,7 +65,7 @@ areas-preamble_main
 )
 
 ======
-areas-main_postamble
+areas-main_postamble-ERROR
 ======
 
 \blank
@@ -68,9 +74,11 @@ areas-main_postamble
 
 ---
 
-(ERROR
-  (command
-    (command_name))
-  (command
-    (command_name))
-)
+(document
+(main
+  (paragraph
+    (command
+      (command_name)))
+  (paragraph
+    (command
+      (command_name)))))

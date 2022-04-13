@@ -28,7 +28,7 @@ module.exports = grammar({
   
   externals: $ => [
     $._command_stop,
-    $.paragraph_stop,
+    $._paragraph_stop,
   ],
 
   word: $ => $.command_name,
@@ -64,12 +64,12 @@ module.exports = grammar({
     
     // Main --- text, commands, comments
     
-    main: $ => repeat1($._main_content),
+    main: $ => repeat1($.paragraph),
     
-    _main_content: $ => choice(
-      $.line_comment,
-      $.command, 
-    ),
+    // _main_content: $ => choice(
+    //   $.line_comment,
+    //   $.command, 
+    // ),
     
     // Postamble --- text, commands, comments
     
@@ -84,6 +84,25 @@ module.exports = grammar({
     ),
     
     
+    
+    // ------ PARAGRAPH
+    
+    paragraph: $ => prec.right(14,
+      seq( 
+        repeat1(
+          $._paragraph_content
+        ),
+        $._paragraph_stop,
+      )
+    ),
+    
+    _paragraph_content: $ => prec.left(14,
+      choice(
+        $.command,
+        $.line_comment,
+      ),
+    ),
+        
     // ------ COMMANDS
     
     command: $ => prec.right(

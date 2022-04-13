@@ -8,8 +8,10 @@ command-simple_command
 
 (document
   (main
-    (command
-      (command_name)
+    (paragraph
+      (command
+        (command_name)
+      )
     )
   ) 
 )
@@ -24,9 +26,11 @@ command-simple_with_scope
 
 (document
   (main
-    (command
-      (command_name)
-      (command_scope)
+    (paragraph
+      (command
+        (command_name)
+        (command_scope)
+      )
     )
   ) 
 )
@@ -41,9 +45,11 @@ command-simple_with_space_with_scope
 
 (document
   (main
-    (command
-      (command_name)
-      (command_scope)
+    (paragraph
+      (command
+        (command_name)
+        (command_scope)
+      )
     )
   ) 
 )
