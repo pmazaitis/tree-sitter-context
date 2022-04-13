@@ -57,6 +57,7 @@ module.exports = grammar({
     _preamble_content: $ => prec(18,
       choice(
         $.command,
+        $.line_comment,
       ),
     ),
     
@@ -79,6 +80,7 @@ module.exports = grammar({
     
     _postamble_content: $ =>  choice(
       $.command,
+      $.line_comment,
     ),
     
     
