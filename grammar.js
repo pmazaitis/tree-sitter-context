@@ -37,21 +37,21 @@ module.exports = grammar({
 
     // DOCUMENT - An entire ConTeXt document.
   
-    document: $ => seq($.preamble, $.main, $.postamble),
+    // document: $ => seq($.preamble, $.main, $.postamble),
     
-    document: $ => $.command_name,
+    document: $ => seq($.preamble, $.main, $.postamble),
     
     // PREAMBLE
     
-    preamble: $ => "",
+    preamble: $ => $.command_name,
     
     // MAIN
     
-    main: $ => "",
+    main: $ => seq("\\starttext", $.command_name, "\\stoptext"),
     
     // POSTAMBLE
     
-    postamble: $ => "",
+    postamble: $ => $.command_name,
     
     
     
