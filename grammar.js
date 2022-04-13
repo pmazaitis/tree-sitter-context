@@ -21,13 +21,17 @@ const sepBy = (rule, sep) => optional(sepBy1(rule, sep));
 module.exports = grammar({
   name: 'context',
   
-  extras: $ => [$._whitespace, $.line_comment],
+  extras: $ => [
+    $._whitespace, 
+    $.line_comment
+  ],
   
   externals: $ => [
     $.command_stop,
     $.paragraph_stop,
     // $._eol,
-    $.preamble_stop,
+    $._preamble_stop,
+    $._postamble_stop,
   ],
 
   word: $ => $.command_name,
@@ -36,29 +40,54 @@ module.exports = grammar({
     // CONTENTS
 
     // DOCUMENT - An entire ConTeXt document.
-  
-    // document: $ => seq($.preamble, $.main, $.postamble),
-    
+      
     document: $ => seq($.preamble, $.main, $.postamble),
     
+  
     // PREAMBLE
     
-    preamble: $ => repeat1($._preamble_content),
+    preamble: $ =>  seq(
+      repeat($._preamble_content), 
+      $._preamble_stop
+    ),
     
-    _preamble_content: $ => choice($.command_name, $.preamble_stop),
+    _preamble_content: $ => choice(
+      $.command,
+    ),
+    
     
     // MAIN
     
-    main: $ => seq("\\starttext", $.command_name, "\\stoptext"),
+    main: $ =>  choice(
+      $.main_text,
+      $.main_component,
+    ),
+    
+    main_text: $ => seq("\\starttext", $.command, "\\stoptext"),
+    
+    main_component: $ => seq("\\startcomponent", $.command, "\\stopcomponent"),
     
     // POSTAMBLE
     
-    postamble: $ => $.command_name,
+    postamble: $ => seq(
+                      repeat($._postamble_content), 
+                      $._postamble_stop
+                    ),
+    
+    _postamble_content: $ =>  choice(
+                                $.command, 
+                              ),
+    
     
     
     
     
     // COMMANDS
+    
+    command: $ => seq(
+      $.command_name,
+      $.command_stop,
+    ),
     
     command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+\*?)?/,
     

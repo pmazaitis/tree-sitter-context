@@ -10,6 +10,7 @@ enum TokenType {
   PARAGRAPH_STOP,
   EOL,
   PREAMBLE_STOP,
+  POSTAMBLE_STOP,
 };
 
 
@@ -24,14 +25,6 @@ static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
 
 static bool scan_command_stop(TSLexer *lexer) {
-
-  /*
-  Conditions for a valid COMMAND_STOP token:
-  
-  - We encounter two EOLs
-  - ...
-
-  */
   
   lexer->result_symbol = COMMAND_STOP;
   lexer->mark_end(lexer);
@@ -47,6 +40,8 @@ static bool scan_command_stop(TSLexer *lexer) {
     // We enter or leave a scope; the command is over
     if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
     if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
+    // Another command
+    if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
     // We find a numeric, the command is over
     if (iswdigit(lexer->lookahead)) {lexer->mark_end(lexer); return true;}
     
@@ -62,13 +57,7 @@ static bool scan_command_stop(TSLexer *lexer) {
       advance(lexer);
       continue;
     } 
-  
-    
-    if (iswspace(lexer->lookahead)) {
-        skip(lexer);
-        continue;
-    }
-  
+
     advance(lexer);
     
   }
@@ -164,6 +153,19 @@ static bool scan_preamble_stop(TSLexer *lexer) {
   return false;
 }
 
+static bool scan_postamble_stop(TSLexer *lexer) {
+  lexer->result_symbol = POSTAMBLE_STOP;
+  lexer->mark_end(lexer);
+  
+  if (lexer->eof(lexer)) {
+    return true;
+  } else {
+    return false;
+  }
+  
+}
+
+
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
   UNUSED(payload);
@@ -184,6 +186,9 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
     return scan_preamble_stop(lexer);
   }
   
+  if (valid_symbols[POSTAMBLE_STOP]) {
+    return scan_postamble_stop(lexer);
+  }
   return false;
   
 }
