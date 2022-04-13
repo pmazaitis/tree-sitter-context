@@ -27,7 +27,7 @@ module.exports = grammar({
   ],
   
   externals: $ => [
-    $.command_stop,
+    $._command_stop,
     $.paragraph_stop,
   ],
 
@@ -79,8 +79,8 @@ module.exports = grammar({
     // COMMANDS
     
     command: $ => seq(
-      $.command_name,
-      $.command_stop,
+      field("name", $.command_name),
+      $._command_stop,
     ),
     
     command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+\*?)?/,

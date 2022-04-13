@@ -1,0 +1,76 @@
+======
+areas-all_areas
+======
+
+\starttext
+
+\blank
+
+\stoptext
+
+---
+
+(document
+    (preamble)
+    (main
+        (command
+            name: (command_name)
+        )
+    )
+    (postamble)
+)
+
+======
+areas-main_only
+======
+
+\blank
+
+---
+
+(document
+    (main
+        (command
+            name: (command_name)
+        )
+    )
+)
+
+======
+areas-preamble_main
+======
+
+\starttext
+
+\blank
+
+---
+
+(document
+  (preamble)
+  (main
+    (command
+      name: (command_name)
+    )
+  )
+  (postamble
+    (MISSING "\stoptext")
+  )
+)
+
+======
+areas-main_postamble
+======
+
+\blank
+
+\stoptext
+
+---
+
+(ERROR
+  (command
+    name: (command_name))
+  (command
+    name: (command_name))
+)
