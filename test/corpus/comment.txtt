@@ -7,7 +7,24 @@ comment-comment_only
 ---
 
 (document
-    (main
-        (line_comment)
+  (main
+    (line_comment)
+  )
+)
+
+======
+comment-command_comment
+======
+
+\blank %comment
+
+---
+
+(document
+  (main
+    (command
+      name: (command_name)
+      (line_comment)
     )
+  )
 )
