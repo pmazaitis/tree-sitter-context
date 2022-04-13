@@ -54,8 +54,10 @@ module.exports = grammar({
       choice("\\starttext", "\\startcomponent"),
     ),
     
-    _preamble_content: $ => choice(
-      $.command,
+    _preamble_content: $ => prec(20,
+      choice(
+        $.command,
+      ),
     ),
     
     
