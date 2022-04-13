@@ -8,9 +8,6 @@
 enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_STOP,
-  EOL,
-  PREAMBLE_STOP,
-  POSTAMBLE_STOP,
 };
 
 
@@ -107,65 +104,6 @@ static bool scan_paragraph_stop(TSLexer *lexer) {
   return true;
 }
 
-static bool scan_eol(TSLexer *lexer) {
-  lexer->result_symbol = EOL;
-  lexer->mark_end(lexer);
-  
-  while (lexer->lookahead != 0) {
-    if (lexer->lookahead == '\n') {
-      skip(lexer);
-      if (lexer->lookahead == '\n') {
-        skip(lexer);
-        return false;
-      } else {
-        skip(lexer);
-        return true;
-      }
-    } else {
-      advance(lexer);
-      return false;
-    }
-  }
-  lexer->mark_end(lexer);
-  return true;
-}
-
-static bool scan_preamble_stop(TSLexer *lexer) {
-  lexer->result_symbol = PREAMBLE_STOP;
-  lexer->mark_end(lexer);
-  
-  int char_count = 0;
-  int char_limit = 15;
-  
-  char test_string[16] = "";
-  
-  while (char_count < char_limit) {
-    test_string[char_count] = lexer->lookahead;
-    
-    printf("Char under test: %c\n", lexer->lookahead);
-    printf("String under test: %s\n", test_string);
-    
-    if (strcmp(test_string, "\\starttext") == 0) return true;
-    if (strcmp(test_string, "\\startcomponent") == 0) return true;
-    
-    advance(lexer);
-    char_count++;
-  }
-  return false;
-}
-
-static bool scan_postamble_stop(TSLexer *lexer) {
-  lexer->result_symbol = POSTAMBLE_STOP;
-  lexer->mark_end(lexer);
-  
-  if (lexer->eof(lexer)) {
-    return true;
-  } else {
-    return false;
-  }
-  
-}
-
 // Cribbed from tree-sitter-latex
 static bool find_verbatim(TSLexer *lexer, const char *keyword,
                           bool is_command_name) {
@@ -234,9 +172,6 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
 
   UNUSED(payload);
 
-  if (valid_symbols[EOL]) {
-    return scan_eol(lexer);
-  }
 
   if (valid_symbols[COMMAND_STOP]) {
     return scan_command_stop(lexer);
@@ -246,13 +181,6 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
     return scan_paragraph_stop(lexer);
   }
   
-  if (valid_symbols[PREAMBLE_STOP]) {
-    return scan_preamble_stop(lexer);
-  }
-  
-  if (valid_symbols[POSTAMBLE_STOP]) {
-    return scan_postamble_stop(lexer);
-  }
   return false;
   
 }

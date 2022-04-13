@@ -29,9 +29,6 @@ module.exports = grammar({
   externals: $ => [
     $.command_stop,
     $.paragraph_stop,
-    // $._eol,
-    $._preamble_stop,
-    $._postamble_stop,
   ],
 
   word: $ => $.command_name,
@@ -77,9 +74,6 @@ module.exports = grammar({
     _postamble_content: $ =>  choice(
       $.command, 
     ),
-    
-    
-    
     
     
     // COMMANDS
