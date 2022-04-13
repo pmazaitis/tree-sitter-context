@@ -43,7 +43,9 @@ module.exports = grammar({
     
     // PREAMBLE
     
-    preamble: $ => $.command_name,
+    preamble: $ => repeat1($._preamble_content),
+    
+    _preamble_content: $ => choice($.command_name, $.preamble_stop),
     
     // MAIN
     
