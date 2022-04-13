@@ -23,7 +23,7 @@ comment-command_comment
 (document
   (main
     (command
-      name: (command_name)
+      (command_name)
       (line_comment)
     )
   )

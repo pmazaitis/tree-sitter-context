@@ -34,9 +34,12 @@ module.exports = grammar({
   word: $ => $.command_name,
 
   rules: {
-    // CONTENTS
+    // ------ CONTENTS
 
-    // DOCUMENT - An entire ConTeXt document.
+
+
+
+    // ------ DOCUMENT - An entire ConTeXt document.
       
     document: $ => choice(
       prec(20, seq($.preamble, $.main, $.postamble)),
@@ -44,7 +47,7 @@ module.exports = grammar({
     ),
     
   
-    // PREAMBLE
+    // Preamble --- commands and comments
     
     preamble: $ =>  seq(
       repeat($._preamble_content), 
@@ -58,7 +61,7 @@ module.exports = grammar({
     ),
     
     
-    // MAIN
+    // Main --- text, commands, comments
     
     main: $ => repeat1($._main_content),
     
@@ -67,7 +70,7 @@ module.exports = grammar({
       $.command, 
     ),
     
-    // POSTAMBLE
+    // Postamble --- text, commands, comments
     
     postamble: $ => seq(
       choice("\\stoptext", "\\stopcomponent"),
@@ -79,16 +82,29 @@ module.exports = grammar({
     ),
     
     
-    // COMMANDS
+    // ------ COMMANDS
     
-    command: $ => seq(
-      field("name", $.command_name),
-      $._command_stop,
+    command: $ => prec.right(
+      choice(
+        seq(
+          $.command_name,
+          $._command_stop,
+        ),
+        seq(
+          $.command_name,
+          $.command_scope,
+          $._command_stop,
+        ),
+      )
     ),
     
     command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+\*?)?/,
     
-    // EXTRAS
+    command_scope: $ => seq("{", /[^}]*/, "}" ),
+    
+    
+    
+    // ------ EXTRAS
     
     _whitespace: $ => /\s+/,
     

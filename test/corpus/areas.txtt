@@ -14,7 +14,7 @@ areas-all_areas
     (preamble)
     (main
         (command
-            name: (command_name)
+            (command_name)
         )
     )
     (postamble)
@@ -31,7 +31,7 @@ areas-main_only
 (document
     (main
         (command
-            name: (command_name)
+            (command_name)
         )
     )
 )
@@ -50,7 +50,7 @@ areas-preamble_main
   (preamble)
   (main
     (command
-      name: (command_name)
+      (command_name)
     )
   )
   (postamble
@@ -70,7 +70,7 @@ areas-main_postamble
 
 (ERROR
   (command
-    name: (command_name))
+    (command_name))
   (command
-    name: (command_name))
+    (command_name))
 )
