@@ -58,20 +58,10 @@ module.exports = grammar({
   word: $ => $.command_name,
 
   rules: {
-    // ------ DOCUMENT - An entire ConTeXt document.
-      
-    document: $ => choice(
-      prec(20, seq($.preamble, $.main, $.postamble)),
-      $.main,
-    ),
-    
-  
-    // Preamble --- commands and comments
-    
-    preamble: $ =>  seq(
-      repeat($._preamble_content), 
-      choice("\\starttext", "\\startcomponent"),
-    ),
+    // ------ CONTENT CONTEXTS
+    //
+    // Content allowed in different parts of the document
+    // TODO: refactor when things are stable
     
     _preamble_content: $ => prec(18,
       choice(
@@ -80,11 +70,6 @@ module.exports = grammar({
       ),
     ),
     
-    
-    // Main --- text, commands, comments
-    
-    main: $ => repeat1($._main_content),
-    
     _main_content: $ => choice(
       $.line_comment,
       $.command,
@@ -92,16 +77,52 @@ module.exports = grammar({
       // $.text,
     ),
     
+    _postamble_content: $ =>  choice(
+      $.command,
+      $.line_comment,
+    ),
+    
+    _group_content: $ => choice(
+      $.command,
+      $.line_comment,
+      $.brace_group,
+      // $.text,
+    ),
+    
+    // _paragraph_content: $ => prec.left(14,
+    //   choice(
+    //     $.command,
+    //     $.line_comment,
+    //     $.text,
+    //   ),
+    // ),
+    
+    _command_scope_content: $ => /[^}]*/,
+    
+    
+    // ------ DOCUMENT - An entire ConTeXt document.
+      
+    document: $ => choice(
+      prec(20, seq($.preamble, $.main, $.postamble)),
+      $.main,
+    ),
+  
+    // Preamble --- commands and comments
+    
+    preamble: $ =>  seq(
+      repeat($._preamble_content), 
+      choice("\\starttext", "\\startcomponent"),
+    ),
+    
+    // Main --- text, commands, comments
+    
+    main: $ => repeat1($._main_content),
+  
     // Postamble --- text, commands, comments
     
     postamble: $ => seq(
       choice("\\stoptext", "\\stopcomponent"),
       repeat($._postamble_content), 
-    ),
-    
-    _postamble_content: $ =>  choice(
-      $.command,
-      $.line_comment,
     ),
     
     
@@ -113,14 +134,7 @@ module.exports = grammar({
       seq("{", repeat($._group_content), "\\egroup"),
       seq("\\bgroup", repeat($._group_content), "\\egroup"),
     ),
-    
-    _group_content: $ => choice(
-      $.command,
-      $.line_comment,
-      $.brace_group,
-      // $.text,
-    ),
-    
+  
     
     // ------ PARAGRAPH
     
@@ -132,14 +146,7 @@ module.exports = grammar({
     //     $._paragraph_stop,
     //   )
     // ),
-    // 
-    // _paragraph_content: $ => prec.left(14,
-    //   choice(
-    //     $.command,
-    //     $.line_comment,
-    //     $.text,
-    //   ),
-    // ),
+     
         
     // ------ COMMANDS
     
@@ -160,13 +167,17 @@ module.exports = grammar({
     command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     
     command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
-    
-    _command_scope_content: $ => /[^}]*/,
+  
     
     // ------ TEXT
     // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),   
     // text: $ => /[^\^#$%&_{}|~\\]+/,
     
+    
+    // ------ ESCAPED CHARACTERS
+    escapechar: $ => choice(...escaped_chars),
+    
+    escaped: $ => seq('\\', $.escapechar),
     
     
     // ------ EXTRAS
