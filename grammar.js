@@ -49,8 +49,8 @@ var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 
 // Possibly useful helper functions?
 // Cribbed from tree-sitter-latex
-// const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
-// const sepBy = (rule, sep) => optional(sepBy1(rule, sep)); 
+const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
+const sepBy = (rule, sep) => optional(sepBy1(rule, sep)); 
 
 
 module.exports = grammar({
@@ -204,12 +204,12 @@ module.exports = grammar({
       choice(
         seq(
           $.command_name,
-          // repeat(
-          //   choice(
-          //     $.option_block,
-          //     $.settings_block,
-          //   )
-          // ),
+          repeat(
+            choice(
+              $.option_block,
+              // $.settings_block,
+            )
+          ),
           optional($.command_scope),
           $._command_stop,
         ),
@@ -221,12 +221,16 @@ module.exports = grammar({
       )
     ),
     
+    // --- Command Name
     // First option seems more robust, but how does it work?
     command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\[a-zA-Z]+/,
     
-    
+    // --- Option Block         
+    option_block: $ => seq("[",sepBy($.keyword, ','),"]"), 
+     
+    keyword: $ =>  /[^\s=,\[\]]+/,
     
     
     
