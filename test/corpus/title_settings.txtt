@@ -1,0 +1,50 @@
+======
+title_settings-title
+======
+
+\blank[title={Text}]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (settings_block
+        (title_setting
+          (value
+            (value_brace_group
+              (value_text)
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+
+======
+title_settings-subtitle
+======
+
+\blank[subtitle={Text}]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (settings_block
+        (subtitle_setting
+          (value
+            (value_brace_group
+              (value_text)
+            )
+          )
+        )
+      )
+    )
+  )
+)
