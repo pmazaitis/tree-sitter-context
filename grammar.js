@@ -32,12 +32,13 @@
 
 // ------ PRECEDENCE LIST
 //
-// 20:  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
-// 18:  _preamble_content: $ => prec(18,
-// 16:  escaped: $ => prec(16,seq('\\', $.escapechar)),  
-// 14:  paragraph: $ => prec.right(14,
-// 14:  _paragraph_content: $ => prec.left(14,
-// r:   command: $ => prec.right(
+// 20  :  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
+// 18  :  _preamble_content: $ => prec(18,
+// 16  :  escaped: $ => prec(16,seq('\\', $.escapechar)),  
+// 14r : paragraph: $ => prec.right(14,
+// 14l : _paragraph_content: $ => prec.left(14,
+// 10  :  inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),  
+// r   :   command: $ => prec.right(
 
 
 // ------ HELPERS
@@ -93,7 +94,8 @@ module.exports = grammar({
       $.line_comment,
       $.command,
       $.brace_group,
-      $.escaped, 
+      $.escaped,
+      $.inline_math, 
       // $.text,
     ),
     
@@ -102,6 +104,7 @@ module.exports = grammar({
       $.line_comment,
       $.escaped,
       $.brace_group,
+      $.inline_math,
     ),
     
     _group_content: $ => choice(
@@ -109,6 +112,7 @@ module.exports = grammar({
       $.line_comment,
       $.brace_group,
       $.escaped,
+      $.inline_math,
       // $.text,
     ),
     
@@ -118,6 +122,7 @@ module.exports = grammar({
     //     $.line_comment,
     //     $.text,
     //     $.escaped,
+    //     $.inline_math,
     //   ),
     // ),
     
@@ -152,6 +157,20 @@ module.exports = grammar({
       seq("\\bgroup", repeat($._group_content), "\\egroup"),
     ),
   
+    
+    // ------ INLINE MATH
+    //
+    // ConTeXt can handle inline math mode like TeX, marking the start and stop of math mode with a dollar sign ('$').
+    // Brace groups ({}) are needed in inline math mode.
+    
+    math_group: $ => seq("{", repeat($._math_content), "}"),
+    
+    _math_content: $=> choice($.line_comment, $.escaped, $.math_group, $.math_text),
+    
+    math_text: $ => /[^${}]+/,
+    
+    inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
+    
     
     // ------ PARAGRAPH
     
