@@ -211,9 +211,9 @@ module.exports = grammar({
     
     // --- Command Name
     // FIXME: First option seems more robust, but how does it work?
-    command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\[a-zA-Z:_]+/,
+    command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
     
     // --- Empty Block
     empty_block: $ => choice(
