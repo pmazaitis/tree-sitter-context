@@ -56,6 +56,8 @@ static bool scan_command_stop(TSLexer *lexer) {
       continue;
     } 
 
+    if (iswalnum(lexer->lookahead)) return true;
+
     advance(lexer);
   }
   

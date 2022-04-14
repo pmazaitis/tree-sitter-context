@@ -64,9 +64,12 @@ module.exports = grammar({
     
     // Main --- text, commands, comments
     
+    main: $ => repeat1($._main_content),
+    
     _main_content: $ => choice(
       $.line_comment,
-      $.command, 
+      $.command,
+      $.brace_group, 
     ),
     
     // Postamble --- text, commands, comments
@@ -81,6 +84,21 @@ module.exports = grammar({
       $.line_comment,
     ),
     
+    
+    // ------ GROUPS
+    
+    brace_group: $ => choice(
+      seq("{", $._group_content, "}"),
+      seq("\\bgroup", $._group_content, "}"),
+      seq("{", $._group_content, "\\egroup"),
+      seq("\\bgroup", $._group_content, "\\egroup"),
+    ),
+    
+    _group_content: $ => choice(
+      $.command,
+      $.line_comment,
+      $.text,
+    ),
     
     
     // ------ PARAGRAPH
@@ -110,18 +128,19 @@ module.exports = grammar({
           $.command_name,
           $._command_stop,
         ),
-        // seq(
-        //   $.command_name,
-        //   $.command_scope,
-        //   $._command_stop,
-        // ),
+        seq(
+          $.command_name,
+          $.command_scope,
+          $._command_stop,
+        ),
       )
     ),
     
     command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     
-    // command_scope: $ => seq("{", /[^}]*/, "}" ),
+    command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
     
+    _command_scope_content: $ => /[^}]*/,
     
     // ------ TEXT
     text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
