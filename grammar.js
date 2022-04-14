@@ -89,10 +89,10 @@ module.exports = grammar({
     // ------ GROUPS
     
     brace_group: $ => choice(
-      seq("{", optional($._group_content), "}"),
-      seq("\\bgroup", optional($._group_content), "}"),
-      seq("{", optional($._group_content), "\\egroup"),
-      seq("\\bgroup", optional($._group_content), "\\egroup"),
+      seq("{", repeat($._group_content), "}"),
+      seq("\\bgroup", repeat($._group_content), "}"),
+      seq("{", repeat($._group_content), "\\egroup"),
+      seq("\\bgroup", repeat($._group_content), "\\egroup"),
     ),
     
     _group_content: $ => choice(
