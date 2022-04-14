@@ -8,9 +8,9 @@ comment-comment_only
 
 (document
   (main
-    (paragraph
+
       (line_comment)
-    )
+
   )
 )
 
@@ -24,11 +24,11 @@ comment-command_comment
 
 (document
   (main
-    (paragraph
+
       (command
         (command_name)
         (line_comment)
       )
-    )
+    
   )
 )

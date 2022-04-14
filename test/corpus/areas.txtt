@@ -13,11 +13,11 @@ areas-all_areas
 (document
   (preamble)
   (main
-    (paragraph
+
       (command
         (command_name)
       )
-    )
+    
   )
   (postamble)
 )
@@ -32,11 +32,11 @@ areas-main_only
 
 (document
   (main
-    (paragraph
+    
       (command
           (command_name)
       )
-    )
+    
   )
 )
 
@@ -53,11 +53,11 @@ areas-preamble_main-ERROR
 (document
   (preamble)
   (main
-    (paragraph
+    
       (command
         (command_name)
       )
-    )
+    
   )
   (postamble
     (MISSING "\stoptext")
@@ -74,11 +74,11 @@ areas-main_postamble-ERROR
 
 ---
 
-(document
-(main
-  (paragraph
-    (command
-      (command_name)))
-  (paragraph
-    (command
-      (command_name)))))
+(ERROR 
+  (command 
+    (command_name)
+  )
+  (command
+    (command_name)
+  )
+)

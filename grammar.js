@@ -143,7 +143,7 @@ module.exports = grammar({
     _command_scope_content: $ => /[^}]*/,
     
     // ------ TEXT
-    text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+    text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
     
     // ------ EXTRAS
     
