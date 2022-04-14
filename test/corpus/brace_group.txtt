@@ -1,0 +1,35 @@
+; Is this a comment?
+
+======
+brace_group-simple_brace_group
+======
+
+{}
+
+---
+
+(document
+  (main
+
+      (brace_group)
+
+  ) 
+)
+
+======
+brace_group-nested_brace_group
+======
+
+{{}}
+
+---
+
+(document
+  (main
+
+      (brace_group
+        (brace_group)
+      )
+
+  ) 
+)
