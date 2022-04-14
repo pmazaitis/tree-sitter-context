@@ -130,6 +130,8 @@ module.exports = grammar({
     
     _command_scope_content: $ => /[^}]*/,
     
+    // ------ AREAS
+    //
     // Preamble --- commands and comments
     preamble: $ =>  seq(
       repeat($._preamble_content), 
