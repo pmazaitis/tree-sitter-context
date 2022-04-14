@@ -5,7 +5,7 @@
 
 // PROGRESS
 //
-// --- Cases to handle
+// ## Cases to handle
 // 
 // [x] Areas
 // [x] Commands
@@ -17,20 +17,20 @@
 // [x] Inline Math
 // [ ]
 //
-// --- Injected Languages
+// ## Injected Languages
 // [ ] Metapost
 // [ ] TiKz
 // [ ] Lua
 // [ ] 
 
-// --- Injected languages for Typing Environments
+// ## Injected languages for Typing Environments
 // [ ] Plain
 // [ ] HTML
 // [ ] CSS
 // [ ]
 
 
-// ------ PRECEDENCE LIST
+// # PRECEDENCE LIST
 //
 // 20  :  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
 // 18  :  _preamble_content: $ => prec(18,
@@ -41,7 +41,7 @@
 // r   :   command: $ => prec.right(
 
 
-// ------ HELPERS
+// # HELPERS
 //
 // Special characters in the ConTeXt markup language.
 // Note: in the following array, the escaped backslash _must_ be the last character (ug)
@@ -69,14 +69,14 @@ module.exports = grammar({
   word: $ => $.command_name,
 
   rules: {
-    // ------ DOCUMENT - An entire ConTeXt document. 
+    // # DOCUMENT - An entire ConTeXt document. 
     document: $ => choice(
       prec(20, seq($.preamble, $.main, $.postamble)),
       $.main,
     ),
     
     
-    // ------ CONTENT CONTEXTS
+    // # CONTENT CONTEXTS
     //
     // Content allowed in different parts of the document
     // TODO: refactor when things are stable
@@ -121,7 +121,7 @@ module.exports = grammar({
     
     _command_scope_content: $ => /[^}]*/,
     
-    // ------ AREAS
+    // # AREAS
     //
     // Preamble --- commands and comments
     preamble: $ =>  seq(
@@ -139,7 +139,7 @@ module.exports = grammar({
     ),
     
     
-    // ------ GROUPS
+    // # GROUPS
 
     // Brace Groups
     brace_group: $ => choice(
@@ -155,7 +155,7 @@ module.exports = grammar({
     command_group: $ => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._group_content), /\\stop[^a-zA-Z]/)),
   
     
-    // ------ INLINE MATH
+    // # INLINE MATH
     //
     // ConTeXt can handle inline math mode like TeX, marking the start and stop of math mode with a dollar sign ('$').
     // Brace groups ({}) are needed in inline math mode.
@@ -169,7 +169,7 @@ module.exports = grammar({
     inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
     
         
-    // ------ COMMANDS
+    // # COMMANDS
     
     command: $ => prec.right(
       choice(
@@ -188,24 +188,24 @@ module.exports = grammar({
       )
     ),
     
-    // --- Command Name
+    // ## Command Name
     // FIXME: First option seems more robust, but how does it work?
     // command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\[a-zA-Z:_]+/,
     command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
     
-    // --- Empty Block
+    // ## Empty Block
     empty_block: $ => choice(
       "[]",
       seq("[" ,/\s*/, "]"),
     ),
     
-    // --- Option Block         
+    // ## Option Block         
     option_block: $ => prec(12, seq("[",sepBy($.keyword, ','),"]")), 
      
     keyword: $ =>  /[^\s=,\[\]]+/,
     
-    // --- Settings Block
+    // ## Settings Block
     settings_block: $ => prec(14,seq("[",sepBy($._setting, ','),"]")),
     
     _setting: $ => choice(
@@ -230,21 +230,21 @@ module.exports = grammar({
     
     value_brace_group: $ => seq("{", repeat($._value_content), "}"),
     
-    // --- Scope
+    // ## Scope
     command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
     
-    // ------ TEXT
+    // # TEXT
     // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),   
     // text: $ => /[^\^#$%&_{}|~\\]+/,
     
     
-    // ------ ESCAPED CHARACTERS
+    // # ESCAPED CHARACTERS
     escaped_char: $ => choice(...escaped_chars),
     
     escaped: $ => prec.right(16,seq('\\', $.escaped_char)),
     
     
-    // ------ EXTRAS
+    // # EXTRAS
     
     _whitespace: $ => /\s+/,
     
