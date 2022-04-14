@@ -208,6 +208,7 @@ module.exports = grammar({
           $.command_name,
           repeat(
             choice(
+              $.empty_block,
               $.option_block,
               $.settings_block,
             )
@@ -228,6 +229,12 @@ module.exports = grammar({
     command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\[a-zA-Z]+/,
+    
+    // --- Empty Block
+    empty_block: $ => choice(
+      "[]",
+      seq("[" ,/\s*/, "]"),
+    ),
     
     // --- Option Block         
     option_block: $ => prec(12, seq("[",sepBy($.keyword, ','),"]")), 
