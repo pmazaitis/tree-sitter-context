@@ -117,16 +117,7 @@ module.exports = grammar({
       $.command_group,
       // $.text,
     ),
-    
-    // _paragraph_content: $ => prec.left(14,
-    //   choice(
-    //     $.command,
-    //     $.line_comment,
-    //     $.text,
-    //     $.escaped,
-    //     $.inline_math,
-    //   ),
-    // ),
+
     
     _command_scope_content: $ => /[^}]*/,
     
@@ -177,20 +168,6 @@ module.exports = grammar({
     
     inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
     
-    
-    // ------ PARAGRAPH
-    
-    // Instead of this, handle paragraph markers in text?
-    
-    // paragraph: $ => prec.right(14,
-    //   seq( 
-    //     repeat1(
-    //       $._paragraph_content
-    //     ),
-    //     $._paragraph_stop,
-    //   )
-    // ),
-     
         
     // ------ COMMANDS
     
