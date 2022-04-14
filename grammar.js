@@ -64,12 +64,10 @@ module.exports = grammar({
     
     // Main --- text, commands, comments
     
-    main: $ => repeat1($.paragraph),
-    
-    // _main_content: $ => choice(
-    //   $.line_comment,
-    //   $.command, 
-    // ),
+    _main_content: $ => choice(
+      $.line_comment,
+      $.command, 
+    ),
     
     // Postamble --- text, commands, comments
     
@@ -87,22 +85,22 @@ module.exports = grammar({
     
     // ------ PARAGRAPH
     
-    paragraph: $ => prec.right(14,
-      seq( 
-        repeat1(
-          $._paragraph_content
-        ),
-        $._paragraph_stop,
-      )
-    ),
-    
-    _paragraph_content: $ => prec.left(14,
-      choice(
-        $.command,
-        $.line_comment,
-        $.text,
-      ),
-    ),
+    // paragraph: $ => prec.right(14,
+    //   seq( 
+    //     repeat1(
+    //       $._paragraph_content
+    //     ),
+    //     $._paragraph_stop,
+    //   )
+    // ),
+    // 
+    // _paragraph_content: $ => prec.left(14,
+    //   choice(
+    //     $.command,
+    //     $.line_comment,
+    //     $.text,
+    //   ),
+    // ),
         
     // ------ COMMANDS
     
@@ -122,7 +120,7 @@ module.exports = grammar({
     
     command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     
-    command_scope: $ => seq("{", /[^}]*/, "}" ),
+    // command_scope: $ => seq("{", /[^}]*/, "}" ),
     
     
     // ------ TEXT
