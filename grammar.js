@@ -204,12 +204,12 @@ module.exports = grammar({
       choice(
         seq(
           $.command_name,
-          repeat(
-            choice(
-              $.option_block,
-              $.settings_block,
-            )
-          ),
+          // repeat(
+          //   choice(
+          //     $.option_block,
+          //     $.settings_block,
+          //   )
+          // ),
           optional($.command_scope),
           $._command_stop,
         ),
