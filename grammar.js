@@ -14,7 +14,7 @@
 // [ ] Command groups (/start and /stop)
 // [x] Escaped Characters
 // [x] Comments
-// [ ] Inline Math
+// [x] Inline Math
 // [ ]
 //
 // --- Injected Languages
