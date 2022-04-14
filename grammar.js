@@ -95,7 +95,8 @@ module.exports = grammar({
       $.command,
       $.brace_group,
       $.escaped,
-      $.inline_math, 
+      $.inline_math,
+      $.command_group, 
       // $.text,
     ),
     
@@ -105,6 +106,8 @@ module.exports = grammar({
       $.escaped,
       $.brace_group,
       $.inline_math,
+      $.command_group,
+      // $.text,
     ),
     
     _group_content: $ => choice(
@@ -113,6 +116,7 @@ module.exports = grammar({
       $.brace_group,
       $.escaped,
       $.inline_math,
+      $.command_group,
       // $.text,
     ),
     
@@ -150,12 +154,22 @@ module.exports = grammar({
     
     // ------ GROUPS
     
+    // Brace Groups
+    
     brace_group: $ => choice(
       seq("{", repeat($._group_content), "}"),
       seq("\\bgroup", repeat($._group_content), "}"),
       seq("{", repeat($._group_content), "\\egroup"),
       seq("\\bgroup", repeat($._group_content), "\\egroup"),
     ),
+  
+    // Command Group
+  
+    // ConTeXt can also group document content between the commands "\start" and "\stop"
+    //
+    // FIXME: these tokens eat the trailing newline, which can suppress paragraph_stop detection
+    
+    command_group: $ => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._group_content), /\\stop[^a-zA-Z]/),
   
     
     // ------ INLINE MATH
