@@ -1,0 +1,118 @@
+======
+options-empty_option_block
+======
+
+\blank[]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (option_block)
+    )
+  )
+)
+
+======
+options-empty_option_block_with_whitespace
+======
+
+\blank[ ]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (option_block)
+    )
+  )
+)
+
+======
+options-option_block_with_one_keyword
+======
+
+\blank[one]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (option_block
+        (keyword)
+      )
+    )
+  )
+)
+
+======
+options-option_block_with_two_keywords
+======
+
+\blank[one,two]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (option_block
+        (keyword)
+        (keyword)
+      )
+    )
+  )
+)
+
+======
+options-multiple_option_blocks_with_one_keyword
+======
+
+\blank[one][two]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (option_block
+        (keyword)
+      )
+      (option_block
+        (keyword)
+      )
+    )
+  )
+)
+
+======
+options-multiple_option_blocks_with_two_keywords
+======
+
+\blank[one,two][three,four]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (option_block
+        (keyword)
+        (keyword)
+      )
+      (option_block
+        (keyword)
+        (keyword)
+      )
+    )
+  )
+)
