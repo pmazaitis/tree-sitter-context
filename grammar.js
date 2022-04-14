@@ -68,6 +68,14 @@ module.exports = grammar({
   word: $ => $.command_name,
 
   rules: {
+    // ------ DOCUMENT - An entire ConTeXt document.
+      
+    document: $ => choice(
+      prec(20, seq($.preamble, $.main, $.postamble)),
+      $.main,
+    ),
+    
+    
     // ------ CONTENT CONTEXTS
     //
     // Content allowed in different parts of the document
@@ -115,13 +123,6 @@ module.exports = grammar({
     
     _command_scope_content: $ => /[^}]*/,
     
-    
-    // ------ DOCUMENT - An entire ConTeXt document.
-      
-    document: $ => choice(
-      prec(20, seq($.preamble, $.main, $.postamble)),
-      $.main,
-    ),
   
     // Preamble --- commands and comments
     
