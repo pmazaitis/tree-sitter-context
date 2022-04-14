@@ -204,26 +204,22 @@ module.exports = grammar({
       choice(
         seq(
           $.command_name,
+          repeat(
+            choice(
+              $.option_block,
+              $.settings_block,
+            )
+          ),
+          optional($.command_scope),
           $._command_stop,
         ),
-        seq(
-          $.command_name,
-          $.command_scope,
-          $._command_stop,
-        ),
+        // seq(
+        //   $.command_name,
+        //   $.command_scope,
+        //   $._command_stop,
+        // ),
       )
     ),
-    
-    // command structure from v000
-    // repeat(
-    //   choice(
-    //     $.option_block, 
-    //     $.settings_block,
-    //     $.comment,
-    //     $._end_of_line,
-    //   )
-    // ),
-    
     
     // First option seems more robust, but how does it work?
     command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
