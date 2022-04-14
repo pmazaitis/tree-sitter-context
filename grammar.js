@@ -70,6 +70,7 @@ module.exports = grammar({
       $.line_comment,
       $.command,
       $.brace_group, 
+      // $.text,
     ),
     
     // Postamble --- text, commands, comments
@@ -88,16 +89,17 @@ module.exports = grammar({
     // ------ GROUPS
     
     brace_group: $ => choice(
-      seq("{", $._group_content, "}"),
-      seq("\\bgroup", $._group_content, "}"),
-      seq("{", $._group_content, "\\egroup"),
-      seq("\\bgroup", $._group_content, "\\egroup"),
+      seq("{", optional($._group_content), "}"),
+      seq("\\bgroup", optional($._group_content), "}"),
+      seq("{", optional($._group_content), "\\egroup"),
+      seq("\\bgroup", optional($._group_content), "\\egroup"),
     ),
     
     _group_content: $ => choice(
       $.command,
       $.line_comment,
-      $.text,
+      $.brace_group,
+      // $.text,
     ),
     
     
@@ -143,7 +145,11 @@ module.exports = grammar({
     _command_scope_content: $ => /[^}]*/,
     
     // ------ TEXT
-    text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+    // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
+    
+    // ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
+    
+    // text: $ => /[^\^#$%&_{}|~\\]+/,
     
     // ------ EXTRAS
     
