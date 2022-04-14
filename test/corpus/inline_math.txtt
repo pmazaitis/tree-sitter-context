@@ -1,0 +1,52 @@
+
+======
+inline_math-empty_group
+======
+
+$ $
+
+---
+
+(document
+  (main
+    (inline_math
+      (math_text)
+    )
+  )
+)
+
+======
+inline_math-simple_inline
+======
+
+$ f(x) = x^2 $
+
+---
+
+(document
+  (main
+    (inline_math
+      (math_text)
+    )
+  )
+)
+
+======
+inline_math-simple_inline_with_grouping
+======
+
+$ f(x) = x^{2x} $
+
+---
+
+(document
+  (main
+    (inline_math
+      (math_text)
+      (math_group
+        (math_text)
+      )
+      (math_text)
+    )
+    )
+)
