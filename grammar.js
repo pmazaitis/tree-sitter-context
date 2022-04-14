@@ -30,6 +30,14 @@
 // [ ]
 
 
+// ------ PRECEDENCE LIST
+// _preamble_content: $ => prec(18,
+// _paragraph_content: $ => prec.left(14,
+// prec(20, seq($.preamble, $.main, $.postamble)),
+// paragraph: $ => prec.right(14,
+// command: $ => prec.right(
+
+
 // ------ HELPERS
 
 // Special characters in the ConTeXt markup language.
