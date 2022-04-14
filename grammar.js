@@ -169,7 +169,7 @@ module.exports = grammar({
     //
     // FIXME: these tokens eat the trailing newline, which can suppress paragraph_stop detection
     
-    command_group: $ => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._group_content), /\\stop[^a-zA-Z]/),
+    command_group: $ => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._group_content), /\\stop[^a-zA-Z]/)),
   
     
     // ------ INLINE MATH
