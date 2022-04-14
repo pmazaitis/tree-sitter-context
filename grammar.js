@@ -232,8 +232,12 @@ module.exports = grammar({
      
     keyword: $ =>  /[^\s=,\[\]]+/,
     
+    // --- Settings Block
     
     
+    
+    
+    // --- Scope
     command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
   
     
