@@ -188,6 +188,8 @@ module.exports = grammar({
     
     // ------ PARAGRAPH
     
+    // Instead of this, handle paragraph markers in text?
+    
     // paragraph: $ => prec.right(14,
     //   seq( 
     //     repeat1(
