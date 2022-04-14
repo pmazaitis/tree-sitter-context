@@ -1,0 +1,162 @@
+======
+settings-settings_block_with_one_keyval
+======
+
+\blank[one=two]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+      )
+    )
+  )
+)
+
+======
+settings-settings_block_with_two_keyvals
+======
+
+\blank[one=two,three=four]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+      )
+    )
+  )
+)
+
+======
+settings-settings_block_with_two_keyvals_and_whitespace
+======
+
+\blank[one=two,
+       three=four
+       ]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+      )
+    )
+  )
+)
+
+======
+settings-two_settings_blocks_with_one_keyval
+======
+
+\blank[one=two][three=four]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+      )
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+      )
+    )
+  )
+)
+
+======
+settings-two_settings_blocks_with_two_keyvals
+======
+
+\blank[one=two,three=four][five=six,seven=eight]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+      )
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+        (setting
+          (key)
+          (value
+            (value_text)
+          )
+        )
+      )
+
+    )
+  )
+)

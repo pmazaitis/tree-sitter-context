@@ -39,6 +39,28 @@ options-option_block_with_two_keywords
 )
 
 ======
+options-option_block_with_two_keywords_and_whitespace
+======
+
+\blank[one,
+       two
+       ]
+
+---
+
+(document
+  (main
+    (command
+      (command_name)
+      (option_block
+        (keyword)
+        (keyword)
+      )
+    )
+  )
+)
+
+======
 options-multiple_option_blocks_with_one_keyword
 ======
 
