@@ -11,7 +11,7 @@
 // [p] Commands
 // [ ] Text
 // [x] Brace Groups
-// [ ] Command groups (/start and /stop)
+// [x] Command groups (/start and /stop)
 // [x] Escaped Characters
 // [x] Comments
 // [x] Inline Math
