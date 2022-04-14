@@ -34,11 +34,6 @@ module.exports = grammar({
   word: $ => $.command_name,
 
   rules: {
-    // ------ CONTENTS
-
-
-
-
     // ------ DOCUMENT - An entire ConTeXt document.
       
     document: $ => choice(
