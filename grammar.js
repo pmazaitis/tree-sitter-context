@@ -181,7 +181,10 @@ module.exports = grammar({
       )
     ),
     
-    command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
+    // First option seems more robust, but how does it work?
+    command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
+    // command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
+    // command_name: $ => /\\[a-zA-Z]+/,
     
     command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
   
@@ -194,14 +197,14 @@ module.exports = grammar({
     // ------ ESCAPED CHARACTERS
     escapechar: $ => choice(...escaped_chars),
     
-    escaped: $ => prec(16,seq('\\', $.escapechar)),
+    escaped: $ => prec.right(16,seq('\\', $.escapechar)),
     
     
     // ------ EXTRAS
     
     _whitespace: $ => /\s+/,
     
-    line_comment: $ => /%[^\r\n]*/,
+    line_comment: $ => /[^\\]%[^\r\n]*/,
          
   },
 });
