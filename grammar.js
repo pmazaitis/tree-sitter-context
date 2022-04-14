@@ -8,7 +8,7 @@
 // --- Cases to handle
 // 
 // [x] Areas
-// [p] Commands
+// [x] Commands
 // [ ] Text
 // [x] Brace Groups
 // [x] Command groups (/start and /stop)
