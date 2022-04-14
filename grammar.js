@@ -222,7 +222,7 @@ module.exports = grammar({
     ),
     
     // --- Command Name
-    // First option seems more robust, but how does it work?
+    // FIXME: First option seems more robust, but how does it work?
     command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\[a-zA-Z]+/,
