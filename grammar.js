@@ -244,7 +244,17 @@ module.exports = grammar({
     // --- Settings Block
     settings_block: $ => prec(14,seq("[",sepBy($.setting, ','),"]")),
     
-    setting: $ => seq($.key, '=', $.value),
+    setting: $ => choice(
+      $.generic_setting,
+      $.title_setting,
+      $.subtitle_setting,
+    ),
+    
+    generic_setting: $ => seq($.key, '=', $.value),
+    
+    title_setting: $ => seq("title", "=", $.value),
+    
+    subtitle_setting: $ => seq("title", "=", $.value),
     
     key: $ => /[^\s=,\[\]]+/,
     
