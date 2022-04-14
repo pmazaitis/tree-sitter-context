@@ -16,6 +16,8 @@ escaped-simple_escaped
   ) 
 )
 
+; This test causes the testing function to not halt
+;
 ; ======
 ; escaped-multiple_escaped
 ; ======
