@@ -12,7 +12,7 @@
 // [ ] Text
 // [x] Brace Groups
 // [ ] Command groups (/start and /stop)
-// [ ] Escaped Characters
+// [x] Escaped Characters
 // [x] Comments
 // [ ] Inline Math
 // [ ]
