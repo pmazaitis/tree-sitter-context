@@ -41,7 +41,7 @@ areas-main_only
 )
 
 ======
-areas-preamble_main-ERROR
+areas-preamble_main
 ======
 
 \starttext
@@ -49,6 +49,8 @@ areas-preamble_main-ERROR
 \blank
 
 ---
+
+; This is expected error - this parser claims this is a broken document.
 
 (document
   (preamble)
@@ -73,6 +75,8 @@ areas-main_postamble-ERROR
 \stoptext
 
 ---
+
+; This is expected error - this parser claims this is a broken document.
 
 (ERROR 
   (command 
