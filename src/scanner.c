@@ -57,7 +57,6 @@ static bool scan_command_stop(TSLexer *lexer) {
     } 
 
     advance(lexer);
-    
   }
   
   // lexer->mark_end(lexer);

@@ -100,6 +100,7 @@ module.exports = grammar({
       choice(
         $.command,
         $.line_comment,
+        $.text,
       ),
     ),
         
@@ -111,11 +112,11 @@ module.exports = grammar({
           $.command_name,
           $._command_stop,
         ),
-        seq(
-          $.command_name,
-          $.command_scope,
-          $._command_stop,
-        ),
+        // seq(
+        //   $.command_name,
+        //   $.command_scope,
+        //   $._command_stop,
+        // ),
       )
     ),
     
@@ -124,6 +125,8 @@ module.exports = grammar({
     command_scope: $ => seq("{", /[^}]*/, "}" ),
     
     
+    // ------ TEXT
+    text: $ => new RegExp('[^\\n\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
     
     // ------ EXTRAS
     
