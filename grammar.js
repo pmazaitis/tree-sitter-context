@@ -31,15 +31,17 @@
 
 
 // ------ PRECEDENCE LIST
-// _preamble_content: $ => prec(18,
-// _paragraph_content: $ => prec.left(14,
-// prec(20, seq($.preamble, $.main, $.postamble)),
-// paragraph: $ => prec.right(14,
-// command: $ => prec.right(
+//
+// 20:  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
+// 18:  _preamble_content: $ => prec(18,
+// 16:  escaped: $ => prec(16,seq('\\', $.escapechar)),  
+// 14:  paragraph: $ => prec.right(14,
+// 14:  _paragraph_content: $ => prec.left(14,
+// r:   command: $ => prec.right(
 
 
 // ------ HELPERS
-
+//
 // Special characters in the ConTeXt markup language.
 // Note: in the following array, the escaped backslash _must_ be the last character (ug)
 var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
@@ -75,25 +77,30 @@ module.exports = grammar({
       choice(
         $.command,
         $.line_comment,
+        $.escaped,
       ),
     ),
     
     _main_content: $ => choice(
       $.line_comment,
       $.command,
-      $.brace_group, 
+      $.brace_group,
+      $.escaped, 
       // $.text,
     ),
     
     _postamble_content: $ =>  choice(
       $.command,
       $.line_comment,
+      $.escaped,
+      $.brace_group,
     ),
     
     _group_content: $ => choice(
       $.command,
       $.line_comment,
       $.brace_group,
+      $.escaped,
       // $.text,
     ),
     
@@ -102,6 +109,7 @@ module.exports = grammar({
     //     $.command,
     //     $.line_comment,
     //     $.text,
+    //     $.escaped,
     //   ),
     // ),
     
@@ -185,7 +193,7 @@ module.exports = grammar({
     // ------ ESCAPED CHARACTERS
     escapechar: $ => choice(...escaped_chars),
     
-    escaped: $ => seq('\\', $.escapechar),
+    escaped: $ => prec(16,seq('\\', $.escapechar)),
     
     
     // ------ EXTRAS
