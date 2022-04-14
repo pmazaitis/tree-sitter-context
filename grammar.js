@@ -140,11 +140,10 @@ module.exports = grammar({
     _command_scope_content: $ => /[^}]*/,
     
     // ------ TEXT
-    // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),
-    
-    // ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
-    
+    // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),   
     // text: $ => /[^\^#$%&_{}|~\\]+/,
+    
+    
     
     // ------ EXTRAS
     
