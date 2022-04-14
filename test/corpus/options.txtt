@@ -1,36 +1,3 @@
-======
-options-empty_option_block
-======
-
-\blank[]
-
----
-
-(document
-  (main
-    (command
-      (command_name)
-      (option_block)
-    )
-  )
-)
-
-======
-options-empty_option_block_with_whitespace
-======
-
-\blank[ ]
-
----
-
-(document
-  (main
-    (command
-      (command_name)
-      (option_block)
-    )
-  )
-)
 
 ======
 options-option_block_with_one_keyword
