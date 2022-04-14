@@ -69,8 +69,7 @@ module.exports = grammar({
   word: $ => $.command_name,
 
   rules: {
-    // ------ DOCUMENT - An entire ConTeXt document.
-      
+    // ------ DOCUMENT - An entire ConTeXt document. 
     document: $ => choice(
       prec(20, seq($.preamble, $.main, $.postamble)),
       $.main,
@@ -81,7 +80,6 @@ module.exports = grammar({
     //
     // Content allowed in different parts of the document
     // TODO: refactor when things are stable
-    
     _preamble_content: $ => prec(18,
       choice(
         $.command,
@@ -132,20 +130,16 @@ module.exports = grammar({
     
     _command_scope_content: $ => /[^}]*/,
     
-  
     // Preamble --- commands and comments
-    
     preamble: $ =>  seq(
       repeat($._preamble_content), 
       choice("\\starttext", "\\startcomponent"),
     ),
     
     // Main --- text, commands, comments
-    
     main: $ => repeat1($._main_content),
   
     // Postamble --- text, commands, comments
-    
     postamble: $ => seq(
       choice("\\stoptext", "\\stopcomponent"),
       repeat($._postamble_content), 
@@ -153,9 +147,8 @@ module.exports = grammar({
     
     
     // ------ GROUPS
-    
+
     // Brace Groups
-    
     brace_group: $ => choice(
       seq("{", repeat($._group_content), "}"),
       seq("\\bgroup", repeat($._group_content), "}"),
@@ -165,10 +158,7 @@ module.exports = grammar({
   
     // Command Group
   
-    // ConTeXt can also group document content between the commands "\start" and "\stop"
-    //
-    // FIXME: these tokens eat the trailing newline, which can suppress paragraph_stop detection
-    
+    // ConTeXt can also group document content between the commands "\start" and "\stop"    
     command_group: $ => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._group_content), /\\stop[^a-zA-Z]/)),
   
     
@@ -216,11 +206,6 @@ module.exports = grammar({
           optional($.command_scope),
           $._command_stop,
         ),
-        // seq(
-        //   $.command_name,
-        //   $.command_scope,
-        //   $._command_stop,
-        // ),
       )
     ),
     
@@ -228,7 +213,7 @@ module.exports = grammar({
     // FIXME: First option seems more robust, but how does it work?
     command_name: $ => /\\([^\r\n\^#$%&_{}|~\\]|[@a-zA-Z:_]+)?/,
     // command_name: $ => /\\([^\r\n]|[@a-zA-Z:_]+)?/,
-    // command_name: $ => /\\[a-zA-Z]+/,
+    // command_name: $ => /\\[a-zA-Z:_]+/,
     
     // --- Empty Block
     empty_block: $ => choice(
@@ -266,10 +251,8 @@ module.exports = grammar({
     
     value_brace_group: $ => seq("{", repeat($._value_content), "}"),
     
-    
     // --- Scope
     command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
-  
     
     // ------ TEXT
     // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),   
