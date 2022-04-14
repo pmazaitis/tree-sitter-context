@@ -35,8 +35,8 @@
 // 20  :  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
 // 18  :  _preamble_content: $ => prec(18,
 // 16  :  escaped: $ => prec(16,seq('\\', $.escapechar)),  
-// 14r : paragraph: $ => prec.right(14,
-// 14l : _paragraph_content: $ => prec.left(14,
+// 14  :  settings_block: $ => prec(14,seq("[",sepBy($.setting, ','),"]")),
+// 12  :  option_block: $ => prec(12, seq("[",sepBy($.keyword, ','),"]")), 
 // 10  :  inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),  
 // r   :   command: $ => prec.right(
 
@@ -209,7 +209,7 @@ module.exports = grammar({
           repeat(
             choice(
               $.option_block,
-              // $.settings_block,
+              $.settings_block,
             )
           ),
           optional($.command_scope),
@@ -230,13 +230,24 @@ module.exports = grammar({
     // command_name: $ => /\\[a-zA-Z]+/,
     
     // --- Option Block         
-    option_block: $ => seq("[",sepBy($.keyword, ','),"]"), 
+    option_block: $ => prec(12, seq("[",sepBy($.keyword, ','),"]")), 
      
     keyword: $ =>  /[^\s=,\[\]]+/,
     
     // --- Settings Block
+    settings_block: $ => prec(14,seq("[",sepBy($.setting, ','),"]")),
     
+    setting: $ => seq($.key, '=', $.value),
     
+    key: $ => /[^\s=,\[\]]+/,
+    
+    value: $ => prec.right(repeat1($._value_content)),
+    
+    _value_content: $ => choice($.line_comment, $.escaped, $.value_brace_group, $.value_text, $.command),
+    
+    value_text: $ => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
+    
+    value_brace_group: $ => seq("{", repeat($._value_content), "}"),
     
     
     // --- Scope
