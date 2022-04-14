@@ -3,16 +3,40 @@
 // Tree-Sitter parser for the ConTeXt markup language (https://www.contextgarden.net/)
 
 
-// CAVEATS
+// PROGRESS
+//
+// --- Cases to handle
+// 
+// [x] Areas
+// [p] Commands
+// [ ] Text
+// [x] Brace Groups
+// [ ] Command groups (/start and /stop)
+// [ ] Escaped Characters
+// [x] Comments
+// [ ] Inline Math
+// [ ]
+//
+// --- Injected Languages
+// [ ] Metapost
+// [ ] TiKz
+// [ ] Lua
+// [ ] 
+
+// --- Injected languages for Typing Environments
+// [ ] Plain
+// [ ] HTML
+// [ ] CSS
+// [ ]
 
 
+// ------ HELPERS
 
 // Special characters in the ConTeXt markup language.
 // Note: in the following array, the escaped backslash _must_ be the last character (ug)
 var escaped_chars = ['#', '$', '%', '&', '^', '_', '{', '}', '|', '~', '\\'];
 
-// UTILITIES
-//
+// Possibly useful helper functions?
 // Cribbed from tree-sitter-latex
 // const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
 // const sepBy = (rule, sep) => optional(sepBy1(rule, sep)); 
