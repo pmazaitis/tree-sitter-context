@@ -15,3 +15,27 @@ escaped-simple_escaped
 
   ) 
 )
+
+======
+escaped-multiple_escaped
+======
+
+\#\$\%\&\^\_\{\}\|\~\\
+
+---
+
+(document
+  (main
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+      (escaped(escaped_char))
+  ) 
+)
