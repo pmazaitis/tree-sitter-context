@@ -1,0 +1,17 @@
+======
+escaped-simple_escaped
+======
+
+\%
+
+---
+
+(document
+  (main
+
+      (escaped
+        (escaped_char)
+      )
+
+  ) 
+)

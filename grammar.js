@@ -195,9 +195,9 @@ module.exports = grammar({
     
     
     // ------ ESCAPED CHARACTERS
-    escapechar: $ => choice(...escaped_chars),
+    escaped_char: $ => choice(...escaped_chars),
     
-    escaped: $ => prec.right(16,seq('\\', $.escapechar)),
+    escaped: $ => prec.right(16,seq('\\', $.escaped_char)),
     
     
     // ------ EXTRAS
