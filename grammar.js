@@ -230,8 +230,7 @@ module.exports = grammar({
     // ## Scope
     command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
     
-    // # TEXT
-    // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),   
+    // # TEXT   
     text: $ => /[^\s\^#$%&_{}|~\\][^\^#$%&_{}|~\\]+/,
     
     
