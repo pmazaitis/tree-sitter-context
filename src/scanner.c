@@ -48,7 +48,7 @@ static bool isctxspecial(char c) {
 // Helpful for tracking state
 static void debuglookahead(char c, char* msg) {
   printf("#### %s\n", msg);
-  printf("#### [Character under test: %c ]", c);
+  printf("#### [Character under test: \'%c\' ]\n", c);
   fflush(stdout);
 }
 
@@ -156,6 +156,7 @@ static bool scan_text(TSLexer *lexer) {
     debuglookahead(lexer->lookahead, "TEXT - In scan loop");
 
     if (isctxspecial(lexer->lookahead)) {
+      debuglookahead(lexer->lookahead, "TEXT - Found Special");
       lexer->mark_end(lexer); 
       return true;
     }
@@ -164,7 +165,7 @@ static bool scan_text(TSLexer *lexer) {
       // ???: will setting this to skip break the token?
       advance(lexer);
       
-      if (lexer->lookahead != 0) {
+      if (lexer->lookahead == 0) {
         lexer->mark_end(lexer);
         return true;
       }
