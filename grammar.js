@@ -63,7 +63,8 @@ module.exports = grammar({
   
   externals: $ => [
     $._command_stop,
-    $._paragraph_stop,
+    $.paragraph_mark,
+    $.text,
   ],
 
   word: $ => $.command_name,
@@ -95,7 +96,7 @@ module.exports = grammar({
       $.escaped,
       $.inline_math,
       $.command_group, 
-      $.text,
+      $.text_block,
     ),
     
     _postamble_content: $ =>  choice(
@@ -231,8 +232,19 @@ module.exports = grammar({
     command_scope: $ => seq("{", repeat($._command_scope_content), "}" ),
     
     // # TEXT   
-    text: $ => /[^\s\^#$%&_{}|~\\][^\^#$%&_{}|~\\]+/,
+    text_block: $ => seq(
+      $.text,                // Advance to any double EOL without consuming either
+      repeat(                 
+        seq (
+          $.paragraph_mark,  // Consume two EOL
+          $.text,            // Advance to any double EOL without consuming
+        )
+      )
+    ),
     
+    // turn text rule into a scanner object; avoid the special characters, and end with two EOLs in lookahead
+    // text: $ => /[^\s\^#$%&_{}|~\\][^\^#$%&_{}|~\\]+/,
+  
     
     // # ESCAPED CHARACTERS
     escaped_char: $ => choice(...escaped_chars),
