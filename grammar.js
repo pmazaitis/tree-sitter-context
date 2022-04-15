@@ -242,9 +242,6 @@ module.exports = grammar({
       )
     ),
     
-    // turn text rule into a scanner object; avoid the special characters, and end with two EOLs in lookahead
-    // text: $ => /[^\s\^#$%&_{}|~\\][^\^#$%&_{}|~\\]+/,
-  
     
     // # ESCAPED CHARACTERS
     escaped_char: $ => choice(...escaped_chars),
