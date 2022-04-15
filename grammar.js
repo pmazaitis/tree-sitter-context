@@ -95,7 +95,7 @@ module.exports = grammar({
       $.escaped,
       $.inline_math,
       $.command_group, 
-      // $.text,
+      $.text,
     ),
     
     _postamble_content: $ =>  choice(
@@ -232,7 +232,7 @@ module.exports = grammar({
     
     // # TEXT
     // text: $ => new RegExp('[^\\]\\['+escaped_chars.slice(1).join('')+'\\]+'),   
-    // text: $ => /[^\^#$%&_{}|~\\]+/,
+    text: $ => /[^\s\^#$%&_{}|~\\][^\^#$%&_{}|~\\]+/,
     
     
     // # ESCAPED CHARACTERS
