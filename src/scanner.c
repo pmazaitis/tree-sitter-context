@@ -25,9 +25,42 @@ static void debuglookahead(char c, char* msg);
 static void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
+// # UTILITY FUNCTIONS
 
+// Check for a ConTeXt special character
+static bool isctxspecial(char c) {
+  switch (c) {
+    case '^': return true;      
+    case '#': return true;
+    case '$': return true;
+    case '%': return true;
+    case '&': return true;
+    case '_': return true;
+    case '{': return true;
+    case '}': return true;
+    case '|': return true;
+    case '~': return true;
+    case '\\': return true;
+  }
+  return false;
+}
+
+// Helpful for tracking state
+static void debuglookahead(char c, char* msg) {
+  printf("#### %s\n", msg);
+  printf("#### [Character under test: %c ]", c);
+  fflush(stdout);
+}
+
+
+// TOKEN FUNCTIONS
+
+//
 static bool scan_command_stop(TSLexer *lexer) {
-  
+  // Determine if a command has ended in the source file.
+  //
+  // ConTeXt commands have a name, then zero or more square bracket blocks with 
+  // options or settings, then one or more scopes.
   lexer->result_symbol = COMMAND_STOP;
   lexer->mark_end(lexer);
   
@@ -69,14 +102,10 @@ static bool scan_command_stop(TSLexer *lexer) {
   return true;
 }
 
-static void debuglookahead(char c, char* msg) {
-  printf("#### %s\n", msg);
-  printf("#### [Character under test: %c ]", c);
-  fflush(stdout);
-}
-
-// FIXME this should be two or more consecutive EOLs  
+ 
 static bool scan_paragraph_mark(TSLexer *lexer) {
+  // Scan for two or more consecutive EOLs, and form a token to indicate a paragraph break.
+  // FIXME the EOLs should be system agnostic.
   lexer->result_symbol = PARAGRAPH_MARK;
   lexer->mark_end(lexer);
   
@@ -110,25 +139,13 @@ static bool scan_paragraph_mark(TSLexer *lexer) {
 }
 
 
-static bool isctxspecial(char c) {
-  switch (c) {
-    case '^': return true;      
-    case '#': return true;
-    case '$': return true;
-    case '%': return true;
-    case '&': return true;
-    case '_': return true;
-    case '{': return true;
-    case '}': return true;
-    case '|': return true;
-    case '~': return true;
-    case '\\': return true;
-  }
-  return false;
-}
-
-
 static bool scan_text(TSLexer *lexer) {
+  // Scan forward to form a text token, stopping before consuming:
+  // - a special character
+  // - EOF
+  // - a sequence of two EOLs
+  // FIXME the EOLs should be system agnostic.
+  
   lexer->result_symbol = TEXT;
   lexer->mark_end(lexer);
   
@@ -173,7 +190,6 @@ static bool scan_text(TSLexer *lexer) {
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
   UNUSED(payload);
-
 
   if (valid_symbols[COMMAND_STOP]) {
     return scan_command_stop(lexer);
