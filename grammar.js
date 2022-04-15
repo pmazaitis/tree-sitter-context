@@ -236,7 +236,7 @@ module.exports = grammar({
       $.text,                // Advance to any double EOL without consuming either
       repeat(                 
         seq (
-          $.paragraph_mark,  // Consume two EOL
+          $.paragraph_mark,  // Consume two or more EOLs
           $.text,            // Advance to any double EOL without consuming
         )
       )
