@@ -9,6 +9,7 @@
 // [x] Areas
 // [x] Commands
 // [ ] Text
+// [ ] Paragraph Markers
 // [x] Brace Groups
 // [x] Command groups (/start and /stop)
 // [x] Escaped Characters
@@ -67,8 +68,7 @@ module.exports = grammar({
     //
     // Content allowed in different parts of the document
     // TODO: refactor when things are stable
-    _preamble_content: ($) =>
-      prec(18, choice($.command, $.line_comment, $.escaped)),
+    _preamble_content: ($) => prec(18, choice($.command, $.line_comment)),
 
     _main_content: ($) =>
       choice(
@@ -89,7 +89,7 @@ module.exports = grammar({
         $.brace_group,
         $.inline_math,
         $.command_group
-        // $.text,
+        // $.text_block,
       ),
 
     _group_content: ($) =>
@@ -100,7 +100,7 @@ module.exports = grammar({
         $.escaped,
         $.inline_math,
         $.command_group
-        // $.text,
+        // $.text_block,
       ),
 
     _command_scope_content: ($) => /[^}]*/,
@@ -219,11 +219,11 @@ module.exports = grammar({
     // # TEXT
     text_block: ($) =>
       seq(
-        $.text, // Advance to any double EOL without consuming either
+        $.text, // Advance to any special char, EOF, or double EOL without consuming
         repeat(
           seq(
             $.paragraph_mark, // Consume two or more EOLs
-            $.text // Advance to any double EOL without consuming
+            $.text // Advance to any special char, EOF, or double EOL without consuming
           )
         )
       ),
