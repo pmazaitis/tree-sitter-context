@@ -8,3 +8,6 @@
 
 ((typing_css_body) @injection.content
   (#set! injection.language "css"))
+  
+((typing_lua_body) @injection.content
+   (#set! injection.language "lua"))
