@@ -1,5 +1,5 @@
 ======
-areas-all_areas - FIXME
+areas-all_areas
 ======
 
 \starttext
@@ -11,19 +11,21 @@ areas-all_areas - FIXME
 ---
 
 (document
-  (preamble)
-  (main
-    (text_block
-      (text)
-    )
-    (command
-      (command_name)
-    )
+  (preamble
     (text_block
       (text)
     )
   )
-  (postamble)
+  (main
+    (command
+      (command_name)
+    )
+  )
+  (postamble
+    (text_block
+      (text)
+    )
+  )
 )
 
 ======
@@ -61,19 +63,21 @@ areas-preamble_main
 ; This is expected misparse - this parser claims this is a broken document.
 
 (document
+  (preamble
+    (text_block
+      (text)
+    )
+  )
   (main
-    (text_block
-      (text)
-    )
-    (command
-      (command_name)
-    )
     (command
       (command_name)
     )
     (text_block
       (text)
     )
+  )
+  (postamble
+    (MISSING "\stoptext")
   )
 )
 

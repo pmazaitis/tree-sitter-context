@@ -73,21 +73,7 @@ module.exports = grammar({
     //
     // Content allowed in different parts of the document
     // TODO: refactor when things are stable
-    _preamble_content: ($) =>
-      prec(
-        17,
-        choice(
-          $.line_comment,
-          $.command,
-          $.brace_group,
-          $.escaped,
-          $.inline_math,
-          $.command_group
-          // $.text_block
-        )
-      ),
-
-    _main_content: ($) =>
+    _content: ($) =>
       choice(
         $.line_comment,
         $.command,
@@ -96,6 +82,31 @@ module.exports = grammar({
         $.inline_math,
         $.command_group,
         $.text_block
+      ),
+
+    _preamble_content: ($) =>
+      choice(
+        $.line_comment,
+        $.command,
+        $.brace_group,
+        $.escaped,
+        $.inline_math,
+        $.command_group,
+        $.text_block
+      ),
+
+    _main_content: ($) =>
+      prec(
+        18,
+        choice(
+          $.line_comment,
+          $.command,
+          $.brace_group,
+          $.escaped,
+          $.inline_math,
+          $.command_group,
+          $.text_block
+        )
       ),
 
     _postamble_content: ($) =>
@@ -126,24 +137,14 @@ module.exports = grammar({
     //
     // Preamble --- commands and comments
     preamble: ($) =>
-      prec(
-        18,
-        seq(
-          repeat($._preamble_content),
-          choice("\\starttext", "\\startcomponent")
-          // $.preamble_stop
-        )
-      ),
+      seq(repeat($._content), choice("\\starttext", "\\startcomponent")),
 
     // Main --- text, commands, comments
-    main: ($) => repeat1($._main_content),
+    main: ($) => repeat1($._content),
 
     // Postamble --- text, commands, comments
     postamble: ($) =>
-      seq(
-        choice("\\stoptext", "\\stopcomponent"),
-        repeat($._postamble_content)
-      ),
+      seq(choice("\\stoptext", "\\stopcomponent"), repeat($._content)),
 
     // # GROUPS
 
