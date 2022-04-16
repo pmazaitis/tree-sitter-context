@@ -94,7 +94,8 @@ module.exports = grammar({
         $.text_block,
         $.html_inclusion,
         $.css_inclusion,
-        $.luacode_inclusion
+        $.luacode_inclusion,
+        $.tikz_inclusion
       ),
 
     // # GROUPS
@@ -194,11 +195,16 @@ module.exports = grammar({
 
     escaped: ($) => prec.right(16, seq("\\", $.escaped_char)),
 
-    // LANGUAGE INCLUSIONS
+    // PARSED LANGUAGE INCLUSIONS
     //
-    // ConTeXt can embed other languages: Metafun/Post, TiKz, and LUA.
+    // This ConTeXt parser can inject parsing for other languages, as supported by tree-sitter.
     //
-    // (A non-goal for this grammar is discovery of any user-generated inclusions.)
+    // * MetaPost/Fun (marked, but parsing not yet supported)
+    // * TiKz (marked, but parsing not yet supported)
+    // * Lua
+    // * HTML
+    // * CSS
+    //
 
     // Metafun/Post
     metapost_start: ($) =>
@@ -265,7 +271,7 @@ module.exports = grammar({
 
     // TYPING INCLUSIONS
     //
-    // Typing
+    // (A non-goal for this grammar is discovery of any user-generated typing inclusions.)
     typing_start: ($) =>
       prec(
         10,
