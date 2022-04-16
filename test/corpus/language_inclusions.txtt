@@ -1,0 +1,78 @@
+======
+language_inclusions-lua
+======
+
+\startluacode
+
+print("Hello World")
+
+\stopluacode
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (luacode_inclusion
+      (luacode_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+
+======
+language_inclusions-html
+======
+
+\startHTML
+
+<p>Cow.</p>
+
+\stopHTML
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (html_inclusion
+      (html_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+language_inclusions-css
+======
+
+\startCSS
+
+p {color: red;}
+
+\stopCSS
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (css_inclusion
+      (css_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)

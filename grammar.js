@@ -37,7 +37,6 @@
 // # PRECEDENCE LIST
 //
 // 20  :  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
-// 18  :  _preamble_content: $ => prec(18,
 // 16  :  escaped: $ => prec(16,seq('\\', $.escapechar)),
 // 14  :  settings_block: $ => prec(14,seq("[",sepBy($.setting, ','),"]")),
 // 12  :  option_block: $ => prec(12, seq("[",sepBy($.keyword, ','),"]")),
@@ -92,7 +91,10 @@ module.exports = grammar({
         $.escaped,
         $.inline_math,
         $.command_group,
-        $.text_block
+        $.text_block,
+        $.html_inclusion,
+        $.css_inclusion,
+        $.luacode_inclusion
       ),
 
     // # GROUPS
@@ -191,6 +193,109 @@ module.exports = grammar({
     escaped_char: ($) => choice(...escaped_chars),
 
     escaped: ($) => prec.right(16, seq("\\", $.escaped_char)),
+
+    // LANGUAGE INCLUSIONS
+    //
+    // ConTeXt can embed other languages: Metafun/Post, TiKz, and LUA.
+    //
+    // (A non-goal for this grammar is discovery of any user-generated inclusions.)
+
+    // Metafun/Post
+    metapost_start: ($) =>
+      choice(
+        "\\startMPinclusions",
+        "\\startuseMPgraphic",
+        "\\startreusableMPgraphic",
+        "\\startMPcode",
+        "\\startMPpage",
+        "\\startstaticMPfigure"
+      ),
+
+    metapost_stop: ($) =>
+      choice(
+        "\\stopMPinclusions",
+        "\\stopuseMPgraphic",
+        "\\stopreusableMPgraphic",
+        "\\stopMPcode",
+        "\\stopMPpage",
+        "\\stopstaticMPfigure"
+      ),
+
+    metapost_body: ($) => /[^\\]*/,
+
+    metapost_inclusion: ($) =>
+      seq($.metapost_start, $.metapost_body, $.metapost_stop),
+
+    // TiKz
+    _tikz_start: ($) => "\\starttikzpicture",
+
+    _tikz_stop: ($) => "\\stoptikzpicture",
+
+    tikz_body: ($) => /[^\\]*/,
+
+    tikz_inclusion: ($) => seq($._tikz_start, $.tikz_body, $._tikz_stop),
+
+    // Lua
+    _luacode_start: ($) => "\\startluacode",
+
+    _luacode_stop: ($) => "\\stopluacode",
+
+    luacode_body: ($) => /[^\\]*/,
+
+    luacode_inclusion: ($) =>
+      seq($._luacode_start, $.luacode_body, $._luacode_stop),
+
+    //HTML
+    _html_start: ($) => "\\startHTML",
+
+    _html_stop: ($) => "\\stopHTML",
+
+    html_body: ($) => /[^\\]*/,
+
+    html_inclusion: ($) => seq($._html_start, $.html_body, $._html_stop),
+
+    //CSS
+    _css_start: ($) => "\\startCSS",
+
+    _css_stop: ($) => "\\stopCSS",
+
+    css_body: ($) => /[^\\]*/,
+
+    css_inclusion: ($) => seq($._css_start, $.css_body, $._css_stop),
+
+    // TYPING INCLUSIONS
+    //
+    // Typing
+    typing_start: ($) =>
+      prec(
+        10,
+        choice(
+          "\\starttyping",
+          "\\startLUA",
+          "\\startMP",
+          "\\startPARSEDXML",
+          "\\startTEX",
+          "\\startXML"
+        )
+      ),
+
+    typing_stop: ($) =>
+      prec(
+        10,
+        choice(
+          "\\stoptyping",
+          "\\stopLUA",
+          "\\stopMP",
+          "\\stopPARSEDXML",
+          "\\stopTEX",
+          "\\stopXML"
+        )
+      ),
+
+    typing_body: ($) => /[^\\]*/,
+
+    typing_inclusion: ($) =>
+      prec(10, seq($.typing_start, $.typing_body, $.typing_stop)),
 
     // # EXTRAS
 
