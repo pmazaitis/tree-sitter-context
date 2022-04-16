@@ -84,42 +84,6 @@ module.exports = grammar({
         $.text_block
       ),
 
-    _preamble_content: ($) =>
-      choice(
-        $.line_comment,
-        $.command,
-        $.brace_group,
-        $.escaped,
-        $.inline_math,
-        $.command_group,
-        $.text_block
-      ),
-
-    _main_content: ($) =>
-      prec(
-        18,
-        choice(
-          $.line_comment,
-          $.command,
-          $.brace_group,
-          $.escaped,
-          $.inline_math,
-          $.command_group,
-          $.text_block
-        )
-      ),
-
-    _postamble_content: ($) =>
-      choice(
-        $.command,
-        $.line_comment,
-        $.escaped,
-        $.brace_group,
-        $.inline_math,
-        $.command_group,
-        $.text_block
-      ),
-
     _group_content: ($) =>
       choice(
         $.command,
