@@ -88,15 +88,15 @@ module.exports = grammar({
           seq(
             "\\startcomponent",
             choice(
-              seq(/[ \t]+/, alias($.generic_id, $.component_id)),
-              seq("[", alias($.generic_id, $.component_id), "]"),
-              seq(/[ \t]+/, "[", alias($.generic_id, $.component_id), "]")
+              seq(/[ \t]+/, $.component_id),
+              seq("[", $.component_id, "]"),
+              seq(/[ \t]+/, "[", $.component_id, "]")
             )
           )
         )
       ),
 
-    generic_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]+/,
+    component_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
 
     // Main --- text, commands, comments
     main: ($) => repeat1($._content),
@@ -104,26 +104,6 @@ module.exports = grammar({
     // Postamble --- text, commands, comments
     postamble: ($) =>
       seq(choice("\\stoptext", "\\stopcomponent"), repeat($._content)),
-
-    // INCLUDE, PROJECT and ENVIRONMENT COMMANDS
-    //
-    // These commands do _not_ require braces to grab the next token as scope.
-
-    // Generic ID for aliasing
-    generic_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]+/,
-
-    // Command group (TODO: better label here)
-    // _callout_command_group: ($) => choice($.project_command),
-
-    project_command: ($) =>
-      seq(
-        "\\project",
-        choice(
-          seq(/[ \t]+/, alias($.generic_id, $.project_id)),
-          seq("[", alias($.generic_id, $.project_id), "]"),
-          seq(/[ \t]+/, "[", alias($.generic_id, $.project_id), "]")
-        )
-      ),
 
     // # CONTENT
     //
@@ -146,7 +126,50 @@ module.exports = grammar({
         $.typing_css_inclusion,
         $.typing_xml_inclusion,
         $.typing_parsedxml_inclusion,
-        $.project_command
+        // the following should only appear in the preamble?
+        $.project_command,
+        $.product_command,
+        $.environment_command
+      ),
+
+    // INCLUDE, PROJECT and ENVIRONMENT COMMANDS
+    //
+    // These commands do _not_ require braces to grab the next token as scope.
+
+    // Generic ID for aliasing
+    generic_id: ($) => /[a-zA-Z*][a-zA-Z0-9:_-]*/,
+
+    // Command group (TODO: better label here)
+    // _callout_command_group: ($) => choice($.project_command),
+
+    project_command: ($) =>
+      seq(
+        "\\project",
+        choice(
+          seq(/[ \t]+/, alias($.generic_id, $.project_id)),
+          seq("[", alias($.generic_id, $.project_id), "]"),
+          seq(/[ \t]+/, "[", alias($.generic_id, $.project_id), "]")
+        )
+      ),
+
+    product_command: ($) =>
+      seq(
+        "\\product",
+        choice(
+          seq(/[ \t]+/, alias($.generic_id, $.product_id)),
+          seq("[", alias($.generic_id, $.product_id), "]"),
+          seq(/[ \t]+/, "[", alias($.generic_id, $.product_id), "]")
+        )
+      ),
+
+    environment_command: ($) =>
+      seq(
+        "\\environment",
+        choice(
+          seq(/[ \t]+/, alias($.generic_id, $.environment_id)),
+          seq("[", alias($.generic_id, $.environment_id), "]"),
+          seq(/[ \t]+/, "[", alias($.generic_id, $.environment_id), "]")
+        )
       ),
 
     // # GROUPS
