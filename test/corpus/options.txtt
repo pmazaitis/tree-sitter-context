@@ -9,11 +9,17 @@ options-option_block_with_one_keyword
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (option_block
         (keyword)
       )
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -28,12 +34,18 @@ options-option_block_with_two_keywords
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (option_block
         (keyword)
         (keyword)
       )
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -50,12 +62,18 @@ options-option_block_with_two_keywords_and_whitespace
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (option_block
         (keyword)
         (keyword)
       )
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -70,6 +88,9 @@ options-multiple_option_blocks_with_one_keyword
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (option_block
@@ -78,6 +99,9 @@ options-multiple_option_blocks_with_one_keyword
       (option_block
         (keyword)
       )
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -92,6 +116,9 @@ options-multiple_option_blocks_with_two_keywords
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (option_block
@@ -102,6 +129,9 @@ options-multiple_option_blocks_with_two_keywords
         (keyword)
         (keyword)
       )
+    )
+    (text_block
+      (text)
     )
   )
 )

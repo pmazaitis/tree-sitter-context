@@ -8,6 +8,9 @@ title_settings-title
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (settings_block
@@ -19,6 +22,9 @@ title_settings-title
           )
         )
       )
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -34,6 +40,9 @@ title_settings-subtitle
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (settings_block
@@ -45,6 +54,9 @@ title_settings-subtitle
           )
         )
       )
+    )
+    (text_block
+      (text)
     )
   )
 )

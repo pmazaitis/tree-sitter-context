@@ -3,33 +3,31 @@
 ======
 brace_group-simple_brace_group
 ======
-
 {}
-
 ---
 
 (document
   (main
-
-      (brace_group)
-
+    (brace_group)
+    (text_block
+      (text)
+    )
   ) 
 )
 
 ======
 brace_group-nested_brace_group
 ======
-
 {{}}
-
 ---
 
 (document
   (main
-
-      (brace_group
-        (brace_group)
-      )
-
+    (brace_group
+      (brace_group)
+    )
+    (text_block
+      (text)
+    )
   ) 
 )

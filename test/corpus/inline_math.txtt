@@ -9,8 +9,14 @@ $ $
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (inline_math
       (math_text)
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -25,8 +31,14 @@ $ f(x) = x^2 $
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (inline_math
       (math_text)
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -41,6 +53,9 @@ $ f(x) = x^{2x} $
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (inline_math
       (math_text)
       (math_group
@@ -48,5 +63,8 @@ $ f(x) = x^{2x} $
       )
       (math_text)
     )
+    (text_block
+      (text)
     )
+  )
 )

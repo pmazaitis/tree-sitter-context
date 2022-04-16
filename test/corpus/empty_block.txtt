@@ -8,9 +8,15 @@ empty_block-empty_block
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (empty_block)
+    )
+    (text_block
+      (text)
     )
   )
 )
@@ -25,9 +31,15 @@ empty_block-empty_block_with_whitespace
 
 (document
   (main
+    (text_block
+      (text)
+    )
     (command
       (command_name)
       (empty_block)
+    )
+    (text_block
+      (text)
     )
   )
 )

@@ -8,11 +8,15 @@ escaped-simple_escaped
 
 (document
   (main
-
-      (escaped
-        (escaped_char)
-      )
-
+    (text_block
+      (text)
+    )
+    (escaped
+      (escaped_char)
+    )
+    (text_block
+      (text)
+    )
   ) 
 )
 

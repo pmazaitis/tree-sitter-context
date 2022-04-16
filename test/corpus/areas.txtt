@@ -1,5 +1,5 @@
 ======
-areas-all_areas
+areas-all_areas - FIXME
 ======
 
 \starttext
@@ -13,11 +13,15 @@ areas-all_areas
 (document
   (preamble)
   (main
-
-      (command
-        (command_name)
-      )
-    
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )
   )
   (postamble)
 )
@@ -32,11 +36,15 @@ areas-main_only
 
 (document
   (main
-    
-      (command
-          (command_name)
-      )
-    
+    (text_block
+      (text)
+    )
+    (command
+        (command_name)
+    )
+    (text_block
+      (text)
+    )
   )
 )
 
@@ -50,19 +58,22 @@ areas-preamble_main
 
 ---
 
-; This is expected error - this parser claims this is a broken document.
+; This is expected misparse - this parser claims this is a broken document.
 
 (document
-  (preamble)
   (main
-    
-      (command
-        (command_name)
-      )
-    
-  )
-  (postamble
-    (MISSING "\stoptext")
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )
   )
 )
 
@@ -76,13 +87,21 @@ areas-main_postamble
 
 ---
 
-; This is expected error - this parser claims this is a broken document.
+; This is expected misparse - this parser claims this is a broken document.
 
-(ERROR 
-  (command 
-    (command_name)
-  )
-  (command
-    (command_name)
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )
   )
 )

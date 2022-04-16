@@ -8,9 +8,13 @@ command_group-simple_command_group
 
 (document
   (main
-
-      (command_group)
-
+    (text_block
+      (text)
+    )
+    (command_group)
+    (text_block
+      (text)
+    )
   ) 
 )
 
@@ -24,10 +28,14 @@ command_group-nested_command_group
 
 (document
   (main
-
-      (command_group
-        (command_group)
-      )
-
+    (text_block
+      (text)
+    )
+    (command_group
+      (command_group)
+    )
+    (text_block
+      (text)
+    )
   ) 
 )

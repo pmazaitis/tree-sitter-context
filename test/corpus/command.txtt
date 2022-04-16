@@ -8,11 +8,15 @@ command-simple_command
 
 (document
   (main
-
-      (command
-        (command_name)
-      )
-
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )  
   ) 
 )
 
@@ -26,12 +30,16 @@ command-simple_with_scope
 
 (document
   (main
-
-      (command
-        (command_name)
-        (command_scope)
-      )
-
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope)
+    )
+    (text_block
+      (text)
+    )
   ) 
 )
 
@@ -45,11 +53,15 @@ command-simple_with_space_with_scope
 
 (document
   (main
-
-      (command
-        (command_name)
-        (command_scope)
-      )
-
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope)
+    )
+    (text_block
+      (text)
+    )
   ) 
 )

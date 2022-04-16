@@ -8,9 +8,13 @@ comment-comment_only
 
 (document
   (main
-
-      (line_comment)
-
+    (text_block
+      (text)
+    )
+    (line_comment)
+    (text_block
+      (text)
+    )
   )
 )
 
@@ -24,11 +28,15 @@ comment-command_comment
 
 (document
   (main
-
-      (command
-        (command_name)
-        (line_comment)
-      )
-    
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (line_comment)
+    )
+    (text_block
+      (text)
+    )
   )
 )
