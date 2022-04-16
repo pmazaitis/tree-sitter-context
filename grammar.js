@@ -15,10 +15,10 @@
 // [PASS] Escaped Characters
 // [PASS] Comments
 // [PASS] Inline Math
-// [BORK] Component Name
-// [    ] Project Command
-// [    ] Product Command
-// [    ] Environment Command
+// [PASS] Component Name (component ID required)
+// [PASS] Project Command
+// [PASS] Product Command
+// [PASS] Environment Command
 // [    ]
 // [    ]
 //

@@ -1,0 +1,123 @@
+======
+component-shadow_filename
+======
+
+\startcomponent *
+
+\blank
+
+\stopcomponent
+
+---
+
+(document
+  (preamble
+    (text_block
+      (text)
+    )
+    (component_id)
+  )
+  (main
+    (command
+      (command_name)
+    )
+  )
+  (postamble
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+component-id
+======
+
+\startcomponent cow
+
+\blank
+
+\stopcomponent
+
+---
+
+(document
+  (preamble
+    (text_block
+      (text)
+    )
+    (component_id)
+  )
+  (main
+    (command
+      (command_name)
+    )
+  )
+  (postamble
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+component-brackets
+======
+
+\startcomponent[cow]
+
+\blank
+
+\stopcomponent
+
+---
+
+(document
+  (preamble
+    (text_block
+      (text)
+    )
+    (component_id)
+  )
+  (main
+    (command
+      (command_name)
+    )
+  )
+  (postamble
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+component-ws-brackets
+======
+
+\startcomponent [cow]
+
+\blank
+
+\stopcomponent
+
+---
+
+(document
+  (preamble
+    (text_block
+      (text)
+    )
+    (component_id)
+  )
+  (main
+    (command
+      (command_name)
+    )
+  )
+  (postamble
+    (text_block
+      (text)
+    )
+  )
+)

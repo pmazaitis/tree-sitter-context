@@ -1,0 +1,109 @@
+======
+file_commands-product
+======
+
+\product cow
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (product_command 
+      (product_id)
+    )
+    (text_block
+      (text)
+    )
+  ) 
+)
+
+======
+file_commands-project
+======
+
+\project cow
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (project_command 
+      (project_id)
+    )
+    (text_block
+      (text)
+    )
+  ) 
+)
+
+======
+file_commands-environment
+======
+
+\environment cow
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (environment_command 
+      (environment_id)
+    )
+    (text_block
+      (text)
+    )
+  ) 
+)
+
+======
+file_commands-environment-brackets
+======
+
+\environment[cow]
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (environment_command 
+      (environment_id)
+    )
+    (text_block
+      (text)
+    )
+  ) 
+)
+
+======
+file_commands-environment-ws-brackets
+======
+
+\environment [cow]
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (environment_command 
+      (environment_id)
+    )
+    (text_block
+      (text)
+    )
+  ) 
+)
