@@ -6,7 +6,7 @@
 //
 // ## Cases to handle
 //
-// [F] Areas
+// [x] Areas
 // [x] Commands
 // [x] Text
 // [x] Paragraph Markers
@@ -15,23 +15,25 @@
 // [x] Escaped Characters
 // [x] Comments
 // [x] Inline Math
-// [ ]
 //
 // ## Injected Languages
-// [ ] Metapost
-// [ ] TiKz
-// [ ] Lua
-// [ ]
+// [x] Metapost
+// [x] TiKz
+// [x] Lua
 //
 // ## Injected languages for Typing Environments
-// [ ] Plain
-// [ ] HTML
-// [ ] CSS
-// [ ]
+// [x] Plain
+// [x] HTML
+// [x] CSS
+// [x] MP
+// [x] Lua
+// [x] XML/UNPARSEDXML
+// [x] Unparsed
 //
 // # TODO
 //
-// * Cleanup up preamble end capture
+// * External scanner whitespace?
+// * Support markdown typing environment?
 // * put explicit boundary markers back for highlighting?
 //
 // # PRECEDENCE LIST
