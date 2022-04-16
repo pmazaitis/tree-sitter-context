@@ -8,8 +8,8 @@
 //
 // [x] Areas
 // [x] Commands
-// [ ] Text
-// [ ] Paragraph Markers
+// [t] Text
+// [t] Paragraph Markers
 // [x] Brace Groups
 // [x] Command groups (/start and /stop)
 // [x] Escaped Characters
