@@ -22,13 +22,18 @@
 // [ ] TiKz
 // [ ] Lua
 // [ ]
-
+//
 // ## Injected languages for Typing Environments
 // [ ] Plain
 // [ ] HTML
 // [ ] CSS
 // [ ]
-
+//
+// # TODO
+//
+// * Cleanup up preamble end capture
+// * rich scope content
+//
 // # PRECEDENCE LIST
 //
 // 20  :  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
@@ -55,12 +60,7 @@ module.exports = grammar({
 
   extras: ($) => [$._whitespace, $.line_comment],
 
-  externals: ($) => [
-    $._command_stop,
-    $.paragraph_mark,
-    $.text,
-    // $.preamble_stop,
-  ],
+  externals: ($) => [$._command_stop, $.paragraph_mark, $.text],
 
   word: ($) => $.command_name,
 
