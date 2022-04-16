@@ -1,5 +1,59 @@
+
 ======
-language_inclusions-html
+typing_inclusions-unparsed
+======
+
+\starttyping
+
+Cow.
+
+\stoptyping
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (typing_unparsed_inclusion
+      (typing_unparsed_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+
+======
+typing_inclusions-mp
+======
+
+\startMP
+
+draw (0,0)--(1,1);
+
+\stopMP
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (typing_mp_inclusion
+      (typing_mp_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+typing_inclusions-html
 ======
 
 \startHTML
@@ -25,7 +79,7 @@ language_inclusions-html
 )
 
 ======
-language_inclusions-css
+typing_inclusions-css
 ======
 
 \startCSS

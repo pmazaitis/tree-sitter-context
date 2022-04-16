@@ -95,6 +95,9 @@ module.exports = grammar({
         $.luacode_inclusion,
         $.tikz_inclusion,
         $.metapost_inclusion,
+        $.typing_unparsed_inclusion,
+        $.typing_mp_inclusion,
+        $.typing_lua_inclusion,
         $.typing_html_inclusion,
         $.typing_css_inclusion
       ),
@@ -198,14 +201,15 @@ module.exports = grammar({
 
     // PARSED LANGUAGE INCLUSIONS
     //
-    // This ConTeXt parser can inject parsing for other languages, as supported by tree-sitter.
+    // This ConTeXt parser can inject parsing for included language code, as supported by tree-sitter.
     //
     // * MetaPost/Fun (marked, but parsing not yet supported)
     // * TiKz (marked, but parsing not yet supported)
     // * Lua
-    // * HTML
-    // * CSS
     //
+
+    // We alias the following token for all inclusion bodies
+    inclusion_body: ($) => /[^\\]*/,
 
     // Metafun/Post
     _metapost_start: ($) =>
@@ -228,86 +232,108 @@ module.exports = grammar({
         "\\stopstaticMPfigure"
       ),
 
-    metapost_body: ($) => /[^\\]*/,
-
     metapost_inclusion: ($) =>
-      seq($._metapost_start, $.metapost_body, $._metapost_stop),
+      seq(
+        $._metapost_start,
+        alias($.inclusion_body, $.metapost_body),
+        $._metapost_stop
+      ),
 
     // TiKz
     _tikz_start: ($) => "\\starttikzpicture",
 
     _tikz_stop: ($) => "\\stoptikzpicture",
 
-    tikz_body: ($) => /[^\\]*/,
-
-    tikz_inclusion: ($) => seq($._tikz_start, $.tikz_body, $._tikz_stop),
+    tikz_inclusion: ($) =>
+      seq($._tikz_start, alias($.inclusion_body, $.tikz_body), $._tikz_stop),
 
     // Lua
     _luacode_start: ($) => "\\startluacode",
 
     _luacode_stop: ($) => "\\stopluacode",
 
-    luacode_body: ($) => /[^\\]*/,
-
     luacode_inclusion: ($) =>
-      seq($._luacode_start, $.luacode_body, $._luacode_stop),
+      seq(
+        $._luacode_start,
+        alias($.inclusion_body, $.luacode_body),
+        $._luacode_stop
+      ),
 
     // PARSED TYPING INCLUSIONS
     //
+    // This ConTeXt parser can inject parsing for typing environments, as supported by tree-sitter.
+    //
+    // * MetaPost/Fun (marked, but parsing not yet supported)
+    // * HTML
+    // * CSS
+    // * Lua
+    //
 
-    //HTML
+    // HTML
     _typing_html_start: ($) => "\\startHTML",
 
     _typing_html_stop: ($) => "\\stopHTML",
 
-    typing_html_body: ($) => /[^\\]*/,
-
     typing_html_inclusion: ($) =>
-      seq($._typing_html_start, $.typing_html_body, $._typing_html_stop),
+      seq(
+        $._typing_html_start,
+        alias($.inclusion_body, $.typing_html_body),
+        $._typing_html_stop
+      ),
 
-    //CSS
+    // CSS
     _typing_css_start: ($) => "\\startCSS",
 
     _typing_css_stop: ($) => "\\stopCSS",
 
-    typing_css_body: ($) => /[^\\]*/,
-
     typing_css_inclusion: ($) =>
-      seq($._typing_css_start, $.typing_css_body, $._typing_css_stop),
+      seq(
+        $._typing_css_start,
+        alias($.inclusion_body, $.typing_css_body),
+        $._typing_css_stop
+      ),
+
+    // MetaPost/Fun
+    _typing_mp_start: ($) => "\\startMP",
+
+    _typing_mp_stop: ($) => "\\stopMP",
+
+    typing_mp_inclusion: ($) =>
+      seq(
+        $._typing_mp_start,
+        alias($.inclusion_body, $.typing_mp_body),
+        $._typing_mp_stop
+      ),
+
+    // LUA
+    _typing_lua_start: ($) => "\\startLUA",
+
+    _typing_lua_stop: ($) => "\\stopLUA",
+
+    typing_lua_inclusion: ($) =>
+      seq(
+        $._typing_lua_start,
+        alias($.inclusion_body, $.typing_lua_body),
+        $._typing_lua_stop
+      ),
 
     // UNPARSED TYPING INCLUSIONS
     //
     // (A non-goal for this grammar is discovery of any user-generated typing inclusions.)
-    typing_start: ($) =>
-      prec(
-        10,
-        choice(
-          "\\starttyping",
-          "\\startLUA",
-          "\\startMP",
-          "\\startPARSEDXML",
-          "\\startTEX",
-          "\\startXML"
-        )
-      ),
+    _typing_unparsed_start: ($) =>
+      choice("\\starttyping", "\\startPARSEDXML", "\\startTEX", "\\startXML"),
 
-    typing_stop: ($) =>
-      prec(
-        10,
-        choice(
-          "\\stoptyping",
-          "\\stopLUA",
-          "\\stopMP",
-          "\\stopPARSEDXML",
-          "\\stopTEX",
-          "\\stopXML"
-        )
-      ),
+    _typing_unparsed_stop: ($) =>
+      choice("\\stoptyping", "\\stopPARSEDXML", "\\stopTEX", "\\stopXML"),
 
     typing_body: ($) => /[^\\]*/,
 
-    typing_inclusion: ($) =>
-      prec(10, seq($.typing_start, $.typing_body, $.typing_stop)),
+    typing_unparsed_inclusion: ($) =>
+      seq(
+        $._typing_unparsed_start,
+        alias($.typing_body, $.typing_unparsed_body),
+        $._typing_unparsed_stop
+      ),
 
     // # EXTRAS
 
