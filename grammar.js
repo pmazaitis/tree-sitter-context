@@ -6,10 +6,10 @@
 //
 // ## Cases to handle
 //
-// [x] Areas
+// [F] Areas
 // [x] Commands
-// [t] Text
-// [t] Paragraph Markers
+// [x] Text
+// [x] Paragraph Markers
 // [x] Brace Groups
 // [x] Command groups (/start and /stop)
 // [x] Escaped Characters
@@ -68,7 +68,20 @@ module.exports = grammar({
     //
     // Content allowed in different parts of the document
     // TODO: refactor when things are stable
-    _preamble_content: ($) => prec(18, choice($.command, $.line_comment)),
+    _preamble_content: ($) =>
+      prec(
+        18,
+        choice(
+          $.line_comment,
+          $.command,
+          $.brace_group,
+          $.escaped,
+          // $.inline_math,
+          $.command_group,
+          $._whitespace
+          // $.text_block
+        )
+      ),
 
     _main_content: ($) =>
       choice(
