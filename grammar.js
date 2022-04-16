@@ -88,8 +88,8 @@ module.exports = grammar({
         $.escaped,
         $.brace_group,
         $.inline_math,
-        $.command_group
-        // $.text_block,
+        $.command_group,
+        $.text_block
       ),
 
     _group_content: ($) =>
@@ -99,8 +99,8 @@ module.exports = grammar({
         $.brace_group,
         $.escaped,
         $.inline_math,
-        $.command_group
-        // $.text_block,
+        $.command_group,
+        $.text_block
       ),
 
     _command_scope_content: ($) => /[^}]*/,
@@ -237,6 +237,6 @@ module.exports = grammar({
 
     _whitespace: ($) => /\s+/,
 
-    line_comment: ($) => /[^\\]%[^\r\n]*/,
+    line_comment: ($) => /%[^\r\n]*/,
   },
 });

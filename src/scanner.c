@@ -5,6 +5,8 @@
 
 #define UNUSED(x) (void)(x)
 
+#define DEBUG
+
 enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_MARK,
@@ -47,9 +49,11 @@ static bool isctxspecial(char c) {
 
 // Helpful for tracking state
 static void debuglookahead(char c, char* msg) {
+  #ifdef DEBUG
   printf("#### %s\n", msg);
   printf("#### [Character under test: \'%c\' ]\n", c);
   fflush(stdout);
+  #endif
 }
 
 
@@ -102,7 +106,7 @@ static bool scan_command_stop(TSLexer *lexer) {
   return true;
 }
 
- 
+
 static bool scan_paragraph_mark(TSLexer *lexer) {
   // Scan for two or more consecutive EOLs, and form a token to indicate a paragraph break.
   // FIXME the EOLs should be system agnostic.
@@ -111,29 +115,19 @@ static bool scan_paragraph_mark(TSLexer *lexer) {
   
   debuglookahead(lexer->lookahead, "Scanning for PARAGRAPH_MARK");
   
-  while (lexer->lookahead != 0) {
-    
-    debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-In scan loop");
-    
-    if (lexer->lookahead == '\n') {
-      debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL");
-      skip(lexer);
-      if (lexer->lookahead == '0') {
-        debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOF");
-        return false;
-      }
-      if (lexer->lookahead == '\n') {
-        debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL, EOL");
-        lexer->mark_end(lexer);
-        skip(lexer);
-        return true;
-      } else {
-        skip(lexer);
-        return false;
-      }
-    } else {
-      advance(lexer);
+  if (lexer->lookahead == '\n') {
+    debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL");
+    advance(lexer);
+    if (lexer->lookahead == '0') {
+      debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOF");
+      return false;
     }
+    if (lexer->lookahead == '\n') {
+      debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL, EOL");
+      advance(lexer);
+      lexer->mark_end(lexer);
+      return true;
+    } 
   }
   return false;
 }
@@ -151,37 +145,51 @@ static bool scan_text(TSLexer *lexer) {
   
   debuglookahead(lexer->lookahead, "Scanning for TEXT");
   
+  int step = 0;
+  
   while (lexer->lookahead != 0) {
 
     debuglookahead(lexer->lookahead, "TEXT - In scan loop");
 
     if (isctxspecial(lexer->lookahead)) {
-      debuglookahead(lexer->lookahead, "TEXT - Found Special");
-      lexer->mark_end(lexer); 
-      return true;
+      debuglookahead(lexer->lookahead, "TEXT - Found Special"); 
+      if (step > 0) { 
+        return true;
+      } else {
+        return false;
+      }
     }
  
     if (lexer->lookahead == '\n') {
       // ???: will setting this to skip break the token?
+      debuglookahead(lexer->lookahead, "TEXT - Found EOL");
       advance(lexer);
       
       if (lexer->lookahead == 0) {
+        debuglookahead(lexer->lookahead, "TEXT - Found EOF");
         lexer->mark_end(lexer);
         return true;
       }
       
       if (lexer->lookahead == '\n') {
-        return true;
+        debuglookahead(lexer->lookahead, "TEXT - Found EOL,EOL");
+        if (step > 0) { 
+          return true;
+        } else {
+          return false;
+        }
       }
       
       if (isctxspecial(lexer->lookahead)) {
+        debuglookahead(lexer->lookahead, "TEXT - Found Special");
         lexer->mark_end(lexer); 
         return true;
       }
       
     } 
-    lexer->mark_end(lexer);
+    step = step + 1;
     advance(lexer);
+    lexer->mark_end(lexer);
   }
   lexer->mark_end(lexer);
   return true;
