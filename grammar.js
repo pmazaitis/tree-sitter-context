@@ -96,7 +96,7 @@ module.exports = grammar({
         )
       ),
 
-    component_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
+    component_id: ($) => /[a-zA-Z*][a-zA-Z0-9:_-]*/,
 
     // Main --- text, commands, comments
     main: ($) => repeat1($._content),
@@ -137,7 +137,7 @@ module.exports = grammar({
     // These commands do _not_ require braces to grab the next token as scope.
 
     // Generic ID for aliasing
-    generic_id: ($) => /[a-zA-Z*][a-zA-Z0-9:_-]*/,
+    generic_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
 
     // Command group (TODO: better label here)
     // _callout_command_group: ($) => choice($.project_command),
