@@ -32,6 +32,7 @@
 // # TODO
 //
 // * Cleanup up preamble end capture
+// * put explicit boundary markers back for highlighting?
 //
 // # PRECEDENCE LIST
 //
