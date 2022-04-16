@@ -5,7 +5,7 @@
 
 #define UNUSED(x) (void)(x)
 
-#define DEBUG
+// #define DEBUG
 
 enum TokenType {
   COMMAND_STOP,
