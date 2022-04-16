@@ -55,7 +55,12 @@ module.exports = grammar({
 
   extras: ($) => [$._whitespace, $.line_comment],
 
-  externals: ($) => [$._command_stop, $.paragraph_mark, $.text],
+  externals: ($) => [
+    $._command_stop,
+    $.paragraph_mark,
+    $.text,
+    // $.preamble_stop,
+  ],
 
   word: ($) => $.command_name,
 
@@ -78,7 +83,7 @@ module.exports = grammar({
           $.escaped,
           $.inline_math,
           $.command_group
-          //$.text_block
+          // $.text_block
         )
       ),
 
@@ -126,6 +131,7 @@ module.exports = grammar({
         seq(
           repeat($._preamble_content),
           choice("\\starttext", "\\startcomponent")
+          // $.preamble_stop
         )
       ),
 
@@ -232,16 +238,7 @@ module.exports = grammar({
     command_scope: ($) => seq("{", repeat($._command_scope_content), "}"),
 
     // # TEXT
-    text_block: ($) =>
-      seq(
-        $.text, // Advance to any special char, EOF, or double EOL without consuming
-        repeat(
-          seq(
-            $.paragraph_mark, // Consume two or more EOLs
-            $.text // Advance to any special char, EOF, or double EOL without consuming
-          )
-        )
-      ),
+    text_block: ($) => seq($.text, repeat(seq($.paragraph_mark, $.text))),
 
     // # ESCAPED CHARACTERS
     escaped_char: ($) => choice(...escaped_chars),
