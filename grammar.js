@@ -80,24 +80,42 @@ module.exports = grammar({
     //
     // Preamble --- commands and comments
     // preamble: ($) => seq(repeat($._content), $.preamble_start_marker),
+    // preamble: ($) =>
+    //   choice(
+    //     seq(repeat($._content), "\\startext"),
+    //     seq(repeat($._content), "\\startcomponent"),
+    //     seq(
+    //       repeat($._content),
+    //       "\\startcomponent",
+    //       /[ \t]+/,
+    //       choice($.component_name, seq("{", $.component_name, "}"))
+    //     )
+    //   ),
+
     preamble: ($) =>
-      choice(
-        seq(repeat($._content), $.text_start_marker),
-        seq(repeat($._content), $.component_start_marker),
-        seq(
-          repeat($._content),
-          $.component_start_marker,
-          /[ \t]+/,
-          $.component_name
+      seq(
+        repeat($._content),
+        choice(
+          "\\startext",
+          // "\\startcomponent",
+          seq(
+            "\\startcomponent",
+            choice(
+              seq(/[ \t]+/, $.component_id),
+              seq("[", $.component_id, "]"),
+              seq(/[ \t]+/, "[", $.component_id, "]")
+            )
+          )
         )
       ),
 
-    text_start_marker: ($) => "\\startext",
+    //     text_start_marker: ($) => "\\startext",
+    //
+    //     component_start_marker: ($) => "\\startcomponent",
 
-    component_start_marker: ($) => "\\startcomponent",
+    component_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
 
-    component_name: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
-
+    // This precedence didn't fix it
     // preamble_start_marker: ($) =>
     //   prec.right(
     //     choice(
@@ -113,6 +131,11 @@ module.exports = grammar({
     // Postamble --- text, commands, comments
     postamble: ($) =>
       seq(choice("\\stoptext", "\\stopcomponent"), repeat($._content)),
+
+    // INCLUDE, PROJECT and ENVIRONMENT COMMANDS
+    //
+    // These commands do _not_ require braces to grab the next token as scope.
+    // project_command: ($) => seq("\\project ", /[ \t]+/, $project_id),
 
     // # CONTENT
     //
