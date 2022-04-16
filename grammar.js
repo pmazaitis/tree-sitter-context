@@ -77,9 +77,8 @@ module.exports = grammar({
           $.brace_group,
           $.escaped,
           $.inline_math,
-          $.command_group,
-          $._whitespace
-          // $.text_block
+          $.command_group
+          //$.text_block
         )
       ),
 
