@@ -1,0 +1,35 @@
+======
+text-simple_text
+======
+
+Cow.
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+text-two_paragraphs
+======
+
+Cow.
+
+Also cow.
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+      (paragraph_mark)
+      (text)
+    )
+  )
+)
