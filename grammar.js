@@ -70,7 +70,7 @@ module.exports = grammar({
     // TODO: refactor when things are stable
     _preamble_content: ($) =>
       prec(
-        18,
+        17,
         choice(
           $.line_comment,
           $.command,
@@ -122,9 +122,12 @@ module.exports = grammar({
     //
     // Preamble --- commands and comments
     preamble: ($) =>
-      seq(
-        repeat($._preamble_content),
-        choice("\\starttext", "\\startcomponent")
+      prec(
+        18,
+        seq(
+          repeat($._preamble_content),
+          choice("\\starttext", "\\startcomponent")
+        )
       ),
 
     // Main --- text, commands, comments

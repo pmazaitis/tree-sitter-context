@@ -139,6 +139,7 @@ static bool scan_text(TSLexer *lexer) {
   // - EOF
   // - a sequence of two EOLs
   // FIXME the EOLs should be system agnostic.
+  // FIXME we also need to stop a text block upon finding a starttext or startcomponent?
   
   lexer->result_symbol = TEXT;
   lexer->mark_end(lexer);
