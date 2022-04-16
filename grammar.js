@@ -8,6 +8,7 @@
 //
 // [PASS] Areas
 // [PASS] Commands
+// [PASS] Scopes
 // [PASS] Text
 // [PASS] Paragraph Markers
 // [PASS] Brace Groups
@@ -20,11 +21,10 @@
 // [PASS] Product Command
 // [PASS] Environment Command
 // [    ]
-// [    ]
 //
 // ## Injected Languages
-// [PASS] Metapost
-// [PASS] TiKz
+// [PASS] MetaPost/Fun (no parsing support)
+// [PASS] TiKz (no parsing support)
 // [PASS] Lua
 //
 // ## Injected languages for Typing Environments
@@ -139,9 +139,6 @@ module.exports = grammar({
     // Generic ID for aliasing
     generic_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
 
-    // Command group (TODO: better label here)
-    // _callout_command_group: ($) => choice($.project_command),
-
     project_command: ($) =>
       seq(
         "\\project",
@@ -203,7 +200,6 @@ module.exports = grammar({
 
     inline_math: ($) => prec(10, seq("$", repeat1($._math_content), "$")),
 
-    // FIXME: commands can have multiple scopes
     // # COMMANDS
 
     command: ($) =>
@@ -215,7 +211,6 @@ module.exports = grammar({
             repeat($.command_scope),
             $._command_stop
           )
-          // TODO: include command handling
         )
       ),
 
