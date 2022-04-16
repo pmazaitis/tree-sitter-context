@@ -32,7 +32,6 @@
 // # TODO
 //
 // * Cleanup up preamble end capture
-// * rich scope content
 //
 // # PRECEDENCE LIST
 //
