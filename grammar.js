@@ -92,10 +92,11 @@ module.exports = grammar({
         $.inline_math,
         $.command_group,
         $.text_block,
-        $.typing_html_inclusion,
-        $.typing_css_inclusion,
         $.luacode_inclusion,
-        $.tikz_inclusion
+        $.tikz_inclusion,
+        $.metapost_inclusion,
+        $.typing_html_inclusion,
+        $.typing_css_inclusion
       ),
 
     // # GROUPS
@@ -207,7 +208,7 @@ module.exports = grammar({
     //
 
     // Metafun/Post
-    metapost_start: ($) =>
+    _metapost_start: ($) =>
       choice(
         "\\startMPinclusions",
         "\\startuseMPgraphic",
@@ -217,7 +218,7 @@ module.exports = grammar({
         "\\startstaticMPfigure"
       ),
 
-    metapost_stop: ($) =>
+    _metapost_stop: ($) =>
       choice(
         "\\stopMPinclusions",
         "\\stopuseMPgraphic",
@@ -230,7 +231,7 @@ module.exports = grammar({
     metapost_body: ($) => /[^\\]*/,
 
     metapost_inclusion: ($) =>
-      seq($.metapost_start, $.metapost_body, $.metapost_stop),
+      seq($._metapost_start, $.metapost_body, $._metapost_stop),
 
     // TiKz
     _tikz_start: ($) => "\\starttikzpicture",

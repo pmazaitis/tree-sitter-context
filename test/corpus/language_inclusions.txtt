@@ -1,14 +1,17 @@
 
 
+
+
+
 ======
-language_inclusions-metapost
+language_inclusions-metapost_inclusion
 ======
 
-\starttikzpicture
+\startMPinclusions
 
 draw(0,0)--(1,1);
 
-\stoptikzpicture
+\stopMPinclusions
 
 ---
 
@@ -17,8 +20,8 @@ draw(0,0)--(1,1);
     (text_block
       (text)
     )
-    (tikz_inclusion
-      (tikz_body)
+    (metapost_inclusion
+      (metapost_body)
     )
     (text_block
       (text)
@@ -26,10 +29,31 @@ draw(0,0)--(1,1);
   )
 )
 
+======
+language_inclusions-metapost_graphic
+======
 
+\startuseMPgraphic
 
+draw(0,0)--(1,1);
 
+\stopuseMPgraphic
 
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (metapost_inclusion
+      (metapost_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
 
 ======
 language_inclusions-tikz
