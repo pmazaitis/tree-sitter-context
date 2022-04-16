@@ -11,6 +11,7 @@ enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_MARK,
   TEXT,
+  PREAMBLE_STOP,
 };
 
 // FIXME this scanner is not line ending agnostic
@@ -196,6 +197,26 @@ static bool scan_text(TSLexer *lexer) {
   return true;
 }
 
+static bool scan_preamble_stop(TSLexer *lexer) {
+  lexer->result_symbol = PREAMBLE_STOP;
+  lexer->mark_end(lexer);
+  
+  int char_count = 0;
+  int char_limit = 15;
+  
+  char test_string[16] = "";
+  
+  while (char_count < char_limit) {
+    test_string[char_count] = lexer->lookahead;
+    
+    if (strcmp(test_string, "\\starttext") == 0) return true;
+    if (strcmp(test_string, "\\startcomponent") == 0) return true;
+    
+    advance(lexer);
+    char_count++;
+  }
+  return false;
+}
 
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
@@ -211,6 +232,10 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
   
   if (valid_symbols[TEXT]) {
     return scan_text(lexer);
+  }
+  
+  if (valid_symbols[PREAMBLE_STOP]) {
+    return scan_preamble_stop(lexer);
   }
   
   return false;
