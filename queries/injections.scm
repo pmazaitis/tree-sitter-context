@@ -3,8 +3,8 @@
 ((luacode_body) @injection.content
  (#set! injection.language "lua"))
 
-((html_body) @injection.content
+((typing_html_body) @injection.content
  (#set! injection.language "html"))
 
-((css_body) @injection.content
+((typing_css_body) @injection.content
   (#set! injection.language "css"))

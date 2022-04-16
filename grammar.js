@@ -92,8 +92,8 @@ module.exports = grammar({
         $.inline_math,
         $.command_group,
         $.text_block,
-        $.html_inclusion,
-        $.css_inclusion,
+        $.typing_html_inclusion,
+        $.typing_css_inclusion,
         $.luacode_inclusion,
         $.tikz_inclusion
       ),
@@ -251,25 +251,30 @@ module.exports = grammar({
     luacode_inclusion: ($) =>
       seq($._luacode_start, $.luacode_body, $._luacode_stop),
 
+    // PARSED TYPING INCLUSIONS
+    //
+
     //HTML
-    _html_start: ($) => "\\startHTML",
+    _typing_html_start: ($) => "\\startHTML",
 
-    _html_stop: ($) => "\\stopHTML",
+    _typing_html_stop: ($) => "\\stopHTML",
 
-    html_body: ($) => /[^\\]*/,
+    typing_html_body: ($) => /[^\\]*/,
 
-    html_inclusion: ($) => seq($._html_start, $.html_body, $._html_stop),
+    typing_html_inclusion: ($) =>
+      seq($._typing_html_start, $.typing_html_body, $._typing_html_stop),
 
     //CSS
-    _css_start: ($) => "\\startCSS",
+    _typing_css_start: ($) => "\\startCSS",
 
-    _css_stop: ($) => "\\stopCSS",
+    _typing_css_stop: ($) => "\\stopCSS",
 
-    css_body: ($) => /[^\\]*/,
+    typing_css_body: ($) => /[^\\]*/,
 
-    css_inclusion: ($) => seq($._css_start, $.css_body, $._css_stop),
+    typing_css_inclusion: ($) =>
+      seq($._typing_css_start, $.typing_css_body, $._typing_css_stop),
 
-    // TYPING INCLUSIONS
+    // UNPARSED TYPING INCLUSIONS
     //
     // (A non-goal for this grammar is discovery of any user-generated typing inclusions.)
     typing_start: ($) =>

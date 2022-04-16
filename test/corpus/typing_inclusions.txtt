@@ -1,0 +1,51 @@
+======
+language_inclusions-html
+======
+
+\startHTML
+
+<p>Cow.</p>
+
+\stopHTML
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (typing_html_inclusion
+      (typing_html_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+language_inclusions-css
+======
+
+\startCSS
+
+p {color: red;}
+
+\stopCSS
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (typing_css_inclusion
+      (typing_css_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)

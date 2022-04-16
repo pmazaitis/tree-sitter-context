@@ -1,5 +1,34 @@
 
 
+======
+language_inclusions-metapost
+======
+
+\starttikzpicture
+
+draw(0,0)--(1,1);
+
+\stoptikzpicture
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (tikz_inclusion
+      (tikz_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+
+
+
 
 
 ======
@@ -58,54 +87,4 @@ print("Hello World")
 )
 
 
-======
-language_inclusions-html
-======
 
-\startHTML
-
-<p>Cow.</p>
-
-\stopHTML
-
----
-
-(document
-  (main
-    (text_block
-      (text)
-    )
-    (html_inclusion
-      (html_body)
-    )
-    (text_block
-      (text)
-    )
-  )
-)
-
-======
-language_inclusions-css
-======
-
-\startCSS
-
-p {color: red;}
-
-\stopCSS
-
----
-
-(document
-  (main
-    (text_block
-      (text)
-    )
-    (css_inclusion
-      (css_body)
-    )
-    (text_block
-      (text)
-    )
-  )
-)
