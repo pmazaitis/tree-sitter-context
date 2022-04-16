@@ -35,7 +35,11 @@ command-simple_with_scope
     )
     (command
       (command_name)
-      (command_scope)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
     )
     (text_block
       (text)
@@ -58,7 +62,11 @@ command-simple_with_space_with_scope
     )
     (command
       (command_name)
-      (command_scope)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
     )
     (text_block
       (text)

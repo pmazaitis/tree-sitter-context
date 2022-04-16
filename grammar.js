@@ -69,23 +69,6 @@ module.exports = grammar({
     document: ($) =>
       choice(prec(20, seq($.preamble, $.main, $.postamble)), $.main),
 
-    // # CONTENT CONTEXTS
-    //
-    // Content allowed in different parts of the document
-    // TODO: refactor when things are stable
-    _content: ($) =>
-      choice(
-        $.line_comment,
-        $.command,
-        $.brace_group,
-        $.escaped,
-        $.inline_math,
-        $.command_group,
-        $.text_block
-      ),
-
-    _command_scope_content: ($) => /[^}]*/,
-
     // # AREAS
     //
     // Preamble --- commands and comments
@@ -98,6 +81,19 @@ module.exports = grammar({
     // Postamble --- text, commands, comments
     postamble: ($) =>
       seq(choice("\\stoptext", "\\stopcomponent"), repeat($._content)),
+
+    // # CONTENT
+    //
+    _content: ($) =>
+      choice(
+        $.line_comment,
+        $.command,
+        $.brace_group,
+        $.escaped,
+        $.inline_math,
+        $.command_group,
+        $.text_block
+      ),
 
     // # GROUPS
 
@@ -186,7 +182,7 @@ module.exports = grammar({
     value_brace_group: ($) => seq("{", repeat($._value_content), "}"),
 
     // ## Scope
-    command_scope: ($) => seq("{", repeat($._command_scope_content), "}"),
+    command_scope: ($) => seq("{", repeat($._content), "}"),
 
     // # TEXT
     text_block: ($) => seq($.text, repeat(seq($.paragraph_mark, $.text))),
