@@ -410,7 +410,7 @@ module.exports = grammar({
 
     // UNPARSED TYPING INCLUSIONS
     //
-    // (The Plain TeX envirnment is unparsed, for now: there is no tree-sitter parser for
+    // (The Plain TeX environment is unparsed, for now: there is no tree-sitter parser for
     // Plain TeX, and the LaTeX parser fights with this one over filenames ending in .tex)
     //
     // (A non-goal for this grammar is discovery of any user-generated typing inclusions.)
