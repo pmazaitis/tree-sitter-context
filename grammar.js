@@ -212,7 +212,7 @@ module.exports = grammar({
           seq(
             $.command_name,
             repeat(choice($.empty_block, $.option_block, $.settings_block)),
-            optional($.command_scope),
+            repeat($.command_scope),
             $._command_stop
           )
           // TODO: include command handling
@@ -260,7 +260,8 @@ module.exports = grammar({
     value_brace_group: ($) => seq("{", repeat($._value_content), "}"),
 
     // ## Scope
-    command_scope: ($) => seq("{", repeat($._content), "}"),
+    command_scope: ($) =>
+      seq(optional($._end_of_line), "{", repeat($._content), "}"),
 
     // # TEXT
     text_block: ($) => seq($.text, repeat(seq($.paragraph_mark, $.text))),
@@ -436,5 +437,7 @@ module.exports = grammar({
     _whitespace: ($) => /\s+/,
 
     line_comment: ($) => /%[^\r\n]*/,
+
+    _end_of_line: ($) => /\r\n?|\n/,
   },
 });

@@ -73,3 +73,69 @@ command-simple_with_space_with_scope
     )
   ) 
 )
+
+======
+command-simple_with_multiple_scopes
+======
+
+\blank {cow}{cow}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  ) 
+)
+
+======
+command-simple_with_multiple_scopes_sep_by_newlines
+======
+
+\blank 
+  {cow}
+  {cow}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  ) 
+)
