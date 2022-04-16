@@ -75,7 +75,22 @@ module.exports = grammar({
     //
     // Preamble --- commands and comments
     preamble: ($) =>
-      seq(repeat($._content), choice("\\starttext", "\\startcomponent")),
+      seq(
+        repeat($._content),
+        // choice("\\starttext", seq("\\startcomponent", $.component_name))
+        $._preamble_start_marker
+      ),
+
+    _preamble_start_marker: ($) =>
+      prec(
+        18,
+        choice(
+          "\\starttext",
+          seq("\\startcomponent", optional($.component_name))
+        )
+      ),
+
+    component_name: ($) => /a-zA-Z:_-/,
 
     // Main --- text, commands, comments
     main: ($) => repeat1($._content),
@@ -138,7 +153,7 @@ module.exports = grammar({
 
     inline_math: ($) => prec(10, seq("$", repeat1($._math_content), "$")),
 
-    //FIXME: commands have have multiple scopes
+    // FIXME: commands can have multiple scopes
     // # COMMANDS
 
     command: ($) =>
@@ -150,6 +165,7 @@ module.exports = grammar({
             optional($.command_scope),
             $._command_stop
           )
+          // TODO: include command handling
         )
       ),
 
