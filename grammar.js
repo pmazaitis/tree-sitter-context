@@ -6,29 +6,30 @@
 //
 // ## Cases to handle
 //
-// [x] Areas
-// [x] Commands
-// [x] Text
-// [x] Paragraph Markers
-// [x] Brace Groups
-// [x] Command groups (/start and /stop)
-// [x] Escaped Characters
-// [x] Comments
-// [x] Inline Math
+// [PASS] Areas
+// [PASS] Commands
+// [PASS] Text
+// [PASS] Paragraph Markers
+// [PASS] Brace Groups
+// [PASS] Command groups (/start and /stop)
+// [PASS] Escaped Characters
+// [PASS] Comments
+// [PASS] Inline Math
+// [    ] Include Commands
 //
 // ## Injected Languages
-// [x] Metapost
-// [x] TiKz
-// [x] Lua
+// [PASS] Metapost
+// [PASS] TiKz
+// [PASS] Lua
 //
 // ## Injected languages for Typing Environments
-// [x] Plain
-// [x] HTML
-// [x] CSS
-// [x] MP
-// [x] Lua
-// [x] XML/UNPARSEDXML
-// [x] Unparsed
+// [PASS] Plain
+// [PASS] HTML
+// [PASS] CSS
+// [PASS] MP
+// [PASS] Lua
+// [PASS] XML/UNPARSEDXML
+// [PASS] Unparsed
 //
 // # TODO
 //
