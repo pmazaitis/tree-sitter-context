@@ -62,7 +62,24 @@ module.exports = grammar({
   rules: {
     // # DOCUMENT - An entire ConTeXt document.
     document: ($) =>
-      choice(prec(20, seq($.preamble, $.main, $.postamble)), $.main),
+      // choice(prec(20, seq($.preamble, $.main, $.postamble)), $.main),
+      choice(
+        prec(
+          20,
+          seq($.preamble, "\\starttext", $.main, "\\stoptext", $.postamble)
+        ),
+        prec(
+          20,
+          seq(
+            $.preamble,
+            "\\startcomponent",
+            $.main,
+            "\\stopcomponent",
+            $.postamble
+          )
+        ),
+        $.main
+      ),
 
     // # CONTENT CONTEXTS
     //
@@ -121,21 +138,23 @@ module.exports = grammar({
     // # AREAS
     //
     // Preamble --- commands and comments
-    preamble: ($) =>
-      seq(
-        repeat($._preamble_content),
-        choice("\\starttext", "\\startcomponent")
-      ),
+    // preamble: ($) =>
+    //   seq(
+    //     repeat($._preamble_content),
+    //     choice("\\starttext", "\\startcomponent")
+    //   ),
+    preamble: ($) => repeat1($._preamble_content),
 
     // Main --- text, commands, comments
     main: ($) => repeat1($._main_content),
 
     // Postamble --- text, commands, comments
-    postamble: ($) =>
-      seq(
-        choice("\\stoptext", "\\stopcomponent"),
-        repeat($._postamble_content)
-      ),
+    // postamble: ($) =>
+    //   seq(
+    //     choice("\\stoptext", "\\stopcomponent"),
+    //     repeat($._postamble_content)
+    //   ),
+    postamble: ($) => repeat($._postamble_content),
 
     // # GROUPS
 
