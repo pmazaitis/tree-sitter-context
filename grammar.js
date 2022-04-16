@@ -15,7 +15,12 @@
 // [PASS] Escaped Characters
 // [PASS] Comments
 // [PASS] Inline Math
-// [    ] Include Commands
+// [BORK] Component Name
+// [    ] Project Command
+// [    ] Product Command
+// [    ] Environment Command
+// [    ]
+// [    ]
 //
 // ## Injected Languages
 // [PASS] Metapost
@@ -74,23 +79,33 @@ module.exports = grammar({
     // # AREAS
     //
     // Preamble --- commands and comments
+    // preamble: ($) => seq(repeat($._content), $.preamble_start_marker),
     preamble: ($) =>
-      seq(
-        repeat($._content),
-        // choice("\\starttext", seq("\\startcomponent", $.component_name))
-        $._preamble_start_marker
-      ),
-
-    _preamble_start_marker: ($) =>
-      prec(
-        18,
-        choice(
-          "\\starttext",
-          seq("\\startcomponent", optional($.component_name))
+      choice(
+        seq(repeat($._content), $.text_start_marker),
+        seq(repeat($._content), $.component_start_marker),
+        seq(
+          repeat($._content),
+          $.component_start_marker,
+          /[ \t]+/,
+          $.component_name
         )
       ),
 
-    component_name: ($) => /a-zA-Z:_-/,
+    text_start_marker: ($) => "\\startext",
+
+    component_start_marker: ($) => "\\startcomponent",
+
+    component_name: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
+
+    // preamble_start_marker: ($) =>
+    //   prec.right(
+    //     choice(
+    //       "\\starttext",
+    //       "\\startcomponent",
+    //       prec(18, seq("\\startcomponent", $.component_name))
+    //     )
+    //   ),
 
     // Main --- text, commands, comments
     main: ($) => repeat1($._content),
