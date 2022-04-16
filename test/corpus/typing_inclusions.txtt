@@ -103,3 +103,81 @@ p {color: red;}
     )
   )
 )
+
+======
+typing_inclusions-lua
+======
+
+\startLUA
+
+print("Hello world!")
+
+\stopLUA
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (typing_lua_inclusion
+      (typing_lua_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+typing_inclusions-xml
+======
+
+\startXML
+
+<p>Cow.</p>
+
+\stopXML
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (typing_xml_inclusion
+      (typing_xml_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+typing_inclusions-parsedxml
+======
+
+\startPARSEDXML
+
+<p>Cow.</p>
+
+\stopPARSEDXML
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (typing_parsedxml_inclusion
+      (typing_parsedxml_body)
+    )
+    (text_block
+      (text)
+    )
+  )
+)

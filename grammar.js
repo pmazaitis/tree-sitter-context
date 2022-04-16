@@ -99,7 +99,9 @@ module.exports = grammar({
         $.typing_mp_inclusion,
         $.typing_lua_inclusion,
         $.typing_html_inclusion,
-        $.typing_css_inclusion
+        $.typing_css_inclusion,
+        $.typing_xml_inclusion,
+        $.typing_parsedxml_inclusion
       ),
 
     // # GROUPS
@@ -317,14 +319,39 @@ module.exports = grammar({
         $._typing_lua_stop
       ),
 
+    // XML
+    _typing_xml_start: ($) => "\\startXML",
+
+    _typing_xml_stop: ($) => "\\stopXML",
+
+    typing_xml_inclusion: ($) =>
+      seq(
+        $._typing_xml_start,
+        alias($.inclusion_body, $.typing_xml_body),
+        $._typing_xml_stop
+      ),
+
+    // PARSEDXML
+    _typing_parsedxml_start: ($) => "\\startPARSEDXML",
+
+    _typing_parsedxml_stop: ($) => "\\stopPARSEDXML",
+
+    typing_parsedxml_inclusion: ($) =>
+      seq(
+        $._typing_parsedxml_start,
+        alias($.inclusion_body, $.typing_parsedxml_body),
+        $._typing_parsedxml_stop
+      ),
+
     // UNPARSED TYPING INCLUSIONS
     //
+    // (The Plain TeX envirnment is unparsed, for now: there is no tree-sitter parser for
+    // Plain TeX, and the LaTeX parser fights with this one over filenames ending in .tex)
+    //
     // (A non-goal for this grammar is discovery of any user-generated typing inclusions.)
-    _typing_unparsed_start: ($) =>
-      choice("\\starttyping", "\\startPARSEDXML", "\\startTEX", "\\startXML"),
+    _typing_unparsed_start: ($) => choice("\\starttyping", "\\startTEX"),
 
-    _typing_unparsed_stop: ($) =>
-      choice("\\stoptyping", "\\stopPARSEDXML", "\\stopTEX", "\\stopXML"),
+    _typing_unparsed_stop: ($) => choice("\\stoptyping", "\\stopTEX"),
 
     typing_body: ($) => /[^\\]*/,
 
