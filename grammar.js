@@ -38,6 +38,7 @@
 //
 // # TODO
 //
+// * We need external scanners to find the end of injection environments
 // * External scanner whitespace?
 // * Support markdown typing environment?
 // * put explicit boundary markers back for highlighting?
