@@ -242,7 +242,7 @@ module.exports = grammar({
     command_name: ($) => /\\[@a-zA-Z:]+/,
 
     // ## Empty Block
-    empty_block: ($) => choice("[]", seq("[", /\s*/, "]")),
+    empty_block: ($) => choice("[]", seq("[", /[ \t]+/, "]")),
 
     // ## Option Block
     option_block: ($) => prec(12, seq("[", sepBy($.keyword, ","), "]")),
@@ -252,10 +252,9 @@ module.exports = grammar({
     // ## Settings Block
     settings_block: ($) => prec(14, seq("[", sepBy($._setting, ","), "]")),
 
-    _setting: ($) =>
-      choice($.generic_setting, $.title_setting, $.subtitle_setting),
+    _setting: ($) => choice($.setting, $.title_setting, $.subtitle_setting),
 
-    generic_setting: ($) => seq($.key, "=", $.value),
+    setting: ($) => seq($.key, "=", $.value),
 
     title_setting: ($) => seq("title", "=", $.value),
 
