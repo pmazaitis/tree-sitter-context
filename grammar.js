@@ -371,7 +371,7 @@ module.exports = grammar({
       seq("\\startTEX", $.typing_tex_body, "\\stopTEX"),
 
     // UNNAMED TYPING ENVIRONMENT
-    typing_xml_inclusion: ($) =>
+    typing_unparsed_inclusion: ($) =>
       seq("\\starttyping", $.typing_unnamed_body, "\\stoptyping"),
 
     // # EXTRAS
