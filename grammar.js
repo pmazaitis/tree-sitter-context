@@ -134,7 +134,7 @@ module.exports = grammar({
         $.luacode_inclusion,
         $.tikz_inclusion,
         $.metapost_inclusion,
-        $.typing_unparsed_inclusion,
+        $.typing_unnamed_inclusion,
         $.typing_mp_inclusion,
         $.typing_lua_inclusion,
         $.typing_html_inclusion,
@@ -361,10 +361,10 @@ module.exports = grammar({
       seq("\\startPARSEDXML", $.typing_parsedxml_body),
 
     // TEX
-    typing_xml_inclusion: ($) => seq("\\startTEX", $.typing_tex_body),
+    typing_tex_inclusion: ($) => seq("\\startTEX", $.typing_tex_body),
 
     // UNNAMED TYPING ENVIRONMENT
-    typing_unparsed_inclusion: ($) =>
+    typing_unnamed_inclusion: ($) =>
       seq("\\starttyping", $.typing_unnamed_body),
 
     // # EXTRAS

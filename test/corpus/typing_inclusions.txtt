@@ -1,6 +1,6 @@
 
 ======
-typing_inclusions-unparsed
+typing_inclusions-unnamed
 ======
 
 \starttyping
@@ -16,8 +16,8 @@ Cow.
     (text_block
       (text)
     )
-    (typing_unparsed_inclusion
-      (typing_unparsed_body)
+    (typing_unnamed_inclusion
+      (typing_unnamed_body)
     )
     (text_block
       (text)

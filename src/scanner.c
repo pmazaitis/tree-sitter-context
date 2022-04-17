@@ -19,6 +19,8 @@ enum TokenType {
   TYPING_LUA_BODY,
   TYPING_XML_BODY,
   TYPING_PARSEDXML_BODY,
+  TYPING_TEX_BODY,
+  TYPING_UNNAMED_BODY,
 };
 
 // FIXME this scanner is not line ending agnostic
@@ -270,7 +272,7 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
   }
 
   if (valid_symbols[TYPING_CSS_BODY]) {
-    lexer->result_symbol = TYPING_HTML_BODY;
+    lexer->result_symbol = TYPING_CSS_BODY;
     return find_verbatim(lexer, "\\stopCSS");
   }
   
@@ -294,6 +296,15 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
     return find_verbatim(lexer, "\\stopPARSEDXML");
   }
   
+  if (valid_symbols[TYPING_TEX_BODY]) {
+    lexer->result_symbol = TYPING_TEX_BODY;
+    return find_verbatim(lexer, "\\stopTEX");
+  }
+  
+  if (valid_symbols[TYPING_UNNAMED_BODY]) {
+    lexer->result_symbol = TYPING_UNNAMED_BODY;
+    return find_verbatim(lexer, "\\stoptyping");
+  }
   
   
   
