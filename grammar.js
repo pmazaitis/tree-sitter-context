@@ -72,8 +72,8 @@ module.exports = grammar({
     $._command_stop,
     $.paragraph_mark,
     $.text,
-    $.tikzcode_body,
-    $.luacode_body,
+    $.code_tikz_body,
+    $.code_lua_body,
     $.typing_html_body,
     $.typing_css_body,
     $.typing_mp_body,
@@ -322,10 +322,10 @@ module.exports = grammar({
       ),
 
     // TiKz
-    tikz_inclusion: ($) => seq("\\starttikzpicture", $.tikzcode_body),
+    tikz_inclusion: ($) => seq("\\starttikzpicture", $.code_tikz_body),
 
     // Lua
-    luacode_inclusion: ($) => seq("\\startluacode", $.luacode_body),
+    luacode_inclusion: ($) => seq("\\startluacode", $.code_lua_body),
 
     // TYPING INCLUSIONS
     //

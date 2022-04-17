@@ -11,8 +11,8 @@ enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_MARK,
   TEXT,
-  TIKZCODE_BODY,
-  LUACODE_BODY,
+  CODE_TIKZ_BODY,
+  CODE_LUA_BODY,
   TYPING_HTML_BODY,
   TYPING_CSS_BODY,
   TYPING_MP_BODY,
@@ -256,13 +256,13 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
     return scan_text(lexer);
   }
   
-  if (valid_symbols[TIKZCODE_BODY]) {
-    lexer->result_symbol = TIKZCODE_BODY;
+  if (valid_symbols[CODE_TIKZ_BODY]) {
+    lexer->result_symbol = CODE_TIKZ_BODY;
     return find_verbatim(lexer, "\\stoptikzpicture");
   }
   
-  if (valid_symbols[LUACODE_BODY]) {
-    lexer->result_symbol = LUACODE_BODY;
+  if (valid_symbols[CODE_LUA_BODY]) {
+    lexer->result_symbol = CODE_LUA_BODY;
     return find_verbatim(lexer, "\\stopluacode");
   }
   

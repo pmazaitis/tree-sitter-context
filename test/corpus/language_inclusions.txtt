@@ -73,7 +73,7 @@ draw(0,0)--(1,1);
       (text)
     )
     (tikz_inclusion
-      (tikzcode_body)
+      (code_tikz_body)
     )
     (text_block
       (text)
@@ -102,7 +102,7 @@ print("Hello World")
       (text)
     )
     (luacode_inclusion
-      (luacode_body)
+      (code_lua_body)
     )
     (text_block
       (text)
