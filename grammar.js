@@ -254,11 +254,11 @@ module.exports = grammar({
 
     _setting: ($) => choice($.setting, $.title_setting, $.subtitle_setting),
 
-    setting: ($) => seq($.key, "=", $.value),
+    setting: ($) => seq($.key, "=", optional($.value)),
 
-    title_setting: ($) => seq("title", "=", $.value),
+    title_setting: ($) => seq("title", "=", optional($.value)),
 
-    subtitle_setting: ($) => seq("subtitle", "=", $.value),
+    subtitle_setting: ($) => seq("subtitle", "=", optional($.value)),
 
     key: ($) => /[^\s=,\[\]]+/,
 

@@ -14,7 +14,7 @@ settings-settings_block_with_one_keyval
     (command
       (command_name)
       (settings_block
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
@@ -44,13 +44,13 @@ settings-settings_block_with_two_keyvals
     (command
       (command_name)
       (settings_block
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
           )
         )
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
@@ -82,13 +82,13 @@ settings-settings_block_with_two_keyvals_and_whitespace
     (command
       (command_name)
       (settings_block
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
           )
         )
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
@@ -118,7 +118,7 @@ settings-two_settings_blocks_with_one_keyval
     (command
       (command_name)
       (settings_block
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
@@ -126,7 +126,7 @@ settings-two_settings_blocks_with_one_keyval
         )
       )
       (settings_block
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
@@ -156,13 +156,13 @@ settings-two_settings_blocks_with_two_keyvals
     (command
       (command_name)
       (settings_block
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
           )
         )
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
@@ -170,13 +170,13 @@ settings-two_settings_blocks_with_two_keyvals
         )
       )
       (settings_block
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)
           )
         )
-        (generic_setting
+        (setting
           (key)
           (value
             (value_text)

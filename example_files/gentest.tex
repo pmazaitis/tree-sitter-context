@@ -1,4 +1,30 @@
-We can link to local content using a \keyword{file path}. Let's say 
-we wanted to load the graphic \code{foo.jpg} into our web page, and 
-we keep it in the folder named "image\_files" that happens to be in 
-the same folder as the HTML file we want to load the image into.
+
+\placefigure
+    [force]                                       % figure placement
+    [fig:paragraph_example]                           % figure reference - figure out a counter
+    {An Example of a Paragraph Element.} % figure caption
+    {
+    \framed[
+      frame=off,
+      width=5in,
+      loffset=-1pc,
+      align=middle]{
+      \startcombination[2*1]                      % contents of the figure: a combination
+          {
+            \framed[offset=1pc,align=right,top=,bottom=\vss,frame=on,strut=no,framecolor=middlegray,]{%
+            \starthtml
+           <p>The Bob Ross Lorem Ipsum Generator 
+           is one of many useful lorem ipsum 
+           generators.</p>
+            \stophtml
+            }
+          } {HTML}   % subfigure and subcaption
+          {    
+            \framed[width=3in,offset=1pc,align=flushleft,bottom=\vss,frame=on,framecolor=middlegray,]{%     
+            The Bob Ross Lorem Ipsum Generator is one of many 
+  useful lorem ipsum generators.
+            }  
+          } {Default Render}
+       \stopcombination
+     }
+     }
