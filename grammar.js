@@ -36,11 +36,11 @@
 // [PASS] XML/UNPARSEDXML
 // [PASS] Unparsed
 //
-// # TODO
+// # Work list
 //
-// * We need external scanners to find the end of injection environments
-// * External scanner whitespace?
-// * Support markdown typing environment?
+// * TODO: We need external scanners to find the end of injection environments...
+// * TODO: ...once that's done, remove exclusion of \\ from those environments
+// * External scanner whitespace? (ask on github?)
 // * put explicit boundary markers back for highlighting?
 //
 // # PRECEDENCE LIST
@@ -72,7 +72,16 @@ module.exports = grammar({
     $._command_stop,
     $.paragraph_mark,
     $.text,
-    $._inclusion_tikz_end,
+    $.tikzcode_body,
+    $.luacode_body,
+    $.typing_html_body,
+    $.typing_css_body,
+    $.typing_mp_body,
+    $.typing_lua_body,
+    $.typing_xml_body,
+    $.typing_parsedxml_body,
+    $.typing_tex_body,
+    $.typing_unnamed_body,
   ],
 
   word: ($) => $.command_name,
@@ -276,8 +285,8 @@ module.exports = grammar({
     //
     // This ConTeXt parser can inject parsing for included language code, as supported by tree-sitter.
     //
-    // * MetaPost/Fun (marked, but parsing not yet supported)
-    // * TiKz (marked, but parsing not yet supported)
+    // * MetaPost/Fun (marked, but parsing not yet supported by tree-sitter)
+    // * TiKz (marked, but parsing not yet supported by tree-sitter)
     // * Lua
     //
 
@@ -313,128 +322,57 @@ module.exports = grammar({
       ),
 
     // TiKz
-    // _inclusion_tikz_start: ($) => "\\starttikzpicture",
-
     tikz_inclusion: ($) =>
-      seq(
-        // $._inclusion_tikz_start,
-        "\\starttikzpicture",
-        alias($.inclusion_body, $.tikz_body),
-        $._inclusion_tikz_end
-      ),
+      seq("\\starttikzpicture", $.tikzcode_body, "\\stoptikzpicture"),
 
     // Lua
-    _luacode_start: ($) => "\\startluacode",
-
-    _luacode_stop: ($) => "\\stopluacode",
-
     luacode_inclusion: ($) =>
-      seq(
-        $._luacode_start,
-        alias($.inclusion_body, $.luacode_body),
-        $._luacode_stop
-      ),
+      seq("\\startluacode", $.luacode_body, "\\stopluacode"),
 
-    // PARSED TYPING INCLUSIONS
+    // TYPING INCLUSIONS
     //
     // This ConTeXt parser can inject parsing for typing environments, as supported by tree-sitter.
     //
-    // * MetaPost/Fun (marked, but parsing not yet supported)
+    // * MetaPost/Fun (marked, but parsing not yet supported by tree-sitter)
     // * HTML
     // * CSS
     // * Lua
+    // * XML
+    // * PARSEDXML
     //
+    // * TeX (marked, but tree-sitter support is tricky)
+    // * Generic Typing Environment
 
     // HTML
-    _typing_html_start: ($) => "\\startHTML",
-
-    _typing_html_stop: ($) => "\\stopHTML",
-
     typing_html_inclusion: ($) =>
-      seq(
-        $._typing_html_start,
-        alias($.inclusion_body, $.typing_html_body),
-        $._typing_html_stop
-      ),
+      seq("\\startHTML", $.typing_html_body, "\\stopHTML"),
 
     // CSS
-    _typing_css_start: ($) => "\\startCSS",
-
-    _typing_css_stop: ($) => "\\stopCSS",
-
     typing_css_inclusion: ($) =>
-      seq(
-        $._typing_css_start,
-        alias($.inclusion_body, $.typing_css_body),
-        $._typing_css_stop
-      ),
+      seq("\\startCSS", $.typing_css_body, "\\stopCSS"),
 
     // MetaPost/Fun
-    _typing_mp_start: ($) => "\\startMP",
-
-    _typing_mp_stop: ($) => "\\stopMP",
-
-    typing_mp_inclusion: ($) =>
-      seq(
-        $._typing_mp_start,
-        alias($.inclusion_body, $.typing_mp_body),
-        $._typing_mp_stop
-      ),
+    typing_mp_inclusion: ($) => seq("\\startMP", $.typing_mp_body, "\\stopMP"),
 
     // LUA
-    _typing_lua_start: ($) => "\\startLUA",
-
-    _typing_lua_stop: ($) => "\\stopLUA",
-
     typing_lua_inclusion: ($) =>
-      seq(
-        $._typing_lua_start,
-        alias($.inclusion_body, $.typing_lua_body),
-        $._typing_lua_stop
-      ),
+      seq("\\startLUA", $.typing_lua_body, "\\stopLUA"),
 
     // XML
-    _typing_xml_start: ($) => "\\startXML",
-
-    _typing_xml_stop: ($) => "\\stopXML",
-
     typing_xml_inclusion: ($) =>
-      seq(
-        $._typing_xml_start,
-        alias($.inclusion_body, $.typing_xml_body),
-        $._typing_xml_stop
-      ),
+      seq("\\startXML", $.typing_xml_body, "\\stopXML"),
 
     // PARSEDXML
-    _typing_parsedxml_start: ($) => "\\startPARSEDXML",
-
-    _typing_parsedxml_stop: ($) => "\\stopPARSEDXML",
-
     typing_parsedxml_inclusion: ($) =>
-      seq(
-        $._typing_parsedxml_start,
-        alias($.inclusion_body, $.typing_parsedxml_body),
-        $._typing_parsedxml_stop
-      ),
+      seq("\\startPARSEDXML", $.typing_parsedxml_body, "\\stopPARSEDXML"),
 
-    // UNPARSED TYPING INCLUSIONS
-    //
-    // (The Plain TeX environment is unparsed, for now: there is no tree-sitter parser for
-    // Plain TeX, and the LaTeX parser fights with this one over filenames ending in .tex)
-    //
-    // (A non-goal for this grammar is discovery of any user-generated typing inclusions.)
-    _typing_unparsed_start: ($) => choice("\\starttyping", "\\startTEX"),
+    // TEX
+    typing_xml_inclusion: ($) =>
+      seq("\\startTEX", $.typing_tex_body, "\\stopTEX"),
 
-    _typing_unparsed_stop: ($) => choice("\\stoptyping", "\\stopTEX"),
-
-    typing_body: ($) => /[^\\]*/,
-
-    typing_unparsed_inclusion: ($) =>
-      seq(
-        $._typing_unparsed_start,
-        alias($.typing_body, $.typing_unparsed_body),
-        $._typing_unparsed_stop
-      ),
+    // UNNAMED TYPING ENVIRONMENT
+    typing_xml_inclusion: ($) =>
+      seq("\\starttyping", $.typing_unnamed_body, "\\stoptyping"),
 
     // # EXTRAS
 

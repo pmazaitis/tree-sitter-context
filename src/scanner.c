@@ -11,7 +11,14 @@ enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_MARK,
   TEXT,
-  INCLUSION_TIKZ_END,
+  TIKZCODE_BODY,
+  LUACODE_BODY,
+  TYPING_HTML_BODY,
+  TYPING_CSS_BODY,
+  TYPING_MP_BODY,
+  TYPING_LUA_BODY,
+  TYPING_XML_BODY,
+  TYPING_PARSEDXML_BODY,
 };
 
 // FIXME this scanner is not line ending agnostic
@@ -216,12 +223,12 @@ static bool find_verbatim(TSLexer *lexer, const char *keyword) {
         break;
       }
 
-      lexer->advance(lexer, false);
+      advance(lexer);
       advanced = true;
     }
 
     if (failed && !advanced) {
-      lexer->advance(lexer, false);
+      advance(lexer);
       lexer->mark_end(lexer);
       has_marked = true;
       continue;
@@ -247,10 +254,47 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
     return scan_text(lexer);
   }
   
-  if (valid_symbols[INCLUSION_TIKZ_END]) {
-    lexer->result_symbol = INCLUSION_TIKZ_END;
+  if (valid_symbols[TIKZCODE_BODY]) {
+    lexer->result_symbol = TIKZCODE_BODY;
     return find_verbatim(lexer, "\\stoptikzpicture");
   }
+  
+  if (valid_symbols[LUACODE_BODY]) {
+    lexer->result_symbol = LUACODE_BODY;
+    return find_verbatim(lexer, "\\stopluacode");
+  }
+  
+  if (valid_symbols[TYPING_HTML_BODY]) {
+    lexer->result_symbol = TYPING_HTML_BODY;
+    return find_verbatim(lexer, "\\stopHTML");
+  }
+
+  if (valid_symbols[TYPING_CSS_BODY]) {
+    lexer->result_symbol = TYPING_HTML_BODY;
+    return find_verbatim(lexer, "\\stopCSS");
+  }
+  
+  if (valid_symbols[TYPING_MP_BODY]) {
+    lexer->result_symbol = TYPING_MP_BODY;
+    return find_verbatim(lexer, "\\stopMP");
+  }
+  
+  if (valid_symbols[TYPING_LUA_BODY]) {
+    lexer->result_symbol = TYPING_LUA_BODY;
+    return find_verbatim(lexer, "\\stopLUA");
+  }
+  
+  if (valid_symbols[TYPING_XML_BODY]) {
+    lexer->result_symbol = TYPING_XML_BODY;
+    return find_verbatim(lexer, "\\stopXML");
+  }
+  
+  if (valid_symbols[TYPING_PARSEDXML_BODY]) {
+    lexer->result_symbol = TYPING_PARSEDXML_BODY;
+    return find_verbatim(lexer, "\\stopPARSEDXML");
+  }
+  
+  
   
   
   return false;  
