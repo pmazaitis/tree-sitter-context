@@ -1,6 +1,6 @@
 ; injections.scm
 
-((luacode_body) @injection.content
+((code_lua_body) @injection.content
  (#set! injection.language "lua"))
 
 ((typing_html_body) @injection.content

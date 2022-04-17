@@ -72,6 +72,12 @@ module.exports = grammar({
     $._command_stop,
     $.paragraph_mark,
     $.text,
+    $.code_MPinclusions_body,
+    $.code_useMPgraphic_body,
+    $.code_reusableMPgraphic_body,
+    $.code_MPcode_body,
+    $.code_MPpage_body,
+    $.code_staticMPfigure_body,
     $.code_tikz_body,
     $.code_lua_body,
     $.typing_html_body,
@@ -132,8 +138,14 @@ module.exports = grammar({
         $.command_group,
         $.text_block,
         $.luacode_inclusion,
-        $.tikz_inclusion,
-        $.metapost_inclusion,
+        $.tikzcode_inclusion,
+        // $.metapost_inclusion,
+        $.MPinclusions_inclusion,
+        $.useMPgraphic_inclusion,
+        $.reusableMPgraphic_inclusion,
+        $.MPcode_inclusion,
+        $.MPpage_inclusion,
+        $.staticMPfigure_inclusion,
         $.typing_unnamed_inclusion,
         $.typing_mp_inclusion,
         $.typing_lua_inclusion,
@@ -291,38 +303,49 @@ module.exports = grammar({
     //
 
     // We alias the following token for all inclusion bodies
-    inclusion_body: ($) => /[^\\]*/,
+    // inclusion_body: ($) => /[^\\]*/,
 
     // Metafun/Post
-    _metapost_start: ($) =>
-      choice(
-        "\\startMPinclusions",
-        "\\startuseMPgraphic",
-        "\\startreusableMPgraphic",
-        "\\startMPcode",
-        "\\startMPpage",
-        "\\startstaticMPfigure"
-      ),
+    MPinclusions_inclusion: ($) =>
+      seq("\\startMPinclusions", $.code_MPinclusions_body),
+    useMPgraphic_inclusion: ($) =>
+      seq("\\startuseMPgraphic", $.code_useMPgraphic_body),
+    reusableMPgraphic_inclusion: ($) =>
+      seq("\\startreusableMPgraphic", $.code_reusableMPgraphic_body),
+    MPcode_inclusion: ($) => seq("\\startMPcode", $.code_MPcode_body),
+    MPpage_inclusion: ($) => seq("\\startMPpage", $.code_MPpage_body),
+    staticMPfigure_inclusion: ($) =>
+      seq("\\startstaticMPfigure", $.code_staticMPfigure_body),
 
-    _metapost_stop: ($) =>
-      choice(
-        "\\stopMPinclusions",
-        "\\stopuseMPgraphic",
-        "\\stopreusableMPgraphic",
-        "\\stopMPcode",
-        "\\stopMPpage",
-        "\\stopstaticMPfigure"
-      ),
-
-    metapost_inclusion: ($) =>
-      seq(
-        $._metapost_start,
-        alias($.inclusion_body, $.metapost_body),
-        $._metapost_stop
-      ),
+    //     _metapost_start: ($) =>
+    //       choice(
+    //         "\\startMPinclusions",
+    //         "\\startuseMPgraphic",
+    //         "\\startreusableMPgraphic",
+    //         "\\startMPcode",
+    //         "\\startMPpage",
+    //         "\\startstaticMPfigure"
+    //       ),
+    //
+    //     _metapost_stop: ($) =>
+    //       choice(
+    //         "\\stopMPinclusions",
+    //         "\\stopuseMPgraphic",
+    //         "\\stopreusableMPgraphic",
+    //         "\\stopMPcode",
+    //         "\\stopMPpage",
+    //         "\\stopstaticMPfigure"
+    //       ),
+    //
+    //     metapost_inclusion: ($) =>
+    //       seq(
+    //         $._metapost_start,
+    //         alias($.inclusion_body, $.metapost_body),
+    //         $._metapost_stop
+    //       ),
 
     // TiKz
-    tikz_inclusion: ($) => seq("\\starttikzpicture", $.code_tikz_body),
+    tikzcode_inclusion: ($) => seq("\\starttikzpicture", $.code_tikz_body),
 
     // Lua
     luacode_inclusion: ($) => seq("\\startluacode", $.code_lua_body),

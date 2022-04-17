@@ -11,6 +11,12 @@ enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_MARK,
   TEXT,
+  CODE_MPINCLUSIONS_BODY,
+  CODE_USEMPGRAPHIC_BODY,
+  CODE_REUSABLEMPGRAPHIC_BODY,
+  CODE_MPCODE_BODY,
+  CODE_MPPAGE_BODY,
+  CODE_STATICMPFIGURE_BODY,
   CODE_TIKZ_BODY,
   CODE_LUA_BODY,
   TYPING_HTML_BODY,
@@ -306,6 +312,35 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
     return find_verbatim(lexer, "\\stoptyping");
   }
   
+  if (valid_symbols[CODE_MPINCLUSIONS_BODY]) {
+    lexer->result_symbol = CODE_MPINCLUSIONS_BODY;
+    return find_verbatim(lexer, "\stopMPinclusions");
+  }
+    
+  if (valid_symbols[CODE_USEMPGRAPHIC_BODY]) {
+    lexer->result_symbol = CODE_USEMPGRAPHIC_BODY;
+    return find_verbatim(lexer, "\stopuseMPgraphic");
+  }
+    
+  if (valid_symbols[CODE_REUSABLEMPGRAPHIC_BODY]) {
+    lexer->result_symbol = CODE_REUSABLEMPGRAPHIC_BODY;
+    return find_verbatim(lexer, "\stopreusableMPgraphic");
+  }
+    
+  if (valid_symbols[CODE_MPCODE_BODY]) {
+    lexer->result_symbol = CODE_MPCODE_BODY;
+    return find_verbatim(lexer, "\stopMPcode");
+  }
+    
+  if (valid_symbols[CODE_MPPAGE_BODY]) {
+    lexer->result_symbol = CODE_MPPAGE_BODY;
+    return find_verbatim(lexer, "\stopMPpage");
+  }
+    
+  if (valid_symbols[CODE_STATICMPFIGURE_BODY]) {
+    lexer->result_symbol = CODE_STATICMPFIGURE_BODY;
+    return find_verbatim(lexer, "\stopstaticMPfigure");
+  }
   
   
   return false;  
