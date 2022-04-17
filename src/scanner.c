@@ -197,8 +197,7 @@ static bool scan_text(TSLexer *lexer) {
   return true;
 }
 
-static bool find_verbatim(TSLexer *lexer, const char *keyword,
-                          bool is_command_name) {
+static bool find_verbatim(TSLexer *lexer, const char *keyword) {
   bool has_marked = false;
   while (true) {
     if (lexer->eof(lexer)) {
@@ -227,34 +226,6 @@ static bool find_verbatim(TSLexer *lexer, const char *keyword,
       has_marked = true;
       continue;
     }
-
-    if (!failed) {
-      if (is_command_name) {
-        if (lexer->eof(lexer)) {
-          return has_marked;
-        }
-
-        char c = lexer->lookahead;
-        switch (c) {
-        case ':':
-        case '_':
-        case '@':
-          failed = true;
-          break;
-        default:
-          failed = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-          break;
-        }
-
-        if (failed) {
-          lexer->mark_end(lexer);
-          has_marked = true;
-          continue;
-        }
-      }
-
-      return has_marked;
-    }
   }
 
   return has_marked;
@@ -278,7 +249,7 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
   
   if (valid_symbols[INCLUSION_TIKZ_END]) {
     lexer->result_symbol = INCLUSION_TIKZ_END;
-    return find_verbatim(lexer, "\\stoptikzpicture", true);
+    return find_verbatim(lexer, "\\stoptikzpicture");
   }
   
   
