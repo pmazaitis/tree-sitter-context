@@ -105,7 +105,6 @@ module.exports = grammar({
         repeat($._content),
         choice(
           "\\starttext",
-          // "\\startcomponent",
           seq(
             "\\startcomponent",
             choice(
