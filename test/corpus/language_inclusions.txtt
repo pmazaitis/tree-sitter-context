@@ -73,7 +73,7 @@ draw(0,0)--(1,1);
       (text)
     )
     (tikz_inclusion
-      (tikz_body)
+      (tikzcode_body)
     )
     (text_block
       (text)
