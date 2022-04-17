@@ -38,8 +38,6 @@
 //
 // # Work list
 //
-// * TODO: We need external scanners to find the end of injection environments...
-// * TODO: ...once that's done, remove exclusion of \\ from those environments
 // * External scanner whitespace? (ask on github?)
 // * put explicit boundary markers back for highlighting?
 //
@@ -139,7 +137,6 @@ module.exports = grammar({
         $.text_block,
         $.luacode_inclusion,
         $.tikzcode_inclusion,
-        // $.metapost_inclusion,
         $.MPinclusions_inclusion,
         $.useMPgraphic_inclusion,
         $.reusableMPgraphic_inclusion,
@@ -153,7 +150,6 @@ module.exports = grammar({
         $.typing_css_inclusion,
         $.typing_xml_inclusion,
         $.typing_parsedxml_inclusion,
-        // the following should only appear in the preamble?
         $.project_command,
         $.product_command,
         $.environment_command
@@ -302,9 +298,6 @@ module.exports = grammar({
     // * Lua
     //
 
-    // We alias the following token for all inclusion bodies
-    // inclusion_body: ($) => /[^\\]*/,
-
     // Metafun/Post
     MPinclusions_inclusion: ($) =>
       seq("\\startMPinclusions", $.code_MPinclusions_body),
@@ -316,33 +309,6 @@ module.exports = grammar({
     MPpage_inclusion: ($) => seq("\\startMPpage", $.code_MPpage_body),
     staticMPfigure_inclusion: ($) =>
       seq("\\startstaticMPfigure", $.code_staticMPfigure_body),
-
-    //     _metapost_start: ($) =>
-    //       choice(
-    //         "\\startMPinclusions",
-    //         "\\startuseMPgraphic",
-    //         "\\startreusableMPgraphic",
-    //         "\\startMPcode",
-    //         "\\startMPpage",
-    //         "\\startstaticMPfigure"
-    //       ),
-    //
-    //     _metapost_stop: ($) =>
-    //       choice(
-    //         "\\stopMPinclusions",
-    //         "\\stopuseMPgraphic",
-    //         "\\stopreusableMPgraphic",
-    //         "\\stopMPcode",
-    //         "\\stopMPpage",
-    //         "\\stopstaticMPfigure"
-    //       ),
-    //
-    //     metapost_inclusion: ($) =>
-    //       seq(
-    //         $._metapost_start,
-    //         alias($.inclusion_body, $.metapost_body),
-    //         $._metapost_stop
-    //       ),
 
     // TiKz
     tikzcode_inclusion: ($) => seq("\\starttikzpicture", $.code_tikz_body),
