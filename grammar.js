@@ -68,7 +68,12 @@ module.exports = grammar({
 
   extras: ($) => [$._whitespace, $.line_comment],
 
-  externals: ($) => [$._command_stop, $.paragraph_mark, $.text],
+  externals: ($) => [
+    $._command_stop,
+    $.paragraph_mark,
+    $.text,
+    $._inclusion_tikz_end,
+  ],
 
   word: ($) => $.command_name,
 
@@ -308,12 +313,15 @@ module.exports = grammar({
       ),
 
     // TiKz
-    _tikz_start: ($) => "\\starttikzpicture",
-
-    _tikz_stop: ($) => "\\stoptikzpicture",
+    // _inclusion_tikz_start: ($) => "\\starttikzpicture",
 
     tikz_inclusion: ($) =>
-      seq($._tikz_start, alias($.inclusion_body, $.tikz_body), $._tikz_stop),
+      seq(
+        // $._inclusion_tikz_start,
+        "\\starttikzpicture",
+        alias($.inclusion_body, $.tikz_body),
+        $._inclusion_tikz_end
+      ),
 
     // Lua
     _luacode_start: ($) => "\\startluacode",
