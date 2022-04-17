@@ -302,21 +302,41 @@ module.exports = grammar({
 
     // Metafun/Post
     MPinclusions_inclusion: ($) =>
-      seq("\\startMPinclusions", $.code_MPinclusions_body),
+      seq(
+        "\\startMPinclusions",
+        $.code_MPinclusions_body,
+        "\\stopMPinclusions"
+      ),
     useMPgraphic_inclusion: ($) =>
-      seq("\\startuseMPgraphic", $.code_useMPgraphic_body),
+      seq(
+        "\\startuseMPgraphic",
+        $.code_useMPgraphic_body,
+        "\\stopuseMPgraphic"
+      ),
     reusableMPgraphic_inclusion: ($) =>
-      seq("\\startreusableMPgraphic", $.code_reusableMPgraphic_body),
-    MPcode_inclusion: ($) => seq("\\startMPcode", $.code_MPcode_body),
-    MPpage_inclusion: ($) => seq("\\startMPpage", $.code_MPpage_body),
+      seq(
+        "\\startreusableMPgraphic",
+        $.code_reusableMPgraphic_body,
+        "\\stopreusableMPgraphic"
+      ),
+    MPcode_inclusion: ($) =>
+      seq("\\startMPcode", $.code_MPcode_body, "\\stopMPcode"),
+    MPpage_inclusion: ($) =>
+      seq("\\startMPpage", $.code_MPpage_body, "\\stopMPpage"),
     staticMPfigure_inclusion: ($) =>
-      seq("\\startstaticMPfigure", $.code_staticMPfigure_body),
+      seq(
+        "\\startstaticMPfigure",
+        $.code_staticMPfigure_body,
+        "\\stopstaticMPfigure"
+      ),
 
     // TiKz
-    tikzcode_inclusion: ($) => seq("\\starttikzpicture", $.code_tikz_body),
+    tikzcode_inclusion: ($) =>
+      seq("\\starttikzpicture", $.code_tikz_body, "\\stoptikzpicture"),
 
     // Lua
-    luacode_inclusion: ($) => seq("\\startluacode", $.code_lua_body),
+    luacode_inclusion: ($) =>
+      seq("\\startluacode", $.code_lua_body, "\\stopluacode"),
 
     // TYPING INCLUSIONS
     //
@@ -333,30 +353,35 @@ module.exports = grammar({
     // * Generic Typing Environment
 
     // HTML
-    typing_html_inclusion: ($) => seq("\\startHTML", $.typing_html_body),
+    typing_html_inclusion: ($) =>
+      seq("\\startHTML", $.typing_html_body, "\\stopHTML"),
 
     // CSS
-    typing_css_inclusion: ($) => seq("\\startCSS", $.typing_css_body),
+    typing_css_inclusion: ($) =>
+      seq("\\startCSS", $.typing_css_body, "\\stopCSS"),
 
     // MetaPost/Fun
-    typing_mp_inclusion: ($) => seq("\\startMP", $.typing_mp_body),
+    typing_mp_inclusion: ($) => seq("\\startMP", $.typing_mp_body, "\\stopMP"),
 
     // LUA
-    typing_lua_inclusion: ($) => seq("\\startLUA", $.typing_lua_body),
+    typing_lua_inclusion: ($) =>
+      seq("\\startLUA", $.typing_lua_body, "\\stopLUA"),
 
     // XML
-    typing_xml_inclusion: ($) => seq("\\startXML", $.typing_xml_body),
+    typing_xml_inclusion: ($) =>
+      seq("\\startXML", $.typing_xml_body, "\\stopXML"),
 
     // PARSEDXML
     typing_parsedxml_inclusion: ($) =>
-      seq("\\startPARSEDXML", $.typing_parsedxml_body),
+      seq("\\startPARSEDXML", $.typing_parsedxml_body, "\\stopPARSEDXML"),
 
     // TEX
-    typing_tex_inclusion: ($) => seq("\\startTEX", $.typing_tex_body),
+    typing_tex_inclusion: ($) =>
+      seq("\\startTEX", $.typing_tex_body, "\\stopTEX"),
 
     // UNNAMED TYPING ENVIRONMENT
     typing_unnamed_inclusion: ($) =>
-      seq("\\starttyping", $.typing_unnamed_body),
+      seq("\\starttyping", $.typing_unnamed_body, "\\stoptyping"),
 
     // # EXTRAS
 

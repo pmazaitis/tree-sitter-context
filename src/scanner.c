@@ -241,6 +241,26 @@ static bool find_verbatim(TSLexer *lexer, const char *keyword) {
       has_marked = true;
       continue;
     }
+    
+    if (!failed) {
+
+      if (lexer->eof(lexer)) {
+        return has_marked;
+      }
+  
+      char c = lexer->lookahead;
+
+      failed = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+      
+      if (failed) {
+        lexer->mark_end(lexer);
+        has_marked = true;
+        continue;
+      }
+      
+    
+      return has_marked;
+    }
   }
 
   return has_marked;
@@ -314,32 +334,32 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
   
   if (valid_symbols[CODE_MPINCLUSIONS_BODY]) {
     lexer->result_symbol = CODE_MPINCLUSIONS_BODY;
-    return find_verbatim(lexer, "\stopMPinclusions");
+    return find_verbatim(lexer, "\\stopMPinclusions");
   }
     
   if (valid_symbols[CODE_USEMPGRAPHIC_BODY]) {
     lexer->result_symbol = CODE_USEMPGRAPHIC_BODY;
-    return find_verbatim(lexer, "\stopuseMPgraphic");
+    return find_verbatim(lexer, "\\stopuseMPgraphic");
   }
     
   if (valid_symbols[CODE_REUSABLEMPGRAPHIC_BODY]) {
     lexer->result_symbol = CODE_REUSABLEMPGRAPHIC_BODY;
-    return find_verbatim(lexer, "\stopreusableMPgraphic");
+    return find_verbatim(lexer, "\\stopreusableMPgraphic");
   }
     
   if (valid_symbols[CODE_MPCODE_BODY]) {
     lexer->result_symbol = CODE_MPCODE_BODY;
-    return find_verbatim(lexer, "\stopMPcode");
+    return find_verbatim(lexer, "\\stopMPcode");
   }
     
   if (valid_symbols[CODE_MPPAGE_BODY]) {
     lexer->result_symbol = CODE_MPPAGE_BODY;
-    return find_verbatim(lexer, "\stopMPpage");
+    return find_verbatim(lexer, "\\stopMPpage");
   }
     
   if (valid_symbols[CODE_STATICMPFIGURE_BODY]) {
     lexer->result_symbol = CODE_STATICMPFIGURE_BODY;
-    return find_verbatim(lexer, "\stopstaticMPfigure");
+    return find_verbatim(lexer, "\\stopstaticMPfigure");
   }
   
   
