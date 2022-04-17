@@ -44,11 +44,13 @@
 // # PRECEDENCE LIST
 //
 // 20  :  (document choice) prec(20, seq($.preamble, $.main, $.postamble)),
-// 16  :  escaped: $ => prec(16,seq('\\', $.escapechar)),
+// 16r :  escaped: $ => prec.right(16,seq('\\', $.escapechar)),
 // 14  :  settings_block: $ => prec(14,seq("[",sepBy($.setting, ','),"]")),
 // 12  :  option_block: $ => prec(12, seq("[",sepBy($.keyword, ','),"]")),
 // 10  :  inline_math: $ => prec(10,seq('$', repeat1($._math_content), '$')),
-// r   :   command: $ => prec.right(
+// 10  :  command_group: ($) => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._content), /\\stop[^a-zA-Z]/)),
+// r   :  command: $ => prec.right(choice(seq($.command_name,repeat(choice($.empty_block, $.option_block, $.settings_block)),repeat($.command_scope),$._command_stop))),
+// r   :  value: ($) => prec.right(repeat1($._value_content)),
 
 // # HELPERS
 //
