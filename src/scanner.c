@@ -11,6 +11,7 @@ enum TokenType {
   COMMAND_STOP,
   PARAGRAPH_MARK,
   TEXT,
+  INCLUSION_TIKZ_END,
 };
 
 // FIXME this scanner is not line ending agnostic
@@ -263,18 +264,46 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
 
   UNUSED(payload);
 
-  if (valid_symbols[COMMAND_STOP]) {
+  // if (valid_symbols[COMMAND_STOP]) {
+  //   return scan_command_stop(lexer);
+  // }
+  // 
+  // if (valid_symbols[PARAGRAPH_MARK]) {
+  //   return scan_paragraph_mark(lexer);
+  // }
+  // 
+  // if (valid_symbols[TEXT]) {
+  //   return scan_text(lexer);
+  // }
+  
+  bool found = false;
+  TSSymbol type = 0xFFFF;
+  for (int i = 0; i <= INCLUSION_TIKZ_END; i++) {
+    if (valid_symbols[i]) {
+      if (found) {
+        return false;
+      } else {
+        found = true;
+        type = i;
+      }
+    }
+  }
+  
+  lexer->result_symbol = type;
+  switch (type) {
+  case COMMAND_STOP:
     return scan_command_stop(lexer);
-  }
-  
-  if (valid_symbols[PARAGRAPH_MARK]) {
+  case PARAGRAPH_MARK:
     return scan_paragraph_mark(lexer);
-  }
-  
-  if (valid_symbols[TEXT]) {
+  case TEXT:
     return scan_text(lexer);
+  case INCLUSION_TIKZ_END:
+    return find_verbatim(lexer, "\\stoptikzpicture", true);
+  // case TRIVIA_RAW_ENV_MINTED:
+  //   return find_verbatim(lexer, "\\end{minted}", false);
+  // case TRIVIA_RAW_ENV_PYCODE:
+  //   return find_verbatim(lexer, "\\end{pycode}", false);
   }
   
-  return false;
-  
+  return false;  
 }
