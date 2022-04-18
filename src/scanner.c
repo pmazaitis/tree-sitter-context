@@ -39,6 +39,7 @@ unsigned tree_sitter_context_external_scanner_serialize(void *p, char *buffer) {
 void tree_sitter_context_external_scanner_deserialize(void *p, const char *b, unsigned n) {UNUSED(p); UNUSED(b); UNUSED(n);}
 
 static bool isctxspecial(char c);
+static bool isvalidtextcontent(char c);
 static void debuglookahead(char c, char* msg);
 
 static void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
@@ -60,6 +61,35 @@ static bool isctxspecial(char c) {
     case '|': return true;
     case '~': return true;
     case '\\': return true;
+  }
+  return false;
+}
+
+static bool isvalidtextcontent(char c) {
+  if (iswalnum(c)) return true;
+  
+  switch(c) {
+    case '!': return true;
+    case '"': return true;
+    case '\'': return true;
+    case '(': return true;
+    case ')': return true;
+    case '*': return true;
+    case '+': return true;
+    case ',': return true;
+    case '-': return true;
+    case '.': return true;
+    case '/': return true;
+    case ':': return true;
+    case ';': return true;
+    case '<': return true;
+    case '=': return true;
+    case '>': return true;
+    case '?': return true;
+    case '@': return true;
+    case '[': return true;
+    case ']': return true;
+    case '`': return true;
   }
   return false;
 }
@@ -99,9 +129,10 @@ static bool scan_command_stop(TSLexer *lexer) {
     if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
     // Found another command
     if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-    // We find a numeric, the command is over
-    if (iswdigit(lexer->lookahead)) {lexer->mark_end(lexer); return true;}
     
+    if (isvalidtextcontent(lexer->lookahead)) {
+      lexer->mark_end(lexer); return true;
+    }
       
     if (lexer->lookahead == '\n') {
       advance(lexer);
@@ -146,9 +177,7 @@ static bool scan_scopes_stop(TSLexer *lexer) {
     // Found another command - scope set is over
     if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
     
-    char c = lexer->lookahead;
-    
-    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+    if (isvalidtextcontent(lexer->lookahead)) {
       lexer->mark_end(lexer); return true;
     }
     

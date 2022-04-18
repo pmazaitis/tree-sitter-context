@@ -139,3 +139,30 @@ command-simple_with_multiple_scopes_sep_by_newlines
     )
   ) 
 )
+
+======
+command-does_not_consume_content
+======
+
+{\blank Foo}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (brace_group
+      (command
+        (command_name)
+      )
+      (text_block
+        (text)
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)
