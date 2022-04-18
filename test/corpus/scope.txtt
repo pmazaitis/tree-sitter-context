@@ -147,6 +147,9 @@ scope-scope_paragraph_scope
         )
       )
     )
+    (text_block
+      (text)
+    )
     (brace_group
       (text_block
         (text)

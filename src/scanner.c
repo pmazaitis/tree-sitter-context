@@ -159,7 +159,7 @@ static bool scan_scopes_stop(TSLexer *lexer) {
       if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
       if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
       if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-      if (lexer->lookahead == '\n') return true;
+      if (lexer->lookahead == '\n') {lexer->mark_end(lexer); return true;}
     } else {
       // Single newlines are okay in scope groups
       return false;
