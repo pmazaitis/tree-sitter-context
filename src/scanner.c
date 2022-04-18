@@ -64,7 +64,7 @@ static bool isctxspecial(char c) {
   }
   return false;
 }
-
+// Make these general, and specific to the command and scope stops (extend to unicode?)
 static bool isvalidtextcontent(char c) {
   if (iswalnum(c)) return true;
   
