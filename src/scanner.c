@@ -9,6 +9,7 @@
 
 enum TokenType {
   COMMAND_STOP,
+  SCOPE_STOP,
   PARAGRAPH_MARK,
   TEXT,
   CODE_MPINCLUSIONS_BODY,
@@ -80,7 +81,7 @@ static bool scan_command_stop(TSLexer *lexer) {
   // Determine if a command has ended in the source file.
   //
   // ConTeXt commands have a name, then zero or more square bracket blocks with 
-  // options or settings, then one or more scopes.
+  // options or settings.
   lexer->result_symbol = COMMAND_STOP;
   lexer->mark_end(lexer);
   
@@ -94,7 +95,7 @@ static bool scan_command_stop(TSLexer *lexer) {
     // We have a comment; this is not necessarily a stop
     if (lexer->lookahead == '%') return false;
     // We enter or leave a scope; the command is over
-    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
+    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
     if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
     // Found another command
     if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
@@ -122,6 +123,46 @@ static bool scan_command_stop(TSLexer *lexer) {
   return true;
 }
 
+static bool scan_scope_stop(TSLexer *lexer) {
+  // Determine if a scope set has ended in the source file.
+  //
+  // ConTeXt commands can be followed by zero or more scopes.
+  lexer->result_symbol = SCOPE_STOP;
+  lexer->mark_end(lexer);
+  
+   
+  // We have a comment; this is not necessarily a stop
+  if (lexer->lookahead == '%') return false;
+  // We enter a scope; the scope set is not complete
+  if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
+  // We leave a scope; the scope set might not yet be complete
+  if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
+  // Found another command - scope set is over
+  if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
+  
+  char c = lexer->lookahead;
+  
+  if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+    lexer->mark_end(lexer); return true;
+  }
+  
+  if (lexer->lookahead == '\n') {
+    advance(lexer);
+    if (lexer->lookahead == 0) return true;
+    if (lexer->lookahead == '%') return false;
+    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
+    if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
+    if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
+    if (lexer->lookahead == '\n') return true;
+  } 
+  
+  // Any other character, the scope set is over
+  return true;
+  
+
+
+
+}
 
 static bool scan_paragraph_mark(TSLexer *lexer) {
   // Scan for two or more consecutive EOLs, and form a token to indicate a paragraph break.
@@ -272,6 +313,10 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
 
   if (valid_symbols[COMMAND_STOP]) {
     return scan_command_stop(lexer);
+  }
+  
+  if (valid_symbols[SCOPE_STOP]) {
+    return scan_scope_stop(lexer);
   }
   
   if (valid_symbols[PARAGRAPH_MARK]) {
