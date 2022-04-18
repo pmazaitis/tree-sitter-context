@@ -1,0 +1,160 @@
+======
+scope-one_scope
+======
+
+\blank{one}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+
+======
+scope-two_scopes
+======
+
+\blank{one}{two}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+
+======
+scope-two_scopes_whitespace_before
+======
+
+\blank {one}{two}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+
+======
+scope-two_scopes_whitespace_between
+======
+
+\blank{one} {two}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+======
+scope-scope_paragraph_scope
+======
+
+\blank{one} 
+
+{two}
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+      )
+    )
+    (brace_group
+      (text_block
+        (text)
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+

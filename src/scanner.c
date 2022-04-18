@@ -9,7 +9,7 @@
 
 enum TokenType {
   COMMAND_STOP,
-  SCOPE_STOP,
+  SCOPES_STOP,
   PARAGRAPH_MARK,
   TEXT,
   CODE_MPINCLUSIONS_BODY,
@@ -123,38 +123,51 @@ static bool scan_command_stop(TSLexer *lexer) {
   return true;
 }
 
-static bool scan_scope_stop(TSLexer *lexer) {
+static bool scan_scopes_stop(TSLexer *lexer) {
   // Determine if a scope set has ended in the source file.
   //
   // ConTeXt commands can be followed by zero or more scopes.
-  lexer->result_symbol = SCOPE_STOP;
+  lexer->result_symbol = SCOPES_STOP;
   lexer->mark_end(lexer);
   
-   
-  // We have a comment; this is not necessarily a stop
-  if (lexer->lookahead == '%') return false;
-  // We enter a scope; the scope set is not complete
-  if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
-  // We leave a scope; the scope set might not yet be complete
-  if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
-  // Found another command - scope set is over
-  if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-  
-  char c = lexer->lookahead;
-  
-  if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-    lexer->mark_end(lexer); return true;
-  }
-  
-  if (lexer->lookahead == '\n') {
-    advance(lexer);
-    if (lexer->lookahead == 0) return true;
+  while (lexer->lookahead != 0) {
+      
+    if (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+      skip(lexer);
+      continue;
+    }
+    
+    // We have a comment; this is not necessarily a stop
     if (lexer->lookahead == '%') return false;
+    // We enter a scope; the scope set is not complete
     if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
+    // We leave a scope; the scope set might not yet be complete
     if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
+    // Found another command - scope set is over
     if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-    if (lexer->lookahead == '\n') return true;
-  } 
+    
+    char c = lexer->lookahead;
+    
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+      lexer->mark_end(lexer); return true;
+    }
+    
+    if (lexer->lookahead == '\n') {
+      advance(lexer);
+      if (lexer->lookahead == 0) return true;
+      if (lexer->lookahead == '%') return false;
+      if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
+      if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
+      if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
+      if (lexer->lookahead == '\n') return true;
+    } else {
+      // Single newlines are okay in scope groups
+      return false;
+    }
+  
+    advance(lexer);
+  
+  }
   
   // Any other character, the scope set is over
   return true;
@@ -315,8 +328,8 @@ bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, co
     return scan_command_stop(lexer);
   }
   
-  if (valid_symbols[SCOPE_STOP]) {
-    return scan_scope_stop(lexer);
+  if (valid_symbols[SCOPES_STOP]) {
+    return scan_scopes_stop(lexer);
   }
   
   if (valid_symbols[PARAGRAPH_MARK]) {

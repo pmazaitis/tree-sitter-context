@@ -70,7 +70,7 @@ module.exports = grammar({
 
   externals: ($) => [
     $._command_stop,
-    $._scope_stop,
+    $._scopes_stop,
     $.paragraph_mark,
     $.text,
     $.code_MPinclusions_body,
@@ -234,7 +234,13 @@ module.exports = grammar({
             $.command_name,
             repeat(choice($.empty_block, $.option_block, $.settings_block)),
             $._command_stop,
-            optional(seq(repeat($.command_scope), $._scope_stop))
+            optional(
+              seq(
+                $.command_scope,
+                repeat(seq(/\s*/, $.command_scope)),
+                $._scopes_stop
+              )
+            )
           )
         )
       ),
