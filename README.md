@@ -7,8 +7,8 @@
 This parser supports, in overview:
 
 - Parsing ConTeXt files into a concrete syntax tree into tokens (text, commands, etc.)
-- Marking inclusions of other languages to be handled by other tree-sitter parsers (for example, included Lua code in a `.tex` file can be handled by [`tree-sitter-lua`](https://github.com/Azganoth/tree-sitter-lua), if installed).
-- Syntax highlighting
+- Marking inclusions of other languages to be handled by other tree-sitter parsers (for example, included Lua code in a `.tex` file can be handled by [`tree-sitter-lua`](https://github.com/Azganoth/tree-sitter-lua), if installed)
+- Syntax highlighting using the syntax tree
 
 This parser should work with tools (editors, formatters) that can work with Tree-Sitter parsers. The Tree-Sitter system also supports several language bindings for building custom tools.
 
