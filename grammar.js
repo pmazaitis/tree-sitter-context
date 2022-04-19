@@ -13,13 +13,14 @@
 // [PASS] Paragraph Markers
 // [PASS] Brace Groups
 // [PASS] Command groups (/start and /stop)
-// [PASS] Escaped Characters
-// [PASS] Comments
+// [FAIL] Escaped Characters
+// [FAIL] Comments
 // [PASS] Inline Math
 // [PASS] Component Name (component ID required)
 // [PASS] Project Command
 // [PASS] Product Command
 // [PASS] Environment Command
+// [    ] Macro Arguments
 // [    ]
 //
 // ## Injected Languages
