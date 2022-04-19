@@ -19,29 +19,3 @@ escaped-simple_escaped
     )
   ) 
 )
-
-; This test causes the testing function to not halt
-;
-; ======
-; escaped-multiple_escaped
-; ======
-; 
-; \#\$\%\&\^\_\{\}\|\~\\
-; 
-; ---
-; 
-; (document
-;  (main
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;       (escaped(escaped_char))
-;   )
-; )
