@@ -1,0 +1,19 @@
+======
+macros-simple_macro_argument
+======
+
+#1
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (macro_argument)
+    (text_block
+      (text)
+    )
+  ) 
+)

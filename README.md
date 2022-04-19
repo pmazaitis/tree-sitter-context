@@ -14,9 +14,11 @@ This parser should work with tools (editors, formatters) that can work with Tree
 
 ## Installation
 
-Clone or download the repository to local disk. Configure tools to find the parser.
+Clone or download the repository to local disk.
 
 This Tree-Sitter parser should also be available via `npm` if that's a viable alternative.
+
+Some tools only require a URL to the repository; they will download and install the parser as needed.
 
 ## Use
 
@@ -28,21 +30,23 @@ Tree-Sitter also supports language bindings for building custom tools.
 
 ## Contributing
 
-Please include tests for any new features, and make sure all the tests in the test suite pass.
+Features and updates cheerfully considered via pull request. Please include tests for any new features, and make sure all the tests in the test suite pass.
 
-Bug reports cheerfully accepted (especially with areas of ConTeXt less well-served by this parser!). Please include as much as possible to make the bug approachable in the report: minimal examples, logs, and especially expectations are all helpful.
+Bug reports cheerfully accepted (especially with areas of ConTeXt less well-served by this parser!). Please use issues to report bugs. Please include as much as possible to make the bug approachable in the report: minimal examples, logs, and especially expectations are all helpful.
 
-As the name implies, `tree-sitter-context_en` is a parser for the English interface to ConTeXt. This parser can be adapted to other language interfaces to the system, but is not meant to be extended to handle more than one language.
+As the name implies, `tree-sitter-context_en` is a parser for the English interface to ConTeXt. This repo can be used as a starting point to produce new parsers to other language interfaces to ConTeXt, but this repo is not meant to be extended to handle more than one language.
 
 ## Caveats and Bugs
 
 ### Bugs
 
-At the moment, the parser struggles with handling an escaped '%'.
+Oh, probably lots. :)
 
 ### Quirks
 
 The parser accepts non-compliant syntax in the argument for project structure commands.
+
+Due to how command and scope endings are handled, this parser includes a bunch of empty text nodes in the tree (WIP).
 
 ## Support
 
