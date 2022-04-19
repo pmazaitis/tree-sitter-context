@@ -20,6 +20,9 @@ areas-all_areas
     (command
       (command_name)
     )
+    (text_block
+      (text)
+    )
   )
   (postamble
     (text_block
@@ -100,6 +103,9 @@ areas-main_postamble
     )
     (command
       (command_name)
+    )
+    (text_block
+      (text)
     )
     (command
       (command_name)

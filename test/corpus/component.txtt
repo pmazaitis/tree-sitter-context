@@ -21,6 +21,9 @@ component-shadow_filename
     (command
       (command_name)
     )
+    (text_block
+      (text)
+    )
   )
   (postamble
     (text_block
@@ -51,6 +54,9 @@ component-id
   (main
     (command
       (command_name)
+    )
+    (text_block
+      (text)
     )
   )
   (postamble
@@ -83,6 +89,9 @@ component-brackets
     (command
       (command_name)
     )
+    (text_block
+      (text)
+    )
   )
   (postamble
     (text_block
@@ -113,6 +122,9 @@ component-ws-brackets
   (main
     (command
       (command_name)
+    )
+    (text_block
+      (text)
     )
   )
   (postamble
