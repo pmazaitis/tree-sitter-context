@@ -33,3 +33,28 @@ Also cow.
     )
   )
 )
+
+======
+text-paragraph then command
+======
+
+Cow.
+
+\blank
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+      (paragraph_mark)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )
+  )
+)
