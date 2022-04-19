@@ -17,3 +17,27 @@ escaped-simple_escaped
     )
   ) 
 )
+
+======
+escaped-escaped_with_comment
+======
+
+\% % Cow
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (escaped)
+    (text_block
+      (text)
+    )
+    (line_comment)
+    (text_block
+      (text)
+    )
+  ) 
+)
