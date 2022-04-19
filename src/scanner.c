@@ -7,7 +7,8 @@
 
 // #define DEBUG
 
-enum TokenType {
+enum TokenType
+{
   COMMAND_STOP,
   SCOPES_STOP,
   PARAGRAPH_MARK,
@@ -33,260 +34,473 @@ enum TokenType {
 // FIXME this scanner is not line ending agnostic
 
 void *tree_sitter_context_external_scanner_create() { return NULL; }
-void tree_sitter_context_external_scanner_destroy(void *p) {UNUSED(p);}
-void tree_sitter_jcontext_external_scanner_reset(void *p) {UNUSED(p);}
-unsigned tree_sitter_context_external_scanner_serialize(void *p, char *buffer) { UNUSED(p); UNUSED(buffer); return 0; }
-void tree_sitter_context_external_scanner_deserialize(void *p, const char *b, unsigned n) {UNUSED(p); UNUSED(b); UNUSED(n);}
+void tree_sitter_context_external_scanner_destroy(void *p) { UNUSED(p); }
+void tree_sitter_jcontext_external_scanner_reset(void *p) { UNUSED(p); }
+unsigned tree_sitter_context_external_scanner_serialize(void *p, char *buffer)
+{
+  UNUSED(p);
+  UNUSED(buffer);
+  return 0;
+}
+void tree_sitter_context_external_scanner_deserialize(void *p, const char *b, unsigned n)
+{
+  UNUSED(p);
+  UNUSED(b);
+  UNUSED(n);
+}
 
-static bool isctxspecial(char c);
+static bool is_special_char(char c);
 static bool isvalidtextcontent(char c);
-static void debuglookahead(char c, char* msg);
+static void debug_lookahead(char c, char *msg);
+static bool char_ends_command(char c);
+static bool char_ends_scope(char c);
 
-static void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
+static void advance(TSLexer *lexer)
+{
+  lexer->advance(lexer, false);
+}
 static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
 // # UTILITY FUNCTIONS
 
 // Check for a ConTeXt special character
-static bool isctxspecial(char c) {
-  switch (c) {
-    case '^': return true;      
-    case '#': return true;
-    case '$': return true;
-    case '%': return true;
-    case '&': return true;
-    case '_': return true;
-    case '{': return true;
-    case '}': return true;
-    case '|': return true;
-    case '~': return true;
-    case '\\': return true;
+static bool is_special_char(char c)
+{
+  switch (c)
+  {
+  case '^':
+    return true;
+  case '#':
+    return true;
+  case '$':
+    return true;
+  case '%':
+    return true;
+  case '&':
+    return true;
+  case '_':
+    return true;
+  case '{':
+    return true;
+  case '}':
+    return true;
+  case '|':
+    return true;
+  case '~':
+    return true;
+  case '\\':
+    return true;
   }
   return false;
 }
 // Make these general, and specific to the command and scope stops (extend to unicode?)
-static bool isvalidtextcontent(char c) {
-  if (iswalnum(c)) return true;
-  
-  switch(c) {
-    case '!': return true;
-    case '"': return true;
-    case '\'': return true;
-    case '(': return true;
-    case ')': return true;
-    case '*': return true;
-    case '+': return true;
-    case ',': return true;
-    case '-': return true;
-    case '.': return true;
-    case '/': return true;
-    case ':': return true;
-    case ';': return true;
-    case '<': return true;
-    case '=': return true;
-    case '>': return true;
-    case '?': return true;
-    case '@': return true;
-    case '[': return true;
-    case ']': return true;
-    case '`': return true;
+static bool isvalidtextcontent(char c)
+{
+  if (iswalnum(c))
+    return true;
+
+  switch (c)
+  {
+  case '!':
+    return true;
+  case '"':
+    return true;
+  case '\'':
+    return true;
+  case '(':
+    return true;
+  case ')':
+    return true;
+  case '*':
+    return true;
+  case '+':
+    return true;
+  case ',':
+    return true;
+  case '-':
+    return true;
+  case '.':
+    return true;
+  case '/':
+    return true;
+  case ':':
+    return true;
+  case ';':
+    return true;
+  case '<':
+    return true;
+  case '=':
+    return true;
+  case '>':
+    return true;
+  case '?':
+    return true;
+  case '@':
+    return true;
+  case '[':
+    return true;
+  case ']':
+    return true;
+  case '`':
+    return true;
+  }
+  return false;
+}
+
+static bool char_ends_command(char c)
+{
+
+  return true;
+}
+
+static bool char_ends_scope(char c)
+{
+  // Chars that do not end scope:
+  //
+  // '%':  A command doesn't necessarily stop the scope
+  // '{':  Enetring a new scope; the set is not complete
+  // '}':  Ending a scope; the set might not yet be complete
+  // '\n': Special case we need to handle to look for EOLEOL
+  // '\r': Special case we need to handle to look for EOLEOL
+
+  if (iswalnum(c))
+    return true;
+
+  switch (c)
+  {
+  case '!':
+    return true;
+  case '"':
+    return true;
+  case '\'':
+    return true;
+  case '(':
+    return true;
+  case ')':
+    return true;
+  case '*':
+    return true;
+  case '+':
+    return true;
+  case ',':
+    return true;
+  case '-':
+    return true;
+  case '.':
+    return true;
+  case '/':
+    return true;
+  case ':':
+    return true;
+  case ';':
+    return true;
+  case '<':
+    return true;
+  case '=':
+    return true;
+  case '>':
+    return true;
+  case '?':
+    return true;
+  case '@':
+    return true;
+  case '[':
+    return true;
+  case ']':
+    return true;
+  case '`':
+    return true;
+  case '\\': // We have a command; scope is over
+    return true;
   }
   return false;
 }
 
 // Helpful for tracking state
-static void debuglookahead(char c, char* msg) {
-  #ifdef DEBUG
+static void debug_lookahead(char c, char *msg)
+{
+#ifdef DEBUG
   printf("#### %s\n", msg);
   printf("#### [Character under test: \'%c\' ]\n", c);
   fflush(stdout);
-  #endif
+#endif
 }
-
 
 // TOKEN FUNCTIONS
 
 //
-static bool scan_command_stop(TSLexer *lexer) {
+static bool scan_command_stop(TSLexer *lexer)
+{
   // Determine if a command has ended in the source file.
   //
-  // ConTeXt commands have a name, then zero or more square bracket blocks with 
+  // ConTeXt commands have a name, then zero or more square bracket blocks with
   // options or settings.
   lexer->result_symbol = COMMAND_STOP;
   lexer->mark_end(lexer);
-  
-  while (lexer->lookahead != 0) {
-  // while (!lexer->eof(lexer)) {
+
+  while (lexer->lookahead != 0)
+  {
+    // while (!lexer->eof(lexer)) {
 
     // We have the start of an option block; still in command
-    if (lexer->lookahead == '[') return false;
+    if (lexer->lookahead == '[')
+      return false;
     // If we find the stop of an option block, the closing option block ends the command
-    if (lexer->lookahead == ']') {lexer->mark_end(lexer); return true;}
-    // We have a comment; this is not necessarily a stop
-    if (lexer->lookahead == '%') return false;
-    // We enter or leave a scope; the command is over
-    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
-    if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
-    // Found another command
-    if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-    
-    if (isvalidtextcontent(lexer->lookahead)) {
-      lexer->mark_end(lexer); return true;
+    if (lexer->lookahead == ']')
+    {
+      lexer->mark_end(lexer);
+      return true;
     }
-      
-    if (lexer->lookahead == '\n') {
+    // We have a comment; this is not necessarily a stop
+    if (lexer->lookahead == '%')
+      return false;
+    // We enter or leave a scope; the command is over
+    if (lexer->lookahead == '{')
+    {
+      lexer->mark_end(lexer);
+      return true;
+    }
+    if (lexer->lookahead == '}')
+    {
+      lexer->mark_end(lexer);
+      return true;
+    }
+    // Found another command
+    if (lexer->lookahead == '\\')
+    {
+      lexer->mark_end(lexer);
+      return true;
+    }
+
+    if (isvalidtextcontent(lexer->lookahead))
+    {
+      lexer->mark_end(lexer);
+      return true;
+    }
+
+    if (lexer->lookahead == '\n')
+    {
       advance(lexer);
-      if (lexer->lookahead == '[') return false;
-      if (lexer->lookahead == ']') {lexer->mark_end(lexer); return true;}
-      if (lexer->lookahead == '%') return false;
-      if (lexer->lookahead == '{') {lexer->mark_end(lexer); return true;}
-      if (lexer->lookahead == '}') {lexer->mark_end(lexer); return true;}
-      if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-      if (lexer->lookahead == '\n') return true;
+      if (lexer->lookahead == '[')
+        return false;
+      if (lexer->lookahead == ']')
+      {
+        lexer->mark_end(lexer);
+        return true;
+      }
+      if (lexer->lookahead == '%')
+        return false;
+      if (lexer->lookahead == '{')
+      {
+        lexer->mark_end(lexer);
+        return true;
+      }
+      if (lexer->lookahead == '}')
+      {
+        lexer->mark_end(lexer);
+        return true;
+      }
+      if (lexer->lookahead == '\\')
+      {
+        lexer->mark_end(lexer);
+        return true;
+      }
+      if (lexer->lookahead == '\n')
+        return true;
       advance(lexer);
       continue;
-    } 
+    }
 
     advance(lexer);
   }
-  
+
   // lexer->mark_end(lexer);
   return true;
 }
 
-static bool scan_scopes_stop(TSLexer *lexer) {
+static bool scan_scopes_stop(TSLexer *lexer)
+{
   // Determine if a scope set has ended in the source file.
   //
   // ConTeXt commands can be followed by zero or more scopes.
   lexer->result_symbol = SCOPES_STOP;
   lexer->mark_end(lexer);
-  
-  while (lexer->lookahead != 0) {
-      
-    if (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+
+  while (lexer->lookahead != 0)
+  {
+
+    // skip whitespace, but not EOLs
+    if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+    {
       skip(lexer);
       continue;
     }
-    
+
     // We have a comment; this is not necessarily a stop
-    if (lexer->lookahead == '%') return false;
+    if (lexer->lookahead == '%')
+      return false;
     // We enter a scope; the scope set is not complete
-    if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
-    // We leave a scope; the scope set might not yet be complete
-    if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
-    // Found another command - scope set is over
-    if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-    
-    if (isvalidtextcontent(lexer->lookahead)) {
-      lexer->mark_end(lexer); return true;
+    if (lexer->lookahead == '{')
+    {
+      lexer->mark_end(lexer);
+      return false;
     }
-    
-    if (lexer->lookahead == '\n') {
+    // We leave a scope; the scope set might not yet be complete
+    if (lexer->lookahead == '}')
+    {
+      lexer->mark_end(lexer);
+      return false;
+    }
+    // Found another command - scope set is over
+    if (lexer->lookahead == '\\')
+    {
+      lexer->mark_end(lexer);
+      return true;
+    }
+
+    if (isvalidtextcontent(lexer->lookahead))
+    {
+      lexer->mark_end(lexer);
+      return true;
+    }
+
+    if (lexer->lookahead == '\n')
+    {
       advance(lexer);
-      if (lexer->lookahead == 0) return true;
-      if (lexer->lookahead == '%') return false;
-      if (lexer->lookahead == '{') {lexer->mark_end(lexer); return false;}
-      if (lexer->lookahead == '}') {lexer->mark_end(lexer); return false;}
-      if (lexer->lookahead == '\\') {lexer->mark_end(lexer); return true;}
-      if (lexer->lookahead == '\n') {lexer->mark_end(lexer); return true;}
-    } else {
+      if (lexer->lookahead == 0)
+        return true;
+      if (lexer->lookahead == '%')
+        return false;
+      if (lexer->lookahead == '{')
+      {
+        lexer->mark_end(lexer);
+        return false;
+      }
+      if (lexer->lookahead == '}')
+      {
+        lexer->mark_end(lexer);
+        return false;
+      }
+      if (lexer->lookahead == '\\')
+      {
+        lexer->mark_end(lexer);
+        return true;
+      }
+      if (lexer->lookahead == '\n')
+      {
+        lexer->mark_end(lexer);
+        return true;
+      }
+    }
+    else
+    {
       // Single newlines are okay in scope groups
       return false;
     }
-  
+
     advance(lexer);
-  
   }
-  
+
   // Any other character, the scope set is over
   return true;
-  
-
-
-
 }
 
-static bool scan_paragraph_mark(TSLexer *lexer) {
+static bool scan_paragraph_mark(TSLexer *lexer)
+{
   // Scan for two or more consecutive EOLs, and form a token to indicate a paragraph break.
   // FIXME the EOLs should be system agnostic.
   lexer->result_symbol = PARAGRAPH_MARK;
   lexer->mark_end(lexer);
-  
-  debuglookahead(lexer->lookahead, "Scanning for PARAGRAPH_MARK");
-  
-  if (lexer->lookahead == '\n') {
-    debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL");
+
+  debug_lookahead(lexer->lookahead, "Scanning for PARAGRAPH_MARK");
+
+  if (lexer->lookahead == '\n')
+  {
+    debug_lookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL");
     advance(lexer);
-    if (lexer->lookahead == '0') {
-      debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOF");
+    if (lexer->lookahead == '0')
+    {
+      debug_lookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOF");
       return false;
     }
-    if (lexer->lookahead == '\n') {
-      debuglookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL, EOL");
+    if (lexer->lookahead == '\n')
+    {
+      debug_lookahead(lexer->lookahead, "PARAGRAPH_MARK-Found EOL, EOL");
       advance(lexer);
       lexer->mark_end(lexer);
       return true;
-    } 
+    }
   }
   return false;
 }
 
-
-static bool scan_text(TSLexer *lexer) {
+static bool scan_text(TSLexer *lexer)
+{
   // Scan forward to form a text token, stopping before consuming:
   // - a special character
   // - EOF
   // - a sequence of two EOLs
   // FIXME the EOLs should be system agnostic.
   // FIXME we also need to stop a text block upon finding a starttext or startcomponent?
-  
+
   lexer->result_symbol = TEXT;
   lexer->mark_end(lexer);
-  
-  debuglookahead(lexer->lookahead, "Scanning for TEXT");
-  
+
+  debug_lookahead(lexer->lookahead, "Scanning for TEXT");
+
   int step = 0;
-  
-  while (lexer->lookahead != 0) {
 
-    debuglookahead(lexer->lookahead, "TEXT - In scan loop");
+  while (lexer->lookahead != 0)
+  {
 
-    if (isctxspecial(lexer->lookahead)) {
-      debuglookahead(lexer->lookahead, "TEXT - Found Special"); 
-      if (step > 0) { 
+    debug_lookahead(lexer->lookahead, "TEXT - In scan loop");
+
+    if (is_special_char(lexer->lookahead))
+    {
+      debug_lookahead(lexer->lookahead, "TEXT - Found Special");
+      if (step > 0)
+      {
         return true;
-      } else {
+      }
+      else
+      {
         return false;
       }
     }
- 
-    if (lexer->lookahead == '\n') {
+
+    if (lexer->lookahead == '\n')
+    {
       // ???: will setting this to skip break the token?
-      debuglookahead(lexer->lookahead, "TEXT - Found EOL");
+      debug_lookahead(lexer->lookahead, "TEXT - Found EOL");
       advance(lexer);
-      
-      if (lexer->lookahead == 0) {
-        debuglookahead(lexer->lookahead, "TEXT - Found EOF");
+
+      if (lexer->lookahead == 0)
+      {
+        debug_lookahead(lexer->lookahead, "TEXT - Found EOF");
         lexer->mark_end(lexer);
         return true;
       }
-      
-      if (lexer->lookahead == '\n') {
-        debuglookahead(lexer->lookahead, "TEXT - Found EOL,EOL");
-        if (step > 0) { 
+
+      if (lexer->lookahead == '\n')
+      {
+        debug_lookahead(lexer->lookahead, "TEXT - Found EOL,EOL");
+        if (step > 0)
+        {
           return true;
-        } else {
+        }
+        else
+        {
           return false;
         }
       }
-      
-      if (isctxspecial(lexer->lookahead)) {
-        debuglookahead(lexer->lookahead, "TEXT - Found Special");
-        lexer->mark_end(lexer); 
+
+      if (is_special_char(lexer->lookahead))
+      {
+        debug_lookahead(lexer->lookahead, "TEXT - Found Special");
+        lexer->mark_end(lexer);
         return true;
       }
-      
-    } 
+    }
     step = step + 1;
     advance(lexer);
     lexer->mark_end(lexer);
@@ -295,21 +509,27 @@ static bool scan_text(TSLexer *lexer) {
   return true;
 }
 
-static bool find_verbatim(TSLexer *lexer, const char *keyword) {
+static bool find_verbatim(TSLexer *lexer, const char *keyword)
+{
   bool has_marked = false;
-  while (true) {
-    if (lexer->eof(lexer)) {
+  while (true)
+  {
+    if (lexer->eof(lexer))
+    {
       break;
     }
 
     bool advanced = false;
     bool failed = false;
-    for (size_t i = 0; keyword[i]; i++) {
-      if (lexer->eof(lexer)) {
+    for (size_t i = 0; keyword[i]; i++)
+    {
+      if (lexer->eof(lexer))
+      {
         return has_marked;
       }
 
-      if (lexer->lookahead != keyword[i]) {
+      if (lexer->lookahead != keyword[i])
+      {
         failed = true;
         break;
       }
@@ -318,30 +538,33 @@ static bool find_verbatim(TSLexer *lexer, const char *keyword) {
       advanced = true;
     }
 
-    if (failed && !advanced) {
+    if (failed && !advanced)
+    {
       advance(lexer);
       lexer->mark_end(lexer);
       has_marked = true;
       continue;
     }
-    
-    if (!failed) {
 
-      if (lexer->eof(lexer)) {
+    if (!failed)
+    {
+
+      if (lexer->eof(lexer))
+      {
         return has_marked;
       }
-  
+
       char c = lexer->lookahead;
 
       failed = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-      
-      if (failed) {
+
+      if (failed)
+      {
         lexer->mark_end(lexer);
         has_marked = true;
         continue;
       }
-      
-    
+
       return has_marked;
     }
   }
@@ -349,106 +572,126 @@ static bool find_verbatim(TSLexer *lexer, const char *keyword) {
   return has_marked;
 }
 
-bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
+{
 
   UNUSED(payload);
 
-  if (valid_symbols[COMMAND_STOP]) {
+  if (valid_symbols[COMMAND_STOP])
+  {
     return scan_command_stop(lexer);
   }
-  
-  if (valid_symbols[SCOPES_STOP]) {
+
+  if (valid_symbols[SCOPES_STOP])
+  {
     return scan_scopes_stop(lexer);
   }
-  
-  if (valid_symbols[PARAGRAPH_MARK]) {
+
+  if (valid_symbols[PARAGRAPH_MARK])
+  {
     return scan_paragraph_mark(lexer);
   }
-  
-  if (valid_symbols[TEXT]) {
+
+  if (valid_symbols[TEXT])
+  {
     return scan_text(lexer);
   }
-  
-  if (valid_symbols[CODE_TIKZ_BODY]) {
+
+  if (valid_symbols[CODE_TIKZ_BODY])
+  {
     lexer->result_symbol = CODE_TIKZ_BODY;
     return find_verbatim(lexer, "\\stoptikzpicture");
   }
-  
-  if (valid_symbols[CODE_LUA_BODY]) {
+
+  if (valid_symbols[CODE_LUA_BODY])
+  {
     lexer->result_symbol = CODE_LUA_BODY;
     return find_verbatim(lexer, "\\stopluacode");
   }
-  
-  if (valid_symbols[TYPING_HTML_BODY]) {
+
+  if (valid_symbols[TYPING_HTML_BODY])
+  {
     lexer->result_symbol = TYPING_HTML_BODY;
     return find_verbatim(lexer, "\\stopHTML");
   }
 
-  if (valid_symbols[TYPING_CSS_BODY]) {
+  if (valid_symbols[TYPING_CSS_BODY])
+  {
     lexer->result_symbol = TYPING_CSS_BODY;
     return find_verbatim(lexer, "\\stopCSS");
   }
-  
-  if (valid_symbols[TYPING_MP_BODY]) {
+
+  if (valid_symbols[TYPING_MP_BODY])
+  {
     lexer->result_symbol = TYPING_MP_BODY;
     return find_verbatim(lexer, "\\stopMP");
   }
-  
-  if (valid_symbols[TYPING_LUA_BODY]) {
+
+  if (valid_symbols[TYPING_LUA_BODY])
+  {
     lexer->result_symbol = TYPING_LUA_BODY;
     return find_verbatim(lexer, "\\stopLUA");
   }
-  
-  if (valid_symbols[TYPING_XML_BODY]) {
+
+  if (valid_symbols[TYPING_XML_BODY])
+  {
     lexer->result_symbol = TYPING_XML_BODY;
     return find_verbatim(lexer, "\\stopXML");
   }
-  
-  if (valid_symbols[TYPING_PARSEDXML_BODY]) {
+
+  if (valid_symbols[TYPING_PARSEDXML_BODY])
+  {
     lexer->result_symbol = TYPING_PARSEDXML_BODY;
     return find_verbatim(lexer, "\\stopPARSEDXML");
   }
-  
-  if (valid_symbols[TYPING_TEX_BODY]) {
+
+  if (valid_symbols[TYPING_TEX_BODY])
+  {
     lexer->result_symbol = TYPING_TEX_BODY;
     return find_verbatim(lexer, "\\stopTEX");
   }
-  
-  if (valid_symbols[TYPING_UNNAMED_BODY]) {
+
+  if (valid_symbols[TYPING_UNNAMED_BODY])
+  {
     lexer->result_symbol = TYPING_UNNAMED_BODY;
     return find_verbatim(lexer, "\\stoptyping");
   }
-  
-  if (valid_symbols[CODE_MPINCLUSIONS_BODY]) {
+
+  if (valid_symbols[CODE_MPINCLUSIONS_BODY])
+  {
     lexer->result_symbol = CODE_MPINCLUSIONS_BODY;
     return find_verbatim(lexer, "\\stopMPinclusions");
   }
-    
-  if (valid_symbols[CODE_USEMPGRAPHIC_BODY]) {
+
+  if (valid_symbols[CODE_USEMPGRAPHIC_BODY])
+  {
     lexer->result_symbol = CODE_USEMPGRAPHIC_BODY;
     return find_verbatim(lexer, "\\stopuseMPgraphic");
   }
-    
-  if (valid_symbols[CODE_REUSABLEMPGRAPHIC_BODY]) {
+
+  if (valid_symbols[CODE_REUSABLEMPGRAPHIC_BODY])
+  {
     lexer->result_symbol = CODE_REUSABLEMPGRAPHIC_BODY;
     return find_verbatim(lexer, "\\stopreusableMPgraphic");
   }
-    
-  if (valid_symbols[CODE_MPCODE_BODY]) {
+
+  if (valid_symbols[CODE_MPCODE_BODY])
+  {
     lexer->result_symbol = CODE_MPCODE_BODY;
     return find_verbatim(lexer, "\\stopMPcode");
   }
-    
-  if (valid_symbols[CODE_MPPAGE_BODY]) {
+
+  if (valid_symbols[CODE_MPPAGE_BODY])
+  {
     lexer->result_symbol = CODE_MPPAGE_BODY;
     return find_verbatim(lexer, "\\stopMPpage");
   }
-    
-  if (valid_symbols[CODE_STATICMPFIGURE_BODY]) {
+
+  if (valid_symbols[CODE_STATICMPFIGURE_BODY])
+  {
     lexer->result_symbol = CODE_STATICMPFIGURE_BODY;
     return find_verbatim(lexer, "\\stopstaticMPfigure");
   }
-  
-  
-  return false;  
+
+  return false;
 }
