@@ -161,3 +161,48 @@ scope-scope_paragraph_scope
   )
 )
 
+======
+scope-scope_with_command_with_scopes
+======
+
+\example{
+  \example
+    {foo}
+    {bar}
+} 
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (command_scope
+        (text_block
+          (text)
+        )
+        (command
+          (command_name)
+          (command_scope
+            (text_block
+              (text)
+            )
+          )
+          (command_scope
+            (text_block
+              (text)
+            )
+          )
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)
+
+
