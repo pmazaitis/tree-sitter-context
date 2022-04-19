@@ -109,8 +109,8 @@ static bool char_ends_command(char c)
     return false;
   case '[':
     return false;
-  case ']':
-    return false;
+  // case ']':
+  //   return false;
   case '\n':
     return false;
   case '\r':
@@ -191,8 +191,8 @@ static bool scan_command_stop(TSLexer *lexer)
       return false; // We have a comment; this is not necessarily a stop
     case '[':
       return false; // We enter a block; the command is not complete
-    case ']':
-      return false; // We leave a block; the command might not yet be complete
+    // case ']':
+    //   return false; // We leave a block; the command might not yet be complete
     }
 
     if (lexer->lookahead == '\n')

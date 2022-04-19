@@ -41,7 +41,7 @@
 // * External scanner whitespace? (ask on github?)
 // * put explicit boundary markers back for highlighting?
 //
-// # PRECEDENCE LIST
+// # PRECEDENCE LIST FOR REFERENCE
 //
 // 20  :  document: ($) => choice(prec(20, seq($.preamble, $.main, $.postamble))),
 // 16r :  escaped: ($) => prec.right(16,seq('\\', $.escapechar)),
@@ -248,12 +248,14 @@ module.exports = grammar({
     empty_block: ($) => choice("[]", seq("[", /[ \t]+/, "]")),
 
     // ## Option Block
-    option_block: ($) => prec(12, seq("[", sepBy($.keyword, ","), "]")),
+    option_block: ($) =>
+      prec(12, seq("[", sepBy($.keyword, ","), optional(","), "]")),
 
     keyword: ($) => /[^\s=,\[\]]+/,
 
     // ## Settings Block
-    settings_block: ($) => prec(14, seq("[", sepBy($._setting, ","), "]")),
+    settings_block: ($) =>
+      prec(14, seq("[", sepBy($._setting, ","), optional(","), "]")),
 
     _setting: ($) => choice($.setting, $.title_setting, $.subtitle_setting),
 
