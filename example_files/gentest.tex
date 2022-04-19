@@ -1,27 +1,13 @@
-\placefigure
-    [force]                                       % figure placement
-    [fig:quotes]                           % figure reference - figure out a counter
-    {An Example of a Quote Element} % figure caption
-    {
-    \framed[
-      frame=off,
-      width=5in,
-      loffset=-1pc,
-      align=middle]{
-      \startcombination[2*1]                      % contents of the figure: a combination
-          {         \framed[offset=1pc,align=right,top=,bottom=\vss,frame=on,strut=no,framecolor=middlegray,]{%
-            \starthtml
-           <p>The <q>Bob Ross Lorem Ipsum 
-           Generator</q> is one of many useful 
-           lorem ipsum generators.</p>
-            \stophtml
-            }
-          } {HTML}   % subfigure and subcaption
-          {          \framed[width=3in,offset=1pc,align=flushleft,bottom=\vss,frame=on,framecolor=middlegray,]{%     
-            The \quotation{Bob Ross Lorem Ipsum Generator} is one of many 
-  useful lorem ipsum generators.
-            }  
-          } {Default Render (English)}
-       \stopcombination
-     }
-     }
+\startsection[title={Introduction}]
+
+Now that we have a skeleton of a page, we can start adding some content for our users.
+
+All content must be in elements.\footnote{Not strictly true; most browsers will have a default mechanism for coping with untagged content, but the results will very likely be something we do not want.} Part of our work in developing a web page is choosing which elements are appropriate for which bits of content. This is generally fairly straight forward: text goes in paragraph elements, lists of things are marked up as unordered lists, sequences are marked up as ordered lists, and so on.
+
+I will point out here that our goal is to mark up our content \keyword{meaningfully}: we want to use our markup to add and improve the meaning attached to our content. 
+
+There are presentation side effects of marking up the text meaningfully, but for now we want to use them only for helping us visually differentiate the different kinds of content we're working with on the rendered page. In the notes for this week, I'll be showing rendered output with the default, somewhat unappealing redering styles. In coming weeks, we'll be exploring how we can manipulate the presentation using CSS, a much better tool for the job.
+
+One good way to start thinking about elements is as containers for both content and other elements (and those elements can themselves be containers, and so on...). At this point, we want to looking forward to the question of how we can use containers to logically group information together.
+
+\stopsection
