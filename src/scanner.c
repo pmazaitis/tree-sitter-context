@@ -50,7 +50,6 @@ void tree_sitter_context_external_scanner_deserialize(void *p, const char *b, un
 }
 
 static bool is_special_char(char c);
-static bool isvalidtextcontent(char c);
 static void debug_lookahead(char c, char *msg);
 static bool char_ends_command(char c);
 static bool char_ends_scope(char c);
@@ -89,59 +88,6 @@ static bool is_special_char(char c)
   case '~':
     return true;
   case '\\':
-    return true;
-  }
-  return false;
-}
-// Make these general, and specific to the command and scope stops (extend to unicode?)
-static bool isvalidtextcontent(char c)
-{
-  if (iswalnum(c))
-    return true;
-
-  switch (c)
-  {
-  case '!':
-    return true;
-  case '"':
-    return true;
-  case '\'':
-    return true;
-  case '(':
-    return true;
-  case ')':
-    return true;
-  case '*':
-    return true;
-  case '+':
-    return true;
-  case ',':
-    return true;
-  case '-':
-    return true;
-  case '.':
-    return true;
-  case '/':
-    return true;
-  case ':':
-    return true;
-  case ';':
-    return true;
-  case '<':
-    return true;
-  case '=':
-    return true;
-  case '>':
-    return true;
-  case '?':
-    return true;
-  case '@':
-    return true;
-  case '[':
-    return true;
-  case ']':
-    return true;
-  case '`':
     return true;
   }
   return false;
@@ -251,7 +197,7 @@ static bool scan_command_stop(TSLexer *lexer)
 
     if (lexer->lookahead == '\n')
     {
-      advance(lexer);
+      skip(lexer);
       if (lexer->lookahead == 0)
         return true;
 
@@ -328,7 +274,7 @@ static bool scan_scopes_stop(TSLexer *lexer)
 
     if (lexer->lookahead == '\n')
     {
-      advance(lexer);
+      skip(lexer);
       if (lexer->lookahead == 0)
         return true;
 
