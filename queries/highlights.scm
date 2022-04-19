@@ -1,8 +1,8 @@
 ; highlights.scm for tree-sitter-context
 
 (text) @user.text
-(title_setting (value (value_brace_group (value_text)))) @user.text
-(subtitle_setting (value (value_brace_group (value_text)))) @user.text
+(title_setting (value (value_brace_group (value_brace_group_text)))) @user.text
+(subtitle_setting (value (value_brace_group (value_brace_group_text)))) @user.text
 
 (command_name) @command.name
 

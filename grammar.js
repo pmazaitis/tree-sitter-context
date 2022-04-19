@@ -280,7 +280,19 @@ module.exports = grammar({
 
     value_text: ($) => /[^\\{}\[\]\s,][^\\{}\[\],]*/,
 
-    value_brace_group: ($) => seq("{", repeat($._value_content), "}"),
+    value_brace_group: ($) =>
+      seq("{", repeat($._value_brace_group_content), "}"),
+
+    _value_brace_group_content: ($) =>
+      choice(
+        $.line_comment,
+        $.escaped,
+        $.value_brace_group,
+        $.value_brace_group_text,
+        $.command
+      ),
+
+    value_brace_group_text: ($) => /[^\\{}]+/,
 
     // ## Scope
     command_scope: ($) =>
