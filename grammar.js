@@ -316,9 +316,25 @@ module.exports = grammar({
       ),
 
     // # ESCAPED CHARACTERS
-    escaped_char: ($) => choice(...escaped_chars),
+    escaped_char: ($) => prec(16, choice(...escaped_chars)),
 
-    escaped: ($) => prec.right(16, seq("\\", $.escaped_char)),
+    escaped: ($) =>
+      prec(
+        16,
+        choice(
+          "\\%",
+          "\\#",
+          "\\$",
+          "\\&",
+          "\\^",
+          "\\_",
+          "\\{",
+          "\\}",
+          "\\|",
+          "\\~",
+          "\\\\"
+        )
+      ),
 
     // PARSED LANGUAGE INCLUSIONS
     //
