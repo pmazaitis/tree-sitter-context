@@ -149,6 +149,27 @@ static bool isvalidtextcontent(char c)
 
 static bool char_ends_command(char c)
 {
+  // Chars that do not end a command:
+  //
+  // '%':  // We have a comment; this is not necessarily a stop
+  // '[':  // We have the start of an option block; still in command
+  // ']':  // The blocks might not yet be complete TODO: check!
+  // '\n': Special case we need to handle to look for EOLEOL
+  // '\r': Special case we need to handle to look for EOLEOL
+
+  switch (c)
+  {
+  case '%':
+    return false;
+  case '[':
+    return false;
+  case ']':
+    return false;
+  case '\n':
+    return false;
+  case '\r':
+    return false;
+  }
 
   return true;
 }
@@ -204,81 +225,70 @@ static bool scan_command_stop(TSLexer *lexer)
 
   while (lexer->lookahead != 0)
   {
-    // while (!lexer->eof(lexer)) {
 
-    // We have the start of an option block; still in command
-    if (lexer->lookahead == '[')
-      return false;
-    // If we find the stop of an option block, the closing option block ends the command
-    if (lexer->lookahead == ']')
+    // skip whitespace, but not EOLs
+    if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
     {
-      lexer->mark_end(lexer);
-      return true;
+      skip(lexer);
+      continue;
     }
-    // We have a comment; this is not necessarily a stop
-    if (lexer->lookahead == '%')
-      return false;
-    // We enter or leave a scope; the command is over
-    if (lexer->lookahead == '{')
-    {
-      lexer->mark_end(lexer);
-      return true;
-    }
-    if (lexer->lookahead == '}')
-    {
-      lexer->mark_end(lexer);
-      return true;
-    }
-    // Found another command
-    if (lexer->lookahead == '\\')
+
+    if (char_ends_command(lexer->lookahead))
     {
       lexer->mark_end(lexer);
       return true;
     }
 
-    if (isvalidtextcontent(lexer->lookahead))
+    switch (lexer->lookahead)
     {
-      lexer->mark_end(lexer);
-      return true;
+    case '%':
+      return false; // We have a comment; this is not necessarily a stop
+    case '[':
+      return false; // We enter a block; the command is not complete
+    case ']':
+      return false; // We leave a block; the command might not yet be complete
     }
 
     if (lexer->lookahead == '\n')
     {
       advance(lexer);
-      if (lexer->lookahead == '[')
-        return false;
-      if (lexer->lookahead == ']')
+      if (lexer->lookahead == 0)
+        return true;
+
+      if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+      {
+        skip(lexer);
+        continue;
+      }
+
+      if (char_ends_command(lexer->lookahead))
       {
         lexer->mark_end(lexer);
         return true;
       }
-      if (lexer->lookahead == '%')
-        return false;
-      if (lexer->lookahead == '{')
+
+      switch (lexer->lookahead)
       {
-        lexer->mark_end(lexer);
-        return true;
+      case '%':
+        return false; // We have a comment; this is not necessarily a stop
+      case '[':
+        return false; // We enter a block; the command is not complete
+      case ']':
+        return false; // We leave a block; the command might not yet be complete
       }
-      if (lexer->lookahead == '}')
-      {
-        lexer->mark_end(lexer);
-        return true;
-      }
-      if (lexer->lookahead == '\\')
-      {
-        lexer->mark_end(lexer);
-        return true;
-      }
+
+      // a sequence of EOL EOL ends the command
       if (lexer->lookahead == '\n')
+      {
+        lexer->mark_end(lexer);
         return true;
+      }
       advance(lexer);
       continue;
     }
-
     advance(lexer);
   }
-
-  // lexer->mark_end(lexer);
+  // If we find the end of the file, the command is stopped
   return true;
 }
 
