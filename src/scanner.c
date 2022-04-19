@@ -163,57 +163,21 @@ static bool char_ends_scope(char c)
   // '\n': Special case we need to handle to look for EOLEOL
   // '\r': Special case we need to handle to look for EOLEOL
 
-  if (iswalnum(c))
-    return true;
-
   switch (c)
   {
-  case '!':
-    return true;
-  case '"':
-    return true;
-  case '\'':
-    return true;
-  case '(':
-    return true;
-  case ')':
-    return true;
-  case '*':
-    return true;
-  case '+':
-    return true;
-  case ',':
-    return true;
-  case '-':
-    return true;
-  case '.':
-    return true;
-  case '/':
-    return true;
-  case ':':
-    return true;
-  case ';':
-    return true;
-  case '<':
-    return true;
-  case '=':
-    return true;
-  case '>':
-    return true;
-  case '?':
-    return true;
-  case '@':
-    return true;
-  case '[':
-    return true;
-  case ']':
-    return true;
-  case '`':
-    return true;
-  case '\\': // We have a command; scope is over
-    return true;
+  case '%':
+    return false;
+  case '{':
+    return false;
+  case '}':
+    return false;
+  case '\n':
+    return false;
+  case '\r':
+    return false;
   }
-  return false;
+
+  return true;
 }
 
 // Helpful for tracking state
@@ -336,32 +300,20 @@ static bool scan_scopes_stop(TSLexer *lexer)
       continue;
     }
 
-    // We have a comment; this is not necessarily a stop
-    if (lexer->lookahead == '%')
-      return false;
-    // We enter a scope; the scope set is not complete
-    if (lexer->lookahead == '{')
-    {
-      lexer->mark_end(lexer);
-      return false;
-    }
-    // We leave a scope; the scope set might not yet be complete
-    if (lexer->lookahead == '}')
-    {
-      lexer->mark_end(lexer);
-      return false;
-    }
-    // Found another command - scope set is over
-    if (lexer->lookahead == '\\')
+    if (char_ends_scope(lexer->lookahead))
     {
       lexer->mark_end(lexer);
       return true;
     }
 
-    if (isvalidtextcontent(lexer->lookahead))
+    switch (lexer->lookahead)
     {
-      lexer->mark_end(lexer);
-      return true;
+    case '%':
+      return false; // We have a comment; this is not necessarily a stop
+    case '{':
+      return false; // We enter a scope; the scope set is not complete
+    case '}':
+      return false; // We leave a scope; the scope set might not yet be complete
     }
 
     if (lexer->lookahead == '\n')
@@ -369,23 +321,30 @@ static bool scan_scopes_stop(TSLexer *lexer)
       advance(lexer);
       if (lexer->lookahead == 0)
         return true;
-      if (lexer->lookahead == '%')
-        return false;
-      if (lexer->lookahead == '{')
+
+      if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
       {
-        lexer->mark_end(lexer);
-        return false;
+        skip(lexer);
+        continue;
       }
-      if (lexer->lookahead == '}')
-      {
-        lexer->mark_end(lexer);
-        return false;
-      }
-      if (lexer->lookahead == '\\')
+
+      if (char_ends_scope(lexer->lookahead))
       {
         lexer->mark_end(lexer);
         return true;
       }
+
+      switch (lexer->lookahead)
+      {
+      case '%':
+        return false; // We have a comment; this is not necessarily a stop
+      case '{':
+        return false; // We enter a scope; the scope set is not complete
+      case '}':
+        return false; // We leave a scope; the scope set might not yet be complete
+      }
+
+      // a sequence of EOL EOL ends the scope set
       if (lexer->lookahead == '\n')
       {
         lexer->mark_end(lexer);
@@ -394,14 +353,14 @@ static bool scan_scopes_stop(TSLexer *lexer)
     }
     else
     {
-      // Single newlines are okay in scope groups
+      // Single newlines are okay in scope groups.
       return false;
     }
 
     advance(lexer);
   }
 
-  // Any other character, the scope set is over
+  // If we fall of the end of the file, the scope if complete.
   return true;
 }
 
