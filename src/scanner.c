@@ -122,7 +122,7 @@ static bool char_ends_scope(char c)
   // Chars that do not end scope:
   //
   // '%':  A command doesn't necessarily stop the scope
-  // '{':  Enetring a new scope; the set is not complete
+  // '{':  Entering a new scope; the set is not complete
   // '\n': Special case we need to handle to look for EOLEOL
   // '\r': Special case we need to handle to look for EOLEOL
 
