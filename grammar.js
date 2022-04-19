@@ -287,7 +287,15 @@ module.exports = grammar({
       seq(optional($._end_of_line), "{", repeat($._content), "}"),
 
     // # TEXT
-    text_block: ($) => seq($.text, repeat(seq($.paragraph_mark, $.text))),
+    // text_block: ($) => seq($.text, repeat(seq($.paragraph_mark, $.text))),
+    text_block: ($) =>
+      prec.right(
+        seq(
+          $.text,
+          repeat(seq($.paragraph_mark, $.text)),
+          optional($.paragraph_mark)
+        )
+      ),
 
     // # ESCAPED CHARACTERS
     escaped_char: ($) => choice(...escaped_chars),
