@@ -22,11 +22,11 @@ Some tools only require a URL to the repository; they will download and install 
 
 ## Use
 
-This Tree-Sitter parser should work with tools that Support Tree-Sitter parsers in general.
+This Tree-Sitter parser works with tools that Support Tree-Sitter parsers in general.
 
 The [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) command can be used for testing parsing and highlighting.
 
-Tree-Sitter also supports language bindings for building custom tools.
+Tree-Sitter supports language bindings for building custom tools.
 
 ## Contributing
 
@@ -54,7 +54,7 @@ If you have a question, _please raise a GitHub issue_ (or a discussion topic).
 
 If you have a bug report, _please raise a GitHub issue_. Anything that you can offer to make the bug reproducible and/or understandable is gratefully accepted.
 
-_I am a hobbiest software developer._ I want to improve this software (not for the least of reasons that I want my ConTeXt environment to be better!), but I can't guarantee that I will always have the time and energy to do so. Best efforts, and onward!
+_I am a hobbyist software developer._ I want to improve this software (not for the least of reasons that I want my ConTeXt environment to be better!), but I can't guarantee that I will always have the time and energy to do so. Best efforts, and onward!
 
 ## Credits
 
