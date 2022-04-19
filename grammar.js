@@ -132,6 +132,7 @@ module.exports = grammar({
       choice(
         $.line_comment,
         $.command,
+        $.macro_argument,
         $.brace_group,
         $.escaped,
         $.inline_math,
@@ -298,6 +299,10 @@ module.exports = grammar({
     command_scope: ($) =>
       seq(optional($._end_of_line), "{", repeat($._content), "}"),
 
+    // # MACROS
+    //
+    macro_argument: ($) => seq("#", /\d/),
+
     // # TEXT
     // text_block: ($) => seq($.text, repeat(seq($.paragraph_mark, $.text))),
     text_block: ($) =>
@@ -410,7 +415,7 @@ module.exports = grammar({
 
     _whitespace: ($) => /\s+/,
 
-    line_comment: ($) => /%[^\r\n]*/,
+    line_comment: ($) => /[^\\]?%[^\r\n]*/,
 
     _end_of_line: ($) => /\r\n?|\n/,
   },
