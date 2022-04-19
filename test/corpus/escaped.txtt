@@ -11,9 +11,7 @@ escaped-simple_escaped
     (text_block
       (text)
     )
-    (escaped
-      (escaped_char)
-    )
+    (escaped)
     (text_block
       (text)
     )
