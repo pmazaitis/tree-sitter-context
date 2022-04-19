@@ -99,7 +99,6 @@ static bool char_ends_command(char c)
   //
   // '%':  // We have a comment; this is not necessarily a stop
   // '[':  // We have the start of an option block; still in command
-  // ']':  // The blocks might not yet be complete TODO: check!
   // '\n': Special case we need to handle to look for EOLEOL
   // '\r': Special case we need to handle to look for EOLEOL
 
@@ -109,8 +108,6 @@ static bool char_ends_command(char c)
     return false;
   case '[':
     return false;
-  // case ']':
-  //   return false;
   case '\n':
     return false;
   case '\r':
@@ -126,7 +123,6 @@ static bool char_ends_scope(char c)
   //
   // '%':  A command doesn't necessarily stop the scope
   // '{':  Enetring a new scope; the set is not complete
-  // '}':  Ending a scope; the set might not yet be complete
   // '\n': Special case we need to handle to look for EOLEOL
   // '\r': Special case we need to handle to look for EOLEOL
 
@@ -135,8 +131,6 @@ static bool char_ends_scope(char c)
   case '%':
     return false;
   case '{':
-    return false;
-  case '}':
     return false;
   case '\n':
     return false;
