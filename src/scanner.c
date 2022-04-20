@@ -185,8 +185,6 @@ static bool scan_command_stop(TSLexer *lexer)
       return false; // We have a comment; this is not necessarily a stop
     case '[':
       return false; // We enter a block; the command is not complete
-    // case ']':
-    //   return false; // We leave a block; the command might not yet be complete
     }
 
     if (lexer->lookahead == '\n')
@@ -213,8 +211,6 @@ static bool scan_command_stop(TSLexer *lexer)
         return false; // We have a comment; this is not necessarily a stop
       case '[':
         return false; // We enter a block; the command is not complete
-      case ']':
-        return false; // We leave a block; the command might not yet be complete
       }
 
       // a sequence of EOL EOL ends the command
@@ -262,8 +258,6 @@ static bool scan_scopes_stop(TSLexer *lexer)
       return false; // We have a comment; this is not necessarily a stop
     case '{':
       return false; // We enter a scope; the scope set is not complete
-    case '}':
-      return false; // We leave a scope; the scope set might not yet be complete
     }
 
     if (lexer->lookahead == '\n')
@@ -290,8 +284,6 @@ static bool scan_scopes_stop(TSLexer *lexer)
         return false; // We have a comment; this is not necessarily a stop
       case '{':
         return false; // We enter a scope; the scope set is not complete
-      case '}':
-        return false; // We leave a scope; the scope set might not yet be complete
       }
 
       // a sequence of EOL EOL ends the scope set
