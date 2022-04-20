@@ -1,0 +1,1655 @@
+[
+  {
+    "type": "MPcode_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_MPcode_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "MPinclusions_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_MPinclusions_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "MPpage_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_MPpage_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "brace_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "MPcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPinclusions_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPpage_inclusion",
+          "named": true
+        },
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "environment_command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "inline_math",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "luacode_inclusion",
+          "named": true
+        },
+        {
+          "type": "macro_argument",
+          "named": true
+        },
+        {
+          "type": "product_command",
+          "named": true
+        },
+        {
+          "type": "project_command",
+          "named": true
+        },
+        {
+          "type": "reusableMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "tikzcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_css_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_lua_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_mp_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_parsedxml_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_unnamed_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_xml_inclusion",
+          "named": true
+        },
+        {
+          "type": "useMPgraphic_inclusion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "command_name",
+          "named": true
+        },
+        {
+          "type": "command_scope",
+          "named": true
+        },
+        {
+          "type": "empty_block",
+          "named": true
+        },
+        {
+          "type": "option_block",
+          "named": true
+        },
+        {
+          "type": "settings_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "MPcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPinclusions_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPpage_inclusion",
+          "named": true
+        },
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "environment_command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "inline_math",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "luacode_inclusion",
+          "named": true
+        },
+        {
+          "type": "macro_argument",
+          "named": true
+        },
+        {
+          "type": "product_command",
+          "named": true
+        },
+        {
+          "type": "project_command",
+          "named": true
+        },
+        {
+          "type": "reusableMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "tikzcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_css_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_lua_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_mp_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_parsedxml_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_unnamed_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_xml_inclusion",
+          "named": true
+        },
+        {
+          "type": "useMPgraphic_inclusion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command_scope",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "MPcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPinclusions_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPpage_inclusion",
+          "named": true
+        },
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "environment_command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "inline_math",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "luacode_inclusion",
+          "named": true
+        },
+        {
+          "type": "macro_argument",
+          "named": true
+        },
+        {
+          "type": "product_command",
+          "named": true
+        },
+        {
+          "type": "project_command",
+          "named": true
+        },
+        {
+          "type": "reusableMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "tikzcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_css_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_lua_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_mp_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_parsedxml_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_unnamed_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_xml_inclusion",
+          "named": true
+        },
+        {
+          "type": "useMPgraphic_inclusion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "main",
+          "named": true
+        },
+        {
+          "type": "postamble",
+          "named": true
+        },
+        {
+          "type": "preamble",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "empty_block",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "environment_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "environment_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "escaped",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "inline_math",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "math_group",
+          "named": true
+        },
+        {
+          "type": "math_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "key",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "keyword",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "luacode_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_lua_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "macro_argument",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "main",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "MPcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPinclusions_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPpage_inclusion",
+          "named": true
+        },
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "environment_command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "inline_math",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "luacode_inclusion",
+          "named": true
+        },
+        {
+          "type": "macro_argument",
+          "named": true
+        },
+        {
+          "type": "product_command",
+          "named": true
+        },
+        {
+          "type": "project_command",
+          "named": true
+        },
+        {
+          "type": "reusableMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "tikzcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_css_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_lua_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_mp_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_parsedxml_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_unnamed_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_xml_inclusion",
+          "named": true
+        },
+        {
+          "type": "useMPgraphic_inclusion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "math_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "math_group",
+          "named": true
+        },
+        {
+          "type": "math_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "option_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "postamble",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "MPcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPinclusions_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPpage_inclusion",
+          "named": true
+        },
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "environment_command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "inline_math",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "luacode_inclusion",
+          "named": true
+        },
+        {
+          "type": "macro_argument",
+          "named": true
+        },
+        {
+          "type": "product_command",
+          "named": true
+        },
+        {
+          "type": "project_command",
+          "named": true
+        },
+        {
+          "type": "reusableMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "tikzcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_css_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_lua_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_mp_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_parsedxml_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_unnamed_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_xml_inclusion",
+          "named": true
+        },
+        {
+          "type": "useMPgraphic_inclusion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "preamble",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "MPcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPinclusions_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPpage_inclusion",
+          "named": true
+        },
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "component_id",
+          "named": true
+        },
+        {
+          "type": "environment_command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "inline_math",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "luacode_inclusion",
+          "named": true
+        },
+        {
+          "type": "macro_argument",
+          "named": true
+        },
+        {
+          "type": "product_command",
+          "named": true
+        },
+        {
+          "type": "project_command",
+          "named": true
+        },
+        {
+          "type": "reusableMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "tikzcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_css_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_lua_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_mp_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_parsedxml_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_unnamed_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_xml_inclusion",
+          "named": true
+        },
+        {
+          "type": "useMPgraphic_inclusion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "product_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "product_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "project_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "project_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reusableMPgraphic_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_reusableMPgraphic_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "setting",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "key",
+          "named": true
+        },
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "settings_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "setting",
+          "named": true
+        },
+        {
+          "type": "subtitle_setting",
+          "named": true
+        },
+        {
+          "type": "title_setting",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "staticMPfigure_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_staticMPfigure_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subtitle_setting",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "text_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "paragraph_mark",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tikzcode_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_tikz_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "title_setting",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_css_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_css_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_html_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_html_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_lua_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_lua_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_mp_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_mp_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_parsedxml_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_parsedxml_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_unnamed_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_unnamed_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typing_xml_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typing_xml_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "useMPgraphic_inclusion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_useMPgraphic_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "value_brace_group",
+          "named": true
+        },
+        {
+          "type": "value_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value_brace_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "value_brace_group",
+          "named": true
+        },
+        {
+          "type": "value_brace_group_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "#",
+    "named": false
+  },
+  {
+    "type": "$",
+    "named": false
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": "&",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "[]",
+    "named": false
+  },
+  {
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "\\#",
+    "named": false
+  },
+  {
+    "type": "\\$",
+    "named": false
+  },
+  {
+    "type": "\\%",
+    "named": false
+  },
+  {
+    "type": "\\&",
+    "named": false
+  },
+  {
+    "type": "\\\\",
+    "named": false
+  },
+  {
+    "type": "\\^",
+    "named": false
+  },
+  {
+    "type": "\\_",
+    "named": false
+  },
+  {
+    "type": "\\bgroup",
+    "named": false
+  },
+  {
+    "type": "\\egroup",
+    "named": false
+  },
+  {
+    "type": "\\environment",
+    "named": false
+  },
+  {
+    "type": "\\product",
+    "named": false
+  },
+  {
+    "type": "\\project",
+    "named": false
+  },
+  {
+    "type": "\\startCSS",
+    "named": false
+  },
+  {
+    "type": "\\startHTML",
+    "named": false
+  },
+  {
+    "type": "\\startLUA",
+    "named": false
+  },
+  {
+    "type": "\\startMP",
+    "named": false
+  },
+  {
+    "type": "\\startMPcode",
+    "named": false
+  },
+  {
+    "type": "\\startMPinclusions",
+    "named": false
+  },
+  {
+    "type": "\\startMPpage",
+    "named": false
+  },
+  {
+    "type": "\\startPARSEDXML",
+    "named": false
+  },
+  {
+    "type": "\\startTEX",
+    "named": false
+  },
+  {
+    "type": "\\startXML",
+    "named": false
+  },
+  {
+    "type": "\\startcomponent",
+    "named": false
+  },
+  {
+    "type": "\\startluacode",
+    "named": false
+  },
+  {
+    "type": "\\startreusableMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\startstaticMPfigure",
+    "named": false
+  },
+  {
+    "type": "\\starttext",
+    "named": false
+  },
+  {
+    "type": "\\starttikzpicture",
+    "named": false
+  },
+  {
+    "type": "\\starttyping",
+    "named": false
+  },
+  {
+    "type": "\\startuseMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\stopCSS",
+    "named": false
+  },
+  {
+    "type": "\\stopHTML",
+    "named": false
+  },
+  {
+    "type": "\\stopLUA",
+    "named": false
+  },
+  {
+    "type": "\\stopMP",
+    "named": false
+  },
+  {
+    "type": "\\stopMPcode",
+    "named": false
+  },
+  {
+    "type": "\\stopMPinclusions",
+    "named": false
+  },
+  {
+    "type": "\\stopMPpage",
+    "named": false
+  },
+  {
+    "type": "\\stopPARSEDXML",
+    "named": false
+  },
+  {
+    "type": "\\stopTEX",
+    "named": false
+  },
+  {
+    "type": "\\stopXML",
+    "named": false
+  },
+  {
+    "type": "\\stopcomponent",
+    "named": false
+  },
+  {
+    "type": "\\stopluacode",
+    "named": false
+  },
+  {
+    "type": "\\stopreusableMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\stopstaticMPfigure",
+    "named": false
+  },
+  {
+    "type": "\\stoptext",
+    "named": false
+  },
+  {
+    "type": "\\stoptikzpicture",
+    "named": false
+  },
+  {
+    "type": "\\stoptyping",
+    "named": false
+  },
+  {
+    "type": "\\stopuseMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\{",
+    "named": false
+  },
+  {
+    "type": "\\|",
+    "named": false
+  },
+  {
+    "type": "\\}",
+    "named": false
+  },
+  {
+    "type": "\\~",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "^",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "code_MPcode_body",
+    "named": true
+  },
+  {
+    "type": "code_MPinclusions_body",
+    "named": true
+  },
+  {
+    "type": "code_MPpage_body",
+    "named": true
+  },
+  {
+    "type": "code_lua_body",
+    "named": true
+  },
+  {
+    "type": "code_reusableMPgraphic_body",
+    "named": true
+  },
+  {
+    "type": "code_staticMPfigure_body",
+    "named": true
+  },
+  {
+    "type": "code_tikz_body",
+    "named": true
+  },
+  {
+    "type": "code_useMPgraphic_body",
+    "named": true
+  },
+  {
+    "type": "command_name",
+    "named": true
+  },
+  {
+    "type": "component_id",
+    "named": true
+  },
+  {
+    "type": "environment_id",
+    "named": true
+  },
+  {
+    "type": "line_comment",
+    "named": true
+  },
+  {
+    "type": "math_text",
+    "named": true
+  },
+  {
+    "type": "paragraph_mark",
+    "named": true
+  },
+  {
+    "type": "product_id",
+    "named": true
+  },
+  {
+    "type": "project_id",
+    "named": true
+  },
+  {
+    "type": "subtitle",
+    "named": false
+  },
+  {
+    "type": "text",
+    "named": true
+  },
+  {
+    "type": "title",
+    "named": false
+  },
+  {
+    "type": "typing_css_body",
+    "named": true
+  },
+  {
+    "type": "typing_html_body",
+    "named": true
+  },
+  {
+    "type": "typing_lua_body",
+    "named": true
+  },
+  {
+    "type": "typing_mp_body",
+    "named": true
+  },
+  {
+    "type": "typing_parsedxml_body",
+    "named": true
+  },
+  {
+    "type": "typing_tex_body",
+    "named": true
+  },
+  {
+    "type": "typing_unnamed_body",
+    "named": true
+  },
+  {
+    "type": "typing_xml_body",
+    "named": true
+  },
+  {
+    "type": "value_brace_group_text",
+    "named": true
+  },
+  {
+    "type": "value_text",
+    "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
+    "named": false
+  }
+]

@@ -1,10 +1,4 @@
-node_modules
-bindings
 .nova
-foo*.tex
-src/grammar.json
-src/node-types.json
-src/parser.c
-src/src/*
-src/tree-sitter/*
+*.tex
+*.log
 log.html
