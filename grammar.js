@@ -305,7 +305,7 @@ module.exports = grammar({
     macro_argument: ($) => seq("#", /\d/),
 
     // # TEXT
-    // text_block: ($) => seq($.text, repeat(seq($.paragraph_mark, $.text))),
+    //
     text_block: ($) =>
       prec.right(
         seq(
