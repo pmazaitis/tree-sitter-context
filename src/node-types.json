@@ -464,6 +464,11 @@
     }
   },
   {
+    "type": "environment_id",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "escaped",
     "named": true,
     "fields": {}
@@ -932,6 +937,11 @@
     }
   },
   {
+    "type": "product_id",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "project_command",
     "named": true,
     "fields": {},
@@ -945,6 +955,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "project_id",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "reusableMPgraphic_inclusion",
@@ -1561,10 +1576,6 @@
     "named": true
   },
   {
-    "type": "environment_id",
-    "named": true
-  },
-  {
     "type": "line_comment",
     "named": true
   },
@@ -1574,14 +1585,6 @@
   },
   {
     "type": "paragraph_mark",
-    "named": true
-  },
-  {
-    "type": "product_id",
-    "named": true
-  },
-  {
-    "type": "project_id",
     "named": true
   },
   {

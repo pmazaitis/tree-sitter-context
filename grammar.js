@@ -161,39 +161,39 @@ module.exports = grammar({
 
     // INCLUDE, PROJECT and ENVIRONMENT COMMANDS
     //
-    // These commands do _not_ require braces to grab the next token as scope.
-
-    // Generic ID for aliasing
-    generic_id: ($) => /[a-zA-Z][a-zA-Z0-9:-_]*/,
+    // These commands do _not_ require braces to grab the next token as an option.
 
     project_command: ($) =>
       seq(
         "\\project",
         choice(
-          seq(/[ \t]+/, alias($.generic_id, $.project_id)),
-          seq("[", alias($.generic_id, $.project_id), "]"),
-          seq(/[ \t]+/, "[", alias($.generic_id, $.project_id), "]")
-        )
+          seq(/[ \t]+/, alias($.keyword, $.project_id)),
+          seq("[", alias($.keyword, $.project_id), "]"),
+          seq(/[ \t]+/, "[", alias($.keyword, $.project_id), "]")
+        ),
+        $._command_stop
       ),
 
     product_command: ($) =>
       seq(
         "\\product",
         choice(
-          seq(/[ \t]+/, alias($.generic_id, $.product_id)),
-          seq("[", alias($.generic_id, $.product_id), "]"),
-          seq(/[ \t]+/, "[", alias($.generic_id, $.product_id), "]")
-        )
+          seq(/[ \t]+/, alias($.keyword, $.product_id)),
+          seq("[", alias($.keyword, $.product_id), "]"),
+          seq(/[ \t]+/, "[", alias($.keyword, $.product_id), "]")
+        ),
+        $._command_stop
       ),
 
     environment_command: ($) =>
       seq(
         "\\environment",
         choice(
-          seq(/[ \t]+/, alias($.generic_id, $.environment_id)),
-          seq("[", alias($.generic_id, $.environment_id), "]"),
-          seq(/[ \t]+/, "[", alias($.generic_id, $.environment_id), "]")
-        )
+          seq(/[ \t]+/, alias($.keyword, $.environment_id)),
+          seq("[", alias($.keyword, $.environment_id), "]"),
+          seq(/[ \t]+/, "[", alias($.keyword, $.environment_id), "]")
+        ),
+        $._command_stop
       ),
 
     // # GROUPS
@@ -256,8 +256,21 @@ module.exports = grammar({
     keyword: ($) => /[^\s=,\[\]]+/,
 
     // ## Settings Block
+
+    //const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
+    //const sepBy = (rule, sep) => optional(sepBy1(rule, sep));
+    // settings_block: ($) =>
+    //   prec(14, seq("[", sepBy($._setting, ","), optional(","), "]")),
     settings_block: ($) =>
-      prec(14, seq("[", sepBy($._setting, ","), optional(","), "]")),
+      prec(
+        14,
+        seq(
+          "[",
+          optional(seq($._setting, repeat(seq(",", $._setting)))),
+          optional(","),
+          "]"
+        )
+      ),
 
     _setting: ($) => choice($.setting, $.title_setting, $.subtitle_setting),
 

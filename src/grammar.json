@@ -263,10 +263,6 @@
         }
       ]
     },
-    "generic_id": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z][a-zA-Z0-9:-_]*"
-    },
     "project_command": {
       "type": "SEQ",
       "members": [
@@ -288,7 +284,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "project_id"
@@ -306,7 +302,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "project_id"
@@ -332,7 +328,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "project_id"
@@ -344,6 +340,10 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_command_stop"
         }
       ]
     },
@@ -368,7 +368,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "product_id"
@@ -386,7 +386,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "product_id"
@@ -412,7 +412,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "product_id"
@@ -424,6 +424,10 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_command_stop"
         }
       ]
     },
@@ -448,7 +452,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "environment_id"
@@ -466,7 +470,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "environment_id"
@@ -492,7 +496,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "generic_id"
+                    "name": "keyword"
                   },
                   "named": true,
                   "value": "environment_id"
@@ -504,6 +508,10 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_command_stop"
         }
       ]
     },
