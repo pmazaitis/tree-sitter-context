@@ -265,7 +265,7 @@
     },
     "generic_id": {
       "type": "PATTERN",
-      "value": "[a-zA-Z][a-zA-Z0-9:_-]*"
+      "value": "[a-zA-Z][a-zA-Z0-9:-_]*"
     },
     "project_command": {
       "type": "SEQ",

@@ -164,7 +164,7 @@ module.exports = grammar({
     // These commands do _not_ require braces to grab the next token as scope.
 
     // Generic ID for aliasing
-    generic_id: ($) => /[a-zA-Z][a-zA-Z0-9:_-]*/,
+    generic_id: ($) => /[a-zA-Z][a-zA-Z0-9:-_]*/,
 
     project_command: ($) =>
       seq(
