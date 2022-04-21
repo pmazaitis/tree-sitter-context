@@ -7,7 +7,7 @@
 This parser supports:
 
 - Parsing ConTeXt files into a concrete syntax tree of tokens (text, commands, command parts, etc.)
-- Marking inclusions of other languages to be handled by other tree-sitter parsers (for example, Lua code in a `.tex` file can be handled by [`tree-sitter-lua`](https://github.com/Azganoth/tree-sitter-lua), if installed)
+- Marking inclusions of other languages to be handled by other tree-sitter parsers (for example, Lua code in a `.tex` file can be handled by [`tree-sitter-lua`](https://github.com/Azganoth/tree-sitter-lua), if the appropriate parser is installed)
 - Syntax highlighting using the syntax tree
 
 This parser should work with tools (editors, formatters) that can work with Tree-Sitter parsers. The Tree-Sitter system also supports several language bindings for building custom tools.
@@ -22,25 +22,25 @@ Some tools only require a URL to the repository; they will download and install 
 
 ## Use
 
-This Tree-Sitter parser works with tools that Support Tree-Sitter parsers in general.
+This Tree-Sitter parser works with tools that support Tree-Sitter parsers in general.
 
-Tree-Sitter syntax highlighting support is build into at least these text editors (useful for a quick test of demo):
+Tree-Sitter syntax highlighting support is built into (at least!) these text editors (useful for a quick test or demo):
 
 - Atom (https://atom.io)
 - NeoVim (https://neovim.io)
 - Helix (https://helix-editor.com)
 
-...and can be enabled with a plugin for others (Virtual Studio Code, Nova)
+...and can be enabled with a plugin for others (Virtual Studio Code, Nova, ...).
 
-The [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) command can be used for testing parsing and highlighting. (A [nice into to `tree-sitter-cli` usage](https://dcreager.net/tree-sitter/getting-started/) is available.)
+The [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) command line utility can be used for simple and direct testing of parsing and highlighting. (A [nice intro to `tree-sitter-cli` usage](https://dcreager.net/tree-sitter/getting-started/) is available.)
 
 ## Contributing
 
-Features and updates cheerfully considered via pull request. Please include tests for any new features, and make sure all the tests in the test suite pass.
+Added features and updates cheerfully considered via pull request. Please include tests for any new features, and make sure all the tests in the test suite pass.
 
 Bug reports cheerfully accepted (especially with areas of ConTeXt less well-served by this parser!). Please use issues to report bugs. Please include as much as possible to make the bug approachable in the report: minimal examples, logs, and especially expectations are all helpful.
 
-As the name implies, `tree-sitter-context_en` is a parser for the English interface to ConTeXt. This repo can be used as a starting point to produce new parsers to other language interfaces to ConTeXt, but this repo is not meant to be extended to handle more than one language.
+As the name implies, `tree-sitter-context_en` is a parser for the English interface to ConTeXt. This repo can be used as a starting point to produce new parsers to other language interfaces to ConTeXt, but the parser in this repo is not meant to be extended to handle more than one language.
 
 ## Caveats and Bugs
 
