@@ -1,6 +1,3 @@
-
-Raw Blame
-     
 MIT License
 
 Copyright (c) 2022 Paul Mazaitis
