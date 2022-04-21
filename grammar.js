@@ -108,12 +108,8 @@ module.exports = grammar({
         choice(
           "\\starttext",
           seq(
-            "\\startcomponent",
-            choice(
-              seq(/[ \t]+/, $.component_id),
-              seq("[", $.component_id, "]"),
-              seq(/[ \t]+/, "[", $.component_id, "]")
-            )
+            /\\startcomponent[ \t]*/,
+            choice($.component_id, seq("[", $.component_id, "]"))
           )
         )
       ),
@@ -165,35 +161,29 @@ module.exports = grammar({
 
     project_command: ($) =>
       seq(
-        "\\project",
+        /\\project[ \t]*/,
         choice(
-          seq(/[ \t]+/, alias($.keyword, $.project_id)),
-          seq("[", alias($.keyword, $.project_id), "]"),
-          seq(/[ \t]+/, "[", alias($.keyword, $.project_id), "]")
-        ),
-        $._command_stop
+          alias($.keyword, $.project_id),
+          seq("[", alias($.keyword, $.project_id), "]")
+        )
       ),
 
     product_command: ($) =>
       seq(
-        "\\product",
+        /\\product[ \t]*/,
         choice(
-          seq(/[ \t]+/, alias($.keyword, $.product_id)),
-          seq("[", alias($.keyword, $.product_id), "]"),
-          seq(/[ \t]+/, "[", alias($.keyword, $.product_id), "]")
-        ),
-        $._command_stop
+          alias($.keyword, $.product_id),
+          seq("[", alias($.keyword, $.product_id), "]")
+        )
       ),
 
     environment_command: ($) =>
       seq(
-        "\\environment",
+        /\\environment[ \t]*/,
         choice(
-          seq(/[ \t]+/, alias($.keyword, $.environment_id)),
-          seq("[", alias($.keyword, $.environment_id), "]"),
-          seq(/[ \t]+/, "[", alias($.keyword, $.environment_id), "]")
-        ),
-        $._command_stop
+          alias($.keyword, $.environment_id),
+          seq("[", alias($.keyword, $.environment_id), "]")
+        )
       ),
 
     // # GROUPS
@@ -247,7 +237,7 @@ module.exports = grammar({
     command_name: ($) => /\\[@a-zA-Z:]+/,
 
     // ## Empty Block
-    empty_block: ($) => choice("[]", seq("[", /[ \t]+/, "]")),
+    empty_block: ($) => /\[[ \t]*\]/,
 
     // ## Option Block
     option_block: ($) =>

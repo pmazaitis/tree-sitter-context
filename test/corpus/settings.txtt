@@ -189,3 +189,39 @@ settings-two_settings_blocks_with_two_keyvals
     )
   )
 )
+
+
+======
+settings-settings_block_with_ws
+======
+
+\cow
+  [ 
+  t={P},
+  ]
+  
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+      (settings_block
+        (setting
+          (key)
+          (value
+            (value_brace_group
+              (value_brace_group_text)
+            )
+          )
+        )
+      )
+    )
+    (text_block
+      (text)
+    )
+  )
+)

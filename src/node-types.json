@@ -444,11 +444,6 @@
     }
   },
   {
-    "type": "empty_block",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "environment_command",
     "named": true,
     "fields": {},
@@ -1308,10 +1303,6 @@
     "named": false
   },
   {
-    "type": "[]",
-    "named": false
-  },
-  {
     "type": "\\",
     "named": false
   },
@@ -1352,18 +1343,6 @@
     "named": false
   },
   {
-    "type": "\\environment",
-    "named": false
-  },
-  {
-    "type": "\\product",
-    "named": false
-  },
-  {
-    "type": "\\project",
-    "named": false
-  },
-  {
     "type": "\\startCSS",
     "named": false
   },
@@ -1401,10 +1380,6 @@
   },
   {
     "type": "\\startXML",
-    "named": false
-  },
-  {
-    "type": "\\startcomponent",
     "named": false
   },
   {
@@ -1573,6 +1548,10 @@
   },
   {
     "type": "component_id",
+    "named": true
+  },
+  {
+    "type": "empty_block",
     "named": true
   },
   {

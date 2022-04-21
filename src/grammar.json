@@ -53,49 +53,19 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "\\startcomponent"
+                  "type": "PATTERN",
+                  "value": "\\\\startcomponent[ \\t]*"
                 },
                 {
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "PATTERN",
-                          "value": "[ \\t]+"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "component_id"
-                        }
-                      ]
+                      "type": "SYMBOL",
+                      "name": "component_id"
                     },
                     {
                       "type": "SEQ",
                       "members": [
-                        {
-                          "type": "STRING",
-                          "value": "["
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "component_id"
-                        },
-                        {
-                          "type": "STRING",
-                          "value": "]"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "PATTERN",
-                          "value": "[ \\t]+"
-                        },
                         {
                           "type": "STRING",
                           "value": "["
@@ -267,59 +237,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "\\project"
+          "type": "PATTERN",
+          "value": "\\\\project[ \\t]*"
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "keyword"
-                  },
-                  "named": true,
-                  "value": "project_id"
-                }
-              ]
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "keyword"
+              },
+              "named": true,
+              "value": "project_id"
             },
             {
               "type": "SEQ",
               "members": [
-                {
-                  "type": "STRING",
-                  "value": "["
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "keyword"
-                  },
-                  "named": true,
-                  "value": "project_id"
-                },
-                {
-                  "type": "STRING",
-                  "value": "]"
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
-                },
                 {
                   "type": "STRING",
                   "value": "["
@@ -340,10 +275,6 @@
               ]
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_command_stop"
         }
       ]
     },
@@ -351,59 +282,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "\\product"
+          "type": "PATTERN",
+          "value": "\\\\product[ \\t]*"
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "keyword"
-                  },
-                  "named": true,
-                  "value": "product_id"
-                }
-              ]
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "keyword"
+              },
+              "named": true,
+              "value": "product_id"
             },
             {
               "type": "SEQ",
               "members": [
-                {
-                  "type": "STRING",
-                  "value": "["
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "keyword"
-                  },
-                  "named": true,
-                  "value": "product_id"
-                },
-                {
-                  "type": "STRING",
-                  "value": "]"
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
-                },
                 {
                   "type": "STRING",
                   "value": "["
@@ -424,10 +320,6 @@
               ]
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_command_stop"
         }
       ]
     },
@@ -435,59 +327,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "\\environment"
+          "type": "PATTERN",
+          "value": "\\\\environment[ \\t]*"
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "keyword"
-                  },
-                  "named": true,
-                  "value": "environment_id"
-                }
-              ]
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "keyword"
+              },
+              "named": true,
+              "value": "environment_id"
             },
             {
               "type": "SEQ",
               "members": [
-                {
-                  "type": "STRING",
-                  "value": "["
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "keyword"
-                  },
-                  "named": true,
-                  "value": "environment_id"
-                },
-                {
-                  "type": "STRING",
-                  "value": "]"
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
-                },
                 {
                   "type": "STRING",
                   "value": "["
@@ -508,10 +365,6 @@
               ]
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_command_stop"
         }
       ]
     },
@@ -768,30 +621,8 @@
       "value": "\\\\[@a-zA-Z:]+"
     },
     "empty_block": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "[]"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "["
-            },
-            {
-              "type": "PATTERN",
-              "value": "[ \\t]+"
-            },
-            {
-              "type": "STRING",
-              "value": "]"
-            }
-          ]
-        }
-      ]
+      "type": "PATTERN",
+      "value": "\\[[ \\t]*\\]"
     },
     "option_block": {
       "type": "PREC",
