@@ -159,7 +159,7 @@ module.exports = grammar({
         /\\project[ \t]*/,
         choice(
           alias($.keyword, $.project_id),
-          seq("[", alias($.keyword, $.project_id), "]")
+          seq("[", alias($.component_id, $.project_id), "]")
         )
       ),
 
@@ -168,7 +168,7 @@ module.exports = grammar({
         /\\product[ \t]*/,
         choice(
           alias($.keyword, $.product_id),
-          seq("[", alias($.keyword, $.product_id), "]")
+          seq("[", alias($.component_id, $.product_id), "]")
         )
       ),
 
@@ -177,7 +177,7 @@ module.exports = grammar({
         /\\environment[ \t]*/,
         choice(
           alias($.keyword, $.environment_id),
-          seq("[", alias($.keyword, $.environment_id), "]")
+          seq("[", alias($.component_id, $.environment_id), "]")
         )
       ),
 

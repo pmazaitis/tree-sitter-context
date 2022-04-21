@@ -263,7 +263,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "keyword"
+                    "name": "component_id"
                   },
                   "named": true,
                   "value": "project_id"
@@ -308,7 +308,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "keyword"
+                    "name": "component_id"
                   },
                   "named": true,
                   "value": "product_id"
@@ -353,7 +353,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "keyword"
+                    "name": "component_id"
                   },
                   "named": true,
                   "value": "environment_id"
