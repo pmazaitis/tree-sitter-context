@@ -161,7 +161,7 @@ module.exports = grammar({
 
     // INCLUDE, PROJECT and ENVIRONMENT COMMANDS
     //
-    // These commands do _not_ require braces to grab the next token as an option.
+    // These commands do _not_ require braces to grab the next token as scope.
 
     project_command: ($) =>
       seq(
