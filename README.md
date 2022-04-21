@@ -50,7 +50,7 @@ Oh, probably lots. :)
 
 ### Limitations
 
-A current issue: this parser does not play nicely with the `tree-sitter-latex` parser when it comes to deciding which parser should be user to handle a file with the extension `.tex` (resolving this is a WIP).
+For the moment, this parser does not play nicely with the `tree-sitter-latex` parser when it comes to deciding which parser should be user to handle a file with the extension `.tex` (resolving this is a WIP).
 
 ### Quirks
 
