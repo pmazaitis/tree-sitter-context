@@ -46,8 +46,8 @@
 //
 // 20  :  document: ($) => choice(prec(20, seq($.preamble, $.main, $.postamble))),
 // 16r :  escaped: ($) => prec.right(16,seq('\\', $.escapechar)),
-// 14  :  settings_block: ($) => prec(14,seq("[",sepBy($.setting, ','),"]")),
-// 12  :  option_block: ($) => prec(12, seq("[",sepBy($.keyword, ','),"]")),
+// 14  :  settings_block: ($) => prec(14,seq("[",($.setting, ','),"]")),
+// 12  :  option_block: ($) => prec(12, seq("[",($.keyword, ','),"]")),
 // 10  :  inline_math: ($) => prec(10,seq('$', repeat1($._math_content), '$')),
 // 10  :  command_group: ($) => prec(10, seq(/\\start[^a-zA-Z]/, repeat($._content), /\\stop[^a-zA-Z]/)),
 // r   :  command: ($) => prec.right(choice(seq($.command_name,repeat(choice($.empty_block, $.option_block, $.settings_block)),repeat($.command_scope),$._command_stop))),
@@ -58,11 +58,6 @@
 // Special characters in the ConTeXt markup language.
 // Note: in the following array, the escaped backslash _must_ be the last character (ug)
 var escaped_chars = ["#", "$", "%", "&", "^", "_", "{", "}", "|", "~", "\\"];
-
-// Possibly useful helper functions?
-// Cribbed from tree-sitter-latex
-const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
-const sepBy = (rule, sep) => optional(sepBy1(rule, sep));
 
 module.exports = grammar({
   name: "context",
@@ -240,8 +235,6 @@ module.exports = grammar({
     empty_block: ($) => /\[[ \t]*\]/,
 
     // ## Option Block
-    // option_block: ($) =>
-    //   prec(12, seq("[", sepBy($.keyword, ","), optional(","), "]")),
     option_block: ($) =>
       prec(
         12,
@@ -256,11 +249,6 @@ module.exports = grammar({
     keyword: ($) => /[^\s=,\[\]]+/,
 
     // ## Settings Block
-
-    //const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
-    //const sepBy = (rule, sep) => optional(sepBy1(rule, sep));
-    // settings_block: ($) =>
-    //   prec(14, seq("[", sepBy($._setting, ","), optional(","), "]")),
     settings_block: ($) =>
       prec(
         14,
