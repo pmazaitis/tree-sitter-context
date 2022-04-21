@@ -240,8 +240,18 @@ module.exports = grammar({
     empty_block: ($) => /\[[ \t]*\]/,
 
     // ## Option Block
+    // option_block: ($) =>
+    //   prec(12, seq("[", sepBy($.keyword, ","), optional(","), "]")),
     option_block: ($) =>
-      prec(12, seq("[", sepBy($.keyword, ","), optional(","), "]")),
+      prec(
+        12,
+        seq(
+          "[",
+          optional(seq($.keyword, repeat(seq(",", $.keyword)))),
+          optional(","),
+          "]"
+        )
+      ),
 
     keyword: ($) => /[^\s=,\[\]]+/,
 

@@ -24,9 +24,15 @@ Some tools only require a URL to the repository; they will download and install 
 
 This Tree-Sitter parser works with tools that Support Tree-Sitter parsers in general.
 
-The [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) command can be used for testing parsing and highlighting.
+Tree-Sitter syntax highlighting support is build into at least these text editors (useful for a quick test of demo):
 
-Tree-Sitter supports language bindings for building custom tools.
+- Atom (https://atom.io)
+- NeoVim (https://neovim.io)
+- Helix (https://helix-editor.com)
+
+...and can be enabled with a plugin for others (Virtual Studio Code, Nova)
+
+The [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) command can be used for testing parsing and highlighting. (A [nice into to `tree-sitter-cli` usage](https://dcreager.net/tree-sitter/getting-started/) is available.)
 
 ## Contributing
 
@@ -44,9 +50,7 @@ Oh, probably lots. :)
 
 ### Quirks
 
-The parser accepts non-compliant syntax in the argument for project structure commands.
-
-Due to how command and scope endings are handled, this parser includes a bunch of empty text nodes in the tree (WIP).
+Due to how command and scope endings are handled, this parser includes a bunch of empty text nodes in the tree (resolving this is a WIP).
 
 ## Support
 
