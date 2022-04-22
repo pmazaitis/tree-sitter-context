@@ -34,6 +34,8 @@ Tree-Sitter driven syntax highlighting support is built into (at least!) these t
 
 The [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) command line utility can be used for simple and direct testing of parsing and highlighting. (A [nice intro to `tree-sitter-cli` usage](https://dcreager.net/tree-sitter/getting-started/) is available.)
 
+Setting up Tree-Sitter on your system may involve satisfying dependencies; see the Tree-Sitter documentation on [using parsers](https://tree-sitter.github.io/tree-sitter/using-parsers).
+
 ## Contributing
 
 New features and updates cheerfully considered via pull request. Please include tests for any new features, and make sure all the tests in the test suite pass.
