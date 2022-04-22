@@ -41,3 +41,34 @@ escaped-escaped_with_comment
     )
   ) 
 )
+
+======
+escaped-all_escaped
+======
+
+\#\$\%\&\^\_\{\}\|\~\\\\
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (escaped)
+    (text_block
+      (text)
+    )
+  )
+)

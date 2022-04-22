@@ -317,7 +317,6 @@ module.exports = grammar({
       ),
 
     // # ESCAPED CHARACTERS
-    escaped_char: ($) => prec(16, choice(...escaped_chars)),
 
     escaped: ($) =>
       prec(
