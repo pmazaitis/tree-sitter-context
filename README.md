@@ -14,17 +14,17 @@ This parser should work with tools (editors, formatters) that can work with Tree
 
 ## Installation
 
-Clone or download the repository to local disk.
+How you install `tree-sitter-context_en` depends on the tool you're using it with.
 
-This Tree-Sitter parser should also be available via `npm` if that's a viable alternative.
+Some tools only require a URL to this repository, and will handle downloading and configuring the parser for their use.
 
-Some tools only require a URL to the repository; they will download and install the parser as needed.
+Other tools require the repository to be cloned or downloaded to local disk by hand. Once the repository is local, it can be referenced by the tool (usually though a configuration setting).
 
 ## Use
 
 This Tree-Sitter parser works with tools that support Tree-Sitter parsers in general.
 
-Tree-Sitter syntax highlighting support is built into (at least!) these text editors (useful for a quick test or demo):
+Tree-Sitter driven syntax highlighting support is built into (at least!) these text editors (useful for a quick test or demo):
 
 - Atom (https://atom.io)
 - NeoVim (https://neovim.io)
@@ -36,11 +36,11 @@ The [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter/blob/master/c
 
 ## Contributing
 
-Added features and updates cheerfully considered via pull request. Please include tests for any new features, and make sure all the tests in the test suite pass.
+New features and updates cheerfully considered via pull request. Please include tests for any new features, and make sure all the tests in the test suite pass.
 
 Bug reports cheerfully accepted (especially with areas of ConTeXt less well-served by this parser!). Please use issues to report bugs. Please include as much as possible to make the bug approachable in the report: minimal examples, logs, and especially expectations are all helpful.
 
-As the name implies, `tree-sitter-context_en` is a parser for the English interface to ConTeXt. This repo can be used as a starting point to produce new parsers to other language interfaces to ConTeXt, but the parser in this repo is not meant to be extended to handle more than one language.
+As the name implies, `tree-sitter-context_en` is a parser for the English interface to ConTeXt. Supporting the ConTeXt interface for other languages is a non-goal of this parser. The software in this repository can be used as a starting point to produce new parsers for other language interfaces to ConTeXt.
 
 ## Caveats
 
@@ -50,7 +50,7 @@ Oh, probably lots. :)
 
 ### Limitations
 
-For the moment, this parser does not play nicely with the `tree-sitter-latex` parser when it comes to deciding which parser should be user to handle a file with the extension `.tex` (resolving this is a WIP).
+For the moment, this parser does not play nicely with the `tree-sitter-latex` parser when deciding which parser should be used to handle a file with the extension `.tex` (resolving this is a WIP).
 
 ### Quirks
 
@@ -58,11 +58,13 @@ Due to how command and scope endings are handled, this parser includes a bunch o
 
 ## Support
 
-If you have a question, _please raise a GitHub issue_ (or a discussion topic).
+If you have a question, [please raise a GitHub issue with your question using the question template](https://github.com/pmazaitis/tree-sitter-context_en/issues/new?assignees=&labels=&template=question.md&title=), or [start a discussion topic](https://github.com/pmazaitis/tree-sitter-context_en/discussions).
 
-If you have a bug report, _please raise a GitHub issue_. Anything that you can offer to make the bug reproducible and/or understandable is gratefully accepted.
+If you have a feature request, [please raise a GitHub issue with your question using the feature request template](https://github.com/pmazaitis/tree-sitter-context_en/issues/new?assignees=&labels=&template=feature_request.md&title=).
 
-_I am a hobbyist software developer._ I want to improve this software (not for the least of reasons that I want my ConTeXt environment to be better!), but I can't guarantee that I will always have the time and energy to do so. Best efforts, and onward!
+If you have a bug report, [please raise a GitHub issue using the bug report template](https://github.com/pmazaitis/tree-sitter-context_en/issues/new?assignees=&labels=&template=bug_report.md&title=). Anything that you can offer to make the bug reproducible and/or understandable is gratefully accepted.
+
+_I am a hobbyist software developer._ I want to improve this software, but I can't guarantee that I will always have the time and energy to do so. Best efforts, and onward!
 
 ## Credits
 
