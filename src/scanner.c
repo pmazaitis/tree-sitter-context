@@ -31,8 +31,6 @@ enum TokenType
   TYPING_UNNAMED_BODY,
 };
 
-// FIXME this scanner is not line ending agnostic
-
 void *tree_sitter_context_external_scanner_create() { return NULL; }
 void tree_sitter_context_external_scanner_destroy(void *p) { UNUSED(p); }
 void tree_sitter_jcontext_external_scanner_reset(void *p) { UNUSED(p); }
@@ -57,8 +55,19 @@ static bool char_ends_scope(char c);
 static void advance(TSLexer *lexer)
 {
   lexer->advance(lexer, false);
+  if (lexer->lookahead == '\r') {
+    lexer->advance(lexer, false);
+  }
+  
 }
-static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
+
+static void skip(TSLexer *lexer) 
+{ 
+  lexer->advance(lexer, true); 
+  if (lexer->lookahead == '\r') {
+    lexer->advance(lexer, true);
+  }
+}
 
 // # UTILITY FUNCTIONS
 
