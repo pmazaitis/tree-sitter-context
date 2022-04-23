@@ -151,14 +151,14 @@ static bool char_ends_scope(char c)
 }
 
 // Helpful for tracking state
-static void debug_lookahead(char c, char *msg)
-{
-#ifdef DEBUG
-  printf("#### %s\n", msg);
-  printf("#### [Character under test: \'%c\' ]\n", c);
-  fflush(stdout);
-#endif
-}
+// static void debug_lookahead(char c, char *msg)
+// {
+// #ifdef DEBUG
+//   printf("#### %s\n", msg);
+//   printf("#### [Character under test: \'%c\' ]\n", c);
+//   fflush(stdout);
+// #endif
+// }
 
 // TOKEN FUNCTIONS
 
