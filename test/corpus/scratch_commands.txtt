@@ -1,0 +1,109 @@
+======
+scratch_commands-system_constant
+======
+
+\s!foo
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )  
+  ) 
+)
+
+======
+scratch_commands-constant_key
+======
+
+\c!foo
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )  
+  ) 
+)
+
+======
+scratch_commands-variable_value_name
+======
+
+\v!foo
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )  
+  ) 
+)
+
+======
+scratch_commands-multilingual_interface_constant
+======
+
+\??foo
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )  
+  ) 
+)
+
+======
+scratch_commands-multilingual_interface_expansion_results
+======
+
+\@@foo
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )  
+  ) 
+)
