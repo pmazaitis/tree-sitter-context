@@ -107,3 +107,25 @@ scratch_commands-multilingual_interface_expansion_results
     )  
   ) 
 )
+
+======
+scratch_commands-reserved
+======
+
+\!!foo
+
+---
+
+(document
+  (main
+    (text_block
+      (text)
+    )
+    (command
+      (command_name)
+    )
+    (text_block
+      (text)
+    )  
+  ) 
+)
