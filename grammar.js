@@ -21,6 +21,7 @@
 // [PASS] Product Command
 // [PASS] Environment Command
 // [PASS] Macro Arguments
+// [FAIL] Scratch Commands
 // [    ]
 //
 // ## Injected Languages
@@ -87,7 +88,7 @@ module.exports = grammar({
     $.typing_unnamed_body,
   ],
 
-  word: ($) => $.command_name,
+  // word: ($) => $.command_name,
 
   rules: {
     // # DOCUMENT - An entire ConTeXt document.
@@ -147,7 +148,13 @@ module.exports = grammar({
         $.typing_parsedxml_inclusion,
         $.project_command,
         $.product_command,
-        $.environment_command
+        $.environment_command,
+        $.system_constant,
+        $.constant_key,
+        $.variable_value,
+        $.multilingual_interface_constant,
+        $.multilingual_interface_expansion_results,
+        $.reserved_constant
       ),
 
     // INCLUDE, PROJECT and ENVIRONMENT COMMANDS
@@ -211,6 +218,33 @@ module.exports = grammar({
     math_text: ($) => /[^${}]+/,
 
     inline_math: ($) => prec(10, seq("$", repeat1($._math_content), "$")),
+
+
+    // # SCRATCH COMMANDS
+
+    system_constant: ($) => prec.left(6,seq("\\s\!", $.system_constant_name)), 
+
+    system_constant_name: ($) => prec(6,/[@a-zA-Z:]+/),
+
+    constant_key: ($) => prec.left(6,seq("\\c\!", $.constant_key_name)), 
+    
+    constant_key_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    
+    variable_value: ($) => prec.left(6,seq("\\v\!", $.variable_value_name)), 
+    
+    variable_value_name: ($) => prec(6,/[@a-zA-Z:]+/),
+
+    multilingual_interface_constant: ($) => prec.left(6,seq("\\\?\?", $.multilingual_interface_constant_name)),
+
+    multilingual_interface_constant_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    
+    multilingual_interface_expansion_results: ($) => prec.left(6,seq("\\\@\@", $.multilingual_interface_expansion_results_name)),
+    
+    multilingual_interface_expansion_results_name: ($) => prec(6,/[a-zA-Z:]+/),
+
+    reserved_constant: ($) => prec.left(6,seq("\\!!", $.reserved_constant_name)),
+    
+    reserved_constant_name: ($) => prec(6,/[@a-zA-Z:]+/),
 
     // # COMMANDS
 

@@ -11,8 +11,8 @@ scratch_commands-system_constant
     (text_block
       (text)
     )
-    (command
-      (command_name)
+    (system_constant
+      (system_constant_name)
     )
     (text_block
       (text)
@@ -33,8 +33,8 @@ scratch_commands-constant_key
     (text_block
       (text)
     )
-    (command
-      (command_name)
+    (constant_key
+      (constant_key_name)
     )
     (text_block
       (text)
@@ -55,8 +55,8 @@ scratch_commands-variable_value_name
     (text_block
       (text)
     )
-    (command
-      (command_name)
+    (variable_value
+      (variable_value_name)
     )
     (text_block
       (text)
@@ -77,8 +77,8 @@ scratch_commands-multilingual_interface_constant
     (text_block
       (text)
     )
-    (command
-      (command_name)
+    (multilingual_interface_constant
+      (multilingual_interface_constant_name)
     )
     (text_block
       (text)
@@ -99,8 +99,8 @@ scratch_commands-multilingual_interface_expansion_results
     (text_block
       (text)
     )
-    (command
-      (command_name)
+    (multilingual_interface_expansion_results
+      (multilingual_interface_expansion_results_name)
     )
     (text_block
       (text)
@@ -121,8 +121,8 @@ scratch_commands-reserved
     (text_block
       (text)
     )
-    (command
-      (command_name)
+    (reserved_constant
+      (reserved_constant_name)
     )
     (text_block
       (text)

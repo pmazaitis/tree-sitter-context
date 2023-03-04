@@ -1,6 +1,5 @@
 {
   "name": "context",
-  "word": "command_name",
   "rules": {
     "document": {
       "type": "CHOICE",
@@ -230,6 +229,30 @@
         {
           "type": "SYMBOL",
           "name": "environment_command"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_constant"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "constant_key"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "multilingual_interface_constant"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "multilingual_interface_expansion_results"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "reserved_constant"
         }
       ]
     },
@@ -544,6 +567,156 @@
             "value": "$"
           }
         ]
+      }
+    },
+    "system_constant": {
+      "type": "PREC_LEFT",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\s!"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "system_constant_name"
+          }
+        ]
+      }
+    },
+    "system_constant_name": {
+      "type": "PREC",
+      "value": 6,
+      "content": {
+        "type": "PATTERN",
+        "value": "[@a-zA-Z:]+"
+      }
+    },
+    "constant_key": {
+      "type": "PREC_LEFT",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\c!"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "constant_key_name"
+          }
+        ]
+      }
+    },
+    "constant_key_name": {
+      "type": "PREC",
+      "value": 6,
+      "content": {
+        "type": "PATTERN",
+        "value": "[@a-zA-Z:]+"
+      }
+    },
+    "variable_value": {
+      "type": "PREC_LEFT",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\v!"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "variable_value_name"
+          }
+        ]
+      }
+    },
+    "variable_value_name": {
+      "type": "PREC",
+      "value": 6,
+      "content": {
+        "type": "PATTERN",
+        "value": "[@a-zA-Z:]+"
+      }
+    },
+    "multilingual_interface_constant": {
+      "type": "PREC_LEFT",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\??"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "multilingual_interface_constant_name"
+          }
+        ]
+      }
+    },
+    "multilingual_interface_constant_name": {
+      "type": "PREC",
+      "value": 6,
+      "content": {
+        "type": "PATTERN",
+        "value": "[@a-zA-Z:]+"
+      }
+    },
+    "multilingual_interface_expansion_results": {
+      "type": "PREC_LEFT",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\@@"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "multilingual_interface_expansion_results_name"
+          }
+        ]
+      }
+    },
+    "multilingual_interface_expansion_results_name": {
+      "type": "PREC",
+      "value": 6,
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-zA-Z:]+"
+      }
+    },
+    "reserved_constant": {
+      "type": "PREC_LEFT",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\!!"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "reserved_constant_name"
+          }
+        ]
+      }
+    },
+    "reserved_constant_name": {
+      "type": "PREC",
+      "value": 6,
+      "content": {
+        "type": "PATTERN",
+        "value": "[@a-zA-Z:]+"
       }
     },
     "command": {

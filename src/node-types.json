@@ -77,6 +77,10 @@
           "named": true
         },
         {
+          "type": "constant_key",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -101,6 +105,14 @@
           "named": true
         },
         {
+          "type": "multilingual_interface_constant",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_expansion_results",
+          "named": true
+        },
+        {
           "type": "product_command",
           "named": true
         },
@@ -109,11 +121,19 @@
           "named": true
         },
         {
+          "type": "reserved_constant",
+          "named": true
+        },
+        {
           "type": "reusableMPgraphic_inclusion",
           "named": true
         },
         {
           "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "system_constant",
           "named": true
         },
         {
@@ -154,6 +174,10 @@
         },
         {
           "type": "useMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "variable_value",
           "named": true
         }
       ]
@@ -223,6 +247,10 @@
           "named": true
         },
         {
+          "type": "constant_key",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -247,6 +275,14 @@
           "named": true
         },
         {
+          "type": "multilingual_interface_constant",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_expansion_results",
+          "named": true
+        },
+        {
           "type": "product_command",
           "named": true
         },
@@ -255,11 +291,19 @@
           "named": true
         },
         {
+          "type": "reserved_constant",
+          "named": true
+        },
+        {
           "type": "reusableMPgraphic_inclusion",
           "named": true
         },
         {
           "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "system_constant",
           "named": true
         },
         {
@@ -300,6 +344,10 @@
         },
         {
           "type": "useMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "variable_value",
           "named": true
         }
       ]
@@ -338,6 +386,10 @@
           "named": true
         },
         {
+          "type": "constant_key",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -362,6 +414,14 @@
           "named": true
         },
         {
+          "type": "multilingual_interface_constant",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_expansion_results",
+          "named": true
+        },
+        {
           "type": "product_command",
           "named": true
         },
@@ -370,11 +430,19 @@
           "named": true
         },
         {
+          "type": "reserved_constant",
+          "named": true
+        },
+        {
           "type": "reusableMPgraphic_inclusion",
           "named": true
         },
         {
           "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "system_constant",
           "named": true
         },
         {
@@ -416,9 +484,33 @@
         {
           "type": "useMPgraphic_inclusion",
           "named": true
+        },
+        {
+          "type": "variable_value",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "constant_key",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "constant_key_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constant_key_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "document",
@@ -558,6 +650,10 @@
           "named": true
         },
         {
+          "type": "constant_key",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -582,6 +678,14 @@
           "named": true
         },
         {
+          "type": "multilingual_interface_constant",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_expansion_results",
+          "named": true
+        },
+        {
           "type": "product_command",
           "named": true
         },
@@ -590,11 +694,19 @@
           "named": true
         },
         {
+          "type": "reserved_constant",
+          "named": true
+        },
+        {
           "type": "reusableMPgraphic_inclusion",
           "named": true
         },
         {
           "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "system_constant",
           "named": true
         },
         {
@@ -636,6 +748,10 @@
         {
           "type": "useMPgraphic_inclusion",
           "named": true
+        },
+        {
+          "type": "variable_value",
+          "named": true
         }
       ]
     }
@@ -666,6 +782,46 @@
         }
       ]
     }
+  },
+  {
+    "type": "multilingual_interface_constant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "multilingual_interface_constant_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multilingual_interface_constant_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "multilingual_interface_expansion_results",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "multilingual_interface_expansion_results_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multilingual_interface_expansion_results_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "option_block",
@@ -715,6 +871,10 @@
           "named": true
         },
         {
+          "type": "constant_key",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -739,6 +899,14 @@
           "named": true
         },
         {
+          "type": "multilingual_interface_constant",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_expansion_results",
+          "named": true
+        },
+        {
           "type": "product_command",
           "named": true
         },
@@ -747,11 +915,19 @@
           "named": true
         },
         {
+          "type": "reserved_constant",
+          "named": true
+        },
+        {
           "type": "reusableMPgraphic_inclusion",
           "named": true
         },
         {
           "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "system_constant",
           "named": true
         },
         {
@@ -792,6 +968,10 @@
         },
         {
           "type": "useMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "variable_value",
           "named": true
         }
       ]
@@ -834,6 +1014,10 @@
           "named": true
         },
         {
+          "type": "constant_key",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -858,6 +1042,14 @@
           "named": true
         },
         {
+          "type": "multilingual_interface_constant",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_expansion_results",
+          "named": true
+        },
+        {
           "type": "product_command",
           "named": true
         },
@@ -866,11 +1058,19 @@
           "named": true
         },
         {
+          "type": "reserved_constant",
+          "named": true
+        },
+        {
           "type": "reusableMPgraphic_inclusion",
           "named": true
         },
         {
           "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "system_constant",
           "named": true
         },
         {
@@ -911,6 +1111,10 @@
         },
         {
           "type": "useMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "variable_value",
           "named": true
         }
       ]
@@ -953,6 +1157,26 @@
   },
   {
     "type": "project_id",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "reserved_constant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "reserved_constant_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reserved_constant_name",
     "named": true,
     "fields": {}
   },
@@ -1042,6 +1266,26 @@
         }
       ]
     }
+  },
+  {
+    "type": "system_constant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "system_constant_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "system_constant_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "text_block",
@@ -1275,6 +1519,26 @@
     }
   },
   {
+    "type": "variable_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable_value_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_value_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "#",
     "named": false
   },
@@ -1295,6 +1559,10 @@
     "named": false
   },
   {
+    "type": "\\!!",
+    "named": false
+  },
+  {
     "type": "\\#",
     "named": false
   },
@@ -1308,6 +1576,14 @@
   },
   {
     "type": "\\&",
+    "named": false
+  },
+  {
+    "type": "\\??",
+    "named": false
+  },
+  {
+    "type": "\\@@",
     "named": false
   },
   {
@@ -1327,7 +1603,15 @@
     "named": false
   },
   {
+    "type": "\\c!",
+    "named": false
+  },
+  {
     "type": "\\egroup",
+    "named": false
+  },
+  {
+    "type": "\\s!",
     "named": false
   },
   {
@@ -1468,6 +1752,10 @@
   },
   {
     "type": "\\stopuseMPgraphic",
+    "named": false
+  },
+  {
+    "type": "\\v!",
     "named": false
   },
   {
