@@ -224,27 +224,27 @@ module.exports = grammar({
 
     system_constant: ($) => prec.left(6,seq("\\s\!", $.system_constant_name)), 
 
-    system_constant_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    system_constant_name: ($) => prec(6,/[a-zA-Z:]+/),
 
     constant_key: ($) => prec.left(6,seq("\\c\!", $.constant_key_name)), 
     
-    constant_key_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    constant_key_name: ($) => prec(6,/[a-zA-Z:]+/),
     
     variable_value: ($) => prec.left(6,seq("\\v\!", $.variable_value_name)), 
     
-    variable_value_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    variable_value_name: ($) => prec(6,/[a-zA-Z:]+/),
 
     multilingual_interface_constant: ($) => prec.left(6,seq("\\\?\?", $.multilingual_interface_constant_name)),
 
-    multilingual_interface_constant_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    multilingual_interface_constant_name: ($) => prec(6,/[a-zA-Z:]+/),
     
-    multilingual_interface_expansion_results: ($) => prec.left(6,seq("\\\@\@", $.multilingual_interface_expansion_results_name)),
+    multilingual_interface_expansion_results: ($) => prec.left(6,seq('\\\@\@', $.multilingual_interface_expansion_results_name)),
     
-    multilingual_interface_expansion_results_name: ($) => prec(6,/[a-zA-Z:]+/),
+    multilingual_interface_expansion_results_name: ($) => prec(6,/[@a-zA-Z:]+/),
 
     reserved_constant: ($) => prec.left(6,seq("\\!!", $.reserved_constant_name)),
     
-    reserved_constant_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    reserved_constant_name: ($) => prec(6,/[a-zA-Z:]+/),
 
     // # COMMANDS
 
@@ -263,7 +263,7 @@ module.exports = grammar({
       ),
 
     // ## Command Name
-    command_name: ($) => /\\[@a-zA-Z:]+/,
+    command_name: ($) => /\\[a-zA-Z:]+/,
 
     // ## Empty Block
     empty_block: ($) => /\[[ \t]*\]/,

@@ -591,7 +591,7 @@
       "value": 6,
       "content": {
         "type": "PATTERN",
-        "value": "[@a-zA-Z:]+"
+        "value": "[a-zA-Z:]+"
       }
     },
     "constant_key": {
@@ -616,7 +616,7 @@
       "value": 6,
       "content": {
         "type": "PATTERN",
-        "value": "[@a-zA-Z:]+"
+        "value": "[a-zA-Z:]+"
       }
     },
     "variable_value": {
@@ -641,7 +641,7 @@
       "value": 6,
       "content": {
         "type": "PATTERN",
-        "value": "[@a-zA-Z:]+"
+        "value": "[a-zA-Z:]+"
       }
     },
     "multilingual_interface_constant": {
@@ -666,7 +666,7 @@
       "value": 6,
       "content": {
         "type": "PATTERN",
-        "value": "[@a-zA-Z:]+"
+        "value": "[a-zA-Z:]+"
       }
     },
     "multilingual_interface_expansion_results": {
@@ -691,7 +691,7 @@
       "value": 6,
       "content": {
         "type": "PATTERN",
-        "value": "[a-zA-Z:]+"
+        "value": "[@a-zA-Z:]+"
       }
     },
     "reserved_constant": {
@@ -716,7 +716,7 @@
       "value": 6,
       "content": {
         "type": "PATTERN",
-        "value": "[@a-zA-Z:]+"
+        "value": "[a-zA-Z:]+"
       }
     },
     "command": {
@@ -791,7 +791,7 @@
     },
     "command_name": {
       "type": "PATTERN",
-      "value": "\\\\[@a-zA-Z:]+"
+      "value": "\\\\[a-zA-Z:]+"
     },
     "empty_block": {
       "type": "PATTERN",
