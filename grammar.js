@@ -21,7 +21,7 @@
 // [PASS] Product Command
 // [PASS] Environment Command
 // [PASS] Macro Arguments
-// [FAIL] Scratch Commands
+// [PASS] Scratch Commands
 // [    ]
 //
 // ## Injected Languages
