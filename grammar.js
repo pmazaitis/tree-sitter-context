@@ -61,7 +61,7 @@
 var escaped_chars = ["#", "$", "%", "&", "^", "_", "{", "}", "|", "~", "\\"];
 
 module.exports = grammar({
-  name: "context",
+  name: "context_en",
 
   extras: ($) => [$._whitespace, $.line_comment],
 
