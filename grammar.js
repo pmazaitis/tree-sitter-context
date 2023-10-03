@@ -61,7 +61,7 @@
 var escaped_chars = ["#", "$", "%", "&", "^", "_", "{", "}", "|", "~", "\\"];
 
 module.exports = grammar({
-  name: "context-en",
+  name: "context",
 
   extras: ($) => [$._whitespace, $.line_comment],
 
@@ -124,6 +124,7 @@ module.exports = grammar({
     _content: ($) =>
       choice(
         $.line_comment,
+        $.environment,
         $.command,
         $.macro_argument,
         $.brace_group,
@@ -222,29 +223,50 @@ module.exports = grammar({
 
     // # SCRATCH COMMANDS
 
-    system_constant: ($) => prec.left(6,seq("\\s\!", $.system_constant_name)), 
+    system_constant: ($) => prec.left(6, seq("\\s\!", $.system_constant_name)),
 
-    system_constant_name: ($) => prec(6,/[a-zA-Z:]+/),
+    system_constant_name: ($) => prec(6, /[a-zA-Z:]+/),
 
-    constant_key: ($) => prec.left(6,seq("\\c\!", $.constant_key_name)), 
-    
-    constant_key_name: ($) => prec(6,/[a-zA-Z:]+/),
-    
-    variable_value: ($) => prec.left(6,seq("\\v\!", $.variable_value_name)), 
-    
-    variable_value_name: ($) => prec(6,/[a-zA-Z:]+/),
+    constant_key: ($) => prec.left(6, seq("\\c\!", $.constant_key_name)),
 
-    multilingual_interface_constant: ($) => prec.left(6,seq("\\\?\?", $.multilingual_interface_constant_name)),
+    constant_key_name: ($) => prec(6, /[a-zA-Z:]+/),
 
-    multilingual_interface_constant_name: ($) => prec(6,/[a-zA-Z:]+/),
-    
-    multilingual_interface_expansion_results: ($) => prec.left(6,seq('\\\@\@', $.multilingual_interface_expansion_results_name)),
-    
-    multilingual_interface_expansion_results_name: ($) => prec(6,/[@a-zA-Z:]+/),
+    variable_value: ($) => prec.left(6, seq("\\v\!", $.variable_value_name)),
 
-    reserved_constant: ($) => prec.left(6,seq("\\!!", $.reserved_constant_name)),
-    
-    reserved_constant_name: ($) => prec(6,/[a-zA-Z:]+/),
+    variable_value_name: ($) => prec(6, /[a-zA-Z:]+/),
+
+    multilingual_interface_constant: ($) => prec.left(6, seq("\\\?\?", $.multilingual_interface_constant_name)),
+
+    multilingual_interface_constant_name: ($) => prec(6, /[a-zA-Z:]+/),
+
+    multilingual_interface_expansion_results: ($) => prec.left(6, seq('\\\@\@', $.multilingual_interface_expansion_results_name)),
+
+    multilingual_interface_expansion_results_name: ($) => prec(6, /[@a-zA-Z:]+/),
+
+    reserved_constant: ($) => prec.left(6, seq("\\!!", $.reserved_constant_name)),
+
+    reserved_constant_name: ($) => prec(6, /[a-zA-Z:]+/),
+
+    // # ENVIRONMENTS
+
+    environment: ($) =>
+      prec.right(6,
+        seq(
+          $.start_environment_name,
+          repeat(choice($.empty_block, $.option_block, $.settings_block)),
+          $._command_stop,
+          // optional(
+          //   seq($.command_scope, repeat($.command_scope), $._scopes_stop)
+          // ),
+          repeat($._content),
+          $.stop_environment_name,
+        )
+      ),
+
+    start_environment_name: ($) => /\\start[a-zA-Z:]+/,
+
+    stop_environment_name: ($) => /\\stop[a-zA-Z:]+/,
+
 
     // # COMMANDS
 
@@ -298,9 +320,9 @@ module.exports = grammar({
 
     setting: ($) => seq($.key, "=", optional($.value)),
 
-    title_setting: ($) => seq("title", "=", optional($.value)),
+    title_setting: ($) => prec(2, seq("title", "=", optional($.value))),
 
-    subtitle_setting: ($) => seq("subtitle", "=", optional($.value)),
+    subtitle_setting: ($) => prec(2, seq("subtitle", "=", optional($.value))),
 
     key: ($) => /[^\s=,\[\]]+/,
 

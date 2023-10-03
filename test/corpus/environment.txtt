@@ -1,0 +1,81 @@
+======
+environment-single
+======
+
+\startchapter
+
+\blank
+
+\stopchapter
+
+---
+
+    (document
+      (main
+        (text_block
+          (text))
+        (environment
+          (start_environment_name)
+          (text_block
+            (text))
+          (command
+            (command_name))
+          (text_block
+            (text))
+          (stop_environment_name))
+        (text_block
+          (text))))
+
+======
+environment-nested
+======
+
+\startchapter[title={Foo}]
+
+\blank
+
+\startsection[title={Bar}]
+
+\blank
+
+\stopsection
+
+\stopchapter
+
+---
+
+    (document
+      (main
+        (text_block
+          (text))
+        (environment
+          (start_environment_name)
+            (settings_block
+            (title_setting
+              (value
+                (value_brace_group
+                  (value_brace_group_text)))))
+          (text_block
+            (text))
+          (command
+            (command_name))
+          (text_block
+            (text))
+            (environment
+            (start_environment_name)
+            (settings_block
+            (title_setting
+              (value
+                (value_brace_group
+                  (value_brace_group_text)))))
+            (text_block
+              (text))
+            (command
+              (command_name))
+            (text_block
+              (text))
+            (stop_environment_name))
+          (stop_environment_name))
+        (text_block
+          (text))))
+

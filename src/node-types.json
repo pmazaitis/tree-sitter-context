@@ -81,6 +81,10 @@
           "named": true
         },
         {
+          "type": "environment",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -251,6 +255,10 @@
           "named": true
         },
         {
+          "type": "environment",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -387,6 +395,10 @@
         },
         {
           "type": "constant_key",
+          "named": true
+        },
+        {
+          "type": "environment",
           "named": true
         },
         {
@@ -536,6 +548,169 @@
     }
   },
   {
+    "type": "environment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "MPcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPinclusions_inclusion",
+          "named": true
+        },
+        {
+          "type": "MPpage_inclusion",
+          "named": true
+        },
+        {
+          "type": "brace_group",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "command_group",
+          "named": true
+        },
+        {
+          "type": "constant_key",
+          "named": true
+        },
+        {
+          "type": "empty_block",
+          "named": true
+        },
+        {
+          "type": "environment",
+          "named": true
+        },
+        {
+          "type": "environment_command",
+          "named": true
+        },
+        {
+          "type": "escaped",
+          "named": true
+        },
+        {
+          "type": "inline_math",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "luacode_inclusion",
+          "named": true
+        },
+        {
+          "type": "macro_argument",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_constant",
+          "named": true
+        },
+        {
+          "type": "multilingual_interface_expansion_results",
+          "named": true
+        },
+        {
+          "type": "option_block",
+          "named": true
+        },
+        {
+          "type": "product_command",
+          "named": true
+        },
+        {
+          "type": "project_command",
+          "named": true
+        },
+        {
+          "type": "reserved_constant",
+          "named": true
+        },
+        {
+          "type": "reusableMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "settings_block",
+          "named": true
+        },
+        {
+          "type": "start_environment_name",
+          "named": true
+        },
+        {
+          "type": "staticMPfigure_inclusion",
+          "named": true
+        },
+        {
+          "type": "stop_environment_name",
+          "named": true
+        },
+        {
+          "type": "system_constant",
+          "named": true
+        },
+        {
+          "type": "text_block",
+          "named": true
+        },
+        {
+          "type": "tikzcode_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_css_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_html_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_lua_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_mp_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_parsedxml_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_unnamed_inclusion",
+          "named": true
+        },
+        {
+          "type": "typing_xml_inclusion",
+          "named": true
+        },
+        {
+          "type": "useMPgraphic_inclusion",
+          "named": true
+        },
+        {
+          "type": "variable_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "environment_command",
     "named": true,
     "fields": {},
@@ -651,6 +826,10 @@
         },
         {
           "type": "constant_key",
+          "named": true
+        },
+        {
+          "type": "environment",
           "named": true
         },
         {
@@ -875,6 +1054,10 @@
           "named": true
         },
         {
+          "type": "environment",
+          "named": true
+        },
+        {
           "type": "environment_command",
           "named": true
         },
@@ -1015,6 +1198,10 @@
         },
         {
           "type": "constant_key",
+          "named": true
+        },
+        {
+          "type": "environment",
           "named": true
         },
         {
@@ -1832,6 +2019,14 @@
   },
   {
     "type": "paragraph_mark",
+    "named": true
+  },
+  {
+    "type": "start_environment_name",
+    "named": true
+  },
+  {
+    "type": "stop_environment_name",
     "named": true
   },
   {
