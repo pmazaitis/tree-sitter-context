@@ -3,3 +3,9 @@
 *.log
 log.html
 target/*
+src/grammar.json
+src/node-types.json
+src/parser.c
+src/parser.o
+src/scanner.o
+build/lib/libtree-sitter-context.dylib

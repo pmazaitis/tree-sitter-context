@@ -249,15 +249,15 @@ module.exports = grammar({
 
     // # ENVIRONMENTS
 
+    // TODO - build a node for all command structures (settings, etc.) and
+    //        then a separate node for content (if any)
+
     environment: ($) =>
       prec.right(6,
         seq(
-          $.start_environment_name,
+          field('env_name', $.start_environment_name),
           repeat(choice($.empty_block, $.option_block, $.settings_block)),
           $._command_stop,
-          // optional(
-          //   seq($.command_scope, repeat($.command_scope), $._scopes_stop)
-          // ),
           repeat($._content),
           $.stop_environment_name,
         )
@@ -274,7 +274,7 @@ module.exports = grammar({
       prec.right(
         choice(
           seq(
-            $.command_name,
+            field('cmd_name', $.command_name),
             repeat(choice($.empty_block, $.option_block, $.settings_block)),
             $._command_stop,
             optional(
@@ -333,7 +333,7 @@ module.exports = grammar({
         $.line_comment,
         $.escaped,
         $.value_brace_group,
-        $.value_text,
+        field('value_content_text', $.value_text),
         $.command
       ),
 
