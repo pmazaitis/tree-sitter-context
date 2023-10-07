@@ -15,6 +15,7 @@ component-shadow_filename
     (text_block
       (text)
     )
+    (content_start)
     (component_id)
   )
   (main
@@ -26,6 +27,7 @@ component-shadow_filename
     )
   )
   (postamble
+    (content_end)
     (text_block
       (text)
     )
@@ -49,6 +51,7 @@ component-id
     (text_block
       (text)
     )
+    (content_start)
     (component_id)
   )
   (main
@@ -60,6 +63,7 @@ component-id
     )
   )
   (postamble
+    (content_end)
     (text_block
       (text)
     )
@@ -83,6 +87,7 @@ component-brackets
     (text_block
       (text)
     )
+    (content_start)
     (component_id)
   )
   (main
@@ -94,6 +99,7 @@ component-brackets
     )
   )
   (postamble
+    (content_end)
     (text_block
       (text)
     )
@@ -117,6 +123,7 @@ component-ws-brackets
     (text_block
       (text)
     )
+    (content_start)
     (component_id)
   )
   (main
@@ -128,6 +135,7 @@ component-ws-brackets
     )
   )
   (postamble
+    (content_end)
     (text_block
       (text)
     )

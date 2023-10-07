@@ -102,9 +102,10 @@ module.exports = grammar({
       seq(
         repeat($._content),
         choice(
-          "\\starttext",
+          alias($.start_text, $.content_start),
           seq(
-            /\\startcomponent[ \t]*/,
+            alias($.start_component, $.content_start),
+            /[ \t]*/,
             choice($.component_id, seq("[", $.component_id, "]"))
           )
         )
@@ -112,12 +113,21 @@ module.exports = grammar({
 
     component_id: ($) => /[a-zA-Z*][a-zA-Z0-9:_-]*/,
 
+    start_text: ($) => "\\starttext",
+
+    start_component: ($) => "\\startcomponent",
+
     // Main --- text, commands, comments
     main: ($) => repeat1($._content),
 
     // Postamble --- text, commands, comments
     postamble: ($) =>
-      seq(choice("\\stoptext", "\\stopcomponent"), repeat($._content)),
+      seq(choice(alias($.stop_text, $.content_end), alias($.stop_component, $.content_end)), repeat($._content)),
+
+    stop_text: ($) => "\\stoptext",
+
+    stop_component: ($) => "\\stopcomponent",
+
 
     // # CONTENT
     //

@@ -15,7 +15,8 @@ areas-all_areas
     (text_block
       (text)
     )
-  )
+    (content_start)
+    )
   (main
     (command
       (command_name)
@@ -25,6 +26,7 @@ areas-all_areas
     )
   )
   (postamble
+    (content_end)
     (text_block
       (text)
     )
@@ -70,6 +72,7 @@ areas-preamble_main
     (text_block
       (text)
     )
+    (content_start)
   )
   (main
     (command
@@ -80,7 +83,7 @@ areas-preamble_main
     )
   )
   (postamble
-    (MISSING "\stoptext")
+    (MISSING content_end)
   )
 )
 
