@@ -1,12 +1,13 @@
-# tree-sitter-context_en
+# tree-sitter-context
 
 ## Description
 
-`tree-sitter-context_en` is a [Tree-Sitter](https://tree-sitter.github.io/tree-sitter/) parser for the [ConTeXt](https://www.contextgarden.net) document preparation system.
+`tree-sitter-context` is a [Tree-Sitter](https://tree-sitter.github.io/tree-sitter/) parser for the [ConTeXt](https://www.contextgarden.net) document preparation system.
 
 This parser supports:
 
 - Parsing ConTeXt files into a concrete syntax tree of tokens (text, commands, command parts, etc.)
+- Preserving the hierarchy of ConTeXt environments in the tree
 - Marking inclusions of other languages to be handled by other tree-sitter parsers (for example, Lua code in a `.tex` file can be handled by [`tree-sitter-lua`](https://github.com/Azganoth/tree-sitter-lua), if the appropriate parser is installed)
 - Syntax highlighting using the syntax tree
 
@@ -14,7 +15,7 @@ This parser should work with tools (editors, formatters) that can work with Tree
 
 ## Installation
 
-How you install `tree-sitter-context_en` depends on the tool you're using it with.
+How you install `tree-sitter-context` depends on the tool you're using it with.
 
 Some tools only require a URL to this repository, and will handle downloading and configuring the parser for their use.
 
@@ -53,6 +54,8 @@ Oh, probably lots. :)
 ### Limitations
 
 For the moment, this parser does not play nicely with the `tree-sitter-latex` parser when deciding which parser should be used to handle a file with the extension `.tex` (resolving this is a WIP).
+
+Experience with integrating this parser with editors has change the stance to localization: the idea of descrete parsers for langauge support has been abandoned. The next step is to have the parser recognize synonymous commands acrross the supported language interfaces, and conflate those down to specific nodes. 
 
 ### Quirks
 
