@@ -43,8 +43,6 @@ New features and updates cheerfully considered via pull request. Please include 
 
 Bug reports cheerfully accepted (especially with areas of ConTeXt less well-served by this parser!). Please use issues to report bugs. Please include as much as possible to make the bug approachable in the report: minimal examples, logs, and especially expectations are all helpful.
 
-As the name implies, `tree-sitter-context_en` is a parser for the English interface to ConTeXt. Supporting the ConTeXt interface for other languages is a non-goal of this parser. The software in this repository can be used as a starting point to produce new parsers for other language interfaces to ConTeXt.
-
 ## Caveats
 
 ### Bugs
