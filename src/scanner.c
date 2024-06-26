@@ -3,7 +3,7 @@
 #include <wctype.h>
 #include <stdio.h>
 
-#define UNUSED(x) (void)(x)
+#define UNUSED_VAR(x) (void)(x)
 
 // #define DEBUG
 
@@ -32,19 +32,19 @@ enum TokenType
 };
 
 void *tree_sitter_context_external_scanner_create() { return NULL; }
-void tree_sitter_context_external_scanner_destroy(void *p) { UNUSED(p); }
-void tree_sitter_jcontext_external_scanner_reset(void *p) { UNUSED(p); }
+void tree_sitter_context_external_scanner_destroy(void *p) { UNUSED_VAR(p); }
+void tree_sitter_jcontext_external_scanner_reset(void *p) { UNUSED_VAR(p); }
 unsigned tree_sitter_context_external_scanner_serialize(void *p, char *buffer)
 {
-  UNUSED(p);
-  UNUSED(buffer);
+  UNUSED_VAR(p);
+  UNUSED_VAR(buffer);
   return 0;
 }
 void tree_sitter_context_external_scanner_deserialize(void *p, const char *b, unsigned n)
 {
-  UNUSED(p);
-  UNUSED(b);
-  UNUSED(n);
+  UNUSED_VAR(p);
+  UNUSED_VAR(b);
+  UNUSED_VAR(n);
 }
 
 static bool is_special_char(char c);
@@ -157,6 +157,9 @@ static void debug_lookahead(char c, char *msg)
   printf("#### %s\n", msg);
   printf("#### [Character under test: \'%c\' ]\n", c);
   fflush(stdout);
+#else
+  UNUSED_VAR(c);
+  UNUSED_VAR(msg);
 #endif
 }
 
@@ -485,7 +488,7 @@ static bool find_verbatim(TSLexer *lexer, const char *keyword)
 bool tree_sitter_context_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
 {
 
-  UNUSED(payload);
+  UNUSED_VAR(payload);
 
   if (valid_symbols[COMMAND_STOP])
   {
