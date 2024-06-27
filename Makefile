@@ -83,7 +83,7 @@ $(LANGUAGE_NAME).pc: bindings/c/$(LANGUAGE_NAME).pc.in
 		-e 's|=$(PREFIX)|=$${prefix}|' \
 		-e 's|@PREFIX@|$(PREFIX)|' $< > $@
 
-$(PARSER): $(SRC_DIR)/grammar.json
+$(PARSER): grammar.js
 	$(TS) generate --no-bindings $^
 
 install: all
