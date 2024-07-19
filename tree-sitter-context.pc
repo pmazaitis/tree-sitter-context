@@ -1,0 +1,11 @@
+prefix=/usr/local
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: tree-sitter-context
+Description: Context grammar for tree-sitter
+URL: https://github.com/pmazaitis/tree-sitter-context
+Version: 0.0.1
+Requires: 
+Libs: -L${libdir}  -ltree-sitter-context
+Cflags: -I${includedir}
